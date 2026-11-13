@@ -46,19 +46,24 @@ class Issue:
         return f"{self.location or '<root>'}: {self.message}"
 
 
-def _major_dir(major: int) -> Path:
-    return schemas_dir() / f"v{major}"
+def _root(schemas_root: Path | None) -> Path:
+    """The Builder's own ``schemas/`` unless a release's bundled ``contracts/`` is given."""
+    return schemas_root if schemas_root is not None else schemas_dir()
 
 
-def available_majors() -> list[int]:
+def available_majors(schemas_root: Path | None = None) -> list[int]:
     return sorted(
-        int(p.name[1:]) for p in schemas_dir().iterdir() if p.is_dir() and p.name[1:].isdigit()
+        int(p.name[1:])
+        for p in _root(schemas_root).iterdir()
+        if p.is_dir() and p.name[1:].isdigit()
     )
 
 
 @cache
-def _load_major(major: int) -> tuple[dict[str, dict[str, Any]], Registry]:
-    directory = _major_dir(major)
+def _load_major(
+    major: int, schemas_root: Path | None = None
+) -> tuple[dict[str, dict[str, Any]], Registry]:
+    directory = _root(schemas_root) / f"v{major}"
     if not directory.is_dir():
         raise FileNotFoundError(f"No schemas for major version {major}")
     schemas: dict[str, dict[str, Any]] = {}
@@ -71,20 +76,20 @@ def _load_major(major: int) -> tuple[dict[str, dict[str, Any]], Registry]:
     return schemas, registry
 
 
-def schema_names(major: int = 1) -> list[str]:
+def schema_names(major: int = 1, schemas_root: Path | None = None) -> list[str]:
     """Names of every schema file for a major version, including internal ones."""
-    return sorted(_load_major(major)[0])
+    return sorted(_load_major(major, schemas_root)[0])
 
 
-def load_schema(name: str, major: int = 1) -> dict[str, Any]:
-    schemas, _ = _load_major(major)
+def load_schema(name: str, major: int = 1, schemas_root: Path | None = None) -> dict[str, Any]:
+    schemas, _ = _load_major(major, schemas_root)
     if name not in schemas:
         raise KeyError(f"Unknown contract '{name}' for major version {major}")
     return schemas[name]
 
 
-def _validator(name: str, major: int) -> Draft202012Validator:
-    schemas, registry = _load_major(major)
+def _validator(name: str, major: int, schemas_root: Path | None) -> Draft202012Validator:
+    schemas, registry = _load_major(major, schemas_root)
     return Draft202012Validator(schemas[name], registry=registry)
 
 
@@ -97,8 +102,12 @@ def _version_tuple(text: str) -> tuple[int, int, int]:
     return int(major), int(minor), int(patch)
 
 
-def validate_document(document: Any) -> list[Issue]:
-    """Validate one document. An empty list means the document is valid."""
+def validate_document(document: Any, schemas_root: Path | None = None) -> list[Issue]:
+    """Validate one document. An empty list means the document is valid.
+
+    ``schemas_root`` selects another schema set, such as the ``contracts/``
+    directory bundled in a world release.
+    """
     if not isinstance(document, dict):
         return [Issue("", "document must be a JSON object")]
     schema_field = document.get("schema")
@@ -111,16 +120,17 @@ def validate_document(document: Any) -> list[Issue]:
     except (AttributeError, ValueError):
         return [Issue("/schema_version", "must be a MAJOR.MINOR.PATCH string")]
     major = doc_version[0]
-    if major not in available_majors():
+    if major not in available_majors(schemas_root):
         return [Issue("/schema_version", f"unsupported major version {major}")]
-    if name not in _load_major(major)[0] or name == "common":
+    if name not in _load_major(major, schemas_root)[0] or name == "common":
         return [Issue("/schema", f"unknown contract '{name}' for major version {major}")]
 
-    schema = load_schema(name, major)
+    schema = load_schema(name, major, schemas_root)
     issues = [
         Issue(_pointer(error.absolute_path), error.message)
         for error in sorted(
-            _validator(name, major).iter_errors(document), key=lambda e: list(e.absolute_path)
+            _validator(name, major, schemas_root).iter_errors(document),
+            key=lambda e: list(e.absolute_path),
         )
     ]
     # A document written against a newer minor version may use fields this

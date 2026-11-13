@@ -128,6 +128,8 @@ met and verified. Otherwise leave it incomplete and record what remains.
 | `uv run olb check [--tests]` | Project health check |
 | `uv run olb validate [files]` | Validate contract documents or `.jsonl` event logs |
 | `uv run olb diagnose [--json] [--save-raw]` | Sanitised machine audit |
+| `uv run olb world build <source> [--out DIR]` | Build a world release (runs capability self-tests); `--publish` builds into the data root |
+| `uv run olb world verify <release-dir> [--self-test]` | Check a built release against its digests |
 | `uv run olb state` | Progress and next milestone |
 
 More detail: [docs/development/DEVELOPMENT.md](docs/development/DEVELOPMENT.md).

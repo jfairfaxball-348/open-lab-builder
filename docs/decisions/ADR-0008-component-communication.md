@@ -23,7 +23,7 @@ be able to influence a run, even by accident.
   event log (polling or server-sent events), never by connecting to the
   running agent.
 - The data root is outside all three checkouts and is set by `OPEN_LAB_DATA`.
-  Its default location is decided in S002.
+  Its default is `open-lab-data` in the home directory (decided in S002).
 
 ## Alternatives
 

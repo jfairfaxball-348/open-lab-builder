@@ -92,6 +92,19 @@ def check_examples(root: Path) -> list[str]:
     return problems
 
 
+def check_world_sources(root: Path) -> list[str]:
+    """Every world source tree is well formed. Self-tests run at build time, not here."""
+    from .worlds import BuildError, load_source
+
+    problems = []
+    for source in sorted(p.parent for p in (root / "worlds").glob("*/world.json")):
+        try:
+            load_source(source)
+        except BuildError as error:
+            problems.extend(f"worlds/{source.name}: {problem}" for problem in error.problems)
+    return problems
+
+
 def check_required_files(root: Path) -> list[str]:
     return [f"{path} is missing" for path in REQUIRED_FILES if not (root / path).is_file()]
 
@@ -175,6 +188,7 @@ def check_privacy(root: Path) -> list[str]:
 CHECKS: list[tuple[str, Callable[[Path], list[str]]]] = [
     ("Contract schemas are well formed", check_schemas),
     ("Every contract has valid examples", check_examples),
+    ("World sources are well formed", check_world_sources),
     ("Required documents exist", check_required_files),
     ("Development state matches the roadmap", check_state),
     ("No private or oversized content is committable", check_privacy),

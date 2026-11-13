@@ -12,7 +12,7 @@ from pathlib import Path
 from . import __version__
 from .contracts import validate_file
 from .health import STATE_PATH, example_files, run_checks
-from .paths import repo_root
+from .paths import data_root, repo_root
 
 
 def _cmd_validate(args: argparse.Namespace) -> int:
@@ -91,6 +91,46 @@ def _cmd_state(_: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_world_build(args: argparse.Namespace) -> int:
+    from .worlds import BuildError, build_world
+
+    if args.publish:
+        out = data_root() / "worlds"
+    elif args.out:
+        out = Path(args.out)
+    else:
+        out = (repo_root() or Path.cwd()) / "releases"
+    try:
+        result = build_world(Path(args.source), out)
+    except BuildError as error:
+        print("Build FAILED; no release was written.")
+        for problem in error.problems:
+            print(f"        {problem}")
+        return 1
+    manifest = result.manifest
+    verb = "Already built, unchanged:" if result.reused else "Built"
+    print(f"{verb} {manifest['world_id']} {manifest['version']} "
+          f"({len(manifest['capabilities'])} capabilities, self-tests passed)")
+    print(f"  directory:      {result.release_dir}")
+    print(f"  content digest: sha256:{manifest['content_digest']['value']}")
+    return 0
+
+
+def _cmd_world_verify(args: argparse.Namespace) -> int:
+    from .worlds import verify_release
+
+    release = Path(args.release_dir)
+    if not release.is_dir():
+        print(f"FAIL  {release}: not a directory")
+        return 1
+    problems = verify_release(release, self_tests=args.self_test)
+    for problem in problems:
+        print(f"        {problem}")
+    tested = " and self-tests passed" if args.self_test else ""
+    print("Release FAILED verification" if problems else f"Release is intact{tested}")
+    return 1 if problems else 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="olb", description="Open Laboratory World Builder.")
     parser.add_argument("--version", action="version", version=f"olb {__version__}")
@@ -115,6 +155,28 @@ def build_parser() -> argparse.ArgumentParser:
     check = commands.add_parser("check", help="Run the project health check.")
     check.add_argument("--tests", action="store_true", help="Also run the test suite.")
     check.set_defaults(func=_cmd_check)
+
+    world = commands.add_parser("world", help="Build or verify a world release.")
+    world_commands = world.add_subparsers(dest="world_command", required=True)
+    build = world_commands.add_parser(
+        "build", help="Validate a world source tree, run its self-tests and write a release."
+    )
+    build.add_argument("source", help="World source directory, e.g. worlds/minimal.")
+    where = build.add_mutually_exclusive_group()
+    where.add_argument("--out", help="Directory to build into. Default: releases/ in the checkout.")
+    where.add_argument(
+        "--publish", action="store_true",
+        help="Build into the shared data root ($OPEN_LAB_DATA/worlds) for the Simulation to use.",
+    )
+    build.set_defaults(func=_cmd_world_build)
+    verify = world_commands.add_parser(
+        "verify", help="Check a built release against its manifest and digests."
+    )
+    verify.add_argument("release_dir", help="Release directory: <out>/<world_id>/<version>.")
+    verify.add_argument(
+        "--self-test", action="store_true", help="Also re-run every capability self-test."
+    )
+    verify.set_defaults(func=_cmd_world_verify)
 
     state = commands.add_parser("state", help="Show development progress and the next milestone.")
     state.set_defaults(func=_cmd_state)

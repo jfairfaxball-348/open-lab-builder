@@ -1,100 +1,153 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-13T22:00:00Z",
-  "last_session": "S001",
+  "updated_at": "2026-11-13T23:10:00Z",
+  "last_session": "S002",
   "completed_milestones": [
     {
       "id": "S001",
       "completed_at": "2026-11-13T22:00:00Z",
       "repository": "open-lab-builder",
-      "commits": ["c546b1a"],
+      "commits": [
+        "c546b1a"
+      ],
       "summary": "Environment audit, architecture and decision records, seven v1 contracts with examples and tests, olb CLI (validate, diagnose, check, state), roadmap and agent instructions."
+    },
+    {
+      "id": "S002",
+      "completed_at": "2026-11-13T23:10:00Z",
+      "repository": "open-lab-builder",
+      "commits": [],
+      "summary": "World source tree with two working capabilities (text.stats, math.evaluate), a build-time capability invoker, olb world build and olb world verify, the digest algorithm, invocation protocol and data root default documented in CONTRACTS.md."
     }
   ],
   "next_milestone": {
-    "id": "S002",
-    "repository": "open-lab-builder",
-    "title": "Minimal World Packaging"
+    "id": "S003a",
+    "repository": "open-lab-simulation",
+    "title": "Simulation Runtime Skeleton"
   },
   "blockers": [],
   "known_issues": [
     {
       "id": "KI-1",
       "summary": "WSL is installed but not functional on the development machine, and no container engine is present.",
-      "affects": ["S006c", "S008d", "S009"],
+      "affects": [
+        "S006c",
+        "S008d",
+        "S009"
+      ],
       "needs_human": true,
       "detail": "Repairing WSL 2 needs administrator rights. Until then only the process isolation tier is available. See ADR-0006."
     },
     {
       "id": "KI-2",
       "summary": "No local model is installed. Ollama is running with an empty model list.",
-      "affects": ["S003b"],
+      "affects": [
+        "S003b"
+      ],
       "needs_human": true,
       "detail": "S003b needs authorisation to pull one small text model (roughly 2-3 GB). S002 and S003a do not need a model."
     },
     {
       "id": "KI-3",
       "summary": "FFmpeg and PyTorch are not installed.",
-      "affects": ["S008a", "S008b"],
+      "affects": [
+        "S008a",
+        "S008b"
+      ],
       "needs_human": true
     },
     {
       "id": "KI-4",
       "summary": "The development machine is a laptop on a pre-release Windows build; sleep, updates and reboots will interrupt long runs.",
-      "affects": ["S011b", "S011c", "S012"],
+      "affects": [
+        "S011b",
+        "S011c",
+        "S012"
+      ],
       "needs_human": true,
       "detail": "Crash recovery (S006b) is mandatory. Power and update settings need review before multi-hour runs."
     },
     {
       "id": "KI-5",
       "summary": "The Simulation and Window repositories are empty (no commits).",
-      "affects": ["S003a", "S004"],
+      "affects": [
+        "S003a",
+        "S004"
+      ],
       "detail": "Each needs its own bootstrap as the first step of its first milestone."
     },
     {
-      "id": "KI-6",
-      "summary": "Example capability manifests describe tools that are not implemented yet.",
-      "affects": ["S002"],
-      "detail": "S002 implements text.stats and math.evaluate and moves their manifests into a world source tree."
+      "id": "KI-7",
+      "summary": "World builds and the content digest have only been run on Windows.",
+      "affects": [
+        "S003a",
+        "S006c"
+      ],
+      "detail": "The algorithm hashes stored bytes and the repository forces LF line endings, so the digest should be identical on Linux, but that has not been observed. Check it the first time a Linux environment is available."
+    },
+    {
+      "id": "KI-8",
+      "summary": "No release has been published to the data root.",
+      "affects": [
+        "S003a"
+      ],
+      "needs_human": true,
+      "detail": "S003a needs 'olb world build worlds/minimal --publish', which creates open-lab-data in the home directory (or the directory named by OPEN_LAB_DATA). Confirm the location with the human before the first write there."
     }
   ],
   "open_decisions": [
     {
       "id": "OD-1",
       "summary": "Container mechanism for the container isolation tier (Podman in WSL 2 preferred).",
-      "affects": ["S006c"],
+      "affects": [
+        "S006c"
+      ],
       "needs_human": true,
       "detail": "Decide once WSL is repaired and the options can be tested. ADR-0006."
     },
     {
       "id": "OD-2",
       "summary": "Which orchestrator model to use, and whether any model that fits in 4 GB of VRAM calls tools reliably enough.",
-      "affects": ["S003b", "S007a"],
+      "affects": [
+        "S003b",
+        "S007a"
+      ],
       "detail": "Decide by measurement in S003b. If local quality is inadequate, an explicitly enabled external provider is the fallback. ADR-0005."
     },
     {
       "id": "OD-3",
       "summary": "Window front-end stack: React with Vite and TypeScript, or server-rendered FastAPI with HTMX.",
-      "affects": ["S004"],
+      "affects": [
+        "S004"
+      ],
       "detail": "Decide at the start of S004. ADR-0008."
-    },
-    {
-      "id": "OD-4",
-      "summary": "Default location of the data root (OPEN_LAB_DATA) and the exact content-digest algorithm for world releases.",
-      "affects": ["S002"],
-      "detail": "Decide and document in S002."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-13T22:00:00Z",
+    "ran_at": "2026-11-13T23:10:00Z",
     "commands": [
-      { "command": "uv run pytest", "result": "133 passed" },
-      { "command": "uv run ruff check .", "result": "All checks passed" },
-      { "command": "uv run olb check --tests", "result": "Health check passed (5 checks and the test suite)" },
-      { "command": "uv run olb validate", "result": "8 valid, 0 invalid" },
-      { "command": "uv run olb diagnose", "result": "Completed; sanitised report printed" }
+      {
+        "command": "uv run ruff check .",
+        "result": "All checks passed"
+      },
+      {
+        "command": "uv run olb check --tests",
+        "result": "Health check passed (6 checks and the test suite: 242 passed)"
+      },
+      {
+        "command": "uv run olb validate",
+        "result": "8 valid, 0 invalid"
+      },
+      {
+        "command": "uv run olb world build worlds/minimal",
+        "result": "Built minimal 0.1.0, 2 capabilities, self-tests passed; a second build reported the release unchanged"
+      },
+      {
+        "command": "uv run olb world verify releases/minimal/0.1.0 --self-test",
+        "result": "Release is intact and self-tests passed"
+      }
     ]
   }
 }

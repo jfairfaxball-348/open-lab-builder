@@ -67,6 +67,7 @@ and in `state.json`.
 ### S002 — Minimal World Packaging
 
 - **Repository:** open-lab-builder
+- **Status:** complete
 - **Objective:** Produce the first validated, versioned world release
   containing two simple, real, working capabilities.
 - **Prerequisites:** S001.
@@ -136,7 +137,13 @@ and in `state.json`.
   `tool.result`); agent runtime loop behind a `ModelClient` interface with a
   `ScriptedModel` implementation that replays a fixed list of replies; minimal
   supervisor (parent process, wall-clock deadline, kills the tree, records
-  state changes); workspace scan producing `artifact.*` events and preserved
+  state changes). The tool host and the release check are the Simulation's own
+  implementations of the invocation protocol and digest algorithm specified in
+  the Builder's `docs/architecture/CONTRACTS.md`; no Builder code is imported.
+  The world comes from `<data root>/worlds/`, put there by
+  `olb world build worlds/minimal --publish` (this creates the data root, the
+  first write outside the checkouts: confirm with the human first). Workspace
+  scan producing `artifact.*` events and preserved
   copies; CLI `ols run <experiment.json>`.
 - **Exclusions:** real models; checkpoints and recovery; capability search;
   resource limits beyond the deadline; container isolation.

@@ -1,8 +1,9 @@
 # Architecture
 
-Status: established in S001. Only the contracts and builder tooling are
-implemented; everything else in this document is design that later milestones
-build. Each section says which milestone delivers it.
+Status: established in S001. Implemented so far: the contracts, the builder
+tooling and (S002) the world release manager with two capabilities. Everything
+else in this document is design that later milestones build. Each section says
+which milestone delivers it.
 
 Related: [CONTRACTS.md](CONTRACTS.md) · [OBSERVATION.md](OBSERVATION.md) ·
 [SAFETY_AND_ISOLATION.md](SAFETY_AND_ISOLATION.md) ·
@@ -23,7 +24,8 @@ The repositories share **no code**. They share:
 1. **Contracts** — JSON Schemas in this repository's `schemas/`, copied into
    every world release so that a release is self-describing.
 2. **A data root** — a directory outside all three checkouts, located by the
-   `OPEN_LAB_DATA` environment variable.
+   `OPEN_LAB_DATA` environment variable (default: `open-lab-data` in the home
+   directory).
 
 ```
 $OPEN_LAB_DATA/
@@ -87,9 +89,11 @@ flowchart LR
 
 ## 2. Subsystems
 
-### World release manager — Builder (S002)
+### World release manager — Builder (S002, implemented)
 
-Turns capability sources and model manifests into an immutable directory:
+`olb world build` and `olb world verify`. The exact layout, digest algorithm
+and invocation protocol are specified in
+[CONTRACTS.md](CONTRACTS.md#world-release). Turns capability sources and model manifests into an immutable directory:
 
 ```
 <world_id>/<version>/

@@ -71,6 +71,68 @@ adding or adjusting tests, and noting the change in this document's log below.
 Immutable once `status` is `validated` or `released`; those states require a
 `content_digest`. `draft` releases must not be used for recorded experiments.
 
+Implemented in S002 by `olb world build` and `olb world verify`
+(`src/open_lab_builder/worlds/`). What follows is the specification the
+Simulation must reproduce without importing that code.
+
+**Layout.** A release is the directory `<world_id>/<version>/`:
+
+```
+world-release.json                       the manifest
+contracts/v1/<name>.schema.json          the seven contracts and common.schema.json
+capabilities/<id>/capability.json        one directory per capability, named by its id
+capabilities/<id>/...                    that capability's implementation files
+models/<file>.json                       model provider manifests
+```
+
+Files are copied byte for byte from the world source (`worlds/<name>/` in this
+repository). Nothing is rewritten: no line-ending conversion, no
+re-serialisation. The repository stores text with LF endings
+(`.gitattributes`), so a build is the same on Windows and Linux. Bytecode
+caches (`__pycache__`, `*.pyc`) are never copied, and symbolic links are
+refused.
+
+**Content digest.** `content_digest.value` is computed as follows.
+
+1. Take every file in the release except `world-release.json`. Its path is
+   relative to the release directory, with forward slashes.
+2. For each, form the line `<sha256 of the file's bytes, lower-case hex>`,
+   two spaces, `<path>`, a line feed.
+3. Sort the lines by the UTF-8 bytes of the path.
+4. Take the manifest as a JSON object, remove the keys `created_at`, `builder`
+   and `content_digest`, and serialise it as UTF-8 JSON with keys sorted, no
+   whitespace (separators `,` and `:`) and non-ASCII characters written
+   literally (Python: `json.dumps(obj, sort_keys=True, separators=(",", ":"),
+   ensure_ascii=False)`). Append the line `<sha256 of that text>`, two spaces,
+   `world-release.json`, a line feed.
+5. The digest is the SHA-256 of all the lines concatenated, encoded as UTF-8.
+
+So the digest covers every bundled byte and every manifest field that
+describes the world, including default permissions and limits. It does not
+cover when or by which Builder version the release was made: building the same
+source twice gives the same digest. `builder.git_commit` is recorded only when
+the Builder checkout had no uncommitted changes.
+
+`extensions.files` lists each bundled file with its SHA-256. It is
+informational (it lets `olb world verify` name the file that changed); the
+content digest is what binds the release, and it covers that list too.
+
+**Verification** (`olb world verify <release-dir> [--self-test]`): the
+manifest validates against the *bundled* contracts; the bundled schema versions
+equal the manifest's `contracts` map; the set of files and each digest match;
+the content digest matches; every capability and model manifest validates and
+is the one its entry names. `--self-test` re-runs the demonstrations.
+
+**Immutability.** `olb world build` never overwrites a release. Rebuilding
+identical content into the same place is a no-op; different content under an
+existing version is an error, and the fix is a new version.
+
+**Data root.** The shared data directory is `$OPEN_LAB_DATA` when that
+variable is set, otherwise `open-lab-data` in the user's home directory, on
+every platform. `olb world build` writes to `releases/` in the checkout by
+default (ignored by Git); `--publish` writes to `<data root>/worlds/`, which is
+where the Simulation looks.
+
 ### Capability
 
 The most important contract: it is what lets an agent pick up a tool it has
@@ -86,6 +148,42 @@ itself:
 `invocation.interface` is one of `python`, `subprocess`, `http` or `mcp`. The
 arguments and results are JSON objects in all four, which is what makes the
 manifest transport-neutral ([ADR-0003](../decisions/ADR-0003-capability-manifest.md)).
+
+**Invocation protocol** (fixed in S002; `python` and `subprocess` are
+implemented, `http` and `mcp` are not):
+
+- A capability is self-contained in its own directory. A host runs it with
+  that directory as the working directory.
+- The host validates the arguments against `input_schema` *before* running
+  anything, and the result against `output_schema` afterwards.
+- `subprocess`: the command is an argument vector, never a shell string. A
+  first element of exactly `python` means the host's own interpreter. The
+  argument object arrives as UTF-8 JSON on stdin. Exit status 0 with the result
+  object as JSON on stdout is success. A non-zero status with
+  `{"error": "<message>"}` on stdout is the capability declining the request.
+- `python`: `entrypoint` is `module:function`, where the module is a file in
+  the capability directory (dots are sub-directories), not something on the
+  import path. The function takes the argument object and returns the result
+  object; raising `ValueError` declines the request. The Builder runs the
+  function in a child process, so it has the same timeout as a subprocess.
+- The timeout is `resources.timeout_s` (30 s if absent).
+
+Every invocation ends in one of these outcomes:
+
+| Outcome | Meaning |
+| --- | --- |
+| `ok` | A result that satisfies `output_schema` |
+| `invalid_input` | Arguments rejected; no capability code ran |
+| `capability_error` | The capability declined, with a message (e.g. `division by zero`) |
+| `execution_error` | It crashed, could not start, or exited non-zero without a message |
+| `timeout` | No result in time; the process was killed |
+| `invalid_output` | It returned something that is not JSON or violates `output_schema` |
+| `unsupported_interface` | The host cannot run this interface |
+
+The Builder's invoker (`src/open_lab_builder/capabilities/`) exists only to run
+self-tests at build time. It gives no isolation beyond a child process and a
+timeout. The Simulation's tool host is a separate implementation of the same
+protocol (S003a).
 
 ### Model provider
 
@@ -117,3 +215,4 @@ time only, so a crash does not eat into an experiment's time budget.
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
 | 2026-11-13 | all | 1.0.0 | Initial versions (S001) |
+| 2026-11-13 | capability | 1.0.1 | Descriptions of `invocation.entrypoint` and `invocation.command` now state where the module is found, the working directory, the meaning of `python` and how an error is reported. No structural change (S002) |

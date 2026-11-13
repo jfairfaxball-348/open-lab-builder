@@ -28,18 +28,25 @@ The three communicate only through the versioned contracts in
 
 ## Status
 
-**S001 (foundation and architecture) is complete.** What exists and works:
+**S001 (foundation) and S002 (minimal world packaging) are complete.** What
+exists and works:
 
 - Seven versioned JSON Schema contracts with validated examples.
+- Two real capabilities in [`worlds/minimal/`](worlds/minimal/): `text.stats`
+  and `math.evaluate` (exact arithmetic on a restricted grammar; no `eval`).
+- `olb world build` — validates a world source, runs every capability's
+  self-test and writes an immutable, digest-stamped release.
+- `olb world verify` — checks a release against its manifest and digests.
 - `olb validate` — validates contract documents and event logs.
 - `olb diagnose` — read-only, sanitised audit of the local machine.
 - `olb check` — project health check.
 - Architecture, decision records, and a multi-session roadmap.
 
-What does **not** exist yet: world packaging, any runnable capability, the
-simulation runtime, the model gateway, and the Window. The documents under
-[`examples/`](examples/) illustrate the contracts; they do not describe working
-software. The next milestone is **S002 — Minimal World Packaging**.
+What does **not** exist yet: the simulation runtime, any agent or model call,
+capability search, the model gateway, and the Window. Nothing has run an
+experiment. The model provider manifest in the minimal world names a model
+that has not been downloaded. The next milestone is **S003a — Simulation
+Runtime Skeleton**, in the open-lab-simulation repository.
 
 ## Quick start
 
@@ -58,6 +65,14 @@ uv run olb check
 ```
 
 ```bash
+uv run olb world build worlds/minimal
+```
+
+```bash
+uv run olb world verify releases/minimal/0.1.0 --self-test
+```
+
+```bash
 uv run olb diagnose
 ```
 
@@ -70,8 +85,11 @@ uv run olb state
 ```
 schemas/v1/              Contract schemas (the source of truth for all three repositories)
 examples/v1/<contract>/  Valid example documents, checked by the tests
+worlds/minimal/          World source: world.json, capabilities/<id>/, models/
 src/open_lab_builder/
   contracts/             Schema loading and document validation
+  capabilities/          Build-time capability invoker (self-tests only)
+  worlds/                World release build and verification
   diagnostics/           Machine audit and readiness assessment
   health.py              Project health check
   cli.py                 The `olb` command

@@ -67,6 +67,42 @@ from open_lab_builder.contracts import validate_document, validate_event_stream
 issues = validate_document(document)   # [] means valid
 ```
 
+## Building a world
+
+```bash
+uv run olb world build worlds/minimal
+```
+
+Validates the source, copies it to a staging directory, runs every
+capability's self-test against the staged copy, and only then writes
+`releases/<world_id>/<version>/` with a `world-release.json`. If anything
+fails, no release directory is left behind. `--out DIR` builds elsewhere;
+`--publish` builds into `<data root>/worlds/` (`$OPEN_LAB_DATA`, or
+`open-lab-data` in the home directory).
+
+```bash
+uv run olb world verify releases/minimal/0.1.0 --self-test
+```
+
+Recomputes every digest and re-validates the manifests against the contracts
+bundled in the release. A release is immutable: to change a world, change the
+`version` in its `world.json`.
+
+### Adding a capability to a world
+
+1. Create `worlds/<world>/capabilities/<id>/` with a `capability.json` whose
+   `id` equals the directory name, and the implementation beside it. Nothing
+   outside that directory is available at run time.
+2. Follow the invocation protocol in
+   [CONTRACTS.md](../architecture/CONTRACTS.md#capability). Standard library
+   only, unless the manifest declares `dependencies`.
+3. Give it demonstrations with exact expected output and list them in
+   `self_test`. The build runs them.
+4. Add tests, including inputs that must be refused.
+5. A capability that runs agent-supplied code or needs the `subprocess`
+   permission can only ship in a world whose minimum isolation tier is
+   `container`. The build enforces the second; the first is on you.
+
 ## Machine diagnostic
 
 ```bash

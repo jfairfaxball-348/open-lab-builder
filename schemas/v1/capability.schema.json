@@ -3,7 +3,7 @@
   "$id": "urn:open-lab:schema:capability:v1",
   "title": "Capability manifest",
   "description": "Self-describing definition of one tool an agent can discover, learn and invoke. Transport-neutral: the same manifest can be projected as an MCP tool, an OpenAI-style function or a plain subprocess call.",
-  "x-schema-version": "1.0.0",
+  "x-schema-version": "1.0.1",
   "type": "object",
   "required": [
     "schema",
@@ -68,7 +68,7 @@
           "properties": {
             "interface": { "const": "python" },
             "entrypoint": {
-              "description": "'package.module:function'. Called with the argument object, returns the result object.",
+              "description": "'module:function'. The module is a file inside the capability's own directory (dots separate sub-directories); it is not looked up on the Python import path. The function is called with the argument object and returns the result object. Raising ValueError reports an error to the caller.",
               "type": "string",
               "pattern": "^[A-Za-z_][A-Za-z0-9_.]*:[A-Za-z_][A-Za-z0-9_]*$"
             }
@@ -82,7 +82,7 @@
           "properties": {
             "interface": { "const": "subprocess" },
             "command": {
-              "description": "Argument vector. Never passed through a shell.",
+              "description": "Argument vector, run with the capability's own directory as the working directory and never passed through a shell. A first element of exactly 'python' means the host's own Python interpreter. The process reads the argument object as JSON on stdin and exits 0 with the result object as JSON on stdout; a non-zero exit with {\"error\": \"message\"} on stdout reports an error to the caller.",
               "type": "array",
               "minItems": 1,
               "items": { "type": "string" }
