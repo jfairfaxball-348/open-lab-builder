@@ -8,7 +8,7 @@
       "id": "S001",
       "completed_at": "2026-11-13T22:00:00Z",
       "repository": "open-lab-builder",
-      "commits": [],
+      "commits": ["c546b1a"],
       "summary": "Environment audit, architecture and decision records, seven v1 contracts with examples and tests, olb CLI (validate, diagnose, check, state), roadmap and agent instructions."
     }
   ],
