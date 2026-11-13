@@ -1,0 +1,64 @@
+{
+  "schema": "open-lab/capability",
+  "schema_version": "1.0.0",
+  "id": "math.evaluate",
+  "version": "0.1.0",
+  "name": "Arithmetic evaluator",
+  "summary": "Evaluate an arithmetic expression exactly and return the result.",
+  "description": "Evaluates an expression built from integers, decimals, parentheses and the operators + - * / ** %. Results are exact rationals where possible; 'value' is the decimal rendering and 'exact' is a fraction string. It is not a general programming language: there are no variables, functions or imports.",
+  "categories": ["math"],
+  "keywords": ["calculator", "arithmetic", "compute", "expression"],
+  "invocation": {
+    "interface": "subprocess",
+    "command": ["python", "-m", "open_lab_world.capabilities.math_evaluate"],
+    "input_mode": "json_stdin",
+    "output_mode": "json_stdout"
+  },
+  "input_schema": {
+    "type": "object",
+    "required": ["expression"],
+    "additionalProperties": false,
+    "properties": {
+      "expression": { "type": "string", "minLength": 1, "maxLength": 500 }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "required": ["value", "exact"],
+    "additionalProperties": false,
+    "properties": {
+      "value": { "type": "number" },
+      "exact": { "type": "string" }
+    }
+  },
+  "permissions": { "filesystem": "none", "network": "none", "subprocess": false },
+  "resources": { "timeout_s": 5, "typical_duration_s": 0.2, "ram_mb": 64 },
+  "dependencies": { "executables": ["python"] },
+  "demonstrations": [
+    {
+      "id": "fraction",
+      "title": "A sum of fractions",
+      "input": { "expression": "1/2 + 1/4" },
+      "expected_output": { "value": 0.75, "exact": "3/4" }
+    }
+  ],
+  "self_test": { "demonstrations": ["fraction"] },
+  "limitations": [
+    "Exponents are limited in size to prevent runaway computation.",
+    "No symbolic algebra; every operand must be a number."
+  ],
+  "failure_modes": [
+    {
+      "condition": "Division by zero.",
+      "symptom": "Result status 'error' with message 'division by zero'.",
+      "recovery": "Check the divisor before calling."
+    },
+    {
+      "condition": "The expression contains names, calls or unsupported operators.",
+      "symptom": "Result status 'error' with message naming the unsupported element.",
+      "recovery": "Reduce the expression to numbers and the supported operators."
+    }
+  ],
+  "provenance": { "origin": "builder" },
+  "stability": "experimental"
+}

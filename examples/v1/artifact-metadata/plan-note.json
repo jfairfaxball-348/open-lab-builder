@@ -1,0 +1,18 @@
+{
+  "schema": "open-lab/artifact-metadata",
+  "schema_version": "1.0.0",
+  "artifact_id": "art-0001",
+  "experiment_id": "creator-returns-pilot-01",
+  "run_id": "run-20261113-01",
+  "workspace_path": "notes/plan.md",
+  "archive_path": "artifacts/sha256/9f/9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+  "preserved": true,
+  "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+  "size_bytes": 4,
+  "media_type": "text/markdown",
+  "observed_at": "2026-11-13T20:06:10Z",
+  "observed_at_seq": 6,
+  "revision": 1,
+  "producer": { "kind": "agent" },
+  "agent_description": "My plan for the hour."
+}

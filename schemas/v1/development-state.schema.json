@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:open-lab:schema:development-state:v1",
+  "title": "Development state",
+  "description": "Machine-readable project progress, read by coding agents at the start of every session and updated at the end. Internal to the project; not consumed by the Simulation or the Window.",
+  "x-schema-version": "1.0.0",
+  "type": "object",
+  "required": [
+    "schema",
+    "schema_version",
+    "updated_at",
+    "last_session",
+    "completed_milestones",
+    "next_milestone",
+    "blockers",
+    "known_issues",
+    "open_decisions",
+    "validation"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "open-lab/development-state" },
+    "schema_version": { "$ref": "urn:open-lab:schema:common:v1#/$defs/schema_version_v1" },
+    "updated_at": { "$ref": "urn:open-lab:schema:common:v1#/$defs/timestamp" },
+    "last_session": { "$ref": "#/$defs/milestone_id" },
+    "completed_milestones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "completed_at", "repository"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/milestone_id" },
+          "completed_at": { "$ref": "urn:open-lab:schema:common:v1#/$defs/timestamp" },
+          "repository": { "$ref": "#/$defs/repository" },
+          "commits": {
+            "description": "Commits that delivered the milestone. The commit that records them is necessarily later, so the closing commit is found with 'git log'.",
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-f0-9]{7,40}$" }
+          },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "next_milestone": {
+      "type": "object",
+      "required": ["id", "repository"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/milestone_id" },
+        "repository": { "$ref": "#/$defs/repository" },
+        "title": { "type": "string" }
+      }
+    },
+    "blockers": { "type": "array", "items": { "$ref": "#/$defs/issue" } },
+    "known_issues": { "type": "array", "items": { "$ref": "#/$defs/issue" } },
+    "open_decisions": { "type": "array", "items": { "$ref": "#/$defs/issue" } },
+    "validation": {
+      "type": "object",
+      "required": ["status", "ran_at", "commands"],
+      "additionalProperties": false,
+      "properties": {
+        "status": { "enum": ["passing", "failing", "not_run"] },
+        "ran_at": { "$ref": "urn:open-lab:schema:common:v1#/$defs/timestamp" },
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["command", "result"],
+            "additionalProperties": false,
+            "properties": {
+              "command": { "type": "string" },
+              "result": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "milestone_id": { "type": "string", "pattern": "^S[0-9]{3}[a-z]?$" },
+    "repository": { "enum": ["open-lab-builder", "open-lab-simulation", "open-lab-window"] },
+    "issue": {
+      "type": "object",
+      "required": ["id", "summary"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 },
+        "affects": { "type": "array", "items": { "$ref": "#/$defs/milestone_id" } },
+        "needs_human": { "type": "boolean" },
+        "detail": { "type": "string" }
+      }
+    }
+  }
+}

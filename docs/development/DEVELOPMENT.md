@@ -1,0 +1,103 @@
+# Development guide
+
+The rules of engagement are in [AGENTS.md](../../AGENTS.md). This document is
+the practical reference for the Builder's tooling.
+
+## Setup
+
+Requires Python 3.12 or newer and [uv](https://docs.astral.sh/uv/).
+
+```bash
+uv sync
+```
+
+This creates `.venv/` with the project installed in editable mode, plus
+`pytest` and `ruff`. The project never uses packages from the base
+interpreter.
+
+## Tests
+
+```bash
+uv run pytest
+```
+
+| File | Covers |
+| --- | --- |
+| `tests/test_contracts.py` | Every schema is valid and versioned; every example validates; each required field is enforced; unknown fields are rejected; version compatibility; path safety |
+| `tests/test_capability_manifest.py` | Capability manifests are self-consistent (demonstrations against their own schemas, self-test references, invocation interfaces, provenance) |
+| `tests/test_observation_events.py` | Integrity rules: the agent is never the recorder, claims and observations cannot be confused, logs are gap-free and single-run |
+| `tests/test_tooling.py` | The diagnostic runs on this machine and its sanitised output leaks nothing; the health check passes; the CLI works |
+
+The tooling tests run the real machine audit once, so the suite takes some
+tens of seconds.
+
+## Lint
+
+```bash
+uv run ruff check .
+```
+
+## Health check
+
+```bash
+uv run olb check --tests
+```
+
+Checks, in order: the schemas are well formed and versioned; every contract has
+at least one example and all examples validate; required documents exist;
+`state.json` is valid and consistent with the roadmap; nothing committable
+contains a local path, user name, host name, model weights or an oversized
+file; and, with `--tests`, the test suite passes. Exit code 0 means healthy.
+
+## Validating documents
+
+```bash
+uv run olb validate
+```
+
+With no arguments it validates everything under `examples/`. Pass file paths to
+validate your own documents. A `.json` file is one document; a `.jsonl` file is
+an event log and is additionally checked for ordering and run consistency.
+
+From Python:
+
+```python
+from open_lab_builder.contracts import validate_document, validate_event_stream
+
+issues = validate_document(document)   # [] means valid
+```
+
+## Machine diagnostic
+
+```bash
+uv run olb diagnose
+```
+
+Read-only. Prints a sanitised report: hardware, isolation mechanisms, model
+servers and models, tools on PATH, packages in the base interpreter, and a
+readiness assessment. `--json` for machine-readable output. `--save-raw` also
+writes the unsanitised report to `.local/diagnostics/` (ignored by Git). The
+curated findings are in
+[LOCAL_ENVIRONMENT.md](../environment/LOCAL_ENVIRONMENT.md); refresh that
+document when the machine changes materially.
+
+## Adding or changing a contract
+
+1. Edit or add the schema in `schemas/v1/`. Give every field a `description`.
+2. Set `x-schema-version` according to the compatibility rules in
+   [CONTRACTS.md](../architecture/CONTRACTS.md).
+3. Add or update an example in `examples/v1/<contract>/`.
+4. Add tests for any new rule, including a document that must be rejected.
+5. If the rule cannot be expressed in JSON Schema, implement it in
+   `src/open_lab_builder/contracts/validation.py` and document it in
+   CONTRACTS.md so other consumers can reproduce it.
+6. Add a row to the CONTRACTS.md change log.
+
+A new public contract also needs adding to `CONTRACT_NAMES` in
+`validation.py`.
+
+## Local-only files
+
+Anything under `.local/` is ignored by Git. Use it for raw diagnostics,
+scratch output and notes that mention the machine. Built world releases go
+under `releases/` (also ignored) or the data root.

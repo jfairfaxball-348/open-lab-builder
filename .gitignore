@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+
+# Local-only material. Raw machine diagnostics, scratch output and anything
+# that may contain personal paths or host details must stay here and never be
+# committed. `olb check` verifies that this directory is ignored.
+.local/
+
+# Built world releases are build outputs, not source.
+/releases/
+
+# Secrets and editor state
+.env
+.env.*
+*.pem
+*.key
+.vscode/
+.idea/
+.claude/settings.local.json
+
+# Model weights must never be committed
+*.gguf
+*.safetensors
+*.onnx
+*.bin
+*.pt
