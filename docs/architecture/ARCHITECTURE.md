@@ -1,8 +1,11 @@
 # Architecture
 
 Status: established in S001. Implemented so far: the contracts, the builder
-tooling and (S002) the world release manager with two capabilities. Everything
-else in this document is design that later milestones build. Each section says
+tooling, the world release manager with two capabilities (S002), and in
+`open-lab-simulation` the experiment manager, a minimal supervisor, the
+recorder, the tool host and the agent loop driven by a scripted stand-in for
+the model (S003a). No model has been called. Everything else in this document
+is design that later milestones build. Each section says
 which milestone delivers it.
 
 Related: [CONTRACTS.md](CONTRACTS.md) · [OBSERVATION.md](OBSERVATION.md) ·

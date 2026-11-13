@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-13T23:10:00Z",
-  "last_session": "S002",
+  "updated_at": "2026-11-13T23:40:00Z",
+  "last_session": "S003a",
   "completed_milestones": [
     {
       "id": "S001",
@@ -21,14 +21,33 @@
         "11a206d"
       ],
       "summary": "World source tree with two working capabilities (text.stats, math.evaluate), a build-time capability invoker, olb world build and olb world verify, the digest algorithm, invocation protocol and data root default documented in CONTRACTS.md."
+    },
+    {
+      "id": "S003a",
+      "completed_at": "2026-11-13T23:40:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "685a51a"
+      ],
+      "summary": "Simulation bootstrap: experiment manager, supervisor with deadline and process-tree termination, single hash-chained recorder, tool host, agent loop behind a ModelClient interface with a scripted stand-in, workspace artifact scanning, ols run and ols verify. No model is called."
     }
   ],
   "next_milestone": {
-    "id": "S003a",
-    "repository": "open-lab-simulation",
-    "title": "Simulation Runtime Skeleton"
+    "id": "S004",
+    "repository": "open-lab-window",
+    "title": "Basic Window"
   },
-  "blockers": [],
+  "blockers": [
+    {
+      "id": "B-1",
+      "summary": "S003b (local model orchestrator) needs the human to authorise pulling one small text model with Ollama (roughly 2-3 GB).",
+      "affects": [
+        "S003b"
+      ],
+      "needs_human": true,
+      "detail": "Per the roadmap S004 goes first while this is outstanding. Once authorised, S003b can be done before or after S004."
+    }
+  ],
   "known_issues": [
     {
       "id": "KI-1",
@@ -71,31 +90,31 @@
       "detail": "Crash recovery (S006b) is mandatory. Power and update settings need review before multi-hour runs."
     },
     {
-      "id": "KI-5",
-      "summary": "The Simulation and Window repositories are empty (no commits).",
-      "affects": [
-        "S003a",
-        "S004"
-      ],
-      "detail": "Each needs its own bootstrap as the first step of its first milestone."
-    },
-    {
       "id": "KI-7",
-      "summary": "World builds and the content digest have only been run on Windows.",
+      "summary": "World builds, the content digest and process-tree termination have only been run on Windows.",
       "affects": [
         "S003a",
         "S006c"
       ],
-      "detail": "The algorithm hashes stored bytes and the repository forces LF line endings, so the digest should be identical on Linux, but that has not been observed. Check it the first time a Linux environment is available."
+      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available."
     },
     {
-      "id": "KI-8",
-      "summary": "No release has been published to the data root.",
+      "id": "KI-9",
+      "summary": "The Window repository is empty (no commits).",
       "affects": [
-        "S003a"
+        "S004"
       ],
-      "needs_human": true,
-      "detail": "S003a needs 'olb world build worlds/minimal --publish', which creates open-lab-data in the home directory (or the directory named by OPEN_LAB_DATA). Confirm the location with the human before the first write there."
+      "detail": "It needs its own bootstrap as the first step of S004."
+    },
+    {
+      "id": "KI-10",
+      "summary": "On the process tier nothing stops a capability process from reading or writing outside the workspace.",
+      "affects": [
+        "S006c",
+        "S008d",
+        "S009"
+      ],
+      "detail": "The Simulation gives capabilities an empty environment and only tells them the workspace path, but that is a convention for Builder-written capabilities, not enforcement. The supervisor re-checks the world digest after each run. Real enforcement arrives with the container tier (S006c)."
     }
   ],
   "open_decisions": [
@@ -128,8 +147,28 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-13T23:10:00Z",
+    "ran_at": "2026-11-13T23:40:00Z",
     "commands": [
+      {
+        "command": "open-lab-simulation: uv run ruff check .",
+        "result": "All checks passed"
+      },
+      {
+        "command": "open-lab-simulation: uv run pytest",
+        "result": "62 passed"
+      },
+      {
+        "command": "open-lab-simulation: uv run ols run experiments/scripted-smoke.json",
+        "result": "Run ended: completed, 20 events, against the published minimal 0.1.0 world"
+      },
+      {
+        "command": "open-lab-simulation: uv run ols verify <that archive>",
+        "result": "Run archive is intact"
+      },
+      {
+        "command": "uv run olb world build worlds/minimal --publish",
+        "result": "Built minimal 0.1.0 into the data root; verify with --self-test passed"
+      },
       {
         "command": "uv run ruff check .",
         "result": "All checks passed"
@@ -137,18 +176,6 @@
       {
         "command": "uv run olb check --tests",
         "result": "Health check passed (6 checks and the test suite: 242 passed)"
-      },
-      {
-        "command": "uv run olb validate",
-        "result": "8 valid, 0 invalid"
-      },
-      {
-        "command": "uv run olb world build worlds/minimal",
-        "result": "Built minimal 0.1.0, 2 capabilities, self-tests passed; a second build reported the release unchanged"
-      },
-      {
-        "command": "uv run olb world verify releases/minimal/0.1.0 --self-test",
-        "result": "Release is intact and self-tests passed"
       }
     ]
   }

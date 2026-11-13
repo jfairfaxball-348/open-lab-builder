@@ -124,6 +124,7 @@ and in `state.json`.
 ### S003a — Simulation Runtime Skeleton
 
 - **Repository:** open-lab-simulation
+- **Status:** complete
 - **Objective:** Launch an isolated, fully recorded run from an experiment
   configuration, driven by a scripted stand-in for the model, so the whole
   pipeline is testable without any model.

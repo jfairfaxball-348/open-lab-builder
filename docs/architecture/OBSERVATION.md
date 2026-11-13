@@ -5,7 +5,9 @@ question can be answered from evidence the agent could not have shaped.
 
 Contract: [`observation-event`](../../schemas/v1/observation-event.schema.json),
 [`artifact-metadata`](../../schemas/v1/artifact-metadata.schema.json).
-Implementation: S003a (recording), S004 (viewing).
+Implementation: recording is implemented in `open-lab-simulation` (S003a);
+viewing is S004. `agent.statement`, `resource.sample`, `checkpoint.created`,
+`recovery` and `memory.written` events are defined but nothing writes them yet.
 
 ## Rules
 
@@ -55,8 +57,27 @@ Implementation: S003a (recording), S004 (viewing).
 
 `seq` is the authoritative order. `validate_event_stream` checks that a log
 starts at 0, has no gaps or reordering, and belongs to a single run.
-`prev_event_sha256` optionally chains each event to the previous one so that
-later tampering is detectable.
+`prev_event_sha256` chains each event to the previous one so that later
+tampering is detectable.
+
+**Log format (fixed in S003a).** Each line of `events.jsonl` is one event in
+canonical JSON: UTF-8, keys sorted, separators `,` and `:` with no whitespace,
+non-ASCII characters written literally, terminated by a line feed. From the
+second event on, `prev_event_sha256` is the SHA-256 of the previous line's
+bytes without its line feed. A reader verifies a log by checking that every
+line is canonical, validates, has `seq` equal to its line number and carries
+the digest of the line before it. Removing, reordering, editing or
+re-serialising any line breaks the chain.
+
+**Who may record what.** One recorder exists per run, inside the supervisor
+process. The agent runtime runs in a child process that is never told where
+the archive is; it asks the supervisor over a pipe to record `model.call`,
+`agent.output`, `tool.call`, `tool.result` and `error` events and waits for an
+acknowledgement before continuing. The supervisor assigns `seq`, timestamps
+and the chain digest itself, and refuses every other event type from the
+runtime: state changes, `supervisor.action` and `artifact.*` events can only
+originate in the supervisor. A refused request is itself recorded as an
+`error` event.
 
 ## The run archive
 
@@ -66,17 +87,24 @@ runs/<experiment_id>/<run_id>/
   world-release.json         frozen world manifest
   contracts/v1/              the schemas needed to read this archive
   events.jsonl               the record; append-only
-  index.sqlite               query cache, rebuildable from events.jsonl
+  index.sqlite               query cache, rebuildable from events.jsonl  (not yet written)
   artifacts/sha256/<aa>/<digest>   preserved file contents
   artifacts/index.jsonl      artifact metadata records
-  checkpoints/<checkpoint_id>/
-  summary.json               final state, counts, duration
+  checkpoints/<checkpoint_id>/                                           (S006a)
+  summary.json               final state, counts, world digest
+  runtime.stderr.log         anything the runtime process wrote to stderr
 ```
+
+`ols verify <archive>` checks an archive using only its own contents.
 
 **Readable after the run and after the workspace is gone.** Artifacts are found
 by the supervisor scanning the workspace, not by the agent announcing them. On
 detection the bytes are copied into the content-addressed `artifacts/` store
-and an artifact metadata record is written. Every version of a file is kept.
+and an artifact metadata record is written. The workspace is scanned after
+every tool result, while the runtime is still waiting for its acknowledgement,
+so a change is attributed to the call during which it happened; and once more
+after the run has ended. Symbolic links are never followed or preserved. Every
+version of a file is kept.
 Deleting a workspace therefore loses nothing. Files above a configured size are
 recorded with their digest and `preserved: false`.
 

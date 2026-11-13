@@ -42,11 +42,15 @@ exists and works:
 - `olb check` — project health check.
 - Architecture, decision records, and a multi-session roadmap.
 
-What does **not** exist yet: the simulation runtime, any agent or model call,
-capability search, the model gateway, and the Window. Nothing has run an
-experiment. The model provider manifest in the minimal world names a model
-that has not been downloaded. The next milestone is **S003a — Simulation
-Runtime Skeleton**, in the open-lab-simulation repository.
+In the sibling `open-lab-simulation` repository, S003a (runtime skeleton) is
+also complete: `ols run` launches a supervised, fully recorded run driven by a
+scripted stand-in for the model.
+
+What does **not** exist yet: any model call, capability search, the model
+gateway, memory, checkpoints, container isolation and the Window. No
+experiment with a real agent has been run. The model provider manifest in the
+minimal world names a model that has not been downloaded. Run `uv run olb
+state` for the next milestone.
 
 ## Quick start
 

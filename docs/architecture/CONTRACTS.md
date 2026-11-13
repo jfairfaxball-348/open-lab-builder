@@ -167,6 +167,19 @@ implemented, `http` and `mcp` are not):
   object; raising `ValueError` declines the request. The Builder runs the
   function in a child process, so it has the same timeout as a subprocess.
 - The timeout is `resources.timeout_s` (30 s if absent).
+- **Workspace.** A capability whose manifest declares `permissions.filesystem`
+  other than `none` is given the absolute path of the run's workspace in the
+  environment variable `OPEN_LAB_WORKSPACE`. That is the only location it is
+  told about. A capability without that permission does not get the variable.
+  (The Builder's self-test invoker does not set it; no shipped capability
+  uses the workspace yet.)
+- **Environment.** The Simulation starts capability processes with an almost
+  empty environment — only what an interpreter needs to start — so nothing in
+  the operator's environment (tokens, keys, user paths) is inherited.
+- **Authority.** Before running, the Simulation's tool host compares the
+  manifest's `permissions` with the experiment's. If the capability needs more
+  than the experiment grants, or the experiment's `capabilities.allow` / `deny`
+  excludes it, the call is recorded with status `denied` and nothing runs.
 
 Every invocation ends in one of these outcomes:
 
@@ -180,10 +193,15 @@ Every invocation ends in one of these outcomes:
 | `invalid_output` | It returned something that is not JSON or violates `output_schema` |
 | `unsupported_interface` | The host cannot run this interface |
 
+In a run, the outcome is recorded in the `tool.result` event: `ok` and
+`timeout` map to the same `status`; `denied` is described above; every other
+outcome is `status: error` with `error` set to `<outcome>: <message>`, for
+example `capability_error: division by zero`.
+
 The Builder's invoker (`src/open_lab_builder/capabilities/`) exists only to run
 self-tests at build time. It gives no isolation beyond a child process and a
-timeout. The Simulation's tool host is a separate implementation of the same
-protocol (S003a).
+timeout. The Simulation's tool host (`open-lab-simulation`, S003a) is a
+separate implementation of the same protocol.
 
 ### Model provider
 
@@ -215,4 +233,5 @@ time only, so a crash does not eat into an experiment's time budget.
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
 | 2026-11-13 | all | 1.0.0 | Initial versions (S001) |
+| 2026-11-13 | (protocol) | — | Invocation protocol gains the `OPEN_LAB_WORKSPACE` variable, the empty child environment and the `denied` outcome; event-log canonical form and hash chain defined in OBSERVATION.md. No schema change (S003a) |
 | 2026-11-13 | capability | 1.0.1 | Descriptions of `invocation.entrypoint` and `invocation.command` now state where the module is found, the working directory, the meaning of `python` and how an error is reported. No structural change (S002) |
