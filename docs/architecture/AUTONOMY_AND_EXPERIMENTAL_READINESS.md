@@ -74,7 +74,12 @@ claim. Historical performance numbers were read, not remeasured in S013.
 The scientific purpose is to separate environmental limitations from limitations
 of the inhabitant. Local-first and essentially zero-cost remain defaults.
 
-**S007a, local implementation next:**
+**S007a, local implementation complete (engineering only):**
+
+See [gateway validation](../experiments/2026-11-14-local-gateway.md). The
+following design is implemented using a pinned inline catalog snapshot; server
+context/sampling/offload remain explicitly unknown in model provenance.
+
 
 1. Preserve the bundled model-provider manifests as the backward-compatible
    default. Add an approved immutable local catalog using the same versioned

@@ -1,0 +1,34 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-14T17:17:27Z",
+  "commands": [
+    {
+      "command": "Simulation: git status; git log; uv sync (start of session)",
+      "result": "Clean head 830379c. No separate pre-change suite run; the S013 audit had recorded 214 passing at this head"
+    },
+    {
+      "command": "wsl -d Ubuntu: podman pull docker.io/library/python:3.12-slim (human-authorised); podman image inspect",
+      "result": "Pulled once; digest sha256:05a994d2344eb364cc186910f4fc8786a38215f39f00d0acc25bff33a08f4177, about 124 MB; pinned in the backend and never pulled at run time"
+    },
+    {
+      "command": "Manual backend probes (scratch scripts outside the repositories)",
+      "result": "Workspace bind mount, no network, read-only root, cgroup ceilings, OOM 137, pids refusal and --timeout observed; wsl.exe -- found to rewrite arguments (use --exec); killing wsl.exe left the container running; container-made links are WSL reparse points Python does not report as links"
+    },
+    {
+      "command": "Simulation: OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_container.py with --network=none, --read-only, --cap-drop=ALL and noexec temporarily removed (negative control)",
+      "result": "Command, network, privilege/write and exec tests failed as expected; protections restored before the final run"
+    },
+    {
+      "command": "Simulation: uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
+      "result": "Lint passed; 237 tests passed in 200.24 seconds (23 container tests, 20 on the actual backend plus three supervised runs); no container with the run label remained"
+    },
+    {
+      "command": "Simulation: git commit",
+      "result": "bc51964 S006c: run capabilities in rootless Podman containers on WSL 2; not pushed"
+    },
+    {
+      "command": "Builder: uv run ruff check .; uv run olb check --tests",
+      "result": "Lint passed; 305 tests passed in 40.58 seconds and all six health checks passed"
+    }
+  ]
+}

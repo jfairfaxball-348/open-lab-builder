@@ -10,6 +10,7 @@ agent-stated objectives and adaptive action, not subjective consciousness.
 
 | Engineering record | Established | Not established |
 | --- | --- | --- |
+| [Local gateway](2026-11-14-local-gateway.md) | Two pinned catalog selections against the same world; frozen provenance and local adapter tests | Autonomy, matched compute or effective setting guarantees |
 | [Local model](2026-11-14-local-model-check.md), [candidate comparisons](2026-11-14-orchestrator-candidates.md) | Local calls/continuations and recorded differences | General autonomy or a controlled success rate; settings/output budgets varied |
 | [Discovery](2026-11-14-discovery-meta-tools.md) | Directed search/describe/invoke with recorded repairs | Reliable independent discovery; the final prompt gives procedural argument guidance |
 | [Registry/artifacts](2026-11-14-registry-artifacts.md) | Shipped tools, files and read-only text preview | Autonomous artifact selection or useful work |

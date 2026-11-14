@@ -275,6 +275,37 @@ decides what serves it. `footprint.measured` distinguishes estimates from
 measurements on the target machine; `status` distinguishes validated models
 from ones that are merely present or not downloaded at all.
 
+S007a implements an optional local catalog via the existing experiment extension
+`extensions.model_catalog = {"document": <model-provider>, "sha256": <hex>}`.
+It replaces bundled provider lookup for that experiment. The document uses the
+world's bundled model-provider schema, with unique gateway model ids. Builder
+owns catalog definitions (`models/local-engineering.json`); the experiment embeds
+an approved snapshot outside agent control. The pin hashes canonical JSON:
+sorted keys, compact separators, literal Unicode, UTF-8, no final newline.
+Changing the catalog requires a new digest/configuration; existing archives are
+never updated. This is an experimental protocol using existing extension points;
+no schema structure/version changes are required.
+
+Only local Ollama or loopback chat-compatible providers are supported. Selected
+models require available status, orchestrator role and explicit model/network
+permissions. Supplied model digests must match server identity. Generic `/models`
+only proves the advertised id; weight digest, server version and offload remain
+unknown. Generic checkpoint resume is refused without an attestable digest.
+HTTP redirects and URL credentials are refused. No external access is enabled.
+
+The archive freezes canonical `model-catalog.json`, the complete selected
+provider/model manifests and adapter/settings in `model.json`. The launch
+`run.state_changed` payload's extensions carry stage `model_provenance` and
+`model_sha256`, hashing canonical model.json. Archive verification checks this
+binding and catalog/config consistency. Resume revalidates configuration and
+identity; new-format archives require the original complete provenance. Legacy
+archives retain their original digest-based checks. Requested sampling and the
+client context guard are distinguished from unknown effective server settings.
+Repair policy `syntactic-tool-repair-v1` names the existing parsing/unwrap/name
+repairs; maximum HTTP attempts remain two. Unspecified output caps now explicitly
+request 512 tokens. Neither request caps nor seeds establish enforced compute
+parity or deterministic results.
+
 ### Experiment configuration
 
 Holds everything needed to reproduce a launch: prompt, world and digest, model
@@ -424,6 +455,7 @@ Windows notification delivery and disk checks have the limitations in ADR-0012.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-14 | (local gateway protocol) | � | S007a adds pinned model_catalog configuration, canonical catalog/model provenance binding and local adapter routing using existing extensions; no schema change |
 | 2026-11-14 | (resource protocol) | — | S006e applies existing resource fields through Windows jobs/supervisor quota admission and trials sample metadata/config extensions; ADR-0012. No schema change |
 | 2026-11-14 | (recovery protocol) | — | S006d trials extensions.recovery, conserved model-attempt and restart reservations, OS writer guard, interrupted startup scan and model health; ADR-0011. No schema change |
 | 2026-11-14 | (supervisor protocol) | — | S006b implements bounded checkpoint_then_stop using existing fields and event extensions; ADR-0010 defines grace and termination. No schema change |

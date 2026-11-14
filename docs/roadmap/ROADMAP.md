@@ -80,7 +80,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S007a → S007c → S007d. With expansion GO, S007e then the most useful
+**Next:** S007c then S007d (S007a complete). With expansion GO, S007e then the most useful
 feasible capability; narrow S008c can precede vision. With NO_GO, start S007h.
 With INCONCLUSIVE, fix the named validity issue before drawing a conclusion.
 S010 protocol work, optional hosted design and S006c/S006f remain safe
@@ -569,7 +569,7 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S007a — Model Gateway and Local Brain Swap
 
 - **Repository / streams:** Simulation; Builder manifests/contracts. B/C.
-- **Status:** planned; **next implementation milestone**.
+- **Status:** complete (S007a); [validation](../experiments/2026-11-14-local-gateway.md).
 - **Objective:** Select a different local orchestrator without rebuilding the world
   or changing its tools, prompts, observation rules or permissions.
 - **Prerequisites:** S003b/S005b/S006e and S013 decisions; no container needed.

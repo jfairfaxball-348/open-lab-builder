@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T17:17:27Z",
-  "last_session": "S006c",
+  "updated_at": "2026-11-14T17:49:17Z",
+  "last_session": "S007a",
   "completed_milestones": [
     {
       "id": "S001",
@@ -123,12 +123,21 @@
         "bc51964"
       ],
       "summary": "Split before implementation into S006c (Windows container capability tier) and S006f (world-declared images, Linux hosts, brokered container networking). Each capability call of a minimum_tier container world runs in a fresh rootless Podman container in WSL 2 from the authorised digest-pinned python:3.12-slim image: no network, cap-drop ALL, no-new-privileges, non-root, read-only root, noexec tmpfs, world read-only, workspace as the only host mount per filesystem permission, memory/CPU/pids ceilings. Launch probe and refusals; supervisor label sweep on every stop path; isolation.json; wsl.exe --exec; reparse-point-aware workspace walks. 23 container tests (20 on the actual backend plus completion/deadline/quota runs) and a negative control; 237 Simulation tests pass with OPEN_LAB_REQUIRE_CONTAINER=1. ADR-0015. No agent-supplied-code capability shipped."
+    },
+    {
+      "id": "S007a",
+      "completed_at": "2026-11-14T17:48:11Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "fd64e3f"
+      ],
+      "summary": "Independent pinned local model catalog, Ollama and loopback chat-compatible adapter routing, frozen catalog/model/adapter/settings provenance and archive integrity. Two installed models ran against unchanged world 0.6.0; verified engineering evidence only, no autonomy GO."
     }
   ],
   "next_milestone": {
-    "id": "S007a",
+    "id": "S007c",
     "repository": "open-lab-simulation",
-    "title": "Model Gateway and Local Brain Swap"
+    "title": "Explicit Continuation, Context and Memory Policy"
   },
   "blockers": [
     {
@@ -143,7 +152,7 @@
         "S008d",
         "S009"
       ],
-      "detail": "Run S007a then S007c then preregister/execute S007d. A complete negative report can complete S007d while keeping expansion closed. S010 can proceed after that report regardless of behavioural outcome."
+      "detail": "S007a is complete. Run S007c, then preregister/execute S007d. A complete negative report can complete S007d while keeping expansion closed. S010 can proceed after that report regardless of behavioural outcome."
     },
     {
       "id": "B-HOSTED",
@@ -214,14 +223,14 @@
     },
     {
       "id": "KI-12",
-      "summary": "Effective context and context-management interventions need explicit pinning; earlier local checks used a 4096-token server default.",
+      "summary": "Effective server settings remain unverified per call; context/intervention policy versioning is pending S007c.",
       "affects": [
         "S007a",
         "S007c",
         "S007d",
         "S011a"
       ],
-      "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Since S003c the runtime blanks old tool results and then drops whole old turns (never the initial prompt), recording both, so nothing is cut silently; but with 4096 tokens the conversation keeps only a few recent turns. Long runs need a larger context (server setting or the native API) and memory. S005b preserves the system preamble, initial user prompt and newest assistant/tool group. Fresh documentation is never blanked before its first use; protected content can still exceed the conservative estimate. S013 does not change behaviour or remeasure the server. S007a records effective settings/unknowns and S007c versions intervention policies before S007d evaluation."
+      "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Since S003c the runtime blanks old tool results and then drops whole old turns (never the initial prompt), recording both, so nothing is cut silently; but with 4096 tokens the conversation keeps only a few recent turns. Long runs need a larger context (server setting or the native API) and memory. S005b preserves the system preamble, initial user prompt and newest assistant/tool group. Fresh documentation is never blanked before its first use; protected content can still exceed the conservative estimate. S013 does not change behaviour or remeasure the server. S007a records effective settings/unknowns and S007c versions intervention policies before S007d evaluation. S007a now freezes requested sampling, the client guard and explicit unknown effective context/sampling/offload in each archive. Separate native probes reported 4096 context for both engineering candidates; they do not attest every chat call."
     },
     {
       "id": "KI-13",
@@ -335,35 +344,39 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T17:17:27Z",
+    "ran_at": "2026-11-14T17:49:17Z",
     "commands": [
       {
-        "command": "Simulation: git status; git log; uv sync (start of session)",
-        "result": "Clean head 830379c. No separate pre-change suite run; the S013 audit had recorded 214 passing at this head"
+        "command": "Builder: uv sync; uv run olb state; uv run olb check --tests (baseline)",
+        "result": "S007a next; 305 tests passed in 45.86 seconds and all health checks passed."
       },
       {
-        "command": "wsl -d Ubuntu: podman pull docker.io/library/python:3.12-slim (human-authorised); podman image inspect",
-        "result": "Pulled once; digest sha256:05a994d2344eb364cc186910f4fc8786a38215f39f00d0acc25bff33a08f4177, about 124 MB; pinned in the backend and never pulled at run time"
+        "command": "Simulation: uv sync; uv run pytest -q (initial suite)",
+        "result": "237 tests passed. This suite overlapped subsequent source edits and is not a pristine-source baseline."
       },
       {
-        "command": "Manual backend probes (scratch scripts outside the repositories)",
-        "result": "Workspace bind mount, no network, read-only root, cgroup ceilings, OOM 137, pids refusal and --timeout observed; wsl.exe -- found to rewrite arguments (use --exec); killing wsl.exe left the container running; container-made links are WSL reparse points Python does not report as links"
+        "command": "Simulation: uv run pytest (final); uv run pytest tests/test_model.py -k catalog_routes; uv run ruff check .",
+        "result": "252 tests passed without warnings in 227.91 seconds; final catalog-routing/recovery assertions passed 3 tests; lint passed. Earlier health-probe warning was fixed by preserving the original Ollama monitor and refusing unattestable generic recovery at admission."
       },
       {
-        "command": "Simulation: OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_container.py with --network=none, --read-only, --cap-drop=ALL and noexec temporarily removed (negative control)",
-        "result": "Command, network, privilege/write and exec tests failed as expected; protections restored before the final run"
+        "command": "Simulation: uv run ols run experiments/s007a-swap-llama.json; uv run ols run experiments/s007a-swap-granite.json; verify_archive on both; paired config comparison",
+        "result": "Both selected installed models against the same world/registry, ended at max_steps=3, and verified without problems. Llama invoked the clock with two repairs; Granite reached documentation only. Configurations differ only in experiment/model ids. No behavioural GO."
       },
       {
-        "command": "Simulation: uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
-        "result": "Lint passed; 237 tests passed in 200.24 seconds (23 container tests, 20 on the actual backend plus three supervised runs); no container with the run label remained"
+        "command": "Simulation: ollama.measure and bounded warm native requests for both installed models",
+        "result": "Llama: 2800 MiB loaded, 2239 VRAM, 561 RAM, 7.18 s unloaded-model load; Granite: 2637 MiB loaded, 2245 VRAM, 392 RAM, 6.92 s load. Native context 4096 for both. No disk-cache cold guarantee; effective per-call settings remain unknown."
       },
       {
-        "command": "Simulation: git commit",
-        "result": "bc51964 S006c: run capabilities in rootless Podman containers on WSL 2; not pushed"
+        "command": "Builder: uv run olb validate models/local-engineering.json and both Simulation paired configurations; check_privacy on Simulation; git diff --check",
+        "result": "Three documents valid; privacy scan empty; diff checks passed."
       },
       {
-        "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 40.58 seconds and all six health checks passed"
+        "command": "Simulation: git commit; git push origin main; git status --short --branch",
+        "result": "fd64e3f committed and pushed; clean main agrees with origin/main."
+      },
+      {
+        "command": "Builder: uv run ruff check .; uv run olb check --tests (final)",
+        "result": "Lint passed; 305 tests passed in 48.15 seconds and all health checks passed. Current catalog and both paired configurations validated; historical S006c validation retained separately."
       }
     ]
   }
