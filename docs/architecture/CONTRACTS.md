@@ -83,14 +83,39 @@ contracts/v1/<name>.schema.json          the seven contracts and common.schema.j
 capabilities/<id>/capability.json        one directory per capability, named by its id
 capabilities/<id>/...                    that capability's implementation files
 models/<file>.json                       model provider manifests
+registry/index.json                     generated discovery index (since S005a)
+registry/docs/<id>.txt                   generated complete manifest documentation
 ```
 
-Files are copied byte for byte from the world source (`worlds/<name>/` in this
+Source files are copied byte for byte from the world source (`worlds/<name>/` in this
 repository). Nothing is rewritten: no line-ending conversion, no
 re-serialisation. The repository stores text with LF endings
 (`.gitattributes`), so a build is the same on Windows and Linux. Bytecode
 caches (`__pycache__`, `*.pyc`) are never copied, and symbolic links are
 refused.
+
+**Registry (S005a).** Generated files join the digest before self-tests and are
+not source files. `registry/index.json` has `format_version: "1.0.0"` and a
+`capabilities` array sorted by id. Each entry has `id`, `name`, `summary`,
+`categories`, `keywords` (empty if absent), `documentation_path` and `tokens`.
+Tokens are stored separately for id, name, keywords, categories, summary and
+description: case-fold Unicode text, split into alphanumeric words (underscore
+and punctuation separate words), deduplicate and sort. No stemming or stop-word
+removal. JSON uses sorted keys, two-space indentation, literal Unicode, UTF-8
+and a final LF. Documentation includes a heading and every manifest field in
+sorted order; strings are prose, other values are sorted, indented JSON. The
+generated separators use LF; string values retain their original content.
+
+The Builder's pure-Python `capabilities.registry.search(index, query,
+category=None, limit=10)` uses the same tokenizer and sums weights for each
+distinct query token present in each field: id 8, name 6, keywords 5, categories
+4, summary 3, description 1. Any positive match is eligible; descending score,
+then ascending id determines order. An optional exact category slug filters
+results. Empty/no-match queries and non-positive limits yield an empty list.
+Results carry the entry and its score. An unsupported format version is refused.
+This is derived release data, not a new JSON Schema contract; existing schemas
+are unchanged. Runtime discovery integration belongs to S005b. Older releases
+without the registry remain verifiable.
 
 **Content digest.** `content_digest.value` is computed as follows.
 
@@ -203,6 +228,15 @@ self-tests at build time. It gives no isolation beyond a child process and a
 timeout. The Simulation's tool host (`open-lab-simulation`, S003a) is a
 separate implementation of the same protocol.
 
+Since S005a, each build-time self-test demonstration receives its own empty,
+disposable workspace. The Builder strips inherited `OPEN_LAB_WORKSPACE` and
+sets it only for filesystem capabilities. The release directory stays unchanged.
+`workspace.write` creates bounded UTF-8 text files (explicit overwrite only);
+`workspace.list` lists at most 1000 immediate children. Both validate relative
+paths, reject traversal, special names and links, and report errors without
+local paths. These checks do not contain concurrent path replacement or
+arbitrary capability code on the process tier; container isolation is S006c.
+
 ### Model provider
 
 Separates the gateway-facing model `id` from the provider's own name
@@ -232,6 +266,7 @@ time only, so a crash does not eat into an experiment's time budget.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-14 | (release layout / protocol) | — | Generated registry format 1.0.0 and full documentation; disposable self-test workspaces; minimal world 0.4.0 adds workspace.write, workspace.list and time.now. No schema change (S005a) |
 | 2026-11-13 | all | 1.0.0 | Initial versions (S001) |
 | 2026-11-13 | (protocol) | — | Invocation protocol gains the `OPEN_LAB_WORKSPACE` variable, the empty child environment and the `denied` outcome; event-log canonical form and hash chain defined in OBSERVATION.md. No schema change (S003a) |
 | 2026-11-14 | observation-event | 1.1.0 | New event type `environment.message` (payload `kind`, `text`, optional `after_seq`; recorder `agent_runtime` only): text the infrastructure gives the model as a conversation turn (S003c) |

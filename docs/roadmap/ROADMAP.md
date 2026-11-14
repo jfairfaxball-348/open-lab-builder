@@ -257,9 +257,9 @@ and in `state.json`.
   an event log against the archive's own schemas and hash chain. Verified in a
   browser against the real archives and against a scripted Simulation run
   while it was being recorded.
-- **Left for later:** the artifact views have only seen synthetic archives,
-  because no world capability writes files yet (re-check once S005a has added
-  workspace file capabilities and a run has used them). The front end has no
+- **Follow-up (S005a):** the artifact list and text preview now have a real
+  scripted archive check with workspace.write; preserved archive bytes were
+  unchanged after browsing. Real image artifacts remain unverified. The front end has no
   automated tests of its own. Run comparison is S010.
 - **Next session should:** S005a.
 
@@ -268,6 +268,7 @@ and in `state.json`.
 ### S005a — Capability Registry Index
 
 - **Repository:** open-lab-builder
+- **Status:** complete
 - **Objective:** Make a world's capabilities searchable and self-documenting.
 - **Prerequisites:** S002.
 - **Scope:** at build time generate a registry index in the release (ids,
@@ -279,6 +280,13 @@ and in `state.json`.
 - **Acceptance tests:** search relevance tests on fixed queries; index is
   deterministic; documentation rendering covers every manifest section.
 - **Exit criteria:** new world version built and verified.
+- **Delivered:** minimal world 0.4.0 built, self-tested, verified and published;
+  deterministic registry/index.json and full per-manifest documentation;
+  weighted pure-Python keyword search; workspace.write, workspace.list and
+  time.now. Simulation fixture rebuilt/copied and configurations updated.
+  Scripted file-writing archive verified and its text artifact checked in the
+  Window, with archive bytes unchanged after browsing. See
+  [engineering check](../experiments/2026-11-14-registry-artifacts.md).
 - **Next session should:** S005b.
 
 ---

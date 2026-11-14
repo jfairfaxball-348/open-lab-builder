@@ -1,7 +1,8 @@
 # Architecture
 
 Status: established in S001. Implemented so far: the contracts, the builder
-tooling, the world release manager with two capabilities (S002), and in
+tooling, the world release manager (S002), the generated registry, documentation
+and five simple capabilities (S005a), and in
 `open-lab-simulation` the experiment manager, a minimal supervisor, the
 recorder, the tool host and the agent loop (S003a), driven either by a
 scripted stand-in or by one local model through Ollama's chat-completions
@@ -118,6 +119,13 @@ launch (the Simulation refuses to start).
 A capability is one directory with a `capability.json` manifest
 ([contract](CONTRACTS.md#capability)). The registry is the set of manifests in
 a world release plus, later, tools the agent creates inside its own sandbox.
+
+Implemented in S005a: build-time `registry/index.json`, full generated
+`registry/docs/<id>.txt`, and pure-Python weighted keyword search in the Builder
+(format and ranking in CONTRACTS.md). Minimal world 0.4.0 contains five
+capabilities, including workspace text writing/listing and UTC time. The
+Simulation still presents capabilities directly; the four meta-tools below
+are S005b and are not yet implemented.
 
 The agent's initial prompt does **not** list the tools. The runtime exposes
 four fixed meta-tools, and everything else is discovered through them:

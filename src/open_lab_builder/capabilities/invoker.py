@@ -12,6 +12,7 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -90,6 +91,7 @@ def invoke(
     arguments: Any,
     *,
     timeout_s: float | None = None,
+    workspace: Path | None = None,
 ) -> InvocationResult:
     """Invoke a capability once. The manifest must already be a valid capability document."""
     problem = _first_error(manifest["input_schema"], arguments)
@@ -101,6 +103,10 @@ def invoke(
     if timeout_s is None:
         timeout_s = manifest.get("resources", {}).get("timeout_s", DEFAULT_TIMEOUT_S)
 
+    environment = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+    environment.pop("OPEN_LAB_WORKSPACE", None)
+    if workspace is not None and manifest["permissions"]["filesystem"] != "none":
+        environment["OPEN_LAB_WORKSPACE"] = str(workspace.resolve())
     try:
         done = subprocess.run(  # noqa: S603 - argument vector, never a shell
             command,
@@ -108,7 +114,7 @@ def invoke(
             capture_output=True,
             cwd=capability_dir,
             # A release directory must stay byte-identical after a self-test.
-            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+            env=environment,
             timeout=timeout_s,
             check=False,
         )
@@ -143,7 +149,11 @@ def run_self_test(manifest: dict[str, Any], capability_dir: Path) -> list[str]:
     timeout_s = manifest["self_test"].get("timeout_s")
     for demo_id in manifest["self_test"]["demonstrations"]:
         demo = demonstrations[demo_id]
-        result = invoke(manifest, capability_dir, demo["input"], timeout_s=timeout_s)
+        # Each demonstration starts with an empty disposable workspace. Never
+        # inherit an operator's workspace or write into the immutable release.
+        with tempfile.TemporaryDirectory(prefix="olb-self-test-") as directory:
+            result = invoke(manifest, capability_dir, demo["input"], timeout_s=timeout_s,
+                            workspace=Path(directory))
         label = f"{manifest['id']} demonstration '{demo_id}'"
         if not result.ok:
             problems.append(f"{label}: {result.error_kind}: {result.message}")

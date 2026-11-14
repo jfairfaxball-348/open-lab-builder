@@ -20,6 +20,7 @@ from typing import Any
 
 from .. import __version__
 from ..capabilities import entrypoint_file, run_self_test
+from ..capabilities.registry import INDEX_PATH, build_index, documentation
 from ..contracts import CONTRACT_NAMES, load_schema, validate_document
 from ..paths import repo_root, schemas_dir
 
@@ -221,6 +222,17 @@ def _stage(world: WorldSource, staging: Path) -> None:
                 )
     for path, _ in world.models:
         _copy(path, staging / "models" / path.name)
+    registry = staging / "registry"
+    (registry / "docs").mkdir(parents=True)
+    (staging / INDEX_PATH).write_text(
+        json.dumps(build_index([c.manifest for c in world.capabilities]),
+                   indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+    for capability in world.capabilities:
+        (registry / "docs" / f"{capability.manifest['id']}.txt").write_text(
+            documentation(capability.manifest), encoding="utf-8", newline="\n",
+        )
 
 
 def _manifest(world: WorldSource, digests: dict[str, str], now: datetime) -> dict[str, Any]:
