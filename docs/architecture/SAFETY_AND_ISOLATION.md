@@ -34,6 +34,11 @@ raising a limit, changing permissions or contacting the supervisor.
 - **Shutdown.** The supervisor is the parent process and owns the clock. At the
   deadline it checkpoints (if configured) and kills the process tree. The
   agent runtime has no veto and is not asked.
+- **Recovery (S006d).** Only frozen experiment configuration enables restarts.
+  One supervisor owns the OS writer guard across segments; stale takeover
+  requires a verified dead/reused local process birth identity. Runtime
+  crashes, prompts and model outputs cannot replenish retry/time/step budgets.
+  Startup scanning is explicit (`ols recover`); no OS startup task is installed.
 - **Resources (planned S006e).** Memory, CPU, process count and workspace size will be limited by
   the operating system or by the supervisor's own checks, not by asking the
   agent to behave.

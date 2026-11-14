@@ -7,7 +7,8 @@ Contract: [`observation-event`](../../schemas/v1/observation-event.schema.json),
 [`artifact-metadata`](../../schemas/v1/artifact-metadata.schema.json).
 Implementation: recording is implemented in `open-lab-simulation` (S003a, S003b);
 viewing is implemented in `open-lab-window` (S004). S006a records checkpoint,
-manual recovery and memory-write events. `agent.statement` and `resource.sample`
+manual recovery and memory-write events. S006d adds bounded automatic
+recovery, startup recovery and model-health supervisor actions. `agent.statement` and `resource.sample`
 remain defined but are not written yet.
 
 ## Rules
@@ -148,6 +149,19 @@ termination after saving a complete-step snapshot or exhausting the fixed grace
 allowance. Both are supervisor observations. No deadline notice is delivered
 to the model. The worker remains blocked until killed; queued barriers after
 termination never cause a snapshot. See ADR-0010.
+
+S006d adds supervisor actions whose extension stages distinguish restart debits,
+model-attempt reservations, model health, exhaustion and refusal. Model attempts
+are reserved and synced before execution; a killed attempt can therefore have a
+reservation without a completed `model.call`. Health records report only server
+availability/model identity, not inferred agent state or inference readiness.
+Recovery state transitions and checkpoint ids preserve the existing hash chain.
+Refusal actions can follow a final state. A live/unverifiable owner or invalid
+log receives no appended event because it cannot safely accept one. Startup
+recovery never trims partial lines; missing summaries remain missing on refusal.
+Host-local writer markers/accounting and retained stale-owner evidence are
+operational files outside the workspace, never authority from an agent.
+See ADR-0011.
 
 `model.json` (S003b) records exactly which model drove the run: gateway id,
 provider, the provider's own name for the model, sampling parameters, and the

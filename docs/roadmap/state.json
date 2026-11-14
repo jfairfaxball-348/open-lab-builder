@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T10:55:02Z",
-  "last_session": "S006b",
+  "updated_at": "2026-11-14T11:28:04Z",
+  "last_session": "S006d",
   "completed_milestones": [
     {
       "id": "S001",
@@ -90,12 +90,21 @@
         "ce102f9"
       ],
       "summary": "The original supervisor milestone was split before implementation: S006b graceful deadlines, S006d recovery, S006e resource enforcement. Bounded checkpoint_then_stop requires checkpointing, uses one fixed grace allowance, snapshots at a complete-step barrier and kills before acknowledgement. Expiry/timeouts preserve prior safe checkpoints; post-kill barriers cannot snapshot. Original budgets remain unchanged. Scripted native CLI archive verifies; 159 Simulation and 305 Builder tests pass. ADR-0010 documents semantics and limits. Automatic recovery and resource enforcement remain unimplemented."
+    },
+    {
+      "id": "S006d",
+      "completed_at": "2026-11-14T11:28:04Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "7e636d4"
+      ],
+      "summary": "Opt-in bounded runtime recovery under one long-lived supervisor; shared persisted restart budget, pre-execution model-attempt reservations and active-time ledger; permanent OS writer guard with hashed installation/PID/birth identity and safe stale-marker retention; ols recover startup scan for opted-in interrupted runs; asynchronous model identity/availability probes. Native worker and exact-supervisor fault injection, append-only restoration, downtime accounting and refusal paths verified. 188 Simulation tests and 305 Builder tests pass. ADR-0011 documents extension semantics and limits. Resource enforcement remains S006e; no OS startup task installed; physical reboot/power-loss, Linux execution and large-run host I/O remain unverified."
     }
   ],
   "next_milestone": {
-    "id": "S006d",
+    "id": "S006e",
     "repository": "open-lab-simulation",
-    "title": "Runtime and Interrupted-Run Recovery"
+    "title": "Resource Enforcement and Sampling"
   },
   "blockers": [],
   "known_issues": [
@@ -128,7 +137,7 @@
         "S012"
       ],
       "needs_human": true,
-      "detail": "Crash recovery (S006d) is mandatory. Power and update settings need review before multi-hour runs."
+      "detail": "S006d recovery is implemented and tested with native process termination; physical reboot and host suspend/resume remain unverified. Power and update settings need review before multi-hour runs."
     },
     {
       "id": "KI-7",
@@ -142,7 +151,7 @@
         "S006d",
         "S006e"
       ],
-      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there. SQLite memory, checkpoint ZIP/backup, resume and writer-lock tests have also only run on Windows."
+      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there. SQLite memory, checkpoint ZIP/backup, resume and writer-lock tests have also only run on Windows. S006d native OS writer locks, process birth identity, worker/supervisor termination and startup recovery have been exercised on Windows only. Mocked Linux identity branches are tested, but no Linux OS execution occurred."
     },
     {
       "id": "KI-10",
@@ -187,10 +196,9 @@
       "id": "KI-14",
       "summary": "The Window cannot tell a run in progress from one that was interrupted, and its front end has no automated tests.",
       "affects": [
-        "S006d",
         "S010"
       ],
-      "detail": "A run without summary.json is shown as 'not finished' with its last recorded state and last event time; nothing in the archive says whether the supervisor is still alive (S006d's recovery records could). The JSON API and the read-only guarantees are tested; rendering was checked by hand in a browser."
+      "detail": "The Window still shows a run without summary.json as not finished, using the last recorded state/event time. S006d adds host-local writer/accounting files and recovery actions, but the Window does not interpret them as liveness evidence. JSON API/read-only guarantees are tested; the front end still has no automated rendering tests."
     },
     {
       "id": "KI-15",
@@ -203,12 +211,16 @@
       "detail": "max_output_tokens covers the hidden reasoning: qwen3:4b at 512 produced only empty replies. Asking Ollama 0.40.16 for reasoning_effort 'none' moved the reasoning into the reply text, which would be recorded as said, so the runtime sends no such option. If a thinking model is chosen (OD-2) the protocol must say how much unrecorded computation is acceptable."
     },
     {
-      "id": "KI-16",
-      "summary": "Automatic crash/reboot recovery and stale-writer-lock handling are not implemented.",
+      "id": "KI-17",
+      "summary": "Recovery is opt-in; physical reboot/power-loss durability, Linux execution and large-run timing remain unverified.",
       "affects": [
-        "S006d"
+        "S006d",
+        "S006e",
+        "S011a",
+        "S011b",
+        "S011c"
       ],
-      "detail": "S006a provides complete-step checkpoints and manual resume of stopped runs with summaries. S006b now implements checkpoint_then_stop with a fixed grace allowance and supervisor termination. Automatic recovery, verified stale-lock ownership and model-server health checks remain S006d. Resource limits and sampling remain S006e. Native console signals, uninterruptible host I/O and large/long-run timing remain unverified. See ADR-0010."
+      "detail": "S006d passes native Windows worker/exact-supervisor termination and startup recovery tests. ols recover is an explicit startup scan; no OS boot task was installed. Interrupted accounting uses durable one-second reservations, not an inferred exact death time. Partial observation/artifact writes, invalid accounting and unverifiable legacy/foreign ownership are refused rather than repaired by inference. Uninterruptible host I/O and directory-entry power-loss durability are not guaranteed. See ADR-0011 and docs/experiments/2026-11-14-supervisor-recovery.md."
     }
   ],
   "open_decisions": [
@@ -235,39 +247,43 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T10:55:02Z",
+    "ran_at": "2026-11-14T11:28:04Z",
     "commands": [
       {
         "command": "uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Dependencies synced; original S006b next; all six health checks and 305 tests passed"
+        "result": "Dependencies synced; S006d next; 305 tests and all six health checks passed"
       },
       {
         "command": "open-lab-simulation: uv sync; uv run pytest (baseline)",
-        "result": "Dependencies synced; 147 tests passed"
+        "result": "Dependencies synced; 159 tests passed in 105.18 seconds"
       },
       {
         "command": "open-lab-simulation: uv run ruff check .; uv run pytest (final)",
-        "result": "Lint passed; 159 tests passed in 105.40 seconds, including 12 new graceful-deadline tests with native Windows workers/capabilities and one queued-barrier regression"
+        "result": "Lint passed; 188 tests passed in 123.11 seconds, including 29 new recovery tests. Native Windows worker/exact-supervisor fault injection, retry/deadline/attempt budgets, stale ownership, startup scan, corruption/refusals, accounting failures and fake-model health probes verified. Linux identity branches have mocked tests only"
       },
       {
         "command": "uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; all six health checks and 305 tests passed in 59.72 seconds"
+        "result": "Lint passed; 305 tests passed in 56.62 seconds and all six health checks passed"
       },
       {
-        "command": "open-lab-simulation: uv run ols run experiments/scripted-graceful-deadline.json; uv run ols verify <archive>",
-        "result": "run-20261114t104818z-7d6fec terminated for deadline in 2.703 active seconds; one complete step, two successful tool calls, two checkpoints, two supervisor actions, 19 events; following step absent; archive intact"
+        "command": "open-lab-simulation: separate CLI fault-injection harness over experiments/scripted-recovery.json; ols verify <archive>",
+        "result": "run-20261114t111831z-64db06 completed after one verified worker kill/restart: 37 events, 3.282 active seconds, 3 completed model calls, 5 reserved attempts; previous log prefix preserved; CLI and independent verification exited zero"
       },
       {
-        "command": "Builder health.check_privacy on Builder and Simulation committable files; git diff --check in both repositories",
-        "result": "Both privacy checks and whitespace checks passed; no archives, weights, personal paths or raw diagnostics staged"
+        "command": "open-lab-simulation: recover_interrupted startup scan after first CLI harness interrupted its supervisor; ols verify <archive>",
+        "result": "The first harness refused injection because launcher and supervisor PIDs differed; cleanup interrupted run-20261114t111721z-d1fda6. Recorded owner/runtime were confirmed absent; startup recovery completed with retained stale-lock evidence, 35 events and 4.078 active seconds; archive verified intact. Harness identity assumption corrected"
+      },
+      {
+        "command": "Builder health.check_privacy on both repositories; git diff --check; assert schemas/worlds unchanged",
+        "result": "Both privacy and whitespace checks passed; no schema/world source changes or new dependency; raw evidence remained ignored/outside version control"
       },
       {
         "command": "open-lab-simulation: git commit; git push origin main; git status --short; git rev-list --left-right --count HEAD...origin/main",
-        "result": "Committed and pushed ce102f9; clean main; local and origin/main agree (0 ahead, 0 behind)"
+        "result": "Committed and pushed 7e636d4; main clean; local and origin/main agree (0 ahead, 0 behind)"
       },
       {
-        "command": "uv run olb check; uv run olb state (after final state/docs update)",
-        "result": "All six health checks passed; S006b complete; S006d Runtime and Interrupted-Run Recovery next"
+        "command": "uv run ruff check .; uv run olb check; uv run olb state (after final docs/state update)",
+        "result": "Lint and all six health checks passed; S006d complete and S006e Resource Enforcement and Sampling next"
       }
     ]
   }

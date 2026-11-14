@@ -386,7 +386,7 @@ and in `state.json`.
 ### S006d — Runtime and Interrupted-Run Recovery
 
 - **Repository:** open-lab-simulation
-- **Status:** planned
+- **Status:** complete
 - **Objective:** Recover under a long-lived supervisor without granting new budgets.
 - **Prerequisites:** S006b.
 - **Scope:** automatic restart from checkpoint on runtime crash with an explicit
@@ -398,6 +398,15 @@ and in `state.json`.
   keeps the event chain and excludes downtime; deadline fires after recovery.
 - **Exit criteria:** all recovery/refusal paths tested and recorded with
   supervisor actions; configuration and recovery protocol documented.
+- **Delivered:** opt-in frozen recovery policy; one long-lived supervisor across
+  worker segments; shared persisted retry/attempt reservations and active-time
+  accounting; OS writer guard and verified process birth identities; startup
+  scan through `ols recover`; asynchronous model identity/availability probes.
+  Native worker/supervisor fault injection, safe refusals, conserved budgets and
+  append-only restoration verified. 188 Simulation and 305 Builder tests pass.
+  No OS startup task installed; physical reboot/power-loss, Linux execution and
+  large-run host-I/O timing remain unverified. ADR-0011 and
+  [validation record](../experiments/2026-11-14-supervisor-recovery.md).
 - **Next session should:** S006e.
 
 ---

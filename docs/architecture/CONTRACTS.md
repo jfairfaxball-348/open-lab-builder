@@ -349,13 +349,50 @@ snapshot. Grace counts as active elapsed time and does not replenish the
 original budget. Hard stop ignores grace. The deadline request is a
 `supervisor.action: limit_enforced` with extension stage
 `deadline_checkpoint_requested`; termination is also a supervisor action.
-See ADR-0010. Automatic crash/reboot and stale-lock recovery remain S006d.
-Stopped runs must have a valid summary for manual resume.
+See ADR-0010. S006d extends resume to opted-in interrupted archives through
+`ols recover`, using verified writer ownership and conserved retry budgets.
+Stopped runs still use `ols resume`; see the extension below.
+
+### Supervisor recovery extension (S006d)
+
+The Simulation trials recovery under `experiment-config.extensions.recovery`,
+using existing extension fields rather than changing a schema or world release.
+The object requires integer `max_restarts` in 0–100. Optional `auto_resume` is a
+boolean (default false). Optional `health_check_interval_s` and
+`health_check_timeout_s` are finite numbers in 0.05–60 (defaults 5 and 2).
+Unknown fields, boolean numbers and recovery without checkpointing are refused.
+Absence disables automatic recovery.
+
+`supervisor.action.payload.extensions.stage` names `recovery_restart`,
+`model_step_reserved`, `model_health`, `recovery_exhausted`, `recovery_refused`
+and `manual_resume`. Restart actions debit one shared retry budget before a
+worker starts; reserved model attempts are charged even without a reply.
+Actions may follow a final state when recording recovery refusal/exhaustion;
+verification checks the final state transition and the full event count.
+
+`.writer.guard` is a permanent OS-locked inode, `.writer.lock` a host-local owner
+marker, and `.supervisor.json` a supervisor-only active-time reservation ledger.
+They are operational state, not agent input or new cross-repository schemas.
+Owner identity combines a hashed installation identity with PID and OS process
+birth identity. Only a confirmed dead/reused local owner can be replaced under
+the exclusive guard; its marker is kept under `segments/`. Legacy/unknown/live
+ownership is refused. The runtime must also be absent before startup recovery.
+
+Startup scans require `auto_resume: true`, a missing summary, a non-stopped
+state in a complete valid log, valid accounting, matching world/model identity
+and a valid checkpoint. Existing observations are never rewritten or truncated.
+Unsafe ownership/invalid logs yield CLI refusals; safe owned logs also receive
+refusal actions. A ledger reserves one second ahead, renewing every 0.2 seconds;
+expired/failed accounting stops work. Interrupted recovery conservatively charges
+the durable reservation while excluding wall-clock downtime. Successful
+revalidation/restoration time is charged. See ADR-0011 for implementation limits,
+including unverified physical reboot/power-loss, Linux and host I/O timing.
 
 ## Change log
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-14 | (recovery protocol) | — | S006d trials extensions.recovery, conserved model-attempt and restart reservations, OS writer guard, interrupted startup scan and model health; ADR-0011. No schema change |
 | 2026-11-14 | (supervisor protocol) | — | S006b implements bounded checkpoint_then_stop using existing fields and event extensions; ADR-0010 defines grace and termination. No schema change |
 | 2026-11-14 | checkpoint-metadata | 1.0.1 | Clarifies that last_event_seq is the snapshot boundary; resume appends after the existing tail and records rollback/replay. Structure and constraints unchanged. S006a protocol, agent-owned memory and world 0.6.0 documented in ADR-0009 |
 | 2026-11-14 | observation-event | 1.2.0 | Adds environment.message kind preamble for the generic discovery system message; minimal world 0.5.0 bundles it. Four meta-tool protocol specified (S005b) |

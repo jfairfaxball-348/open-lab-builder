@@ -16,6 +16,7 @@ by rewriting history.
 | [0008](ADR-0008-component-communication.md) | Components communicate through files under a data root; Window is read-only | Accepted; front-end stack decided in S004 |
 | [0009](ADR-0009-checkpoint-barriers-and-agent-memory.md) | Complete-step checkpoints, append-only rollback/resume and agent-owned live memory | Accepted; refines ADR-0007 memory location |
 | [0010](ADR-0010-bounded-deadline-checkpoints.md) | Fixed deadline grace, complete-step snapshot and supervisor termination | Accepted; supersedes ADR-0009 deadline-mode refusal |
+| [0011](ADR-0011-bounded-supervisor-recovery.md) | Opt-in bounded restarts, startup recovery, verified writer ownership and model health | Accepted; extends ADR-0009/0010 |
 
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).

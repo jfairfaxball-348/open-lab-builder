@@ -6,8 +6,9 @@ and five simple capabilities (S005a), and in
 `open-lab-simulation` the experiment manager, a minimal supervisor, the
 recorder, the tool host and the agent loop (S003a), driven either by a
 scripted stand-in or by one local model through Ollama's chat-completions
-endpoint (S003b), now through four discovery meta-tools (S005b). Everything else in this document is design that later
-milestones build. Each section says
+endpoint (S003b), now through four discovery meta-tools (S005b), with durable
+memory/checkpoints (S006a), graceful deadlines (S006b) and opt-in bounded
+recovery (S006d). Other sections describe later designs. Each section says
 which milestone delivers it.
 
 Related: [CONTRACTS.md](CONTRACTS.md) · [OBSERVATION.md](OBSERVATION.md) ·
@@ -207,16 +208,21 @@ termination retains the previous safe snapshot. S006b implements
 `checkpoint_then_stop` with a fixed additional grace allowance (default zero),
 a complete-step snapshot and supervisor termination before acknowledging the
 barrier. See [ADR-0010](../decisions/ADR-0010-bounded-deadline-checkpoints.md).
-Automatic recovery remains S006d; resource enforcement remains S006e.
+S006d adds opt-in bounded worker restarts and interrupted-run startup scanning,
+with verified writer ownership, original budgets and model-health probes. See
+[ADR-0011](../decisions/ADR-0011-bounded-supervisor-recovery.md). Resource
+enforcement remains S006e.
 
-### Runtime supervisor — Simulation (S003a, S006b partial; S006d/S006e planned)
+### Runtime supervisor — Simulation (S003a/S006b/S006d; resources planned S006e)
 
 Implemented: the CLI supervisor is a separate OS process and the parent of
 the runtime; it owns the recorder, deadlines and process-tree termination.
-Graceful deadlines are implemented in S006b. Automatic recovery, stale-lock
-handling and resource limits/sampling are still planned (S006d/S006e).
+Graceful deadlines are implemented in S006b. S006d implements bounded recovery,
+stale-lock verification and model-health probes. `ols recover` is the explicit
+startup scan for opted-in interrupted runs; it installs no OS startup task.
+Resource limits/sampling are still planned (S006e).
 
-The full design also adds memory/CPU/process/disk limits, crash recovery and
+The full design also adds memory/CPU/process/disk limits and
 resource sampling. The supervisor does not read the agent's output to decide
 anything: a limit is a limit regardless of what the agent says.
 
