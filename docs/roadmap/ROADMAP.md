@@ -488,7 +488,8 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S006c — Container Isolation Tier
 
 - **Repository / streams:** Simulation; Builder decision/docs. C.
-- **Status:** planned; human-gated by WSL repair and engine approval (KI-1/OD-1).
+- **Status:** planned; unblocked. The human repaired WSL 2 and approved rootless
+  Podman on 2026-11-14 (ADR-0014, resolving KI-1/OD-1).
 - **Objective:** Establish an OS sandbox before agent-authored execution.
 - **Prerequisites:** S006e and human setup; no autonomy benchmark prerequisite.
 - **Scope:** new ADR refining ADR-0006; world-derived image, workspace-only mount,
@@ -501,7 +502,8 @@ Research campaign gates are not extra paperwork for every routine fix.
   shutdown/descendant cleanup tested on the actual backend.
 - **Exit criteria:** escape/limit suite passes; unsupported settings refuse launch.
   Configuration alone is not evidence of isolation.
-- **Risks:** 16 GB RAM, mounts, WSL and GPU routing; models stay outside the sandbox
+- **Risks:** 16 GB RAM, mounts (private `/` propagation, Windows/WSL path
+  crossing; ADR-0014), WSL and GPU routing; models stay outside the sandbox
   behind explicitly permitted broker access.
 - **Next recommended milestone:** pending S007a/S007c/S007d; otherwise S008d only
   after expansion GO, or the next unblocked protocol milestone.

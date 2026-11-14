@@ -1,0 +1,46 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-14T13:15:55Z",
+  "commands": [
+    {
+      "command": "Builder: uv sync; uv run olb state; uv run olb check --tests (audit baseline)",
+      "result": "Clean starting checkout; 305 tests and all six health checks passed in 56.66 seconds"
+    },
+    {
+      "command": "Simulation: uv sync; uv run ruff check .; uv run pytest (read-only source audit)",
+      "result": "Clean head 830379c; lint passed; 214 tests passed in 139.48 seconds, including S006e native resource acceptance"
+    },
+    {
+      "command": "Window: uv sync; uv run ruff check .; uv run pytest (read-only source audit)",
+      "result": "Clean head 9ef9ba4; lint passed; 38 tests passed in 22.70 seconds, including archive immutability and read-only API checks"
+    },
+    {
+      "command": "uv run olb world verify releases/minimal/0.6.0 --self-test",
+      "result": "Release intact and capability self-tests passed; no world rebuilt or modified"
+    },
+    {
+      "command": "Simulation verify_archive on named resource/quota/recovery engineering archives",
+      "result": "run-20261114t115404z-96a2a1, run-20261114t115011z-113b13 and run-20261114t111831z-64db06 all verified intact; no model/behavioural trial run"
+    },
+    {
+      "command": "Preserve pre-session validation object as docs/roadmap/validation/S006e.json",
+      "result": "Exact structured equality to the S006e validation object from pre-session Git state; historical record not overwritten"
+    },
+    {
+      "command": "uv run python .local/realignment/check_plan.py (one-off planning audit)",
+      "result": "Passed: historical completed entries/sections and S006e validation unchanged; unique ids, future templates/prerequisite ids and local links/anchors valid; sibling heads clean/unchanged; only authorised planning/governance files changed. Fixed one pre-existing architecture link anchor; no runtime or test assertion changed"
+    },
+    {
+      "command": "uv run ruff check .; uv run olb check --tests (final Builder)",
+      "result": "Lint passed; 305 tests passed in 59.05 seconds and all six health checks passed. Simulation/Window source unchanged since their passing audit suites"
+    },
+    {
+      "command": "git diff --check",
+      "result": "Passed; historical engineering reports, schemas, source/tests/worlds and lockfiles untouched"
+    },
+    {
+      "command": "Privacy checks and git ls-remote comparison in all three repositories; final planning audit, lint, health/state and whitespace checks",
+      "result": "All privacy checks passed; audited heads matched remote main before publication; siblings remained clean/unchanged. Final planning audit and Builder lint/health/state passed; next S007a. No runtime, schema, test, world, dependency or historical report edits."
+    }
+  ]
+}

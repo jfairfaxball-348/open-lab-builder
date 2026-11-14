@@ -32,9 +32,9 @@ writes the unsanitised report (with executable paths) under
 | --- | --- |
 | OS | Windows 11 Home, 64-bit, build 26300 (a pre-release channel build) |
 | Hypervisor | Present; Virtual Machine Platform feature enabled |
-| WSL | `wsl.exe` present but **not functional** ("class not registered" error) |
+| WSL | Not functional at the S001 audit ("class not registered"). Repaired by the human on 2026-11-14: WSL 3.0.5, Ubuntu on WSL 2 |
 | Docker | Not installed |
-| Podman | Not installed |
+| Podman | Not installed at the S001 audit. Installed by the human on 2026-11-14 inside WSL 2: 5.7.0, rootless, cgroups v2 (ADR-0014) |
 | Windows Sandbox / Hyper-V management | Not available on Home edition |
 
 ## Software
@@ -71,7 +71,7 @@ these has been tested yet.
 | Lean 4 proof checking | Needs validation | Wrap and test as a capability (S008c) |
 | Scientific Python stack | Needs validation | Pin into a world environment and test (S008c) |
 | Browser automation | Needs validation | Install browser binaries; needs the container tier |
-| Container isolation | Needs installation | Repair WSL 2 and install Podman or Docker; administrator rights required |
+| Container isolation | Needs validation | Engine installed (ADR-0014); the isolation backend and escape tests are S006c |
 | Vision-language model | Needs installation | Model download; must fit 4 GB VRAM (S007b) |
 | Audio/video processing | Needs installation | FFmpeg (S008a) |
 | Speech recognition and synthesis | Needs installation | Model and runtime, e.g. a Whisper-family model on CPU or GPU (S008a) |
@@ -87,7 +87,8 @@ these has been tested yet.
 2. **16 GB of system RAM**, of which the desktop already uses about 10 GB.
    CPU-side model layers, the agent runtime, a container VM (WSL 2 reserves
    memory) and capabilities all compete for the remainder.
-3. **No functional isolation mechanism** beyond ordinary processes.
+3. **No tested isolation mechanism** beyond ordinary processes. Rootless
+   Podman in WSL 2 is installed (2026-11-14) but untested as a sandbox until S006c.
 4. **A laptop** on a pre-release Windows build: sleep, lid closure, thermal
    throttling, forced updates and reboots will interrupt multi-day runs.
    Crash recovery is a requirement, not a refinement.
@@ -125,6 +126,6 @@ these has been tested yet.
 | Action | Unlocks | Needed by |
 | --- | --- | --- |
 | Authorise pulling one small text model into Ollama | A real local orchestrator | S003b |
-| Repair WSL 2 (administrator) and approve a container engine | Container isolation tier | S006c, then S008d and S009 |
+| ~~Repair WSL 2 (administrator) and approve a container engine~~ Done 2026-11-14 (ADR-0014) | Container isolation tier | S006c, then S008d and S009 |
 | Authorise installing FFmpeg | Audio/video capabilities | S008a |
 | Review power and update settings for long runs | Multi-day experiments | S011 |

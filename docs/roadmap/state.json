@@ -1,7 +1,7 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T13:15:55Z",
+  "updated_at": "2026-11-14T16:46:02Z",
   "last_session": "S013",
   "completed_milestones": [
     {
@@ -124,7 +124,7 @@
   "blockers": [
     {
       "id": "B-ISOLATION",
-      "summary": "S006c awaits human WSL repair and container-engine approval; no process-tier substitution.",
+      "summary": "S006c container tier is not yet implemented; no process-tier substitution.",
       "affects": [
         "S006c",
         "S008d",
@@ -134,8 +134,7 @@
         "S011c",
         "S012"
       ],
-      "needs_human": true,
-      "detail": "KI-1/OD-1 remain. Local S007a/S007c/S007d and S010 protocol/Window work do not depend on container setup. Actual isolation tests are required before arbitrary code, computer control, agent tools or unattended certification."
+      "detail": "The human gate is cleared: on 2026-11-14 the human repaired WSL 2 and approved rootless Podman (ADR-0014, resolving KI-1/OD-1). S006c is unblocked but unbuilt. Local S007a/S007c/S007d and S010 protocol/Window work do not depend on it. Actual isolation tests are required before arbitrary code, computer control, agent tools or unattended certification."
     },
     {
       "id": "B-EXPANSION",
@@ -162,17 +161,6 @@
     }
   ],
   "known_issues": [
-    {
-      "id": "KI-1",
-      "summary": "WSL status is unresponsive and no container engine is available on the development machine.",
-      "affects": [
-        "S006c",
-        "S008d",
-        "S009"
-      ],
-      "needs_human": true,
-      "detail": "S006e read-only wsl.exe --status timed out after ten seconds; neither Podman nor Docker was found. S006c requires human repair/engine approval. No system change or workaround was attempted; the roadmap explicitly allows proceeding to S007a."
-    },
     {
       "id": "KI-3",
       "summary": "FFmpeg and PyTorch are not installed.",
@@ -292,15 +280,6 @@
   ],
   "open_decisions": [
     {
-      "id": "OD-1",
-      "summary": "Container mechanism for the container isolation tier (Podman in WSL 2 preferred).",
-      "affects": [
-        "S006c"
-      ],
-      "needs_human": true,
-      "detail": "Decide once WSL is repaired and the options can be tested. ADR-0006."
-    },
-    {
       "id": "OD-2",
       "summary": "Select an orchestrator through registered comparisons; earlier local pilots did not establish reliable unguided autonomy.",
       "affects": [
@@ -351,47 +330,27 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T13:15:55Z",
+    "ran_at": "2026-11-14T16:46:02Z",
     "commands": [
       {
-        "command": "Builder: uv sync; uv run olb state; uv run olb check --tests (audit baseline)",
-        "result": "Clean starting checkout; 305 tests and all six health checks passed in 56.66 seconds"
+        "command": "wsl.exe --status; wsl.exe -l -v (after the human's WSL repair and Ubuntu install)",
+        "result": "Responds; default version 2; Ubuntu distribution running on WSL 2"
       },
       {
-        "command": "Simulation: uv sync; uv run ruff check .; uv run pytest (read-only source audit)",
-        "result": "Clean head 830379c; lint passed; 214 tests passed in 139.48 seconds, including S006e native resource acceptance"
+        "command": "wsl -d Ubuntu: podman --version; podman info (rootless, cgroups, OCI runtime, storage, network backend); findmnt -no PROPAGATION /",
+        "result": "Podman 5.7.0, rootless, cgroups v2, crun, overlay, netavark; '/' propagation is private (noted in ADR-0014 for S006c)"
       },
       {
-        "command": "Window: uv sync; uv run ruff check .; uv run pytest (read-only source audit)",
-        "result": "Clean head 9ef9ba4; lint passed; 38 tests passed in 22.70 seconds, including archive immutability and read-only API checks"
+        "command": "wsl -d Ubuntu: podman run --rm --network=none docker.io/library/hello-world",
+        "result": "Container ran and exited successfully. Engine smoke test only; no isolation property was tested"
       },
       {
-        "command": "uv run olb world verify releases/minimal/0.6.0 --self-test",
-        "result": "Release intact and capability self-tests passed; no world rebuilt or modified"
+        "command": "Preserve the S013 validation object as docs/roadmap/validation/S013.json",
+        "result": "Copied unchanged before replacing this validation object"
       },
       {
-        "command": "Simulation verify_archive on named resource/quota/recovery engineering archives",
-        "result": "run-20261114t115404z-96a2a1, run-20261114t115011z-113b13 and run-20261114t111831z-64db06 all verified intact; no model/behavioural trial run"
-      },
-      {
-        "command": "Preserve pre-session validation object as docs/roadmap/validation/S006e.json",
-        "result": "Exact structured equality to the S006e validation object from pre-session Git state; historical record not overwritten"
-      },
-      {
-        "command": "uv run python .local/realignment/check_plan.py (one-off planning audit)",
-        "result": "Passed: historical completed entries/sections and S006e validation unchanged; unique ids, future templates/prerequisite ids and local links/anchors valid; sibling heads clean/unchanged; only authorised planning/governance files changed. Fixed one pre-existing architecture link anchor; no runtime or test assertion changed"
-      },
-      {
-        "command": "uv run ruff check .; uv run olb check --tests (final Builder)",
-        "result": "Lint passed; 305 tests passed in 59.05 seconds and all six health checks passed. Simulation/Window source unchanged since their passing audit suites"
-      },
-      {
-        "command": "git diff --check",
-        "result": "Passed; historical engineering reports, schemas, source/tests/worlds and lockfiles untouched"
-      },
-      {
-        "command": "Privacy checks and git ls-remote comparison in all three repositories; final planning audit, lint, health/state and whitespace checks",
-        "result": "All privacy checks passed; audited heads matched remote main before publication; siblings remained clean/unchanged. Final planning audit and Builder lint/health/state passed; next S007a. No runtime, schema, test, world, dependency or historical report edits."
+        "command": "uv run ruff check .; uv run olb check --tests",
+        "result": "Lint passed; 305 tests passed in 41.06 seconds and all six health checks passed"
       }
     ]
   }

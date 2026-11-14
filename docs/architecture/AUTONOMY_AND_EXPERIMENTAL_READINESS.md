@@ -159,8 +159,9 @@ control, executable proof-language surfaces and agent-created tools. S006c must
 test host/repository/archive/network/process/resource/shutdown boundaries on an
 actual backend. S006e's process limits are not an OS sandbox: disk can overshoot,
 CPU cycles differ from active-time samples and Windows notifications are best
-effort. No model output can weaken these boundaries. Human WSL/engine work can
-block S006c without blocking local gateway/policy/benchmark/S010 tooling.
+effort. No model output can weaken these boundaries. The human WSL/engine gate
+was cleared on 2026-11-14 (ADR-0014); S006c still has to be implemented and is
+independent of local gateway/policy/benchmark/S010 tooling.
 
 S010 freezes conditions and makes comparison/export evidence-linked and read-only.
 S011 engineering success remains distinct from its behavioural panel. Unattended
