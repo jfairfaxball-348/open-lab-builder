@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-13T23:40:00Z",
-  "last_session": "S003a",
+  "updated_at": "2026-11-14T02:55:00Z",
+  "last_session": "S003b",
   "completed_milestones": [
     {
       "id": "S001",
@@ -30,6 +30,15 @@
         "685a51a"
       ],
       "summary": "Simulation bootstrap: experiment manager, supervisor with deadline and process-tree termination, single hash-chained recorder, tool host, agent loop behind a ModelClient interface with a scripted stand-in, workspace artifact scanning, ols run and ols verify. No model is called."
+    },
+    {
+      "id": "S003b",
+      "completed_at": "2026-11-14T02:55:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "ba64cdd"
+      ],
+      "summary": "Chat model client over Ollama's OpenAI-compatible endpoint with tool calling, tool-call repair, retry, context guard and recorded model identity; ols measure-model; llama3.2:3b measured and recorded in minimal world 0.2.0; one documented real-model run whose archive verifies."
     }
   ],
   "next_milestone": {
@@ -37,17 +46,7 @@
     "repository": "open-lab-window",
     "title": "Basic Window"
   },
-  "blockers": [
-    {
-      "id": "B-1",
-      "summary": "S003b (local model orchestrator) needs the human to authorise pulling one small text model with Ollama (roughly 2-3 GB).",
-      "affects": [
-        "S003b"
-      ],
-      "needs_human": true,
-      "detail": "Per the roadmap S004 goes first while this is outstanding. Once authorised, S003b can be done before or after S004."
-    }
-  ],
+  "blockers": [],
   "known_issues": [
     {
       "id": "KI-1",
@@ -59,15 +58,6 @@
       ],
       "needs_human": true,
       "detail": "Repairing WSL 2 needs administrator rights. Until then only the process isolation tier is available. See ADR-0006."
-    },
-    {
-      "id": "KI-2",
-      "summary": "No local model is installed. Ollama is running with an empty model list.",
-      "affects": [
-        "S003b"
-      ],
-      "needs_human": true,
-      "detail": "S003b needs authorisation to pull one small text model (roughly 2-3 GB). S002 and S003a do not need a model."
     },
     {
       "id": "KI-3",
@@ -115,6 +105,27 @@
         "S009"
       ],
       "detail": "The Simulation gives capabilities an empty environment and only tells them the workspace path, but that is a convention for Builder-written capabilities, not enforcement. The supervisor re-checks the world digest after each run. Real enforcement arrives with the container tier (S006c)."
+    },
+    {
+      "id": "KI-11",
+      "summary": "Unprompted, the 3B local model does not use the tool-call channel and describes surroundings that do not exist; runs end within seconds.",
+      "affects": [
+        "S005b",
+        "S010",
+        "S011a",
+        "S012"
+      ],
+      "detail": "Observed in the S003b trial runs (docs/experiments/2026-11-14-local-model-check.md). Prompted tool use works. See OD-2 and OD-5."
+    },
+    {
+      "id": "KI-12",
+      "summary": "The context window in use is Ollama's default of 4096 tokens, and the server-reported input token count is not the conversation length.",
+      "affects": [
+        "S006a",
+        "S007a",
+        "S011a"
+      ],
+      "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Long runs need a larger context (server setting or the native API) and memory; the runtime's guard only blanks old tool results."
     }
   ],
   "open_decisions": [
@@ -129,12 +140,14 @@
     },
     {
       "id": "OD-2",
-      "summary": "Which orchestrator model to use, and whether any model that fits in 4 GB of VRAM calls tools reliably enough.",
+      "summary": "Which orchestrator model to use. llama3.2:3b fits and calls tools when asked, but is not reliable unprompted.",
       "affects": [
-        "S003b",
-        "S007a"
+        "S007a",
+        "S010",
+        "S012"
       ],
-      "detail": "Decide by measurement in S003b. If local quality is inadequate, an explicitly enabled external provider is the fallback. ADR-0005."
+      "detail": "Evidence in docs/experiments/2026-11-14-local-model-check.md. Options: measure one or two other models that fit 4 GB (each needs a download to be authorised), accept a slower partially offloaded larger model, or explicitly enable an external provider. ADR-0005.",
+      "needs_human": true
     },
     {
       "id": "OD-3",
@@ -143,11 +156,21 @@
         "S004"
       ],
       "detail": "Decide at the start of S004. ADR-0008."
+    },
+    {
+      "id": "OD-5",
+      "summary": "What a run does when the model replies without calling a tool.",
+      "affects": [
+        "S010",
+        "S011a"
+      ],
+      "needs_human": true,
+      "detail": "Today the run ends as completed. Alternatives (a neutral continuation turn, a time notice) change what the agent is told and so are part of the experimental protocol, to be decided in S010 at the latest."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-13T23:40:00Z",
+    "ran_at": "2026-11-14T02:55:00Z",
     "commands": [
       {
         "command": "open-lab-simulation: uv run ruff check .",
@@ -155,19 +178,23 @@
       },
       {
         "command": "open-lab-simulation: uv run pytest",
-        "result": "62 passed"
+        "result": "101 passed (fake model server; no model)"
       },
       {
-        "command": "open-lab-simulation: uv run ols run experiments/scripted-smoke.json",
-        "result": "Run ended: completed, 20 events, against the published minimal 0.1.0 world"
+        "command": "open-lab-simulation: uv run ols measure-model http://127.0.0.1:11434/v1 llama3.2:3b",
+        "result": "2239 MB VRAM, 561 MB RAM, load 33 s cold / 3.3 s warm, 62 tokens per second"
+      },
+      {
+        "command": "uv run olb world build worlds/minimal --publish",
+        "result": "Built minimal 0.2.0; verify with --self-test passed"
+      },
+      {
+        "command": "open-lab-simulation: uv run ols run experiments/local-model-check.json",
+        "result": "Manual, real model: completed in 2.4 s, both capabilities called once with correct results"
       },
       {
         "command": "open-lab-simulation: uv run ols verify <that archive>",
         "result": "Run archive is intact"
-      },
-      {
-        "command": "uv run olb world build worlds/minimal --publish",
-        "result": "Built minimal 0.1.0 into the data root; verify with --self-test passed"
       },
       {
         "command": "uv run ruff check .",

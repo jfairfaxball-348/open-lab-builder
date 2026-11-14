@@ -42,14 +42,14 @@ exists and works:
 - `olb check` — project health check.
 - Architecture, decision records, and a multi-session roadmap.
 
-In the sibling `open-lab-simulation` repository, S003a (runtime skeleton) is
-also complete: `ols run` launches a supervised, fully recorded run driven by a
-scripted stand-in for the model.
+In the sibling `open-lab-simulation` repository, S003a and S003b are also
+complete: `ols run` launches a supervised, fully recorded run driven by a
+scripted stand-in or by one small local model (`llama3.2:3b` through Ollama).
 
-What does **not** exist yet: any model call, capability search, the model
-gateway, memory, checkpoints, container isolation and the Window. No
-experiment with a real agent has been run. The model provider manifest in the
-minimal world names a model that has not been downloaded. Run `uv run olb
+What does **not** exist yet: capability search, the full model gateway,
+memory, checkpoints, container isolation and the Window. No experiment has
+been run: the runs so far are engineering checks, recorded in
+[docs/experiments/](docs/experiments/). Run `uv run olb
 state` for the next milestone.
 
 ## Quick start

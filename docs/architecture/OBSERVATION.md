@@ -5,7 +5,7 @@ question can be answered from evidence the agent could not have shaped.
 
 Contract: [`observation-event`](../../schemas/v1/observation-event.schema.json),
 [`artifact-metadata`](../../schemas/v1/artifact-metadata.schema.json).
-Implementation: recording is implemented in `open-lab-simulation` (S003a);
+Implementation: recording is implemented in `open-lab-simulation` (S003a, S003b);
 viewing is S004. `agent.statement`, `resource.sample`, `checkpoint.created`,
 `recovery` and `memory.written` events are defined but nothing writes them yet.
 
@@ -96,6 +96,17 @@ runs/<experiment_id>/<run_id>/
 ```
 
 `ols verify <archive>` checks an archive using only its own contents.
+
+`model.json` (S003b) records exactly which model drove the run: gateway id,
+provider, the provider's own name for the model, sampling parameters, and the
+digest and server version the model server reported at launch.
+
+`model.call` events carry the token counts the server reported and, when they
+happened, what the runtime did around the call: `repaired_tool_calls` (tool
+calls recovered from malformed output), `retries`, and
+`context_truncated_tool_results` (older tool results blanked to fit the
+context window). The model's text is always recorded as it was written; a
+repair changes what is executed, never what is recorded as said.
 
 **Readable after the run and after the workspace is gone.** Artifacts are found
 by the supervisor scanning the workspace, not by the agent announcing them. On

@@ -168,6 +168,7 @@ and in `state.json`.
 ### S003b — Local Model Orchestrator
 
 - **Repository:** open-lab-simulation
+- **Status:** complete
 - **Objective:** Replace the scripted model with a real local model: one
   prompt in, autonomous tool use out.
 - **Prerequisites:** S003a. **Human action:** authorise pulling one small

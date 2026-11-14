@@ -43,7 +43,7 @@ writes the unsanitised report (with executable paths) under
 | --- | --- | --- |
 | Version control | Git 2.54, GitHub CLI 2.93 (authenticated over HTTPS, `repo` scope); all three remotes reachable and empty | — |
 | Python | CPython 3.12.10 (only installation), uv 0.11, pipx | conda, poetry |
-| Model serving | Ollama 0.40.16, service running on loopback, **no models pulled**; `llama-cpp-python` 0.3 in the base interpreter | LM Studio, llama.cpp server binaries |
+| Model serving | Ollama 0.40.16, service running on loopback, one model pulled on 2026-11-14 with authorisation (`llama3.2:3b`, 2.0 GB; measured 2.2 GB VRAM plus 0.6 GB RAM, about 62 tokens per second); `llama-cpp-python` 0.3 in the base interpreter | LM Studio, llama.cpp server binaries |
 | Model files | A small Hugging Face cache (one repository, about 81 MB) | Any GGUF/safetensors language, vision or speech model |
 | Deep learning | — | PyTorch, TensorFlow, JAX, ONNX Runtime, transformers, diffusers |
 | Scientific Python (base interpreter) | NumPy 1.26, SciPy 1.15, pandas 3.0, scikit-learn 1.9, NetworkX 3.4, z3-solver 5.3 | SymPy, Matplotlib, Jupyter |
@@ -67,7 +67,7 @@ these has been tested yet.
 | Deterministic Python capabilities | Usable now | Implemented in S002 |
 | NVIDIA GPU with current driver | Usable now | — |
 | SQLite (3.49 via Python) | Usable now | — |
-| Local text model | Needs installation | Pull one small model into Ollama (about 2–3 GB). Requires human authorisation; S001 downloaded nothing |
+| Local text model | Available | `llama3.2:3b` in Ollama since S003b. It calls tools correctly when asked to; unprompted reliability is poor (see [the S003b check](../experiments/2026-11-14-local-model-check.md)) |
 | Lean 4 proof checking | Needs validation | Wrap and test as a capability (S008c) |
 | Scientific Python stack | Needs validation | Pin into a world environment and test (S008c) |
 | Browser automation | Needs validation | Install browser binaries; needs the container tier |

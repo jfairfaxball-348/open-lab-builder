@@ -3,9 +3,10 @@
 Status: established in S001. Implemented so far: the contracts, the builder
 tooling, the world release manager with two capabilities (S002), and in
 `open-lab-simulation` the experiment manager, a minimal supervisor, the
-recorder, the tool host and the agent loop driven by a scripted stand-in for
-the model (S003a). No model has been called. Everything else in this document
-is design that later milestones build. Each section says
+recorder, the tool host and the agent loop (S003a), driven either by a
+scripted stand-in or by one local model through Ollama's chat-completions
+endpoint (S003b). Everything else in this document is design that later
+milestones build. Each section says
 which milestone delivers it.
 
 Related: [CONTRACTS.md](CONTRACTS.md) · [OBSERVATION.md](OBSERVATION.md) ·
@@ -132,6 +133,12 @@ This keeps the prompt constant as the world grows and makes discovery itself
 observable behaviour. See [ADR-0003](../decisions/ADR-0003-capability-manifest.md).
 
 ### Model gateway — Simulation (S003b minimal, S007 full)
+
+Implemented so far (S003b): a single chat model client with tool calling,
+tool-call repair, one retry, a context-length guard, and the model's identity
+recorded in the archive. Capabilities are presented to the model directly as
+tools; the meta-tools are S005b. Not implemented: multiple models, loading and
+unloading, memory scheduling.
 
 One internal interface for every model, whatever serves it. Request and
 response use the OpenAI chat-completions shape, which Ollama, llama.cpp's
