@@ -73,7 +73,7 @@ uv run olb world build worlds/minimal
 ```
 
 ```bash
-uv run olb world verify releases/minimal/0.1.0 --self-test
+uv run olb world verify releases/minimal/0.2.0 --self-test
 ```
 
 ```bash

@@ -11,7 +11,8 @@ What is real and what is only illustrative:
 - `world-release/minimal-world.json` is a hand-written `draft` with placeholder
   digests, showing the shape of a manifest. A real one is produced by
   `uv run olb world build worlds/minimal`.
-- `model-provider/` names a candidate model that has not been downloaded.
+- `model-provider/` is a copy of the minimal world's provider manifest, with footprint
+  figures measured on the development machine.
 - `experiment-config/`, `observation-event/run-excerpt.jsonl`,
   `artifact-metadata/` and `checkpoint-metadata/` show what an experiment and
   its records will look like. No run has happened.

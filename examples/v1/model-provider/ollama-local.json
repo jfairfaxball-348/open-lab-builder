@@ -10,21 +10,42 @@
       "protocol": "openai_chat_completions",
       "base_url": "http://127.0.0.1:11434/v1",
       "supports_explicit_unload": true
-    }
+    },
+    "version": "0.40.16"
   },
   "models": [
     {
       "id": "orchestrator-small",
       "provider_ref": "llama3.2:3b",
+      "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
       "family": "llama",
-      "parameter_count": "3B",
+      "parameter_count": "3.2B",
       "quantization": "Q4_K_M",
-      "roles": ["orchestrator", "text_generation"],
-      "modalities": { "input": ["text"], "output": ["text"] },
-      "features": { "tool_calling": true, "streaming": true },
-      "footprint": { "disk_mb": 2000, "vram_mb": 3000, "measured": false },
-      "status": "requires_download",
-      "notes": "Illustrative candidate sized for a 4 GB GPU. Not downloaded or validated; footprint figures are estimates."
+      "roles": [
+        "orchestrator",
+        "text_generation"
+      ],
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "context_window_tokens": 4096,
+      "features": {
+        "tool_calling": true,
+        "streaming": true
+      },
+      "footprint": {
+        "disk_mb": 1926,
+        "ram_mb": 561,
+        "vram_mb": 2239,
+        "measured": true
+      },
+      "status": "available",
+      "notes": "Measured on the development machine (4 GB GPU) on 2026-11-14 with 'ols measure-model': 2800 MB loaded, of which 2239 MB on the GPU and 561 MB in system RAM; cold load 33 s, warm load 3 s; about 62 output tokens per second. The context window is the server's default as reported by Ollama, not the model's maximum. Tool calling was checked in one short prompted run, which is evidence that it works, not that it is reliable."
     }
   ]
 }

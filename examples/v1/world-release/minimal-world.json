@@ -2,7 +2,7 @@
   "schema": "open-lab/world-release",
   "schema_version": "1.0.0",
   "world_id": "minimal",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "name": "Minimal world",
   "description": "Illustrative draft manifest for the minimal world: two deterministic capabilities and one local model provider manifest.",
   "created_at": "2026-11-13T20:00:00Z",

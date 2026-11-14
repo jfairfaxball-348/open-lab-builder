@@ -1,6 +1,6 @@
 {
   "world_id": "minimal",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "name": "Minimal world",
   "description": "The smallest useful world: two deterministic capabilities (text.stats, math.evaluate) and one local model provider manifest, included as documentation only.",
   "environment": {
@@ -29,5 +29,5 @@
     "subprocess": false,
     "gpu": true
   },
-  "notes": "The model provider manifest names a model that has not been downloaded or measured. Nothing in this world calls a model."
+  "notes": "0.2.0 records the measured orchestrator model in the model provider manifest. The capabilities are unchanged from 0.1.0."
 }

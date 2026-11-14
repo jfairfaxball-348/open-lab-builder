@@ -81,7 +81,7 @@ fails, no release directory is left behind. `--out DIR` builds elsewhere;
 `open-lab-data` in the home directory).
 
 ```bash
-uv run olb world verify releases/minimal/0.1.0 --self-test
+uv run olb world verify releases/minimal/0.2.0 --self-test
 ```
 
 Recomputes every digest and re-validates the manifests against the contracts

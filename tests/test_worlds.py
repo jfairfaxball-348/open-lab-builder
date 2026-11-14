@@ -60,8 +60,8 @@ def test_build_produces_a_validated_release(release):
     manifest = json.loads((release / MANIFEST_NAME).read_text(encoding="utf-8"))
     assert validate_file(release / MANIFEST_NAME) == []
     assert manifest["status"] == "validated"
-    assert (manifest["world_id"], manifest["version"]) == ("minimal", "0.1.0")
-    assert release.parts[-2:] == ("minimal", "0.1.0")
+    assert (manifest["world_id"], manifest["version"]) == ("minimal", "0.2.0")
+    assert release.parts[-2:] == ("minimal", "0.2.0")
     assert [c["id"] for c in manifest["capabilities"]] == ["math.evaluate", "text.stats"]
     assert [m["provider_id"] for m in manifest["model_manifests"]] == ["ollama-local"]
     for entry in (*manifest["capabilities"], *manifest["model_manifests"]):
@@ -112,7 +112,7 @@ def test_an_existing_release_is_never_overwritten(source, tmp_path):
     with pytest.raises(BuildError, match="immutable"):
         build_world(source, tmp_path / "out")
     assert verify_release(first.release_dir) == []
-    assert everything_under(tmp_path / "out" / "minimal")[0] == "0.1.0"
+    assert everything_under(tmp_path / "out" / "minimal")[0] == "0.2.0"
     assert not [n for n in everything_under(tmp_path / "out") if ".building" in n]
 
 
@@ -265,7 +265,7 @@ def test_self_test_rerun_catches_a_broken_implementation(source, tmp_path):
 def test_cli_build_then_verify(tmp_path, capsys):
     assert main(["world", "build", str(MINIMAL), "--out", str(tmp_path)]) == 0
     assert "content digest: sha256:" in capsys.readouterr().out
-    built = tmp_path / "minimal" / "0.1.0"
+    built = tmp_path / "minimal" / "0.2.0"
     assert main(["world", "verify", str(built), "--self-test"]) == 0
     (built / "models" / "ollama-local.json").write_text("{}", encoding="utf-8")
     assert main(["world", "verify", str(built)]) == 1
@@ -281,7 +281,7 @@ def test_cli_build_failure_exits_non_zero(source, tmp_path, capsys):
 def test_cli_publish_builds_into_the_data_root(tmp_path, monkeypatch, capsys):
     monkeypatch.setenv("OPEN_LAB_DATA", str(tmp_path / "data"))
     assert main(["world", "build", str(MINIMAL), "--publish"]) == 0
-    assert (tmp_path / "data" / "worlds" / "minimal" / "0.1.0" / MANIFEST_NAME).is_file()
+    assert (tmp_path / "data" / "worlds" / "minimal" / "0.2.0" / MANIFEST_NAME).is_file()
 
 
 def test_data_root_comes_from_the_environment_or_the_home_directory(tmp_path, monkeypatch):
