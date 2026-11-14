@@ -127,6 +127,24 @@ records `context_truncated_tool_results` and `context_dropped_messages` when
 this happened, so what the model could see at every step can be
 reconstructed.
 
+## Benchmark observations and derived review (S007d)
+
+The supervisor observes initial workspace entries and memory absence, and records
+one marked fault injection for D only after an actual execution passes admission
+and schema/interface checks. Stage `benchmark_fault` includes the exact failure,
+actual target/input digest and correlation. A real capability failure is never
+substituted for this known injection. Exposure requires a later recorded model
+input carrying the delivered failure, not simply an injection event.
+
+Every scheduled cell, launch/outcome and interruption is retained in a separate
+supervisor-area campaign ledger. Analysis verifies raw archives and frozen
+conditions; it never writes them. Investigator annotations bind the event-log
+hash, retain exact goal quotes as agent claims and label consistency, selection,
+adaptation and verification as derived assessments. The first campaign used one
+unmasked Codex reviewer; no independent second rating is claimed. A separate
+mechanical audit is not a second rater. See the registered S007d-001 report for
+NO_GO, unexposed faults, budget censoring, partial successes and limitations.
+
 ## Resource measurements (S006e)
 
 Only the supervisor writes resource samples. They can interleave with

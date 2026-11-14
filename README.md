@@ -106,8 +106,8 @@ pause/resume preserved quiet idling without another model call; see
 Both policies are experimental treatments, not assertions of neutrality.
 
 What does **not** exist yet: specialist model consultation/GPU leasing,
-container isolation on Linux or with network access, and run comparison. No experiment has
-been run: the runs so far are engineering checks, recorded in
+container isolation on Linux or with network access, and run comparison. The first
+registered short baseline is complete; earlier engineering checks are recorded in
 [docs/experiments/](docs/experiments/). Run `uv run olb
 state` for the next milestone.
 
@@ -170,8 +170,9 @@ docs/
 
 **S013 strategic realignment is complete as planning.** Existing engineering and
 the three-repository architecture are preserved. S007a local gateway is complete.
-Next is **S007d (Autonomy Baseline and Behavioural Benchmark)**, which must
-preregister one frozen primary policy/profile before scored runs. Major capability
+S007d-001 is complete with **NO_GO**: all 24 cells verified, but no complete
+guided control or qualifying unguided run. Next is **S007h (Bounded Orchestrator
+Improvement and Re-evaluation)**. Major capability
 expansion then depends on replicated independent discovery/use; a valid negative
 report remains a completed research result, not a capability claim. Hosted models
 are optional and separately authorised; real isolation remains mandatory for
@@ -179,9 +180,9 @@ agent-authored execution and unattended certification.
 
 See the [research audit/plan](docs/architecture/AUTONOMY_AND_EXPERIMENTAL_READINESS.md),
 [benchmark/validity specification](docs/experiments/README.md) and
-[dependency-aware roadmap](docs/roadmap/ROADMAP.md). The autonomy benchmark
-and hosted providers remain unimplemented. S007a local routing and S007c policies
-are engineering evidence only.
+[dependency-aware roadmap](docs/roadmap/ROADMAP.md). The [registered baseline report](docs/experiments/2026-11-14-autonomy-baseline.md)
+and [derived results](docs/experiments/results/S007d-001.json) retain negative
+and partial findings. Hosted providers and future campaigns remain unimplemented.
 S006e's historical validation is preserved in
 [its immutable snapshot](docs/roadmap/validation/S006e.json).
 

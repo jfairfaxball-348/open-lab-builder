@@ -1,0 +1,38 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-14T18:11:14Z",
+  "commands": [
+    {
+      "command": "Builder: git status/log; uv sync; uv run olb state; uv run olb check --tests (baseline)",
+      "result": "Clean b9a6020; S007c next; 305 tests passed in 41.71 seconds and all health checks passed."
+    },
+    {
+      "command": "Simulation: git status/log; uv sync; uv run pytest (baseline before source edits)",
+      "result": "Clean fd64e3f; 252 tests passed in 224.89 seconds before source edits."
+    },
+    {
+      "command": "Simulation: uv run pytest (final); uv run ruff check .; focused changed-behaviour regression run",
+      "result": "275 tests passed without warnings in 259.68 seconds; lint passed; focused 27 passed. Old event-sequence assertions explicitly include input observations while retaining conversation, step and deadline checks."
+    },
+    {
+      "command": "Simulation: uv run ols run experiments/s007c-legacy.json; uv run ols run experiments/s007c-quiet.json --pause-after-steps 1; resume_experiment; verify_archive",
+      "result": "Legacy run-20261114t180326z-a87542 made 2 calls, 1 continuation and an empty-result search; max_steps exit. Quiet run-20261114t180340z-bcaf9b made 1 call across pause/resume, no continuation, and terminated at the original 20-second active deadline. Both archives verified; first HTTP request bodies matched exactly."
+    },
+    {
+      "command": "Simulation: verify_archive on both historical S007a native archives",
+      "result": "Both unchanged historical archives still verify. No old observations rewritten or retroactive inputs invented."
+    },
+    {
+      "command": "Builder: uv run olb validate both S007c configurations; check_privacy on Simulation; git diff --check",
+      "result": "Both configurations valid; committable privacy scan empty; diff checks passed."
+    },
+    {
+      "command": "Simulation: git commit; git push origin main; git status --short --branch",
+      "result": "80cb67b committed and pushed; clean main agrees with origin/main."
+    },
+    {
+      "command": "Builder: uv run ruff check .; uv run olb check --tests (final)",
+      "result": "Lint passed; 305 tests passed in 40.96 seconds and all health checks passed. S007a validation retained separately; current state and S007d handoff validated."
+    }
+  ]
+}

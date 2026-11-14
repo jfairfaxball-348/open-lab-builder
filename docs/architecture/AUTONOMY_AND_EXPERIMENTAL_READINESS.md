@@ -2,8 +2,9 @@
 
 Current implementation update: S007a local routing and S007c versioned runtime
 policies are complete as engineering. See [policy specification](RUNTIME_POLICIES.md)
-and [validation](../experiments/2026-11-14-runtime-policies.md). S007d remains
-UNEXECUTED; this update does not promote earlier pilots to behavioural evidence.
+and [validation](../experiments/2026-11-14-runtime-policies.md). S007d-001 is now
+complete with NO_GO; see the [registered report](../experiments/2026-11-14-autonomy-baseline.md).
+The original planning/audit body is retained; earlier pilots remain engineering evidence.
 
 
 Date: 2026-11-14. Status: strategic planning, not a runtime release or experiment.

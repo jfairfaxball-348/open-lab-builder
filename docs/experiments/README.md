@@ -1,10 +1,14 @@
 # Experiments and experimental validity
 
-No philosophical experiment or autonomy baseline has been run. Existing dated
-reports are engineering checks/pilots, not preregistered behavioural results.
-S013 defines future S007d and strengthens S010/S012; it implements no harness,
-scheduling policy or provider. We investigate observable artificial agency,
-agent-stated objectives and adaptive action, not subjective consciousness.
+The first registered local baseline, **S007d-001, is complete with NO_GO**.
+All 24 scheduled cells and archives verified; guided control and B/C qualification
+were each 0/6. Real partial tool use and two exposed fault-response examples are
+retained separately. See the [report](2026-11-14-autonomy-baseline.md),
+[registration](registrations/S007d-001.md), [rubric](S007d-RUBRIC.md) and
+[derived dataset](results/S007d-001.json). No philosophical long-duration
+experiment has run. Earlier dated records remain engineering checks/pilots.
+We study observable artificial agency and agent-stated objectives, not subjective
+consciousness. A negative valid baseline completes S007d without opening expansion.
 
 ## Existing evidence
 
@@ -23,11 +27,10 @@ Their conclusions do not become stronger because later engineering works.
 
 ## Prospective autonomy baseline (S007d)
 
-**Design only; UNEXECUTED.** This is an initial protocol specification, not a claim
-that current runtime supports its treatments/metrics. S007c must implement and
-version policies; S007d must validate the harness before use. Freeze a campaign
-preregistration commit before evaluation. Pilot-driven revisions are recorded
-before scoring, never after a failing result.
+**Executed as S007d-001; NO_GO.** The prospective design below is retained;
+the linked registration freezes the actual protocol/profile before scoring.
+Earlier pilots are not scored evidence. A later comparison needs a new campaign
+id and prior registration, with development exposure disclosed.
 
 ### Question, conditions and candidate prompts
 
@@ -170,8 +173,8 @@ wake; pause/resume/recovery preserve idle state and the original active budget.
 The remaining wall-clock budget bounds waiting. Prose never supplies intent or
 scheduling authority. Both treatments can affect behaviour and neither is proven
 neutral. See [the specification](../architecture/RUNTIME_POLICIES.md) and
-[engineering evidence](2026-11-14-runtime-policies.md). S007d is still UNEXECUTED;
-it must preregister one primary policy/profile and pin all settings.
+[engineering evidence](2026-11-14-runtime-policies.md). S007d-001 froze legacy-immediate-v1 as its primary profile and is complete
+with NO_GO. Later comparisons require a new frozen registration.
 
 New archives freeze exact continuation, context/memory/turn versions and client
 guard in `policy.json`. Before every HTTP attempt, supervisor-owned records

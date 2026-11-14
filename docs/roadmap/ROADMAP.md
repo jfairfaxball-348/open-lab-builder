@@ -80,8 +80,8 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S007d (S007a/S007c complete). With expansion GO, S007e then the most useful
-feasible capability; narrow S008c can precede vision. With NO_GO, start S007h.
+**Next:** S007h, one bounded registered improvement/re-evaluation after S007d-001 NO_GO.
+A future current GO can open S007e or a useful narrow S008c capability.
 With INCONCLUSIVE, fix the named validity issue before drawing a conclusion.
 S010 protocol work, optional hosted design and S006c/S006f remain safe
 paths after negative behaviour. Do not add major multimodal tools to mask failure.
@@ -627,7 +627,7 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S007d — Autonomy Baseline and Behavioural Benchmark
 
 - **Repository / streams:** Simulation harness/analysis; Builder protocol. B/D.
-- **Status:** planned; **defined only, not run in S013**.
+- **Status:** complete; S007d-001 **NO_GO**. [Registered report](../experiments/2026-11-14-autonomy-baseline.md); expansion stays closed.
 - **Objective:** Distinguish instructed competence, exploration, self-directed
   activity and adaptation through reproducible comparative observations.
 - **Prerequisites:** S007a/S007c/S006e/S004; no S010 or arbitrary-code sandbox needed.
@@ -657,7 +657,7 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S007h — Bounded Orchestrator Improvement and Re-evaluation
 
 - **Repository / streams:** Simulation; Builder evidence/configuration. B/D.
-- **Status:** planned; conditional on an identified S007d limitation.
+- **Status:** planned; next implementation after the complete S007d-001 NO_GO report.
 - **Objective:** Test one stated explanation for poor autonomous activity.
 - **Prerequisites:** S007d report and any specific model/resource approvals.
 - **Scope:** preregister one bounded model, context/memory, discovery or explicitly

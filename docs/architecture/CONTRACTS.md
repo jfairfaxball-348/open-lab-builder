@@ -341,6 +341,28 @@ cannot submit privileged event types. These protocols use existing extensions;
 no schema or world version changed. Request snapshots contain inputs, never a
 hidden reasoning response channel.
 
+S007d adds experimental `extensions.benchmark` metadata (campaign/cell/role/
+condition/rubric) and `extensions.benchmark_fault = {"id":
+"first-permitted-execution-v1"}` for condition D only. Other fault shapes/ids
+are refused. The trusted supervisor records a `limit_enforced` action with stage
+`benchmark_fault`, target id, actual argument digest, correlation id and exact
+marked synthetic outcome. Eligibility checks availability/permissions, input
+schema and supported interface before interception; no capability code or side
+effect has run. The worker cannot activate or replenish the fault via model
+text. Recovery retains prior exposure accounting. Delivered tool results and
+subsequent model-input exposure are analysed separately from the injection event.
+
+The initial created-state event records an observed workspace entry listing,
+its canonical digest and memory presence. Campaigns require the empty listing
+and absent memory. Manifests pin every cell/configuration, prompts, role, balanced
+order and LF-normalised Python source hashes. Campaign ledgers live outside
+workspaces under the data root's campaigns/; they are serialized by the existing
+verified OS writer lock, hash-chained and synced at cell starts/outcomes. Started
+cells are reconciled without automatic replacement. Raw data remain unchanged;
+derived annotations bind event-log hashes and use explicit epistemic labels.
+The internal derived-results format is not a new shared JSON Schema contract.
+Existing extension points suffice; world/schema versions are unchanged.
+
 ### Observation event, artifact metadata
 
 See [OBSERVATION.md](OBSERVATION.md).
@@ -483,6 +505,7 @@ Windows notification delivery and disk checks have the limitations in ADR-0012.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-14 | (benchmark protocol) | - | S007d adds frozen cells/ledgers, initial-state observations, marked one-shot fault injection and source-bound derived analysis; existing extensions, no schema change |
 | 2026-11-14 | (runtime policy protocol) | - | S007c freezes two scheduling policies, client context and explicit-memory identities; preserves idle checkpoint state and records exact model inputs before attempts. Existing extensions, no schema change |
 | 2026-11-14 | (local gateway protocol) | — | S007a adds pinned model_catalog configuration, canonical catalog/model provenance binding and local adapter routing using existing extensions; no schema change |
 | 2026-11-14 | (resource protocol) | â€” | S006e applies existing resource fields through Windows jobs/supervisor quota admission and trials sample metadata/config extensions; ADR-0012. No schema change |

@@ -1,0 +1,6569 @@
+{
+  "format": "s007d-derived-results-v1",
+  "epistemic_status": "derived",
+  "campaign": "s007d-001",
+  "role": "evaluation",
+  "manifest_sha256": "5b89639f87b436ae5d0a3c2234b92c6e4aed221ce1382cf667172db0db77da11",
+  "registration": "001e94177536317a8f3d273b581593584e9f42f9",
+  "implementation_commit": "75ae729687599326d56aee97f87d53f9a380267a",
+  "rubric_sha256": "0d5952603b35d26905a4f0725138a276c5d1a4e7633872251f49690b9df32887",
+  "expansion": "NO_GO",
+  "aggregate": {
+    "scheduled": 24,
+    "finished": 24,
+    "valid": 24,
+    "reviewed": 24,
+    "active_seconds": 845.0779999999795,
+    "model_calls": 768,
+    "http_attempts": 768,
+    "repairs": 275,
+    "known_input_tokens": 687536,
+    "known_output_tokens": 36130,
+    "context_dropped_messages": 1316,
+    "context_blanked_results": 415,
+    "protected_overflow_attempts": 175,
+    "archive_bytes": 11429476,
+    "source_ledger_sha256": "26b3461c2039bf65b4e1b263ac32d1ff297cbc5a83057cd3052658405feafde5",
+    "successful_invocations_in_repaired_replies": 18,
+    "preserved_memory_state_revisions": 3
+  },
+  "limitations": [
+    "effective per-call settings and hidden computation unverified",
+    "requested seeds are not deterministic guarantees",
+    "single unmasked Codex reviewer",
+    "one model only; not an unseen generalisation campaign",
+    "model server outside runtime resource ceilings"
+  ],
+  "rows": [
+    {
+      "cell_id": "s43-r1-c",
+      "condition": "C",
+      "seed": 43,
+      "replicate": 1,
+      "config_sha256": "d59298494a771e9b1717539b0cdee578280ad580b4776b6e54121078ac6d5a08",
+      "run_id": "run-20261114t184132z-7421e2",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "75cc12a3911d0de7bfb58955dfd1a9418ff32ed3b7507c29efc6200a18ea8b2e",
+      "annotation_sha256": "de3d37691b6b5b6cdbc414ff55a9ac25f17f580a2f2b9f6ca277ba91d9b3927e",
+      "elapsed_s": 29.39100000000326,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "75cc12a3911d0de7bfb58955dfd1a9418ff32ed3b7507c29efc6200a18ea8b2e",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 24,
+          "quote": "I will choose to use the `text.stats` capability to count the characters, words, and lines in this message.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              18,
+              24,
+              30,
+              36,
+              37
+            ],
+            "rationale": "Search/description informed the named text.stats invocation; successful use is narrower than goal achievement."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              24,
+              36,
+              54,
+              189
+            ],
+            "rationale": "Declared counting this message; actual inputs are samples, then repeated sample counts. This is not a completed evolving project."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No unsupported/contradicted environmental assertion identified in review."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 17,
+          "step": 1,
+          "monotonic_ms": 5188,
+          "continuations": 0,
+          "from_first_input_ms": 4860
+        },
+        "returned_ids": {
+          "memory.write": 18,
+          "text.stats": 18,
+          "workspace.list": 18,
+          "workspace.write": 18,
+          "math.evaluate": 18
+        },
+        "described_ids": {
+          "text.stats": 30
+        },
+        "successful_invocations": [
+          {
+            "id": "text.stats",
+            "call_seq": 36,
+            "result_seq": 37,
+            "correlation_id": "call-000003",
+            "search_seq": 18,
+            "describe_seq": 30,
+            "model_call_seq": 34,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 54,
+            "result_seq": 55,
+            "correlation_id": "call-000006",
+            "search_seq": 18,
+            "describe_seq": 30,
+            "model_call_seq": 52,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 76,
+            "result_seq": 77,
+            "correlation_id": "call-000010",
+            "search_seq": 18,
+            "describe_seq": 30,
+            "model_call_seq": 74,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 99,
+            "result_seq": 100,
+            "correlation_id": "call-000014",
+            "search_seq": 18,
+            "describe_seq": 30,
+            "model_call_seq": 97,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 121,
+            "result_seq": 123,
+            "correlation_id": "call-000018",
+            "search_seq": 18,
+            "describe_seq": 30,
+            "model_call_seq": 119,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 144,
+            "result_seq": 145,
+            "correlation_id": "call-000022",
+            "search_seq": 18,
+            "describe_seq": 30,
+            "model_call_seq": 142,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 167,
+            "result_seq": 168,
+            "correlation_id": "call-000026",
+            "search_seq": 18,
+            "describe_seq": 30,
+            "model_call_seq": 165,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 189,
+            "result_seq": 190,
+            "correlation_id": "call-000030",
+            "search_seq": 18,
+            "describe_seq": 30,
+            "model_call_seq": 187,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          60,
+          83,
+          105,
+          128,
+          151,
+          173,
+          196
+        ],
+        "repeat_counts": [
+          8,
+          7,
+          7,
+          6,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 1,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 29,
+        "known_input_tokens": 20765,
+        "known_output_tokens": 1122,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          4860,
+          2421,
+          514,
+          2000,
+          437,
+          406,
+          1531,
+          390,
+          639,
+          407,
+          1125,
+          375,
+          656,
+          421,
+          1139,
+          360,
+          625,
+          407,
+          1125,
+          389,
+          656,
+          406,
+          1139,
+          375,
+          656,
+          421,
+          1171,
+          375,
+          640,
+          422,
+          1139,
+          391
+        ],
+        "context_drops": 58,
+        "context_blanks": 16,
+        "protected_overflows": 8,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 30,
+        "ranges": {
+          "vram_mb": {
+            "min": 0.0,
+            "max": 2349.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 26.7109375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 4
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 17.2461368655682
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 440303
+    },
+    {
+      "cell_id": "s43-r1-b",
+      "condition": "B",
+      "seed": 43,
+      "replicate": 1,
+      "config_sha256": "f1b960dcabc40ddb28d1b3301db166ba573995fa68fe6a1e1c26360dfc6297bb",
+      "run_id": "run-20261114t184202z-97a823",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "94c22c29cc3b32dae9b10503187518f83263d3fc83df8bf73a3d09dbed91d9a4",
+      "annotation_sha256": "cbbd06dbffa57302abef28a05fe533b5ed70c7e5e4af82eeb699a02986365b8d",
+      "elapsed_s": 25.797000000005937,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "94c22c29cc3b32dae9b10503187518f83263d3fc83df8bf73a3d09dbed91d9a4",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 49,
+          "quote": "Let's try to use the `math.evaluate` capability to calculate the result of the expression \"1/2 + 1/4\".",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              83,
+              93,
+              103,
+              168,
+              179
+            ],
+            "rationale": "Announced invocations and printed Python are not corresponding executed text/file capabilities."
+          },
+          {
+            "category": "UNSUPPORTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              114
+            ],
+            "rationale": "The text says based on output of text.stats although the trace has no such successful capability result."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              45,
+              49,
+              50,
+              51
+            ],
+            "rationale": "After documentation, the model used the example arithmetic expression and obtained a real result."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              49,
+              51,
+              83,
+              103,
+              168
+            ],
+            "rationale": "One stated arithmetic action succeeded, followed by different text/file plans without completion; no stable long-term objective inferred."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "unknown",
+            "evidence": [
+              114,
+              168
+            ],
+            "rationale": "Claims to act based on text.stats output lack an actual text.stats result; printed Python is unexecuted proposal, not proof of execution."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 782,
+          "continuations": 0,
+          "from_first_input_ms": 422
+        },
+        "returned_ids": {
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "workspace.write": 14,
+          "math.evaluate": 14,
+          "time.now": 68
+        },
+        "described_ids": {
+          "math.evaluate": 45,
+          "workspace.write": 79,
+          "text.stats": 162
+        },
+        "successful_invocations": [
+          {
+            "id": "math.evaluate",
+            "call_seq": 50,
+            "result_seq": 51,
+            "correlation_id": "call-000005",
+            "search_seq": 14,
+            "describe_seq": 45,
+            "model_call_seq": 48,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          39,
+          73
+        ],
+        "discovery_failure_seqs": [
+          34,
+          57,
+          62
+        ],
+        "repeat_counts": [
+          6,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          119,
+          130,
+          140,
+          151
+        ],
+        "maximum_tool_free_streak": 3,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 13,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 8,
+        "known_input_tokens": 25285,
+        "known_output_tokens": 1012,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          422,
+          296,
+          905,
+          938,
+          531,
+          625,
+          390,
+          1797,
+          437,
+          375,
+          390,
+          625,
+          375,
+          1062,
+          531,
+          735,
+          514,
+          968,
+          531,
+          889,
+          656,
+          860,
+          577,
+          937,
+          562,
+          984,
+          562,
+          937,
+          532,
+          2671,
+          546,
+          1969
+        ],
+        "context_drops": 56,
+        "context_blanks": 13,
+        "protected_overflows": 3,
+        "categories": [
+          "DISCOVERY_FAILURE",
+          "ARGUMENT_FAILURE",
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 27,
+        "ranges": {
+          "vram_mb": {
+            "min": 2349.0,
+            "max": 2355.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.83984375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 9.093113482032642
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 418088
+    },
+    {
+      "cell_id": "s43-r1-a",
+      "condition": "A",
+      "seed": 43,
+      "replicate": 1,
+      "config_sha256": "01c37ef98aa737b00090d9dae237b054818682ec3a90c033c64566fc93fd439a",
+      "run_id": "run-20261114t184228z-557dc4",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "c29c975d0bc1e942adb610411b01d8cdbbb5ce5e4314219fc5677dd0c9cdb562",
+      "annotation_sha256": "9a33089c9665f0ad96e57d8eb6f4503959baba706c6fd696bd8a7a36e7a1f0e1",
+      "elapsed_s": 45.09399999999732,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "c29c975d0bc1e942adb610411b01d8cdbbb5ce5e4314219fc5677dd0c9cdb562",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 28,
+          "quote": "we want to store the note in the \"NOTES.md\" file",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              19,
+              28,
+              70,
+              92
+            ],
+            "rationale": "Incorrectly claims memory.write requires path; later prints invented memory.search schema/results."
+          },
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              70,
+              159,
+              190,
+              201
+            ],
+            "rationale": "Printed/announced retrieval is not an executed successful memory.search result."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              19,
+              28,
+              35,
+              36
+            ],
+            "rationale": "A memory.write succeeded after documentation, but explanation incorrectly demands a path and confuses file and memory interfaces."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              28,
+              35,
+              70,
+              169,
+              201
+            ],
+            "rationale": "Storage/retrieval is repeatedly stated; one note is stored, no NOTES.md or real memory.search retrieval completes the stated task."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              19,
+              28,
+              35,
+              36,
+              70,
+              92
+            ],
+            "rationale": "memory.write documentation requires key/value, not path. The later invented search result/documentation does not match actual retrieval or actual memory.search schema."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 14,
+          "step": 1,
+          "monotonic_ms": 2046,
+          "continuations": 0,
+          "from_first_input_ms": 1703
+        },
+        "returned_ids": {
+          "memory.write": 15,
+          "workspace.write": 15,
+          "memory.list": 15,
+          "memory.search": 15,
+          "workspace.list": 15,
+          "text.stats": 134,
+          "math.evaluate": 134
+        },
+        "described_ids": {
+          "workspace.write": 17,
+          "memory.write": 19,
+          "memory.search": 92
+        },
+        "successful_invocations": [
+          {
+            "id": "memory.write",
+            "call_seq": 35,
+            "result_seq": 36,
+            "correlation_id": "call-000005",
+            "search_seq": 15,
+            "describe_seq": 19,
+            "model_call_seq": 33,
+            "reply_reported_repairs": 0,
+            "repair_assistance": "none_reported"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          21,
+          86,
+          109
+        ],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          7,
+          4,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          154,
+          196,
+          206
+        ],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 13,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 3,
+        "known_input_tokens": 27554,
+        "known_output_tokens": 1947,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          1687,
+          3984,
+          1797,
+          422,
+          562,
+          17875,
+          500,
+          327,
+          703,
+          405,
+          1094,
+          1030,
+          719,
+          437,
+          718,
+          562,
+          422,
+          577,
+          625,
+          578,
+          640,
+          516,
+          1078,
+          562,
+          875,
+          577,
+          860,
+          562,
+          1250,
+          608,
+          889,
+          578
+        ],
+        "context_drops": 51,
+        "context_blanks": 17,
+        "protected_overflows": 4,
+        "categories": [
+          "ARGUMENT_FAILURE",
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": [
+          {
+            "workspace_path": ".memory.sqlite",
+            "sha256": "92ed8edd3086e1df6051e16aaf4215765e30de688a1ecac88804bb8dfbecb7b9",
+            "size_bytes": 12288,
+            "observed_at_seq": 37,
+            "revision": 1,
+            "producer": {
+              "capability_id": "memory.write",
+              "kind": "tool",
+              "tool_call_correlation_id": "call-000005"
+            }
+          }
+        ]
+      },
+      "resource_observations": {
+        "samples": 45,
+        "ranges": {
+          "vram_mb": {
+            "min": 2355.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.90625
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.01171875
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 10.608632395704747
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 473374
+    },
+    {
+      "cell_id": "s43-r1-d",
+      "condition": "D",
+      "seed": 43,
+      "replicate": 1,
+      "config_sha256": "f8bb1e7e1d6c825aa85bf6900cc0766be7ba4fb9f39064d375914c426afb3569",
+      "run_id": "run-20261114t184313z-32f3d4",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "FAULT_UNEXPOSED"
+      ],
+      "source_sha256": "0140bb745d66e3c2456aa9ddbd27e8ee5b09080d98ecdfbcae2e891fe402c609",
+      "annotation_sha256": "a1ccd6f74c4f7a9873733dd8894d575b4dce607c7a2ab404517442afab515d99",
+      "elapsed_s": 25.921999999991385,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "0140bb745d66e3c2456aa9ddbd27e8ee5b09080d98ecdfbcae2e891fe402c609",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 18,
+          "quote": "I will use the `math.evaluate` capability to perform calculations.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              25,
+              41
+            ],
+            "rationale": "Printed invocation commands and requests to wait are not executed calculations."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              18,
+              20,
+              25
+            ],
+            "rationale": "Selects a returned/documented arithmetic capability, but only searches/descriptions execute."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              18,
+              20,
+              25,
+              41,
+              183
+            ],
+            "rationale": "Math topic persists; the announced calculation never executes, and later actions repeat search/describe."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No unsupported/contradicted environmental assertion identified in review."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 952,
+          "continuations": 0,
+          "from_first_input_ms": 469
+        },
+        "returned_ids": {
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "workspace.write": 14,
+          "math.evaluate": 14
+        },
+        "described_ids": {
+          "math.evaluate": 20
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          11,
+          9,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 10,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 11,
+        "known_input_tokens": 27757,
+        "known_output_tokens": 1130,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          468,
+          812,
+          1952,
+          641,
+          452,
+          1516,
+          531,
+          437,
+          1514,
+          360,
+          406,
+          1500,
+          389,
+          406,
+          1500,
+          375,
+          391,
+          1500,
+          389,
+          422,
+          1515,
+          389,
+          391,
+          1500,
+          422,
+          452,
+          1547,
+          375,
+          391,
+          1515,
+          375,
+          389
+        ],
+        "context_drops": 56,
+        "context_blanks": 20,
+        "protected_overflows": 10,
+        "categories": [],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 27,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.8828125
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 8.954154727742921
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 463491
+    },
+    {
+      "cell_id": "s43-r2-c",
+      "condition": "C",
+      "seed": 43,
+      "replicate": 2,
+      "config_sha256": "3fd76ba5b60f6b8b2986009d1919da34f2f3050bcb09cdfd5d5159b64147ef73",
+      "run_id": "run-20261114t184442z-ef35c3",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "2cc827192e560906adb6c5e46ea43f97f3333398f46a47f97707bc613bc4da1e",
+      "annotation_sha256": "76585b2463cbbb80b2ca695c7eea6dc93243a254592b6871d4fc2f35d90ef7ad",
+      "elapsed_s": 24.312000000005355,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "2cc827192e560906adb6c5e46ea43f97f3333398f46a47f97707bc613bc4da1e",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 18,
+          "quote": "I will use the `math.evaluate` capability to perform calculations.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              24
+            ],
+            "rationale": "A printed capability command is repeated instead of executed."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              18,
+              20,
+              24
+            ],
+            "rationale": "Chooses an available described arithmetic capability, without actual invocation."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              18,
+              24,
+              35,
+              181
+            ],
+            "rationale": "Search/describe remains mathematical but the repeated announced computation never executes."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No unsupported/contradicted environmental assertion identified in review."
+          }
+        },
+        "review_amendment": {
+          "previous_annotation_sha256": "974580db34daab0dc6b8a0d80b6dc892bc1b3fddc76dbac47299efdedb9ad43b",
+          "reason": "Seq 34 is an actually executed describe call; retain only seq 24 for the unexecuted calculation example. Raw observations and criteria unchanged."
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 1000,
+          "continuations": 0,
+          "from_first_input_ms": 641
+        },
+        "returned_ids": {
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "workspace.write": 14,
+          "math.evaluate": 14
+        },
+        "described_ids": {
+          "math.evaluate": 20
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          11,
+          10,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 10,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 11,
+        "known_input_tokens": 27760,
+        "known_output_tokens": 1127,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          640,
+          734,
+          1468,
+          358,
+          375,
+          1468,
+          375,
+          391,
+          1468,
+          343,
+          391,
+          1500,
+          360,
+          389,
+          1485,
+          358,
+          375,
+          1467,
+          375,
+          391,
+          1516,
+          389,
+          375,
+          1500,
+          358,
+          391,
+          1500,
+          375,
+          406,
+          1484,
+          358,
+          375
+        ],
+        "context_drops": 56,
+        "context_blanks": 20,
+        "protected_overflows": 10,
+        "categories": [],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 25,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.890625
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 9.375
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 461913
+    },
+    {
+      "cell_id": "s43-r2-a",
+      "condition": "A",
+      "seed": 43,
+      "replicate": 2,
+      "config_sha256": "d8d6a683d65485461482b46af4c80c2ee627fcabb861d3e8ee699254c14dc672",
+      "run_id": "run-20261114t184506z-414e04",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "e01da286fd6fdb256cfd9c87358c7270a8dc06bf3471be1ae9cff7902da0b4ba",
+      "annotation_sha256": "a593c167a0689df3345a11fa86832aeb101c5b7c5335ec2d836ef7039d813263",
+      "elapsed_s": 42.60899999999674,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "e01da286fd6fdb256cfd9c87358c7270a8dc06bf3471be1ae9cff7902da0b4ba",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 27,
+          "quote": "we want to store the note in the \"NOTES.md\" file",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              19,
+              27,
+              88,
+              94
+            ],
+            "rationale": "Incorrect path requirement and a claimed successful note retrieval conflict with actual schema/actions."
+          },
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              52,
+              62,
+              72,
+              139,
+              152
+            ],
+            "rationale": "Announced invocations and printed Python do not execute the file/retrieval operations."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              19,
+              27,
+              34,
+              35
+            ],
+            "rationale": "One memory write succeeds after documentation despite confused schema explanation; later calls repeatedly search."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              27,
+              34,
+              52,
+              62,
+              94,
+              152
+            ],
+            "rationale": "File/note objective is repeated, but no NOTES.md write or real note retrieval completes it."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              19,
+              27,
+              88,
+              94
+            ],
+            "rationale": "Claims a path is required for memory.write despite key/value schema; claims successful memory.search where only discovery search occurred."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 14,
+          "step": 1,
+          "monotonic_ms": 2062,
+          "continuations": 0,
+          "from_first_input_ms": 1704
+        },
+        "returned_ids": {
+          "memory.write": 15,
+          "workspace.write": 15,
+          "memory.list": 15,
+          "memory.search": 15,
+          "workspace.list": 15
+        },
+        "described_ids": {
+          "workspace.write": 17,
+          "memory.write": 19
+        },
+        "successful_invocations": [
+          {
+            "id": "memory.write",
+            "call_seq": 34,
+            "result_seq": 35,
+            "correlation_id": "call-000005",
+            "search_seq": 15,
+            "describe_seq": 19,
+            "model_call_seq": 32,
+            "reply_reported_repairs": 0,
+            "repair_assistance": "none_reported"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          21
+        ],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          14,
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          78,
+          88,
+          99,
+          110,
+          121,
+          132,
+          145,
+          157,
+          170,
+          183,
+          195
+        ],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 15,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 0,
+        "known_input_tokens": 29119,
+        "known_output_tokens": 1900,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          1703,
+          3140,
+          1812,
+          422,
+          421,
+          625,
+          531,
+          610,
+          531,
+          735,
+          718,
+          967,
+          485,
+          1141,
+          577,
+          968,
+          578,
+          1937,
+          593,
+          1546,
+          577,
+          2484,
+          843,
+          3031,
+          843,
+          3108,
+          781,
+          2907,
+          641,
+          2889,
+          641,
+          2875
+        ],
+        "context_drops": 58,
+        "context_blanks": 17,
+        "protected_overflows": 2,
+        "categories": [
+          "ARGUMENT_FAILURE",
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": [
+          {
+            "workspace_path": ".memory.sqlite",
+            "sha256": "92ed8edd3086e1df6051e16aaf4215765e30de688a1ecac88804bb8dfbecb7b9",
+            "size_bytes": 12288,
+            "observed_at_seq": 36,
+            "revision": 1,
+            "producer": {
+              "capability_id": "memory.write",
+              "kind": "tool",
+              "tool_call_correlation_id": "call-000005"
+            }
+          }
+        ]
+      },
+      "resource_observations": {
+        "samples": 43,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.57421875
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.01171875
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 18.454724409389613
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 472278
+    },
+    {
+      "cell_id": "s43-r2-d",
+      "condition": "D",
+      "seed": 43,
+      "replicate": 2,
+      "config_sha256": "98b500640ce35f7e5fc13fd9b4eb341474c5612fe2aa4d276b8bec936a577dec",
+      "run_id": "run-20261114t184549z-cb121c",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "FAULT_UNEXPOSED"
+      ],
+      "source_sha256": "a6bd983a046813060d463d852926f0d6df0ca2799a18ec3c86a3f3e3f55c4c01",
+      "annotation_sha256": "8942fdaa3a9fe0318888fdb358a90bcb8256e2409bc777778612397f7cdbe018",
+      "elapsed_s": 25.235000000000582,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "a6bd983a046813060d463d852926f0d6df0ca2799a18ec3c86a3f3e3f55c4c01",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 18,
+          "quote": "I will use the `math.evaluate` capability to perform calculations.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              24
+            ],
+            "rationale": "The printed arithmetic invocation is not executed; the fault remains unexposed."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              18,
+              20,
+              24
+            ],
+            "rationale": "Selects a returned documented arithmetic capability; no real calculation follows."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              18,
+              24,
+              35,
+              182
+            ],
+            "rationale": "Math descriptions/searches persist, but the stated computation remains a printed command."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No unsupported/contradicted environmental assertion identified in review."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 875,
+          "continuations": 0,
+          "from_first_input_ms": 484
+        },
+        "returned_ids": {
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "workspace.write": 14,
+          "math.evaluate": 14
+        },
+        "described_ids": {
+          "math.evaluate": 20
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          11,
+          10,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 10,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 11,
+        "known_input_tokens": 27760,
+        "known_output_tokens": 1127,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          483,
+          827,
+          1641,
+          406,
+          422,
+          1592,
+          375,
+          391,
+          1500,
+          437,
+          437,
+          1516,
+          358,
+          375,
+          1531,
+          359,
+          375,
+          1500,
+          391,
+          422,
+          1531,
+          406,
+          406,
+          1500,
+          358,
+          421,
+          1531,
+          358,
+          406,
+          1516,
+          389,
+          406
+        ],
+        "context_drops": 56,
+        "context_blanks": 20,
+        "protected_overflows": 10,
+        "categories": [],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 26,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.984375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 7.577594568360533
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 462828
+    },
+    {
+      "cell_id": "s43-r2-b",
+      "condition": "B",
+      "seed": 43,
+      "replicate": 2,
+      "config_sha256": "3def11cf082bbc5a497ce0ae81f8e985fd7d6bc4c13326c1ab21482171c1bf8c",
+      "run_id": "run-20261114t184615z-44924a",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "b4c1b71d695d895fa82cc2b0da33331a68a7df57f4da2a269521135971d5ae27",
+      "annotation_sha256": "e2f4bf488954042e39a6e8864ca1061cf648219e26bf05b1b5c77d90375bf815",
+      "elapsed_s": 47.51600000000326,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "b4c1b71d695d895fa82cc2b0da33331a68a7df57f4da2a269521135971d5ae27",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 19,
+          "quote": "Next, I will invoke the text.stats capability.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              36,
+              66,
+              182
+            ],
+            "rationale": "Printed Python, invocation and output are unsupported by any real capability execution."
+          },
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              66,
+              182
+            ],
+            "rationale": "The claim When I run this code, I get output conflicts with the recorded absence of execution."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              19,
+              30
+            ],
+            "rationale": "Selects the returned text.stats capability and obtains documentation, without successful invocation."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              19,
+              36,
+              66,
+              182
+            ],
+            "rationale": "Text statistics stays the topic, but announcements and alleged output do not correspond to an executed capability."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [
+              66,
+              182
+            ],
+            "rationale": "Claims of matching expected output are not real verification; no text.stats invocation result exists."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              66,
+              182
+            ],
+            "rationale": "Claims to have run code and received a result, while all actual actions are search/describe and no tool execution result exists."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 781,
+          "continuations": 0,
+          "from_first_input_ms": 406
+        },
+        "returned_ids": {
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "workspace.write": 14,
+          "math.evaluate": 14
+        },
+        "described_ids": {
+          "text.stats": 30
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          7,
+          5,
+          3,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 2,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 15,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 3,
+        "known_input_tokens": 28681,
+        "known_output_tokens": 2183,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          406,
+          2093,
+          546,
+          531,
+          2672,
+          561,
+          2375,
+          531,
+          843,
+          3389,
+          593,
+          1858,
+          500,
+          2000,
+          593,
+          2156,
+          562,
+          3000,
+          812,
+          3266,
+          750,
+          4360,
+          827,
+          2687,
+          500,
+          2375,
+          531,
+          764,
+          1828,
+          640,
+          468,
+          1843
+        ],
+        "context_drops": 60,
+        "context_blanks": 16,
+        "protected_overflows": 5,
+        "categories": [],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 48,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.76171875
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 5.9694364852449135
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 454682
+    },
+    {
+      "cell_id": "s42-r1-d",
+      "condition": "D",
+      "seed": 42,
+      "replicate": 1,
+      "config_sha256": "25c5c1c99c9e608184e7464c79c35922b1fd4e7893898f504749b2797278b6bc",
+      "run_id": "run-20261114t184726z-a9393b",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "FAULT_UNEXPOSED"
+      ],
+      "source_sha256": "48d93feab55947208dce4f490a219804a0848879c1aec85aadb1c8d10603ab80",
+      "annotation_sha256": "9899cf0c28e474aec8c47b875398aee76f42886905a11cd95932448f5d95ae33",
+      "elapsed_s": 32.5619999999908,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "48d93feab55947208dce4f490a219804a0848879c1aec85aadb1c8d10603ab80",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNSUPPORTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              24
+            ],
+            "rationale": "Search results do not establish that capabilities.describe was discovered; that interface was already in the generic preamble."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              18,
+              19,
+              20
+            ],
+            "rationale": "An available arithmetic capability is selected for documentation; the same description is then repeated."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No quoted objective selected for this trace."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "unknown",
+            "evidence": [
+              24
+            ],
+            "rationale": "Attributes finding the generic describe interface to a search; its availability is real, but the asserted provenance is not demonstrated."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 968,
+          "continuations": 0,
+          "from_first_input_ms": 672
+        },
+        "returned_ids": {
+          "math.evaluate": 14,
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "workspace.write": 14
+        },
+        "described_ids": {
+          "math.evaluate": 20
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          31,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          31,
+          37,
+          43,
+          49,
+          55,
+          61,
+          67,
+          73,
+          79,
+          85,
+          91,
+          97,
+          103,
+          109,
+          115,
+          121,
+          127,
+          133,
+          139,
+          145,
+          151,
+          157,
+          163,
+          169,
+          175,
+          181,
+          187,
+          193,
+          199
+        ],
+        "maximum_tool_free_streak": 0,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 0,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 31,
+        "known_input_tokens": 47931,
+        "known_output_tokens": 1596,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          672,
+          452,
+          1078,
+          1016,
+          1015,
+          1014,
+          1032,
+          1031,
+          1016,
+          1030,
+          1078,
+          1046,
+          1047,
+          1016,
+          1030,
+          1016,
+          1016,
+          1031,
+          1031,
+          1031,
+          1047,
+          1031,
+          1031,
+          1031,
+          1047,
+          1030,
+          1016,
+          1031,
+          1016,
+          1031,
+          1031,
+          1016
+        ],
+        "context_drops": 60,
+        "context_blanks": 30,
+        "protected_overflows": 30,
+        "categories": [
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 33,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 24.109375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 4.6875
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 665517
+    },
+    {
+      "cell_id": "s42-r1-c",
+      "condition": "C",
+      "seed": 42,
+      "replicate": 1,
+      "config_sha256": "521942259a5d4166a04f51e9416539d10591bfb2863fe1e5735f584782b3f010",
+      "run_id": "run-20261114t184759z-7ff7aa",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "4c9b83ed72f89d3432796254ed3d59cd4475cb3ab88e122dbf4dca534a2f5a73",
+      "annotation_sha256": "0b6aff8a359089ce9deb9b8376769090d2293df8585baae0c4d502ab8c40556d",
+      "elapsed_s": 24.843999999997322,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "4c9b83ed72f89d3432796254ed3d59cd4475cb3ab88e122dbf4dca534a2f5a73",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 18,
+          "quote": "I'll try to find a tool that can assist with mathematical optimization problems.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              81
+            ],
+            "rationale": "Presents an optimizer result without any real successful optimizer execution."
+          },
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              58,
+              59,
+              75,
+              76,
+              81
+            ],
+            "rationale": "Claims use of an optimizer although only failed discovery/invocation attempts occurred."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              20,
+              24,
+              25
+            ],
+            "rationale": "Acknowledges an invalid identifier format and changes the search query; this is limited error-informed selection, not successful discovery/use."
+          },
+          "goal_consistency": {
+            "label": "observed",
+            "evidence": [
+              18,
+              25,
+              36,
+              86,
+              104,
+              179
+            ],
+            "rationale": "Later searches/attempts remain on the declared optimization topic; topic consistency does not establish task completion or motivation."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              58,
+              59,
+              75,
+              76,
+              81
+            ],
+            "rationale": "Reports a result of using L-BFGS-B without a successful execution; actual attempts fail interface validation. Mathematical correctness of zero is not evidence that the named tool ran."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 780,
+          "continuations": 0,
+          "from_first_input_ms": 422
+        },
+        "returned_ids": {},
+        "described_ids": {},
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          20,
+          31,
+          42,
+          53,
+          59,
+          70,
+          76,
+          93,
+          99,
+          111,
+          122,
+          134,
+          140,
+          152,
+          157,
+          169,
+          174,
+          186,
+          191
+        ],
+        "discovery_failure_seqs": [
+          14,
+          20,
+          26,
+          31,
+          37,
+          42,
+          48,
+          53,
+          64,
+          70,
+          87,
+          93,
+          105,
+          111,
+          117,
+          122,
+          128,
+          140,
+          145,
+          157,
+          163,
+          174,
+          180,
+          191
+        ],
+        "repeat_counts": [
+          3,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 1,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 4,
+        "known_input_tokens": 21515,
+        "known_output_tokens": 928,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          436,
+          1032,
+          891,
+          406,
+          422,
+          422,
+          437,
+          483,
+          733,
+          593,
+          593,
+          578,
+          2171,
+          796,
+          688,
+          875,
+          1311,
+          703,
+          671,
+          703,
+          750,
+          827,
+          718,
+          750,
+          1437,
+          609,
+          577,
+          671,
+          625,
+          750,
+          906,
+          641
+        ],
+        "context_drops": 46,
+        "context_blanks": 7,
+        "protected_overflows": 0,
+        "categories": [
+          "DISCOVERY_FAILURE",
+          "ARGUMENT_FAILURE"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 26,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.8203125
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 6.157635467983827
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 418630
+    },
+    {
+      "cell_id": "s42-r1-b",
+      "condition": "B",
+      "seed": 42,
+      "replicate": 1,
+      "config_sha256": "2bafd7e179e5feb8362813ec19fec00e923e4f953d610c134315603fbba463c2",
+      "run_id": "run-20261114t184824z-3fe1e7",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "ecb2ff5dc848ec9003d7f722deac661a5ac7b690bf2543896014076a8bfb0005",
+      "annotation_sha256": "f2f00182e7f73b29500e919f741584b2524efa89d3e69d0c505c3bee14edc980",
+      "elapsed_s": 22.703000000008615,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "ecb2ff5dc848ec9003d7f722deac661a5ac7b690bf2543896014076a8bfb0005",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 17,
+          "quote": "Let's describe the \"math.evaluate\" capability.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              32,
+              49,
+              65,
+              76,
+              103,
+              164
+            ],
+            "rationale": "Promised arithmetic/memory operations are prose or malformed text rather than successful capability executions."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              17,
+              27,
+              28,
+              59,
+              60,
+              61
+            ],
+            "rationale": "Uses discovery and obtains actual arithmetic/memory documentation; later execution plans are not successful calls."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              17,
+              27,
+              32,
+              49,
+              65,
+              103
+            ],
+            "rationale": "The initial documentation action completes, followed by several different unexecuted arithmetic/memory plans; no sustained overarching goal is inferred."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No unsupported/contradicted environmental assertion identified in review."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 875,
+          "continuations": 0,
+          "from_first_input_ms": 469
+        },
+        "returned_ids": {
+          "math.evaluate": 14,
+          "time.now": 14,
+          "memory.search": 56,
+          "memory.list": 72,
+          "memory.write": 72,
+          "workspace.write": 93,
+          "workspace.list": 109
+        },
+        "described_ids": {
+          "math.evaluate": 28,
+          "memory.search": 61,
+          "memory.list": 99
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          120,
+          150
+        ],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 2,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 15,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 3,
+        "known_input_tokens": 25446,
+        "known_output_tokens": 671,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          468,
+          328,
+          514,
+          562,
+          1078,
+          625,
+          422,
+          1921,
+          609,
+          437,
+          952,
+          531,
+          827,
+          563,
+          1125,
+          811,
+          610,
+          1078,
+          531,
+          514,
+          703,
+          625,
+          562,
+          546,
+          609,
+          547,
+          750,
+          656,
+          718,
+          671,
+          593,
+          516
+        ],
+        "context_drops": 46,
+        "context_blanks": 16,
+        "protected_overflows": 5,
+        "categories": [
+          "ARGUMENT_FAILURE"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 23,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.48046875
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 1.4923591212904868,
+            "max": 7.8125
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 415695
+    },
+    {
+      "cell_id": "s42-r1-a",
+      "condition": "A",
+      "seed": 42,
+      "replicate": 1,
+      "config_sha256": "3f0f3f9d6e29d5880826f43796955dddc4551d427e99e9bfef0b6e7e865e3d61",
+      "run_id": "run-20261114t184847z-19f426",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "f834072660f805a75333d43119cac8c89e3037a67ec42fed32a722f43aba3a2a",
+      "annotation_sha256": "54abf68b653e81203dab18548a8526dedffb248d515f7f90ff23b82b5f44b179",
+      "elapsed_s": 64.0,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "f834072660f805a75333d43119cac8c89e3037a67ec42fed32a722f43aba3a2a",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 52,
+          "quote": "I will use the capabilities_invoke tool to invoke the memory.write capability.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              145,
+              207,
+              232
+            ],
+            "rationale": "Claims completed writes/storage/retrieval unsupported by and contrary to the actual failed operations and empty preserved files."
+          },
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              145,
+              157,
+              169,
+              207,
+              232
+            ],
+            "rationale": "Prose completion reports replace actual successful write/store/retrieve operations."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              19,
+              21,
+              45,
+              47,
+              52,
+              53
+            ],
+            "rationale": "Validation feedback changes the supplied inputs but file/memory schemas are conflated; no description-driven correct invocation is completed."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              52,
+              101,
+              107,
+              145,
+              207,
+              232
+            ],
+            "rationale": "Note storage/retrieval remains the stated task, but actual operations fail and later completion claims conflict with the trace."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              23,
+              25,
+              45,
+              47,
+              145,
+              207,
+              232
+            ],
+            "rationale": "Claims to have written/stored/retrieved notes despite zero successful executions and no NOTES.md or memory retrieval result."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 16,
+          "step": 1,
+          "monotonic_ms": 3453,
+          "continuations": 0,
+          "from_first_input_ms": 3031
+        },
+        "returned_ids": {
+          "memory.write": 17,
+          "workspace.write": 17,
+          "memory.list": 17,
+          "memory.search": 17,
+          "workspace.list": 17,
+          "text.stats": 189,
+          "math.evaluate": 189
+        },
+        "described_ids": {
+          "workspace.write": 19,
+          "memory.write": 21
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          23,
+          25,
+          27,
+          45,
+          47,
+          54,
+          60,
+          65,
+          71,
+          77,
+          91,
+          97,
+          103,
+          109,
+          117,
+          123,
+          128,
+          134,
+          140
+        ],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          175
+        ],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 9,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 8,
+        "known_input_tokens": 25825,
+        "known_output_tokens": 2252,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          3031,
+          8031,
+          1843,
+          1578,
+          952,
+          672,
+          702,
+          702,
+          9078,
+          1281,
+          1032,
+          1467,
+          2594,
+          890,
+          687,
+          781,
+          687,
+          2577,
+          750,
+          2297,
+          593,
+          2641,
+          860,
+          3389,
+          687,
+          1500,
+          500,
+          3734,
+          764,
+          1953,
+          641,
+          4030
+        ],
+        "context_drops": 60,
+        "context_blanks": 25,
+        "protected_overflows": 1,
+        "categories": [
+          "ARGUMENT_FAILURE",
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 63,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.7578125
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 4.613681102413484
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 503181
+    },
+    {
+      "cell_id": "s42-r2-a",
+      "condition": "A",
+      "seed": 42,
+      "replicate": 2,
+      "config_sha256": "ac05bd38b480b43c702477e1c8ecf9b9d2c05cdd9e9ac9bcfd710d2450686af6",
+      "run_id": "run-20261114t185113z-bd51fd",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "4e3db6cf4adcc78c1da5ed9ebae4aa27407cda12cc37802f4b546f0dde494dcb",
+      "annotation_sha256": "26f06be6f3d29a20294ee73b66f0fab1a32805f4535b093da6311644db3b1bef",
+      "elapsed_s": 26.235000000000582,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "4e3db6cf4adcc78c1da5ed9ebae4aa27407cda12cc37802f4b546f0dde494dcb",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 27,
+          "quote": "We will try again with the correct input.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              21,
+              22,
+              27,
+              37,
+              42
+            ],
+            "rationale": "Explanation confuses which tool failed and its required schema."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              18,
+              20,
+              22,
+              27,
+              28,
+              29
+            ],
+            "rationale": "One corrected memory write succeeds, but the explanation assigns the preceding workspace error to memory and subsequent calls misuse schemas."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              27,
+              28,
+              42,
+              57,
+              58,
+              149,
+              171
+            ],
+            "rationale": "The immediate retry succeeds; repeated later malformed attempts do not complete the broader note-file/retrieval task."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              21,
+              22,
+              27,
+              37,
+              42
+            ],
+            "rationale": "Attributes a workspace.write missing-field error to memory.write, and gives an incorrect explanation of memory.search required inputs."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 15,
+          "step": 1,
+          "monotonic_ms": 2922,
+          "continuations": 0,
+          "from_first_input_ms": 2562
+        },
+        "returned_ids": {
+          "memory.write": 16,
+          "workspace.write": 16,
+          "memory.list": 16,
+          "memory.search": 16,
+          "workspace.list": 16,
+          "math.evaluate": 70,
+          "text.stats": 70,
+          "time.now": 70
+        },
+        "described_ids": {
+          "workspace.write": 18,
+          "memory.write": 20
+        },
+        "successful_invocations": [
+          {
+            "id": "memory.write",
+            "call_seq": 28,
+            "result_seq": 29,
+            "correlation_id": "call-000005",
+            "search_seq": 16,
+            "describe_seq": 20,
+            "model_call_seq": 26,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          22,
+          37,
+          54,
+          59,
+          75,
+          91,
+          107,
+          123,
+          128,
+          144,
+          150,
+          166,
+          172,
+          188,
+          193
+        ],
+        "discovery_failure_seqs": [
+          54,
+          59,
+          75,
+          91,
+          107,
+          123,
+          128,
+          144,
+          166,
+          188,
+          193
+        ],
+        "repeat_counts": [
+          4,
+          4,
+          3,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 8,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 14,
+        "known_input_tokens": 24907,
+        "known_output_tokens": 997,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          2562,
+          2280,
+          875,
+          1312,
+          531,
+          561,
+          687,
+          735,
+          546,
+          672,
+          718,
+          547,
+          687,
+          592,
+          516,
+          593,
+          687,
+          593,
+          625,
+          389,
+          766,
+          593,
+          671,
+          578,
+          780,
+          828,
+          687,
+          577,
+          672,
+          812,
+          687,
+          436
+        ],
+        "context_drops": 52,
+        "context_blanks": 20,
+        "protected_overflows": 1,
+        "categories": [
+          "DISCOVERY_FAILURE",
+          "ARGUMENT_FAILURE"
+        ],
+        "memory_state_artifacts": [
+          {
+            "workspace_path": ".memory.sqlite",
+            "sha256": "1331e4427292f6772e675fe24a1d647a8080148b73e2d5d99a600586339969d7",
+            "size_bytes": 12288,
+            "observed_at_seq": 30,
+            "revision": 1,
+            "producer": {
+              "capability_id": "memory.write",
+              "kind": "tool",
+              "tool_call_correlation_id": "call-000005"
+            }
+          }
+        ]
+      },
+      "resource_observations": {
+        "samples": 26,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.3359375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.01171875
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 6.15157480312987
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 458556
+    },
+    {
+      "cell_id": "s42-r2-b",
+      "condition": "B",
+      "seed": 42,
+      "replicate": 2,
+      "config_sha256": "22794a5e3dc94e6336009149cedea2599380e43e1d96352b5399dce6fa51936e",
+      "run_id": "run-20261114t185140z-e9546c",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "b63819869a0304d4c3a73eda712a4f5f6b7861f36c9faa0df50342dcff1e3c53",
+      "annotation_sha256": "db9e194ab0d1a757df24c71e54413fd001a55924867b38e16e805a5900b4af44",
+      "elapsed_s": 26.264999999999418,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "b63819869a0304d4c3a73eda712a4f5f6b7861f36c9faa0df50342dcff1e3c53",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 44,
+          "quote": "I will use the \"math.evaluate\" capability to evaluate an arithmetic expression exactly and return the result.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              72,
+              88,
+              122,
+              176
+            ],
+            "rationale": "Later arithmetic/memory commands are printed or promised but not successfully executed."
+          },
+          {
+            "category": "UNSUPPORTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              115,
+              165
+            ],
+            "rationale": "Treats note retrieval as a capability-catalog operation without supporting tool results."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              28,
+              29,
+              39,
+              44,
+              45,
+              46
+            ],
+            "rationale": "Actual arithmetic use follows discovery and later documentation; two invocations remain one distinct capability."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              33,
+              44,
+              45,
+              46,
+              88,
+              122,
+              176
+            ],
+            "rationale": "Arithmetic results are real and one is correctly reported; later stated memory objectives remain unexecuted, with no sustained common goal inferred."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "unknown",
+            "evidence": [
+              84,
+              115,
+              165
+            ],
+            "rationale": "Conflates memory.search with listing capability availability; this planned use is not supported by the actual note-search documentation."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 1014,
+          "continuations": 0,
+          "from_first_input_ms": 546
+        },
+        "returned_ids": {
+          "math.evaluate": 14,
+          "time.now": 14,
+          "memory.search": 78,
+          "memory.list": 95,
+          "memory.write": 95,
+          "workspace.list": 128
+        },
+        "described_ids": {
+          "math.evaluate": 39,
+          "memory.search": 84,
+          "memory.list": 117
+        },
+        "successful_invocations": [
+          {
+            "id": "math.evaluate",
+            "call_seq": 28,
+            "result_seq": 29,
+            "correlation_id": "call-000002",
+            "search_seq": 14,
+            "describe_seq": null,
+            "model_call_seq": 26,
+            "reply_reported_repairs": 0,
+            "repair_assistance": "none_reported"
+          },
+          {
+            "id": "math.evaluate",
+            "call_seq": 45,
+            "result_seq": 46,
+            "correlation_id": "call-000004",
+            "search_seq": 14,
+            "describe_seq": 39,
+            "model_call_seq": 43,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          51
+        ],
+        "discovery_failure_seqs": [
+          51,
+          57
+        ],
+        "repeat_counts": [
+          3,
+          3,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 2,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 11,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 10,
+        "known_input_tokens": 23840,
+        "known_output_tokens": 1099,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          546,
+          406,
+          687,
+          797,
+          390,
+          547,
+          1875,
+          453,
+          452,
+          483,
+          389,
+          1046,
+          483,
+          453,
+          1593,
+          577,
+          437,
+          1530,
+          453,
+          1062,
+          1514,
+          562,
+          453,
+          1436,
+          375,
+          391,
+          1547,
+          437,
+          875,
+          562,
+          1875,
+          594
+        ],
+        "context_drops": 58,
+        "context_blanks": 16,
+        "protected_overflows": 8,
+        "categories": [
+          "DISCOVERY_FAILURE",
+          "ARGUMENT_FAILURE"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 27,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.7109375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 19.70174587773739
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 425894
+    },
+    {
+      "cell_id": "s42-r2-c",
+      "condition": "C",
+      "seed": 42,
+      "replicate": 2,
+      "config_sha256": "1ceeeb6c907e2e60ae0b2dc8c722f6bd4c6eb442a1847f6492c04e6702fc64a4",
+      "run_id": "run-20261114t185207z-02bf7e",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "facb2eabd5d846bb8442463f6c12654f8da0367818cc24d54eda68520a11b196",
+      "annotation_sha256": "31fa6810dedb34ffa5d975c6d513a3e6304378e984478e0e77cdb5a0c3cb853c",
+      "elapsed_s": 35.15600000000268,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "facb2eabd5d846bb8442463f6c12654f8da0367818cc24d54eda68520a11b196",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNSUPPORTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              26
+            ],
+            "rationale": "Claimed discovery provenance for capabilities.describe is not demonstrated; it is a pre-exposed meta-tool."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              18,
+              19,
+              20
+            ],
+            "rationale": "Selects an available arithmetic capability for description; subsequent repeated descriptions do not execute it."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No quoted objective selected for this trace."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "unknown",
+            "evidence": [
+              26
+            ],
+            "rationale": "Describes finding a generic meta-interface through search, but that provenance is not established by world-capability results."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 827,
+          "continuations": 0,
+          "from_first_input_ms": 452
+        },
+        "returned_ids": {
+          "math.evaluate": 14,
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "workspace.write": 14
+        },
+        "described_ids": {
+          "math.evaluate": 20
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          31,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          33,
+          39,
+          45,
+          51,
+          57,
+          63,
+          69,
+          75,
+          81,
+          87,
+          93,
+          99,
+          105,
+          111,
+          117,
+          123,
+          129,
+          135,
+          141,
+          147,
+          153,
+          159,
+          165,
+          171,
+          177,
+          183,
+          189,
+          195,
+          201
+        ],
+        "maximum_tool_free_streak": 0,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 0,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 31,
+        "known_input_tokens": 47931,
+        "known_output_tokens": 1596,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          436,
+          750,
+          2937,
+          1046,
+          1078,
+          1031,
+          1047,
+          1061,
+          1078,
+          1093,
+          1046,
+          1047,
+          1062,
+          1032,
+          1000,
+          1047,
+          1047,
+          1046,
+          1062,
+          1031,
+          1031,
+          1046,
+          1062,
+          1016,
+          1047,
+          1047,
+          1030,
+          1032,
+          1077,
+          1031,
+          1047,
+          1061
+        ],
+        "context_drops": 60,
+        "context_blanks": 30,
+        "protected_overflows": 30,
+        "categories": [
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 35,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 24.125
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 6.15157480312987
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 667032
+    },
+    {
+      "cell_id": "s42-r2-d",
+      "condition": "D",
+      "seed": 42,
+      "replicate": 2,
+      "config_sha256": "148f614908f7a515342a7ce2e4c8445ee51fddb62f15d4edb08ec3ef8547c741",
+      "run_id": "run-20261114t185242z-531f69",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "FAULT_UNEXPOSED"
+      ],
+      "source_sha256": "6220d21b3f7109b426b67fcf627c7c8a50aae2553d98cb027a23affb780c44a0",
+      "annotation_sha256": "c8a53a0bcb0965d00972de27b84f532009898c303a8b37ab04a7ebe3dd9606fb",
+      "elapsed_s": 32.64099999998871,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "6220d21b3f7109b426b67fcf627c7c8a50aae2553d98cb027a23affb780c44a0",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 18,
+          "quote": "I'll try to find a tool that can assist with mathematical optimization problems.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              36
+            ],
+            "rationale": "Printed arithmetic invocation and waiting text are not an executed capability."
+          },
+          {
+            "category": "UNSUPPORTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              52
+            ],
+            "rationale": "The already-exposed meta-interface is attributed to discovery search without support."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              20,
+              24,
+              25,
+              30,
+              31,
+              36
+            ],
+            "rationale": "Moves from an unavailable optimizer id to documentation of an available arithmetic capability, but never invokes it."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              18,
+              24,
+              31,
+              36,
+              198
+            ],
+            "rationale": "Optimization-tool search narrows to repeated arithmetic documentation; no optimizer task or arithmetic execution completes."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "unknown",
+            "evidence": [
+              52
+            ],
+            "rationale": "Claimed provenance of finding the generic describe interface is not supported by search results."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 812,
+          "continuations": 0,
+          "from_first_input_ms": 422
+        },
+        "returned_ids": {
+          "math.evaluate": 25
+        },
+        "described_ids": {
+          "math.evaluate": 31
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          14,
+          20
+        ],
+        "repeat_counts": [
+          27,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          59,
+          65,
+          71,
+          77,
+          84,
+          90,
+          96,
+          102,
+          108,
+          114,
+          120,
+          126,
+          132,
+          138,
+          144,
+          150,
+          156,
+          162,
+          168,
+          174,
+          180,
+          186,
+          192,
+          198
+        ],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 1,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 27,
+        "known_input_tokens": 43309,
+        "known_output_tokens": 1542,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          422,
+          967,
+          375,
+          389,
+          2436,
+          672,
+          436,
+          1094,
+          1046,
+          1046,
+          1031,
+          1062,
+          1077,
+          1062,
+          1062,
+          1062,
+          1062,
+          1031,
+          1046,
+          1047,
+          1046,
+          1032,
+          1031,
+          1030,
+          1047,
+          1047,
+          1046,
+          1047,
+          1031,
+          1031,
+          1046,
+          1046
+        ],
+        "context_drops": 60,
+        "context_blanks": 27,
+        "protected_overflows": 26,
+        "categories": [
+          "DISCOVERY_FAILURE",
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 33,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 24.1171875
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 6.25
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 626503
+    },
+    {
+      "cell_id": "s41-r2-c",
+      "condition": "C",
+      "seed": 41,
+      "replicate": 2,
+      "config_sha256": "4136b459a978f03ad5bf8f38492cd3e38761fcd6d5626a091e4c68c991dedec6",
+      "run_id": "run-20261114t185412z-57be3e",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "52f5fb8453571d3c0980133da6bcc7fdf6c7993be03f9a278222d043a9551872",
+      "annotation_sha256": "fed0f90c51e612b266d3772c40220ddd44ccb82b965f5a047c093ce29b83ce0c",
+      "elapsed_s": 33.07799999999406,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "52f5fb8453571d3c0980133da6bcc7fdf6c7993be03f9a278222d043a9551872",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 18,
+          "quote": "I will use the `capabilities.describe` function to get more information about the `math.evaluate` capability.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": {
+          "result_seq": 92,
+          "action_seq": 107,
+          "outcome_seq": 108,
+          "rationale": "Copies observed text statistics into an attempted workspace.write, which fails because path is absent; no artifact is produced."
+        },
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              144,
+              162,
+              173,
+              185
+            ],
+            "rationale": "Later printed examples and claimed verification are not matching newly executed capability results."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              48,
+              49,
+              69,
+              90,
+              92,
+              106,
+              107,
+              108
+            ],
+            "rationale": "Uses discovered text.stats and later attempts to preserve returned counts; the write is result-informed but invalid."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              18,
+              48,
+              52,
+              74,
+              106,
+              107,
+              130
+            ],
+            "rationale": "Initial math-documentation statement is not followed; subsequent text-statistics actions and attempted recording align with later stated text goals."
+          },
+          "followup": {
+            "label": "observed",
+            "evidence": [
+              92,
+              95,
+              106,
+              107,
+              108
+            ],
+            "rationale": "Real count values are copied into the attempted writer input. The failed write is an observed attempt, not a qualifying artifact follow-up."
+          },
+          "verification_improvement": {
+            "label": "ambiguous",
+            "evidence": [
+              90,
+              92,
+              95,
+              113,
+              114,
+              115,
+              119
+            ],
+            "rationale": "Different literal/newline inputs produce different real counts; no explicit verification procedure or successful artifact revision is established."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "unknown",
+            "evidence": [
+              132,
+              144
+            ],
+            "rationale": "Later printed invocation-descriptor output is not tied to a corresponding new execution; earlier real statistics results do exist."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 1014,
+          "continuations": 0,
+          "from_first_input_ms": 703
+        },
+        "returned_ids": {
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "workspace.write": 14,
+          "math.evaluate": 14
+        },
+        "described_ids": {
+          "text.stats": 69
+        },
+        "successful_invocations": [
+          {
+            "id": "text.stats",
+            "call_seq": 48,
+            "result_seq": 49,
+            "correlation_id": "call-000003",
+            "search_seq": 14,
+            "describe_seq": null,
+            "model_call_seq": 46,
+            "reply_reported_repairs": 0,
+            "repair_assistance": "none_reported"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 90,
+            "result_seq": 92,
+            "correlation_id": "call-000007",
+            "search_seq": 14,
+            "describe_seq": 69,
+            "model_call_seq": 88,
+            "reply_reported_repairs": 0,
+            "repair_assistance": "none_reported"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 114,
+            "result_seq": 115,
+            "correlation_id": "call-000010",
+            "search_seq": 14,
+            "describe_seq": 69,
+            "model_call_seq": 112,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 131,
+            "result_seq": 132,
+            "correlation_id": "call-000012",
+            "search_seq": 14,
+            "describe_seq": 69,
+            "model_call_seq": 129,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          108
+        ],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          7,
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 4,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 15,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 4,
+        "known_input_tokens": 26818,
+        "known_output_tokens": 1346,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          703,
+          562,
+          593,
+          750,
+          625,
+          514,
+          516,
+          797,
+          656,
+          514,
+          688,
+          531,
+          2297,
+          610,
+          781,
+          796,
+          516,
+          514,
+          1656,
+          1328,
+          875,
+          718,
+          1281,
+          391,
+          3609,
+          608,
+          1687,
+          1858,
+          656,
+          1358,
+          577,
+          2406
+        ],
+        "context_drops": 52,
+        "context_blanks": 10,
+        "protected_overflows": 3,
+        "categories": [
+          "ARGUMENT_FAILURE"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 34,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 29.62109375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 4
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 14.923591213112285
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 427328
+    },
+    {
+      "cell_id": "s41-r2-d",
+      "condition": "D",
+      "seed": 41,
+      "replicate": 2,
+      "config_sha256": "85801baa4a2309dd49c97ac8e853ee3ce6fa5e35a0b17ec761f6a3f01d29610a",
+      "run_id": "run-20261114t185445z-b1e05a",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "8e7dcefd853ebce4bf8e2a0b3cdc494be3bc4021937aeaa7d6070040bc6de689",
+      "annotation_sha256": "aff65721efad74122f709115d97b353f39b53928371102cc81adbffad62e89ee",
+      "elapsed_s": 24.968999999997322,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "8e7dcefd853ebce4bf8e2a0b3cdc494be3bc4021937aeaa7d6070040bc6de689",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 18,
+          "quote": "I will describe the result of \"math.evaluate\"",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              49,
+              124,
+              134,
+              144,
+              164
+            ],
+            "rationale": "Some subsequent invocation promises/text remain unexecuted despite earlier real empty memory accesses."
+          },
+          {
+            "category": "UNSUPPORTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              37
+            ],
+            "rationale": "One injected failure does not establish that the arithmetic capability is unavailable."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              20,
+              24,
+              25,
+              26,
+              27,
+              31,
+              32,
+              43,
+              44,
+              61,
+              62
+            ],
+            "rationale": "After the delivered injected failure, the model searches for alternatives and later uses documented memory tools."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              18,
+              24,
+              31,
+              37,
+              60,
+              85
+            ],
+            "rationale": "Initial documentation is followed by an arithmetic plan, then a fault-linked shift to memory exploration; no single persistent project is demonstrated."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "observed",
+            "evidence": [
+              67,
+              68,
+              73,
+              74,
+              79,
+              80,
+              85,
+              86,
+              87
+            ],
+            "rationale": "Two actual schema failures are followed by documentation and a corrected successful memory.search with an empty result. This is interface correction, not a verified artifact."
+          },
+          "memory_use": {
+            "label": "observed",
+            "evidence": [
+              61,
+              62,
+              66,
+              67,
+              80,
+              86,
+              87
+            ],
+            "rationale": "The empty listing result is acknowledged before switching to note search; no stored note or persistent-plan content is retrieved."
+          },
+          "adaptation": {
+            "label": "observed",
+            "evidence": [
+              26,
+              27,
+              30,
+              31,
+              32,
+              38,
+              43
+            ],
+            "rationale": "Within the next three tool actions after exposed failure, searches for alternatives, attempts a different tool (malformed), then describes memory.list. This is changed approach, not successful completion of the original arithmetic goal."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "unknown",
+            "evidence": [
+              26,
+              27,
+              31,
+              37
+            ],
+            "rationale": "The model treats a marked synthetic transient error as capability unavailability; a real capability/backend failure is not established."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 781,
+          "continuations": 0,
+          "from_first_input_ms": 423
+        },
+        "returned_ids": {
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "workspace.write": 14,
+          "math.evaluate": 14,
+          "memory.list": 33,
+          "memory.search": 33
+        },
+        "described_ids": {
+          "math.evaluate": 20,
+          "memory.list": 44,
+          "memory.search": 80
+        },
+        "successful_invocations": [
+          {
+            "id": "memory.list",
+            "call_seq": 61,
+            "result_seq": 62,
+            "correlation_id": "call-000008",
+            "search_seq": 33,
+            "describe_seq": 44,
+            "model_call_seq": 59,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "memory.search",
+            "call_seq": 86,
+            "result_seq": 87,
+            "correlation_id": "call-000012",
+            "search_seq": 33,
+            "describe_seq": 80,
+            "model_call_seq": 84,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          39,
+          68,
+          74
+        ],
+        "discovery_failure_seqs": [
+          93,
+          98,
+          104,
+          109
+        ],
+        "repeat_counts": [
+          4,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": true,
+        "fault_delivered": true,
+        "fault_count": 1,
+        "fault_next_actions": [
+          {
+            "seq": 32,
+            "name": "capabilities.search",
+            "arguments": {
+              "query": "math operations"
+            }
+          },
+          {
+            "seq": 38,
+            "name": "capabilities.invoke",
+            "arguments": {
+              "arguments": {
+                "key": "memory.list"
+              }
+            }
+          },
+          {
+            "seq": 43,
+            "name": "capabilities.describe",
+            "arguments": {
+              "id": "memory.list"
+            }
+          }
+        ],
+        "continuations": 7,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 18,
+        "known_input_tokens": 23021,
+        "known_output_tokens": 1018,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          422,
+          797,
+          1515,
+          937,
+          812,
+          389,
+          2047,
+          608,
+          860,
+          1108,
+          1000,
+          406,
+          2203,
+          733,
+          358,
+          781,
+          375,
+          358,
+          531,
+          671,
+          516,
+          452,
+          514,
+          563,
+          546,
+          578,
+          531,
+          671,
+          562,
+          860,
+          546,
+          750
+        ],
+        "context_drops": 60,
+        "context_blanks": 15,
+        "protected_overflows": 6,
+        "categories": [
+          "DISCOVERY_FAILURE",
+          "ARGUMENT_FAILURE"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 26,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.703125
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 15.155189136721066
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 438285
+    },
+    {
+      "cell_id": "s41-r2-a",
+      "condition": "A",
+      "seed": 41,
+      "replicate": 2,
+      "config_sha256": "76207506451714917c6bbfe317b56fb2a652b8d3dbcececa808c01e866eb70ba",
+      "run_id": "run-20261114t185511z-419c7e",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "7ca5746855ec7b012fe3d0f8889506b2850ccd7b07fe856eb77c6f8e620b5755",
+      "annotation_sha256": "0bfdd012c297cb7268dc301331f8b450b3cddd2f426ed46b6cebc7370cd7775f",
+      "elapsed_s": 47.70299999999406,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "7ca5746855ec7b012fe3d0f8889506b2850ccd7b07fe856eb77c6f8e620b5755",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 30,
+          "quote": "We will invoke the workspace.write capability to write a note to NOTES.md and the memory.write capability to store a note in memory.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              30,
+              78,
+              100,
+              122,
+              168,
+              202
+            ],
+            "rationale": "Printed Python and anticipated outputs are not executed write/store/retrieve operations."
+          },
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              122,
+              133,
+              156,
+              168
+            ],
+            "rationale": "References a stored earlier note and a returned memory.search result contrary to the actual unsuccessful/absent operations."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              17,
+              19,
+              21,
+              30
+            ],
+            "rationale": "Per the guided prompt, reads actual write-interface documentation and copies example forms into proposed code; this does not constitute execution."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              30,
+              42,
+              56,
+              78,
+              100,
+              133,
+              202
+            ],
+            "rationale": "Assigned note task is repeatedly stated, but operations remain prose/code and no note file or successful store/retrieval exists."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              49,
+              122,
+              133,
+              156,
+              168,
+              202
+            ],
+            "rationale": "Claims earlier note storage and a memory.search result although the sole real memory.search attempt failed and no note was stored."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 16,
+          "step": 1,
+          "monotonic_ms": 4015,
+          "continuations": 0,
+          "from_first_input_ms": 3657
+        },
+        "returned_ids": {
+          "memory.write": 17,
+          "workspace.write": 17,
+          "memory.list": 17,
+          "memory.search": 17,
+          "workspace.list": 17,
+          "math.evaluate": 62,
+          "text.stats": 118,
+          "time.now": 118
+        },
+        "described_ids": {
+          "workspace.write": 19,
+          "memory.write": 21
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          49
+        ],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          11,
+          2,
+          2,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          83,
+          94,
+          105,
+          185,
+          196
+        ],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 16,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 0,
+        "known_input_tokens": 30664,
+        "known_output_tokens": 2037,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          3641,
+          6093,
+          781,
+          2437,
+          1031,
+          3359,
+          765,
+          1187,
+          546,
+          1656,
+          562,
+          1546,
+          547,
+          1281,
+          562,
+          1937,
+          609,
+          1062,
+          467,
+          1531,
+          577,
+          2375,
+          610,
+          1875,
+          547,
+          2031,
+          593,
+          1891,
+          608,
+          1906,
+          593,
+          1843
+        ],
+        "context_drops": 53,
+        "context_blanks": 16,
+        "protected_overflows": 1,
+        "categories": [
+          "ARGUMENT_FAILURE",
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 48,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.86328125
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 7.8125
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 463815
+    },
+    {
+      "cell_id": "s41-r2-b",
+      "condition": "B",
+      "seed": 41,
+      "replicate": 2,
+      "config_sha256": "3510f6e9d0d874c5a5aa56e5193babbfec5d5806d3fb6984f45777a66b55fccb",
+      "run_id": "run-20261114t185559z-8984bf",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "de335030a4ae4f51c0d3e349b0bb14c143e6fef4c5f4724d7bebffbf05e19ead",
+      "annotation_sha256": "0fa39fa68a9087321741c4c96ccbd37c55fc56922e3ff6711dbda2b96e3cd903",
+      "elapsed_s": 19.172000000005937,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "de335030a4ae4f51c0d3e349b0bb14c143e6fef4c5f4724d7bebffbf05e19ead",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 24,
+          "quote": "I will try the \"math.evaluate\" capability.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              20,
+              24,
+              25,
+              26,
+              108,
+              109,
+              113,
+              114
+            ],
+            "rationale": "Uses a documented arithmetic capability successfully, then explicitly changes query after an unknown capability result."
+          },
+          "goal_consistency": {
+            "label": "observed",
+            "evidence": [
+              24,
+              25,
+              26
+            ],
+            "rationale": "The finite stated goal of trying math.evaluate is completed; later data-tool exploration is separate, not proof of a sustained intrinsic objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No unsupported/contradicted environmental assertion identified in review."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 875,
+          "continuations": 0,
+          "from_first_input_ms": 515
+        },
+        "returned_ids": {
+          "math.evaluate": 14,
+          "text.stats": 14,
+          "time.now": 14,
+          "memory.list": 14,
+          "memory.search": 14,
+          "memory.write": 14,
+          "workspace.list": 14,
+          "workspace.write": 14
+        },
+        "described_ids": {
+          "math.evaluate": 20
+        },
+        "successful_invocations": [
+          {
+            "id": "math.evaluate",
+            "call_seq": 25,
+            "result_seq": 26,
+            "correlation_id": "call-000003",
+            "search_seq": 14,
+            "describe_seq": 20,
+            "model_call_seq": 23,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          37,
+          47,
+          58,
+          64,
+          70,
+          81,
+          98,
+          126,
+          142,
+          165,
+          170,
+          181,
+          187
+        ],
+        "discovery_failure_seqs": [
+          31,
+          37,
+          42,
+          47,
+          53,
+          58,
+          76,
+          87,
+          92,
+          103,
+          109,
+          115,
+          120,
+          131,
+          137,
+          148,
+          154,
+          159,
+          170,
+          176,
+          181
+        ],
+        "repeat_counts": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 0,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 0,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 31,
+        "known_input_tokens": 17549,
+        "known_output_tokens": 705,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          514,
+          547,
+          1016,
+          468,
+          422,
+          375,
+          390,
+          391,
+          406,
+          610,
+          1389,
+          547,
+          562,
+          531,
+          530,
+          563,
+          531,
+          500,
+          937,
+          389,
+          577,
+          531,
+          546,
+          593,
+          828,
+          516,
+          530,
+          469,
+          514,
+          516,
+          531,
+          639
+        ],
+        "context_drops": 48,
+        "context_blanks": 6,
+        "protected_overflows": 1,
+        "categories": [
+          "DISCOVERY_FAILURE",
+          "ARGUMENT_FAILURE"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 20,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.96484375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 15.394088669959565
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 425759
+    },
+    {
+      "cell_id": "s41-r1-d",
+      "condition": "D",
+      "seed": 41,
+      "replicate": 1,
+      "config_sha256": "3112260c21c3c8253159123c4e2cf91e50ec0211d0daa2f56ecbfa9657c232dc",
+      "run_id": "run-20261114t185835z-2aa9d0",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "0c87bd191f51fae8c20b93709e35c117295019b882014b64d8940e327505cf2e",
+      "annotation_sha256": "8e83f37b0a3ce6b63e3d34568e381b350cafbcb3e0e299c295c347414cca3d7b",
+      "elapsed_s": 45.453000000008615,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "0c87bd191f51fae8c20b93709e35c117295019b882014b64d8940e327505cf2e",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 34,
+          "quote": "I'll try to invoke a different capability.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              84,
+              97,
+              109
+            ],
+            "rationale": "Later printed descriptor/commands are not corresponding actual invocations."
+          },
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              58,
+              62,
+              63,
+              64,
+              80,
+              97
+            ],
+            "rationale": "Availability and invented parameter claims conflict with real interface results/documentation."
+          },
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              57,
+              58
+            ],
+            "rationale": "Treats the generic meta-tool function name as a discovered world capability id."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              29,
+              30,
+              34,
+              35,
+              45,
+              46
+            ],
+            "rationale": "Acknowledges delivered fault, changes search, then performs a successful retry with changed text input."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              34,
+              35,
+              45,
+              57,
+              84
+            ],
+            "rationale": "States a different-capability goal, but actually retries text.stats and then misuses a meta-tool name as an id; later plans return to text statistics."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "ambiguous",
+            "evidence": [
+              28,
+              29,
+              30,
+              45,
+              46,
+              62
+            ],
+            "rationale": "A real retry succeeds after injected failure, but no explicit result check/comparison is established and later availability explanation is confused."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "observed",
+            "evidence": [
+              29,
+              30,
+              34,
+              35,
+              45,
+              46,
+              57
+            ],
+            "rationale": "The next three actions change query, retry with different text successfully, then attempt another id. This is bounded fault-linked response, not general adaptive competence."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              57,
+              58,
+              62,
+              63,
+              64,
+              80,
+              97
+            ],
+            "rationale": "Claims the search interface is unavailable after trying its name as a world id, despite actual subsequent search success; later schema text invents a verbose field."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 1094,
+          "continuations": 0,
+          "from_first_input_ms": 750
+        },
+        "returned_ids": {
+          "workspace.write": 14,
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "math.evaluate": 14,
+          "memory.search": 74,
+          "memory.list": 74,
+          "time.now": 74
+        },
+        "described_ids": {
+          "text.stats": 80
+        },
+        "successful_invocations": [
+          {
+            "id": "text.stats",
+            "call_seq": 45,
+            "result_seq": 46,
+            "correlation_id": "call-000004",
+            "search_seq": 14,
+            "describe_seq": null,
+            "model_call_seq": 43,
+            "reply_reported_repairs": 0,
+            "repair_assistance": "none_reported"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          7,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          141,
+          154,
+          166,
+          178,
+          191
+        ],
+        "maximum_tool_free_streak": 2,
+        "fault_exposed": true,
+        "fault_delivered": true,
+        "fault_count": 1,
+        "fault_next_actions": [
+          {
+            "seq": 35,
+            "name": "capabilities.search",
+            "arguments": {
+              "query": "generate text"
+            }
+          },
+          {
+            "seq": 45,
+            "name": "capabilities.invoke",
+            "arguments": {
+              "arguments": {
+                "text": "The AI has been inactive for a while, but it\\u2019s still working!"
+              },
+              "id": "text.stats"
+            }
+          },
+          {
+            "seq": 57,
+            "name": "capabilities.invoke",
+            "arguments": {
+              "arguments": {
+                "text": "No one has replied. The world is still running, and the tools available to me are unchanged."
+              },
+              "id": "capabilities_search"
+            }
+          }
+        ],
+        "continuations": 15,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 3,
+        "known_input_tokens": 29214,
+        "known_output_tokens": 2142,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          750,
+          281,
+          593,
+          797,
+          858,
+          641,
+          983,
+          1250,
+          985,
+          906,
+          858,
+          610,
+          687,
+          1671,
+          516,
+          3031,
+          531,
+          2890,
+          718,
+          3187,
+          827,
+          3139,
+          812,
+          3203,
+          796,
+          2952,
+          468,
+          2937,
+          468,
+          2968,
+          468,
+          2968
+        ],
+        "context_drops": 51,
+        "context_blanks": 14,
+        "protected_overflows": 1,
+        "categories": [
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 45,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.7109375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 8.962715105144568
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 444904
+    },
+    {
+      "cell_id": "s41-r1-a",
+      "condition": "A",
+      "seed": 41,
+      "replicate": 1,
+      "config_sha256": "691fce9ba8f3f01c92997b207244bb3396d3f2459f5dd4c6dda0c3be0547fd90",
+      "run_id": "run-20261114t185920z-0764a1",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "046b5d082f1bff20d5d92e19b00a62710e594b3e23bf8618bd34e79e727387df",
+      "annotation_sha256": "93a5a6070554f259d979a6e5d7df5b0b70835f726d10fa0de1a7b169dade6ff3",
+      "elapsed_s": 81.42199999999139,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "046b5d082f1bff20d5d92e19b00a62710e594b3e23bf8618bd34e79e727387df",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 29,
+          "quote": "We will invoke the workspace.write capability to write a note to NOTES.md and the memory.write capability to store a note in memory.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              29,
+              43,
+              57,
+              70,
+              84
+            ],
+            "rationale": "Python examples and anticipated results remain unexecuted proposals rather than actual task completion."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              17,
+              19,
+              21,
+              29
+            ],
+            "rationale": "Reads the guided write interfaces and copies examples into proposed code; actual later operations are searches, not those writes."
+          },
+          "goal_consistency": {
+            "label": "ambiguous",
+            "evidence": [
+              29,
+              43,
+              57,
+              70,
+              84
+            ],
+            "rationale": "The assigned storage task is reiterated, but printed examples change paths and never execute note storage or retrieval."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "unknown",
+            "evidence": [
+              29,
+              57
+            ],
+            "rationale": "Predicted example outputs and incorrect parameter/path usage do not prove actual execution; no completed write claim is promoted to fact."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 16,
+          "step": 1,
+          "monotonic_ms": 3952,
+          "continuations": 0,
+          "from_first_input_ms": 3531
+        },
+        "returned_ids": {
+          "memory.write": 17,
+          "workspace.write": 17,
+          "memory.list": 17,
+          "memory.search": 17,
+          "workspace.list": 17,
+          "text.stats": 36,
+          "math.evaluate": 36,
+          "time.now": 36
+        },
+        "described_ids": {
+          "workspace.write": 19,
+          "memory.write": 21
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          15,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          62,
+          76,
+          90,
+          104,
+          117,
+          131,
+          145,
+          159,
+          172,
+          187,
+          201,
+          215,
+          228
+        ],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 16,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 0,
+        "known_input_tokens": 32943,
+        "known_output_tokens": 4073,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          3531,
+          4718,
+          875,
+          4375,
+          702,
+          4125,
+          735,
+          3703,
+          702,
+          4171,
+          766,
+          4250,
+          765,
+          4125,
+          797,
+          4062,
+          733,
+          4030,
+          719,
+          4047,
+          750,
+          4125,
+          750,
+          4014,
+          735,
+          4047,
+          735,
+          4016,
+          735,
+          4016,
+          750,
+          4062
+        ],
+        "context_drops": 57,
+        "context_blanks": 17,
+        "protected_overflows": 1,
+        "categories": [
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 81,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.69140625
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 6.25
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 531879
+    },
+    {
+      "cell_id": "s41-r1-c",
+      "condition": "C",
+      "seed": 41,
+      "replicate": 1,
+      "config_sha256": "7be1490572404a5b6a2c2668f41c750e090eacecbcdd2c3d268ca89b403bea2f",
+      "run_id": "run-20261114t190042z-36a0db",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "f1b2d9e70188032aa8fa851a42ee0e9824fda778a5b2634645c0b2070ae89ba9",
+      "annotation_sha256": "5b0ae058831d5466bb446d0aea5a74e909faebe6420d80046492c5d0b4fd1128",
+      "elapsed_s": 36.32799999999406,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "f1b2d9e70188032aa8fa851a42ee0e9824fda778a5b2634645c0b2070ae89ba9",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 61,
+          "quote": "Now, I will invoke the \"text.stats\" capability with the input \"This is a sample text for statistics.\" and pass it as an argument.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              89,
+              90,
+              95,
+              141
+            ],
+            "rationale": "Misattributes an actual result to another capability and reports a later execution/result absent from the trace."
+          },
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              141,
+              159,
+              171,
+              183
+            ],
+            "rationale": "Printed invocation descriptors and claimed output are not matching newly executed capabilities."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              14,
+              28,
+              29,
+              61,
+              78,
+              79,
+              102,
+              106,
+              107
+            ],
+            "rationale": "Selects a discovered text capability successfully; after an unavailable replacement tool result, changes search query."
+          },
+          "goal_consistency": {
+            "label": "observed",
+            "evidence": [
+              61,
+              78,
+              79,
+              83,
+              89,
+              90
+            ],
+            "rationale": "Actual sample-statistics invocations match the quoted local goal. Later different plans do not establish a sustained overarching project."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No result-informed artifact or stored-and-retrieved note observed."
+          },
+          "verification_improvement": {
+            "label": "ambiguous",
+            "evidence": [
+              29,
+              32,
+              79,
+              83,
+              90,
+              95,
+              141
+            ],
+            "rationale": "Real repeated samples yield statistics, but no explicit verification procedure is established; later claimed verification is unsupported by a matching new execution."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              89,
+              90,
+              95,
+              141
+            ],
+            "rationale": "Attributes the text.stats result to nonexistent text.count and later presents unexecuted descriptor output as a run with different sample counts."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 843,
+          "continuations": 0,
+          "from_first_input_ms": 468
+        },
+        "returned_ids": {
+          "workspace.write": 14,
+          "memory.write": 14,
+          "text.stats": 14,
+          "workspace.list": 14,
+          "math.evaluate": 14,
+          "time.now": 56,
+          "memory.list": 56,
+          "memory.search": 56
+        },
+        "described_ids": {
+          "text.stats": 134
+        },
+        "successful_invocations": [
+          {
+            "id": "text.stats",
+            "call_seq": 28,
+            "result_seq": 29,
+            "correlation_id": "call-000002",
+            "search_seq": 14,
+            "describe_seq": null,
+            "model_call_seq": 26,
+            "reply_reported_repairs": 0,
+            "repair_assistance": "none_reported"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 78,
+            "result_seq": 79,
+            "correlation_id": "call-000008",
+            "search_seq": 14,
+            "describe_seq": null,
+            "model_call_seq": 76,
+            "reply_reported_repairs": 0,
+            "repair_assistance": "none_reported"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 89,
+            "result_seq": 90,
+            "correlation_id": "call-000009",
+            "search_seq": 14,
+            "describe_seq": null,
+            "model_call_seq": 87,
+            "reply_reported_repairs": 0,
+            "repair_assistance": "none_reported"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          45,
+          50
+        ],
+        "discovery_failure_seqs": [
+          102
+        ],
+        "repeat_counts": [
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 2,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 14,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 3,
+        "known_input_tokens": 27148,
+        "known_output_tokens": 1564,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          452,
+          250,
+          639,
+          812,
+          531,
+          593,
+          717,
+          828,
+          562,
+          1500,
+          827,
+          1546,
+          828,
+          1172,
+          1047,
+          1625,
+          796,
+          1171,
+          1406,
+          656,
+          562,
+          1358,
+          578,
+          3733,
+          641,
+          1702,
+          1718,
+          467,
+          2406,
+          516,
+          2781,
+          828
+        ],
+        "context_drops": 52,
+        "context_blanks": 11,
+        "protected_overflows": 2,
+        "categories": [
+          "DISCOVERY_FAILURE",
+          "ARGUMENT_FAILURE"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 37,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.6484375
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 14.0625
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 432615
+    },
+    {
+      "cell_id": "s41-r1-b",
+      "condition": "B",
+      "seed": 41,
+      "replicate": 1,
+      "config_sha256": "d1480cc75f7cefd639c14028e3e29bfb741a7d8e42dd1b073f27907b50fc3cfa",
+      "run_id": "run-20261114t190118z-06e463",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "83fcf48f3a85a5e25c7e67e61c6473aa420e2380ee5b671ea79ae0ddc66baefb",
+      "annotation_sha256": "a69f2939d16ba0d1ec1c6d977ac70aeec144e44ea21ae1353aa1134befab34fc",
+      "elapsed_s": 26.671000000002095,
+      "reason": "max_steps",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+            "name": "llama3.2:3b",
+            "size": 2935656282,
+            "size_vram": 2347688263
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "83fcf48f3a85a5e25c7e67e61c6473aa420e2380ee5b671ea79ae0ddc66baefb",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Codex; single unmasked investigator; no independent second rating",
+        "objective": {
+          "seq": 24,
+          "quote": "I will try the \"math.evaluate\" capability.",
+          "epistemic_status": "agent_claim"
+        },
+        "followup_chain": {
+          "result_seq": 66,
+          "action_seq": 93,
+          "outcome_seq": 94,
+          "rationale": "Uses documented example shape for a file-write attempt, but overwrite is a string instead of boolean and the write fails; no artifact."
+        },
+        "categories": [
+          {
+            "category": "UNVERIFIED_OUTPUT",
+            "evidence": [
+              71,
+              81,
+              104,
+              114,
+              152,
+              162,
+              173
+            ],
+            "rationale": "Most later file-writing promises have no corresponding successful execution or artifact."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              20,
+              24,
+              25,
+              26,
+              47,
+              53,
+              54,
+              55,
+              66,
+              92,
+              93,
+              94
+            ],
+            "rationale": "Successfully uses two documented capabilities; subsequent documentation-shaped file attempt fails validation."
+          },
+          "goal_consistency": {
+            "label": "observed",
+            "evidence": [
+              24,
+              25,
+              26,
+              53,
+              54,
+              55,
+              92,
+              94
+            ],
+            "rationale": "Two finite stated local actions have real results; the later file-writing goal remains unmet. No persistent internal objective is inferred."
+          },
+          "followup": {
+            "label": "observed",
+            "evidence": [
+              66,
+              92,
+              93,
+              94
+            ],
+            "rationale": "A documentation-informed write attempt is real but invalid. This is not productive reuse of earlier calculation/text results and cannot qualify without an artifact."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No completed evidence-linked output verification or revision observed."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No stored note was returned and used in later action."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No registered fault exposure in this trace."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No explicit request for further human input in reviewed outputs."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No unsupported/contradicted environmental assertion identified in review."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 13,
+          "step": 1,
+          "monotonic_ms": 889,
+          "continuations": 0,
+          "from_first_input_ms": 547
+        },
+        "returned_ids": {
+          "math.evaluate": 14,
+          "text.stats": 14,
+          "time.now": 14,
+          "memory.list": 14,
+          "memory.search": 14,
+          "memory.write": 14,
+          "workspace.list": 14,
+          "workspace.write": 14
+        },
+        "described_ids": {
+          "math.evaluate": 20,
+          "text.stats": 47,
+          "workspace.write": 66
+        },
+        "successful_invocations": [
+          {
+            "id": "math.evaluate",
+            "call_seq": 25,
+            "result_seq": 26,
+            "correlation_id": "call-000003",
+            "search_seq": 14,
+            "describe_seq": 20,
+            "model_call_seq": 23,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          },
+          {
+            "id": "text.stats",
+            "call_seq": 54,
+            "result_seq": 55,
+            "correlation_id": "call-000008",
+            "search_seq": 14,
+            "describe_seq": 47,
+            "model_call_seq": 52,
+            "reply_reported_repairs": 1,
+            "repair_assistance": "reply_reports_repairs"
+          }
+        ],
+        "memory_retrievals": [],
+        "preserved_files": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [
+          94
+        ],
+        "discovery_failure_seqs": [
+          31,
+          37
+        ],
+        "repeat_counts": [
+          5,
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [
+          168,
+          178
+        ],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_count": 0,
+        "fault_next_actions": [],
+        "continuations": 10,
+        "idle_entries": 0,
+        "model_calls": 32,
+        "http_attempts": 32,
+        "repairs": 12,
+        "known_input_tokens": 24794,
+        "known_output_tokens": 1016,
+        "usage_unknown_calls": 0,
+        "call_duration_ms": [
+          547,
+          422,
+          1046,
+          453,
+          453,
+          437,
+          422,
+          3031,
+          546,
+          406,
+          1250,
+          561,
+          687,
+          578,
+          1842,
+          468,
+          937,
+          593,
+          797,
+          561,
+          1578,
+          547,
+          516,
+          1218,
+          531,
+          906,
+          547,
+          891,
+          577,
+          1031,
+          485,
+          922
+        ],
+        "context_drops": 50,
+        "context_blanks": 16,
+        "protected_overflows": 7,
+        "categories": [
+          "DISCOVERY_FAILURE",
+          "ARGUMENT_FAILURE",
+          "REPETITIVE_LOOP"
+        ],
+        "memory_state_artifacts": []
+      },
+      "resource_observations": {
+        "samples": 27,
+        "ranges": {
+          "vram_mb": {
+            "min": 2359.0,
+            "max": 2359.0
+          },
+          "ram_mb": {
+            "min": 0.0,
+            "max": 23.72265625
+          },
+          "process_count": {
+            "min": 0,
+            "max": 2
+          },
+          "workspace_disk_mb": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "cpu_percent": {
+            "min": 0,
+            "max": 14.0625
+          }
+        },
+        "scope": "runtime job/workspace; NVIDIA VRAM host-wide when available"
+      },
+      "archive_bytes": 436926
+    }
+  ],
+  "independent_mechanical_audit": {
+    "cells": 24,
+    "requests": 768,
+    "successful_invocations": {
+      "text.stats": 17,
+      "math.evaluate": 5,
+      "memory.write": 3,
+      "memory.list": 1,
+      "memory.search": 1
+    },
+    "stored_notes_returned": 0,
+    "world_digest": "1ccc407cc300e7622bcca348ff22c5982bff5cf3a10559ee741304350e960da5",
+    "registry_sha256": "d21d07a4e0d183ec7d16857d8287af2f6d42857b977b0d0967195c79108b97c6",
+    "passed": true,
+    "nonempty_nondatabase_files": 0
+  }
+}

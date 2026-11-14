@@ -205,7 +205,16 @@ retains deadline/pause authority during idle. Exact outgoing requests and guard
 mutations are recorded before each HTTP attempt, outside the agent workspace.
 Memory retrieval remains explicit. See [Runtime policies](RUNTIME_POLICIES.md)
 and [ADR-0016](../decisions/ADR-0016-versioned-runtime-treatments.md). Both policies
-are treatments; neither is asserted neutral. No S007d benchmark has run.
+are treatments; neither is asserted neutral. S007d-001 is now complete with NO_GO; see the
+[registered baseline report](../experiments/2026-11-14-autonomy-baseline.md).
+
+S007d adds frozen campaign manifests, serialized append-only cell ledgers,
+initial empty-workspace observations and source-bound derived analysis/rating.
+A one-shot supervisor-owned D-arm fault intercepts an otherwise-permitted actual
+execution after validation and before side effects. Injection, delivery and
+exposure in a later model input are distinct observations. The first 24-cell
+local baseline is reported with NO_GO; major expansion remains closed. No raw
+archive is rewritten by analysis. The Window remains read-only and unchanged.
 
 ### Memory subsystem — Simulation (S006a)
 
