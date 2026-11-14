@@ -71,7 +71,7 @@ these has been tested yet.
 | Lean 4 proof checking | Needs validation | Wrap and test as a capability (S008c) |
 | Scientific Python stack | Needs validation | Pin into a world environment and test (S008c) |
 | Browser automation | Needs validation | Install browser binaries; needs the container tier |
-| Container isolation | Needs validation | Engine installed (ADR-0014); the isolation backend and escape tests are S006c |
+| Container isolation | Usable now | S006c backend (ADR-0015); base image `python:3.12-slim` pulled with authorisation and pinned by digest |
 | Vision-language model | Needs installation | Model download; must fit 4 GB VRAM (S007b) |
 | Audio/video processing | Needs installation | FFmpeg (S008a) |
 | Speech recognition and synthesis | Needs installation | Model and runtime, e.g. a Whisper-family model on CPU or GPU (S008a) |
@@ -87,8 +87,8 @@ these has been tested yet.
 2. **16 GB of system RAM**, of which the desktop already uses about 10 GB.
    CPU-side model layers, the agent runtime, a container VM (WSL 2 reserves
    memory) and capabilities all compete for the remainder.
-3. **No tested isolation mechanism** beyond ordinary processes. Rootless
-   Podman in WSL 2 is installed (2026-11-14) but untested as a sandbox until S006c.
+3. **Container isolation is Windows/WSL 2 only** and adds about 0.3–2 s per
+   capability call (S006c). It has no network or GPU path yet.
 4. **A laptop** on a pre-release Windows build: sleep, lid closure, thermal
    throttling, forced updates and reboots will interrupt multi-day runs.
    Crash recovery is a requirement, not a refinement.

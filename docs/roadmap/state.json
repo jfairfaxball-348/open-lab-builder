@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T16:46:02Z",
-  "last_session": "S013",
+  "updated_at": "2026-11-14T17:17:27Z",
+  "last_session": "S006c",
   "completed_milestones": [
     {
       "id": "S001",
@@ -114,6 +114,15 @@
       "completed_at": "2026-11-14T13:15:55Z",
       "repository": "open-lab-builder",
       "summary": "Strategic planning only under explicit human instruction: audited all three clean checkouts and reverified S006e scope/archives; preserved completed entries/sections and the exact S006e validation object in docs/roadmap/validation/S006e.json. Revised future roadmap into four streams; local S007a gateway/brain swap, S007c explicit interventions, UNEXECUTED S007d autonomy baseline, bounded negative-result response, optional separately authorised hosting and evidence-gated expansion. Hard isolation and later protocol/reliability/null-result gates retained. No runtime/schema/test/world changes or new behavioural run. Checks: Builder 305, Simulation 214, Window 38 passed; next S007a."
+    },
+    {
+      "id": "S006c",
+      "completed_at": "2026-11-14T17:17:27Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "bc51964"
+      ],
+      "summary": "Split before implementation into S006c (Windows container capability tier) and S006f (world-declared images, Linux hosts, brokered container networking). Each capability call of a minimum_tier container world runs in a fresh rootless Podman container in WSL 2 from the authorised digest-pinned python:3.12-slim image: no network, cap-drop ALL, no-new-privileges, non-root, read-only root, noexec tmpfs, world read-only, workspace as the only host mount per filesystem permission, memory/CPU/pids ceilings. Launch probe and refusals; supervisor label sweep on every stop path; isolation.json; wsl.exe --exec; reparse-point-aware workspace walks. 23 container tests (20 on the actual backend plus completion/deadline/quota runs) and a negative control; 237 Simulation tests pass with OPEN_LAB_REQUIRE_CONTAINER=1. ADR-0015. No agent-supplied-code capability shipped."
     }
   ],
   "next_milestone": {
@@ -122,20 +131,6 @@
     "title": "Model Gateway and Local Brain Swap"
   },
   "blockers": [
-    {
-      "id": "B-ISOLATION",
-      "summary": "S006c container tier is not yet implemented; no process-tier substitution.",
-      "affects": [
-        "S006c",
-        "S008d",
-        "S009",
-        "S011a",
-        "S011b",
-        "S011c",
-        "S012"
-      ],
-      "detail": "The human gate is cleared: on 2026-11-14 the human repaired WSL 2 and approved rootless Podman (ADR-0014, resolving KI-1/OD-1). S006c is unblocked but unbuilt. Local S007a/S007c/S007d and S010 protocol/Window work do not depend on it. Actual isolation tests are required before arbitrary code, computer control, agent tools or unattended certification."
-    },
     {
       "id": "B-EXPANSION",
       "summary": "The prospective S007d autonomy baseline is UNEXECUTED; major capability expansion has no GO evidence.",
@@ -193,17 +188,16 @@
         "S006d",
         "S006e"
       ],
-      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there. SQLite memory, checkpoint ZIP/backup, resume and writer-lock tests have also only run on Windows. S006d native OS writer locks, process birth identity, worker/supervisor termination and startup recovery have been exercised on Windows only. Mocked Linux identity branches are tested, but no Linux OS execution occurred. S006e job ceilings, suspended startup, CPU throttling, quota admission and resource samples were tested on Windows only. Non-Windows CPU/RAM/process limits are explicitly refused; optional unavailable samples are marked rather than fabricated."
+      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there. SQLite memory, checkpoint ZIP/backup, resume and writer-lock tests have also only run on Windows. S006d native OS writer locks, process birth identity, worker/supervisor termination and startup recovery have been exercised on Windows only. Mocked Linux identity branches are tested, but no Linux OS execution occurred. S006e job ceilings, suspended startup, CPU throttling, quota admission and resource samples were tested on Windows only. Non-Windows CPU/RAM/process limits are explicitly refused; optional unavailable samples are marked rather than fabricated. The S006c container tier runs only on Windows/WSL 2 and refuses other hosts; a Linux backend is S006f."
     },
     {
       "id": "KI-10",
       "summary": "On the process tier nothing stops a capability process from reading or writing outside the workspace.",
       "affects": [
-        "S006c",
         "S008d",
         "S009"
       ],
-      "detail": "The Simulation gives capabilities an empty environment and only tells them the workspace path, but that is a convention for Builder-written capabilities, not enforcement. The supervisor re-checks the world digest after each run. Real enforcement arrives with the container tier (S006c)."
+      "detail": "The Simulation gives capabilities an empty environment and only tells them the workspace path, but that is a convention for Builder-written capabilities, not enforcement. The supervisor re-checks the world digest after each run. Worlds declaring minimum_tier container get OS enforcement (S006c, ADR-0015); process-tier worlds do not."
     },
     {
       "id": "KI-11",
@@ -276,6 +270,17 @@
         "S011a"
       ],
       "detail": "OS job RAM/process ceilings and CPU cycle rate are installed independently of notification delivery. CPU active-time samples are not exact short-window equivalents of nominal core cycle budgets. Supervisor disk checks deny future writing calls at quota and kill an observed live writer above quota, but do not impose an OS byte quota or limit archive/model storage. GPU samples are host-wide; VRAM limits and non-Windows CPU/RAM/process limits are refused. Uninterruptible host I/O, physical reboot/power-loss and Linux execution remain unverified. See ADR-0012 and docs/experiments/2026-11-14-resource-enforcement.md."
+    },
+    {
+      "id": "KI-19",
+      "summary": "The container tier is Windows/WSL 2 only, has no network or GPU path, and its base image is a host constant.",
+      "affects": [
+        "S006f",
+        "S008d",
+        "S009",
+        "S011a"
+      ],
+      "detail": "Per-container memory/CPU/pids ceilings are separate from the runtime's Windows job. Container-made links are WSL reparse points; the disk quota and checkpoint snapshot refuse them, so code able to create links can end a quota-limited run (fail closed). Each call costs about 0.3-2 s of container start. A Windows update breaking WSL makes container worlds unlaunchable. See ADR-0015 and docs/experiments/2026-11-14-container-isolation.md."
     }
   ],
   "open_decisions": [
@@ -330,27 +335,35 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T16:46:02Z",
+    "ran_at": "2026-11-14T17:17:27Z",
     "commands": [
       {
-        "command": "wsl.exe --status; wsl.exe -l -v (after the human's WSL repair and Ubuntu install)",
-        "result": "Responds; default version 2; Ubuntu distribution running on WSL 2"
+        "command": "Simulation: git status; git log; uv sync (start of session)",
+        "result": "Clean head 830379c. No separate pre-change suite run; the S013 audit had recorded 214 passing at this head"
       },
       {
-        "command": "wsl -d Ubuntu: podman --version; podman info (rootless, cgroups, OCI runtime, storage, network backend); findmnt -no PROPAGATION /",
-        "result": "Podman 5.7.0, rootless, cgroups v2, crun, overlay, netavark; '/' propagation is private (noted in ADR-0014 for S006c)"
+        "command": "wsl -d Ubuntu: podman pull docker.io/library/python:3.12-slim (human-authorised); podman image inspect",
+        "result": "Pulled once; digest sha256:05a994d2344eb364cc186910f4fc8786a38215f39f00d0acc25bff33a08f4177, about 124 MB; pinned in the backend and never pulled at run time"
       },
       {
-        "command": "wsl -d Ubuntu: podman run --rm --network=none docker.io/library/hello-world",
-        "result": "Container ran and exited successfully. Engine smoke test only; no isolation property was tested"
+        "command": "Manual backend probes (scratch scripts outside the repositories)",
+        "result": "Workspace bind mount, no network, read-only root, cgroup ceilings, OOM 137, pids refusal and --timeout observed; wsl.exe -- found to rewrite arguments (use --exec); killing wsl.exe left the container running; container-made links are WSL reparse points Python does not report as links"
       },
       {
-        "command": "Preserve the S013 validation object as docs/roadmap/validation/S013.json",
-        "result": "Copied unchanged before replacing this validation object"
+        "command": "Simulation: OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_container.py with --network=none, --read-only, --cap-drop=ALL and noexec temporarily removed (negative control)",
+        "result": "Command, network, privilege/write and exec tests failed as expected; protections restored before the final run"
       },
       {
-        "command": "uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 41.06 seconds and all six health checks passed"
+        "command": "Simulation: uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
+        "result": "Lint passed; 237 tests passed in 200.24 seconds (23 container tests, 20 on the actual backend plus three supervised runs); no container with the run label remained"
+      },
+      {
+        "command": "Simulation: git commit",
+        "result": "bc51964 S006c: run capabilities in rootless Podman containers on WSL 2; not pushed"
+      },
+      {
+        "command": "Builder: uv run ruff check .; uv run olb check --tests",
+        "result": "Lint passed; 305 tests passed in 40.58 seconds and all six health checks passed"
       }
     ]
   }

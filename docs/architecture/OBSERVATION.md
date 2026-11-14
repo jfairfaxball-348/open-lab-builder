@@ -187,6 +187,11 @@ Host-local writer markers/accounting and retained stale-owner evidence are
 operational files outside the workspace, never authority from an agent.
 See ADR-0011.
 
+`isolation.json` (S006c) records the isolation every capability call had:
+`{"tier": "process"}`, or for the container tier the engine and version,
+rootless/cgroup/runtime facts, image reference and id, and applied limits.
+Resumed segments add `segments/isolation-<seq>.json`. See ADR-0015.
+
 `model.json` (S003b) records exactly which model drove the run: gateway id,
 provider, the provider's own name for the model, sampling parameters, and the
 digest and server version the model server reported at launch.

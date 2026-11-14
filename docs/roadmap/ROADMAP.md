@@ -46,7 +46,8 @@ flowchart TD
     S002 --> S005a --> S005b
     S003b --> S005b
     S003b --> S006a --> S006b --> S006d --> S006e
-    S006e --> S006c["S006c Isolation: human gate"]
+    S006e --> S006c["S006c Container capability tier"]
+    S006c --> S006f["S006f World images / Linux / brokered network"]
     S006e --> S007a["S007a Local gateway / brain swap"]
     S005b --> S007a
     S007a --> S007c["S007c Explicit policies"]
@@ -82,10 +83,10 @@ The loop authorises one bounded S007h change, not unlimited tuning.
 **Next:** S007a → S007c → S007d. With expansion GO, S007e then the most useful
 feasible capability; narrow S008c can precede vision. With NO_GO, start S007h.
 With INCONCLUSIVE, fix the named validity issue before drawing a conclusion.
-S010 protocol work, optional hosted design and human-unblocked S006c remain safe
+S010 protocol work, optional hosted design and S006c/S006f remain safe
 paths after negative behaviour. Do not add major multimodal tools to mask failure.
 
-S006c can proceed when the human repairs/approves its backend; it does not block
+S006c is complete for Windows hosts (ADR-0015); it did not block
 local gateway, policy, baseline or protocol work. It does block arbitrary code,
 shell, computer/browser control, agent-created tools and unattended long-run
 certification. There is no process-tier workaround. Hosted work is never required
@@ -485,17 +486,31 @@ Research campaign gates are not extra paperwork for every routine fix.
 
 ---
 
-### S006c — Container Isolation Tier
+### S006c — Container Capability Tier
 
 - **Repository / streams:** Simulation; Builder decision/docs. C.
-- **Status:** planned; unblocked. The human repaired WSL 2 and approved rootless
-  Podman on 2026-11-14 (ADR-0014, resolving KI-1/OD-1).
-- **Objective:** Establish an OS sandbox before agent-authored execution.
+- **Status:** complete. The human repaired WSL 2 and approved rootless
+  Podman on 2026-11-14 (ADR-0014, resolving KI-1/OD-1). Split before
+  implementation on 2026-11-14: S006c is the capability backend on the
+  development host; S006f carries world-declared images, Linux hosts and
+  brokered container networking.
+- **Objective:** Establish an OS sandbox for capability execution before any
+  agent-authored execution ships.
 - **Prerequisites:** S006e and human setup; no autonomy benchmark prerequisite.
-- **Scope:** new ADR refining ADR-0006; world-derived image, workspace-only mount,
-  denied-by-default networking, minimum_tier and supervisor-owned lifecycle.
-- **Exclusions:** execution capabilities themselves, host GUI access, broad host
-  mounts or automatic system repair.
+- **Scope:** new ADR refining ADR-0006/0014; a Windows-host backend running each
+  capability call in a fresh rootless Podman container in WSL 2 from a base
+  image pinned by digest, never pulled at run time, with the verified world
+  release mounted read-only, the workspace as the only host mount (per the
+  capability's filesystem permission, no exec/setuid/devices), no network, no
+  Linux capabilities, read-only root filesystem and per-container memory/CPU/
+  process ceilings; `minimum_tier: container` worlds launchable only when the
+  backend probe passes; supervisor-owned lifecycle (labelled containers removed
+  on every stop path, Podman timeout backstop); backend identity recorded in
+  the archive.
+- **Exclusions:** execution capabilities themselves (S008d), agent-created tools
+  (S009), any network or GPU inside containers, world-declared/Builder-built
+  images and Linux hosts (S006f), host GUI access, broad host mounts, automatic
+  system repair or image pulls.
 - **Deliverables:** backend, fixed escape fixtures and documented host requirements.
 - **Acceptance tests:** host files, all repositories and run archives inaccessible;
   network rules, process boundaries, memory/CPU/process/disk limits and supervisor
@@ -505,8 +520,49 @@ Research campaign gates are not extra paperwork for every routine fix.
 - **Risks:** 16 GB RAM, mounts (private `/` propagation, Windows/WSL path
   crossing; ADR-0014), WSL and GPU routing; models stay outside the sandbox
   behind explicitly permitted broker access.
+- **Delivered:** Simulation `bc51964`: per-call rootless Podman containers in
+  WSL 2 from the authorised, digest-pinned `python:3.12-slim` base image;
+  launch probe and refusals; supervisor label sweep on every stop path with a
+  recorded cleanup action; `isolation.json`; `wsl.exe --exec` argument
+  handling; reparse-point-aware workspace walks (container-made links are WSL
+  reparse points Python does not report as links). 23 container tests, 20 on
+  the actual backend, plus whole runs for completion, deadline and quota;
+  a negative control showed the tests fail without the protections. 237
+  Simulation tests pass with `OPEN_LAB_REQUIRE_CONTAINER=1`. ADR-0015 and
+  [validation record](../experiments/2026-11-14-container-isolation.md).
+  Limits: Windows host only; no network/GPU in containers; base image is a
+  host constant, not world-declared; per-container ceilings are separate from
+  the runtime job; links end quota-limited runs (fail closed).
 - **Next recommended milestone:** pending S007a/S007c/S007d; otherwise S008d only
   after expansion GO, or the next unblocked protocol milestone.
+
+---
+
+### S006f — World Images, Linux Hosts and Brokered Container Networking
+
+- **Repository / streams:** Builder contracts/images; Simulation backend. C.
+- **Status:** planned; split from S006c on 2026-11-14.
+- **Objective:** Make the container environment part of the versioned world and
+  run the container tier on Linux hosts.
+- **Prerequisites:** S006c.
+- **Scope:** a world-release contract field naming the container image by
+  digest (minor schema bump, change-log row); Builder builds/records the image
+  from the world source; Simulation runs the declared image; native Linux
+  Podman backend; explicit, recorded broker access when a containerised
+  capability needs a loopback model service.
+- **Exclusions:** arbitrary internet allowlists, GPU passthrough, execution
+  capabilities and agent-created tools.
+- **Deliverables:** contract change with examples/tests, image build/verify,
+  Linux backend, broker design and tests.
+- **Acceptance tests:** the S006c escape/limit suite passes against the
+  world-declared image on Windows/WSL 2 and on a Linux host; an image digest
+  mismatch refuses launch; brokered access reaches only the permitted service.
+- **Exit criteria:** world image identity verified at build and launch; Linux
+  backend passes the same suite; no unbrokered network path.
+- **Risks:** image size and download authorisation; Linux host availability;
+  broker becoming a general network path.
+- **Next recommended milestone:** only when a capability needs a world-specific
+  image, a Linux host or containerised model access; otherwise S007a.
 
 ---
 

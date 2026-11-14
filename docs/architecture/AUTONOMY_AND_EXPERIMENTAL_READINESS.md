@@ -160,7 +160,8 @@ test host/repository/archive/network/process/resource/shutdown boundaries on an
 actual backend. S006e's process limits are not an OS sandbox: disk can overshoot,
 CPU cycles differ from active-time samples and Windows notifications are best
 effort. No model output can weaken these boundaries. The human WSL/engine gate
-was cleared on 2026-11-14 (ADR-0014); S006c still has to be implemented and is
+was cleared on 2026-11-14 (ADR-0014) and S006c delivered the Windows container
+capability tier (ADR-0015); S006f and later execution milestones remain
 independent of local gateway/policy/benchmark/S010 tooling.
 
 S010 freezes conditions and makes comparison/export evidence-linked and read-only.
@@ -184,7 +185,7 @@ question on the existing world; it cannot be advertised as established autonomy.
    vision/audio/generation by utility/hardware. Repeat after each meaningful change.
 5. **If NO_GO:** one S007h hypothesis/change and repeat. If still negative, choose
    a documented bounded route or S010 rather than silently escalating capabilities.
-6. **Independent:** human-unblocked S006c; S010 after the baseline report even if
+6. **Independent:** S006f (S006c is complete); S010 after the baseline report even if
    negative; optional S007f/S007g only with their separate authorisations.
 7. **Later:** actual S011 reliability ladder, then S012 under frozen valid conditions.
 

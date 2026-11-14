@@ -1,0 +1,26 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-14T16:46:02Z",
+  "commands": [
+    {
+      "command": "wsl.exe --status; wsl.exe -l -v (after the human's WSL repair and Ubuntu install)",
+      "result": "Responds; default version 2; Ubuntu distribution running on WSL 2"
+    },
+    {
+      "command": "wsl -d Ubuntu: podman --version; podman info (rootless, cgroups, OCI runtime, storage, network backend); findmnt -no PROPAGATION /",
+      "result": "Podman 5.7.0, rootless, cgroups v2, crun, overlay, netavark; '/' propagation is private (noted in ADR-0014 for S006c)"
+    },
+    {
+      "command": "wsl -d Ubuntu: podman run --rm --network=none docker.io/library/hello-world",
+      "result": "Container ran and exited successfully. Engine smoke test only; no isolation property was tested"
+    },
+    {
+      "command": "Preserve the S013 validation object as docs/roadmap/validation/S013.json",
+      "result": "Copied unchanged before replacing this validation object"
+    },
+    {
+      "command": "uv run ruff check .; uv run olb check --tests",
+      "result": "Lint passed; 305 tests passed in 41.06 seconds and all six health checks passed"
+    }
+  ]
+}

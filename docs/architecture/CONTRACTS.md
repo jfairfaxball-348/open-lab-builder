@@ -264,7 +264,8 @@ sets it only for filesystem capabilities. The release directory stays unchanged.
 `workspace.list` lists at most 1000 immediate children. Both validate relative
 paths, reject traversal, special names and links, and report errors without
 local paths. These checks do not contain concurrent path replacement or
-arbitrary capability code on the process tier; container isolation is S006c.
+arbitrary capability code on the process tier; the container tier (S006c, ADR-0015)
+confines capability processes on Windows hosts.
 
 ### Model provider
 

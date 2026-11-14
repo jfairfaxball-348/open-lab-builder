@@ -59,7 +59,7 @@ Decision and alternatives: [ADR-0006](../decisions/ADR-0006-isolation.md).
 | Tier | Mechanism | Sufficient for | Status on the development machine |
 | --- | --- | --- | --- |
 | `process` | Supervised child processes; workspace confinement by path validation in the tool host; OS job limits; minimal environment | Worlds whose capabilities are all builder-written and take validated JSON arguments | Windows job limits and supervisor quota checks implemented (S006e); not an OS sandbox |
-| `container` | Capabilities and agent-written code run inside a container or VM with no host mounts except the workspace, and no network | Any capability that executes agent-supplied code or shell commands; agent-created tools; long unattended runs | **Not yet implemented**: rootless Podman in WSL 2 is installed (ADR-0014); the backend and its escape tests are S006c |
+| `container` | Capabilities and agent-written code run inside a container or VM with no host mounts except the workspace, and no network | Any capability that executes agent-supplied code or shell commands; agent-created tools; long unattended runs | Implemented for Windows hosts (S006c, ADR-0015): each capability call in a fresh rootless Podman container in WSL 2; escape/limit fixtures pass on the actual backend. No network or GPU inside; Linux hosts and world images are S006f |
 
 The honest limit of the `process` tier: it is an *architectural* boundary. It
 holds because the agent can only cause effects through builder-written
@@ -70,7 +70,11 @@ Therefore:
   must refuse to launch a world on a weaker tier.
 - Capabilities with `permissions.subprocess: true`, anything that evaluates
   agent-supplied code, and agent-created tools (S009) require `container`.
-- Until the container tier exists (S006c), no such capability may ship.
+- The container tier exists for Windows hosts (S006c). Agent-created tools
+  remain refused until S009, and execution capabilities until S008d.
+- A container-tier world launches only when the backend probe passes; it is
+  never silently run on the process tier. Container lifetime is owned by the
+  supervisor: every container of a run is removed when a runtime segment ends.
 
 ## Capability expansion without privilege expansion
 
