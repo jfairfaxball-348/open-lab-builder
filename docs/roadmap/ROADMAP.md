@@ -374,6 +374,17 @@ and in `state.json`.
   cost recorded.
 - **Exit criteria:** an experiment can change orchestrator by editing only its
   configuration.
+- **Noted for later (human, 2026-11-14), not yet scoped:** a "brain swap"
+  mode in which the orchestrator is an external hosted model reached with the
+  human's own API key (a frontier model, or a hosted Gemma model), as an
+  alternative to the local models, which did not behave as autonomous tool
+  users in S003c. It needs, before any code: a decision record amending
+  ADR-0005 (the model client currently refuses any non-loopback host); how
+  the key is supplied without ever entering the repository, the archive or
+  the agent's environment; what the archive records about a model it cannot
+  pin by digest; and how network access for the runtime is granted by the
+  experiment configuration alone. Trying a larger, partially offloaded local
+  model is also still planned (OD-2).
 - **Next session should:** S007b.
 
 ---
