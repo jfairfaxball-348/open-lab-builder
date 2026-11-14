@@ -6,7 +6,7 @@ question can be answered from evidence the agent could not have shaped.
 Contract: [`observation-event`](../../schemas/v1/observation-event.schema.json),
 [`artifact-metadata`](../../schemas/v1/artifact-metadata.schema.json).
 Implementation: recording is implemented in `open-lab-simulation` (S003a, S003b);
-viewing is S004. `agent.statement`, `resource.sample`, `checkpoint.created`,
+viewing is implemented in `open-lab-window` (S004). `agent.statement`, `resource.sample`, `checkpoint.created`,
 `recovery` and `memory.written` events are defined but nothing writes them yet.
 
 ## Rules
@@ -132,3 +132,21 @@ off the agent's path by reading files the recorder has already flushed. If
 operator controls (pause, stop) are ever added they belong to the Simulation's
 supervisor, are recorded as `human_operator` events, and are not part of the
 Window.
+
+**As implemented (S004).** Every file is opened by one function in mode `rb`,
+and the Window writes nothing anywhere, including no cache. Its server
+answers only GET and HEAD, binds only to `127.0.0.1` and refuses requests
+addressed to any other host name. It contains no client code, so it cannot
+contact the Simulation or a model server. A live run is followed by polling
+for events after the last sequence number seen; only complete lines of
+`events.jsonl` are read, so a line the recorder is still writing is not shown.
+The Window's tests enforce each of these, including a digest of the data root
+before and after every page has been requested.
+
+A run with no `summary.json` is shown as *not finished*: the archive alone
+cannot distinguish a run in progress from one that was interrupted, so the
+Window shows the last recorded state and the time of the last event and
+claims neither. `agent_claim` events are drawn differently from `observed`
+ones. The Window can re-check an event log (schemas bundled in the archive,
+sequence, hash chain, agreement with `summary.json`); it does not re-check
+artifact contents or the world digest, which `ols verify` does.

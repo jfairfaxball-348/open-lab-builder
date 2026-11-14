@@ -207,8 +207,14 @@ stateDiagram-v2
 
 Privileged components append [observation events](OBSERVATION.md) to
 `events.jsonl` in the run archive. The agent has no handle on this file. A
-SQLite index beside it is a rebuildable cache for queries. Details and the
-integrity rules are in [OBSERVATION.md](OBSERVATION.md).
+SQLite index beside it is a rebuildable cache for queries (designed; nothing
+writes it yet). Details and the integrity rules are in
+[OBSERVATION.md](OBSERVATION.md).
+
+The Window (S004) serves a read-only browser view of the archives: run list,
+frozen configuration, paginated timeline, tool call and result pairs,
+artifact previews and a live tail. It reads the files directly and keeps only
+line offsets in memory; it does not need the SQLite index.
 
 ### Experiment manager — Simulation (S003a)
 
@@ -309,4 +315,4 @@ Summarised here; reasoning and alternatives are in the
 | Isolation | Two tiers: supervised process now, container before agent-written code |
 | Durable state | Append-only JSONL as the record; SQLite for indexes and memory |
 | Inter-component communication | Files under the data root; read-only local HTTP for the Window |
-| Window front end | Undecided (see open decisions in `docs/roadmap/state.json`) |
+| Window front end | Standard-library HTTP server, JSON API, static HTML and JavaScript with no build step (ADR-0008) |

@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T02:55:00Z",
-  "last_session": "S003b",
+  "updated_at": "2026-11-14T08:09:00Z",
+  "last_session": "S004",
   "completed_milestones": [
     {
       "id": "S001",
@@ -39,12 +39,21 @@
         "ba64cdd"
       ],
       "summary": "Chat model client over Ollama's OpenAI-compatible endpoint with tool calling, tool-call repair, retry, context guard and recorded model identity; ols measure-model; llama3.2:3b measured and recorded in minimal world 0.2.0; one documented real-model run whose archive verifies."
+    },
+    {
+      "id": "S004",
+      "completed_at": "2026-11-14T08:09:00Z",
+      "repository": "open-lab-window",
+      "commits": [
+        "e752d64"
+      ],
+      "summary": "Window bootstrap and first version: loopback-only standard-library server with a JSON API and a static front end (no build step). Run list, run summary with frozen configuration, paginated timeline with type filters, tool call and result pairs, artifact previews, live tail by polling, event-log check against the archive's own schemas and hash chain. Read-only guarantees are tested. Front-end stack decided (ADR-0008)."
     }
   ],
   "next_milestone": {
-    "id": "S004",
-    "repository": "open-lab-window",
-    "title": "Basic Window"
+    "id": "S005a",
+    "repository": "open-lab-builder",
+    "title": "Capability Registry Index"
   },
   "blockers": [],
   "known_issues": [
@@ -81,20 +90,13 @@
     },
     {
       "id": "KI-7",
-      "summary": "World builds, the content digest and process-tree termination have only been run on Windows.",
+      "summary": "World builds, the content digest, process-tree termination and the Window have only been run on Windows.",
       "affects": [
         "S003a",
+        "S004",
         "S006c"
       ],
-      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available."
-    },
-    {
-      "id": "KI-9",
-      "summary": "The Window repository is empty (no commits).",
-      "affects": [
-        "S004"
-      ],
-      "detail": "It needs its own bootstrap as the first step of S004."
+      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there."
     },
     {
       "id": "KI-10",
@@ -126,6 +128,24 @@
         "S011a"
       ],
       "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Long runs need a larger context (server setting or the native API) and memory; the runtime's guard only blanks old tool results."
+    },
+    {
+      "id": "KI-13",
+      "summary": "The Window's artifact list and previews have only been exercised on synthetic archives.",
+      "affects": [
+        "S005a",
+        "S010"
+      ],
+      "detail": "No world capability writes files yet, so no real archive contains an artifact. The views are covered by tests and a manual browser check using archives written by the Window's test helper. Re-check against a real archive once S005a has added workspace file capabilities and a run has used them."
+    },
+    {
+      "id": "KI-14",
+      "summary": "The Window cannot tell a run in progress from one that was interrupted, and its front end has no automated tests.",
+      "affects": [
+        "S006b",
+        "S010"
+      ],
+      "detail": "A run without summary.json is shown as 'not finished' with its last recorded state and last event time; nothing in the archive says whether the supervisor is still alive (S006b's recovery records could). The JSON API and the read-only guarantees are tested; rendering was checked by hand in a browser."
     }
   ],
   "open_decisions": [
@@ -150,14 +170,6 @@
       "needs_human": true
     },
     {
-      "id": "OD-3",
-      "summary": "Window front-end stack: React with Vite and TypeScript, or server-rendered FastAPI with HTMX.",
-      "affects": [
-        "S004"
-      ],
-      "detail": "Decide at the start of S004. ADR-0008."
-    },
-    {
       "id": "OD-5",
       "summary": "What a run does when the model replies without calling a tool.",
       "affects": [
@@ -170,31 +182,31 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T02:55:00Z",
+    "ran_at": "2026-11-14T08:09:00Z",
     "commands": [
       {
-        "command": "open-lab-simulation: uv run ruff check .",
+        "command": "open-lab-window: uv run ruff check .",
         "result": "All checks passed"
       },
       {
-        "command": "open-lab-simulation: uv run pytest",
-        "result": "101 passed (fake model server; no model)"
+        "command": "open-lab-window: uv run pytest",
+        "result": "37 passed (two real fixture archives plus synthetic ones; no model)"
       },
       {
-        "command": "open-lab-simulation: uv run ols measure-model http://127.0.0.1:11434/v1 llama3.2:3b",
-        "result": "2239 MB VRAM, 561 MB RAM, load 33 s cold / 3.3 s warm, 62 tokens per second"
+        "command": "open-lab-window: uv run olw serve (manual, in a browser, real data root)",
+        "result": "Run list, summary, timeline with filters, tool pairs and the record check displayed for the real archives; no console errors; POST answered 405, a foreign Host header 403; SHA-256 over every file under runs/ identical before and after"
       },
       {
-        "command": "uv run olb world build worlds/minimal --publish",
-        "result": "Built minimal 0.2.0; verify with --self-test passed"
-      },
-      {
-        "command": "open-lab-simulation: uv run ols run experiments/local-model-check.json",
-        "result": "Manual, real model: completed in 2.4 s, both capabilities called once with correct results"
+        "command": "open-lab-simulation: uv run ols run <450-step scripted experiment> --data-root <scratch copy>, watched with olw serve --data-root <scratch copy>",
+        "result": "Manual, no model: the Window listed the run as not finished and its timeline followed the log as it grew (event 1309 to 1531 in six seconds); the run completed with 2706 events and the view switched to completed"
       },
       {
         "command": "open-lab-simulation: uv run ols verify <that archive>",
         "result": "Run archive is intact"
+      },
+      {
+        "command": "open-lab-window: artifact and agent-claim views (manual, synthetic archive)",
+        "result": "Text and PNG previews displayed, binary refused, HTML in model output and file content shown as inert text, agent.statement drawn distinctly. Synthetic archive only: see KI-13"
       },
       {
         "command": "uv run ruff check .",

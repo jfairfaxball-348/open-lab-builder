@@ -199,6 +199,7 @@ and in `state.json`.
 ### S004 — Basic Window
 
 - **Repository:** open-lab-window
+- **Status:** complete
 - **Objective:** Read-only browser view of a real run archive.
 - **Prerequisites:** S003a (a real archive). Better after S003b.
 - **Scope:** decide the front-end stack (ADR-0008) and record it; a local
@@ -215,6 +216,15 @@ and in `state.json`.
 - **Exit criteria:** a completed and an in-progress run can both be inspected;
   the read-only guarantees are tested.
 - **Risks:** large logs; paginate from the start.
+- **Delivered:** stack decision (ADR-0008: standard-library server, JSON API,
+  static front end with no build step); `olw serve`; the six views; a check of
+  an event log against the archive's own schemas and hash chain. Verified in a
+  browser against the real archives and against a scripted Simulation run
+  while it was being recorded.
+- **Left for later:** the artifact views have only seen synthetic archives,
+  because no world capability writes files yet (re-check once S005a has added
+  workspace file capabilities and a run has used them). The front end has no
+  automated tests of its own. Run comparison is S010.
 - **Next session should:** S005a.
 
 ---
