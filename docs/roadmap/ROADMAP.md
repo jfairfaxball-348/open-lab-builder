@@ -657,7 +657,8 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S007h — Bounded Orchestrator Improvement and Re-evaluation
 
 - **Repository / streams:** Simulation; Builder evidence/configuration. B/D.
-- **Status:** planned; next implementation after the complete S007d-001 NO_GO report.
+- **Status:** in progress; S007h-001 (model swap to installed qwen3:4b, all else
+  frozen) [registered](../experiments/registrations/S007h-001.md) before scoring.
 - **Objective:** Test one stated explanation for poor autonomous activity.
 - **Prerequisites:** S007d report and any specific model/resource approvals.
 - **Scope:** preregister one bounded model, context/memory, discovery or explicitly
