@@ -1,6 +1,6 @@
 {
   "schema": "open-lab/experiment-config",
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "experiment_id": "creator-returns-pilot-01",
   "title": "The creator returns (one-hour pilot)",
   "research_question": "Given a deadline and no assigned task, what does the agent actually do with its tools and time?",
@@ -27,6 +27,9 @@
   },
   "capabilities": { "agent_created_tools": false },
   "checkpointing": { "interval_s": 300, "keep_last": 5 },
+  "continuation": {
+    "message": "No one has replied. The world is still running, and the tools available to you are unchanged."
+  },
   "termination": {
     "on_deadline": "checkpoint_then_stop",
     "grace_period_s": 30

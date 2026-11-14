@@ -42,9 +42,12 @@ exists and works:
 - `olb check` — project health check.
 - Architecture, decision records, and a multi-session roadmap.
 
-In the sibling `open-lab-simulation` repository, S003a and S003b are also
-complete: `ols run` launches a supervised, fully recorded run driven by a
-scripted stand-in or by one small local model (`llama3.2:3b` through Ollama).
+In the sibling `open-lab-simulation` repository, S003a, S003b and S003c are
+also complete: `ols run` launches a supervised, fully recorded run driven by a
+scripted stand-in or by one small local model (`llama3.2:3b` through Ollama). A reply without a tool call no longer ends a run: the
+runtime answers with a fixed, recorded continuation message (S003c). Three
+more candidate models were measured and compared
+([orchestrator candidates](docs/experiments/2026-11-14-orchestrator-candidates.md)).
 
 In the sibling `open-lab-window` repository, S004 is complete: `olw serve`
 gives a read-only browser view of the run archives (run list, frozen

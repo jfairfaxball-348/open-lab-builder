@@ -5,6 +5,11 @@ and reports once the platform can run them (protocol: S010; first experiment:
 S012). This page records the intended premises and the standards any
 experiment must meet.
 
+Engineering checks so far (not experiments):
+[2026-11-14 local model check](2026-11-14-local-model-check.md) (S003b) and
+[2026-11-14 orchestrator candidates](2026-11-14-orchestrator-candidates.md)
+(S003c).
+
 ## Premises under consideration
 
 | Working title | Initial prompt, in outline | Contrast of interest |
@@ -18,7 +23,11 @@ privileges ([SAFETY_AND_ISOLATION.md](../architecture/SAFETY_AND_ISOLATION.md)).
 
 ## Standards
 
-1. **One prompt.** After launch nobody sends the agent anything.
+1. **One prompt.** After launch no person sends the agent anything. The only
+   text the infrastructure adds is the experiment's fixed continuation message,
+   given when the model replies without calling a tool, and recorded verbatim
+   as an `environment.message` event (decision OD-5; ADR-0004 addendum). Its
+   wording is part of the pre-registered condition.
 2. **Pre-registered.** The question, conditions, world version, model, limits
    and what will be measured are written down before the run.
 3. **Reproducible.** The experiment configuration and the world's content

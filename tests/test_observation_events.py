@@ -76,3 +76,21 @@ def test_reordering_is_detected(events):
 def test_events_from_another_run_are_detected(events):
     events[3]["run_id"] = "run-other"
     assert any("differs from the first event" in str(i) for i in validate_event_stream(events))
+
+
+def test_messages_from_the_environment_are_recorded_by_the_runtime_as_observations(events):
+    message = by_type(events, "environment.message")
+    assert validate_document(message) == []
+    for field, value in (("recorder", "supervisor"), ("epistemic_status", "agent_claim")):
+        changed = dict(message, **{field: value})
+        assert validate_document(changed), field
+    for missing in ("kind", "text"):
+        payload = {k: v for k, v in message["payload"].items() if k != missing}
+        assert validate_document(dict(message, payload=payload)), missing
+    assert validate_document(dict(message, payload={**message["payload"], "kind": "human"}))
+
+
+def test_environment_messages_need_the_newer_minor_version(events):
+    message = dict(by_type(events, "environment.message"), schema_version="1.0.0")
+    # A 1.0.0 document is still valid under 1.1.0: the type was added, nothing removed.
+    assert validate_document(message) == []

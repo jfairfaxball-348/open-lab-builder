@@ -69,9 +69,15 @@ def test_extensions_object_accepts_unknown_fields(contract):
 
 @pytest.mark.parametrize(
     "version, accepted",
-    [("1.0.0", True), ("1.0.7", True), ("1.1.0", False), ("2.0.0", False), ("1.0", False)],
+    [("1.0.0", True), ("same.7", True), ("current", True), ("next-minor", False),
+     ("2.0.0", False), ("1.0", False)],
 )
 def test_schema_version_compatibility(contract, version, accepted):
+    # Relative to the contract's own version: documents written against it or an
+    # older 1.x are read; a newer minor or another major is refused.
+    _, minor, _ = (int(part) for part in load_schema(contract)["x-schema-version"].split("."))
+    version = {"same.7": f"1.{minor}.7", "current": f"1.{minor}.0",
+               "next-minor": f"1.{minor + 1}.0"}.get(version, version)
     document = first_example(contract)
     document["schema_version"] = version
     assert (validate_document(document) == []) is accepted
@@ -112,4 +118,17 @@ def test_unpreserved_artifact_needs_no_archive_path():
     del document["archive_path"]
     assert validate_document(document)
     document["preserved"] = False
+    assert validate_document(document) == []
+
+
+def test_continuation_message_has_a_default_and_rejects_empty_text():
+    schema = load_schema("experiment-config")
+    default = schema["properties"]["continuation"]["properties"]["message"]["default"]
+    assert default and "?" not in default
+    document = first_example("experiment-config")
+    document["continuation"] = {"message": ""}
+    assert validate_document(document)
+    document["continuation"] = {"message": "x", "mode": "end"}
+    assert validate_document(document)
+    del document["continuation"]
     assert validate_document(document) == []

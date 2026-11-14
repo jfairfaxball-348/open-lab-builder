@@ -46,6 +46,7 @@ viewing is implemented in `open-lab-window` (S004). `agent.statement`, `resource
 | Time and order | `timestamp` (UTC), `monotonic_ms`, gap-free `seq` |
 | Agent and model identity | `actor.model_id`, `actor.provider_id`; `model.call` |
 | Observable agent output | `agent.output` |
+| What the infrastructure said to the agent | `environment.message` (S003c) |
 | Tool invocation and arguments | `tool.call` |
 | Tool results | `tool.result`, linked by `correlation_id` |
 | Artifacts created or modified | `artifact.created` / `.modified` / `.deleted` |
@@ -72,12 +73,30 @@ re-serialising any line breaks the chain.
 **Who may record what.** One recorder exists per run, inside the supervisor
 process. The agent runtime runs in a child process that is never told where
 the archive is; it asks the supervisor over a pipe to record `model.call`,
-`agent.output`, `tool.call`, `tool.result` and `error` events and waits for an
-acknowledgement before continuing. The supervisor assigns `seq`, timestamps
+`agent.output`, `environment.message`, `tool.call`, `tool.result` and `error`
+events and waits for an acknowledgement (which carries the event's `seq`)
+before continuing. The supervisor assigns `seq`, timestamps
 and the chain digest itself, and refuses every other event type from the
 runtime: state changes, `supervisor.action` and `artifact.*` events can only
 originate in the supervisor. A refused request is itself recorded as an
 `error` event.
+
+**Everything the agent is told is in the record.** The initial prompt is in
+the frozen `experiment.json`. Anything the infrastructure adds to the
+conversation afterwards is an `environment.message` event recorded before the
+model sees it, with the text verbatim. Since S003c the only such message is
+the *continuation*: when the model replies without calling a tool, the run
+does not end; the runtime answers with the experiment's `continuation.message`
+(or the default stated in the experiment-config schema) and asks the model
+again (decision OD-5). The event's `after_seq` names the output it answers. A
+run therefore ends only at its step limit, its deadline or a failure.
+
+**Context.** When the conversation outgrows the model's context window, the
+runtime first blanks the oldest long tool results, then drops the oldest whole
+turns, never the initial prompt or the latest message. Each `model.call`
+records `context_truncated_tool_results` and `context_dropped_messages` when
+this happened, so what the model could see at every step can be
+reconstructed.
 
 ## The run archive
 

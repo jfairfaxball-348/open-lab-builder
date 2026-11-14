@@ -39,3 +39,28 @@ truncating a long conversation) is an explicit, recorded step in that loop.
   checkpointing and replay feasible.
 - If a framework later proves worthwhile for a narrow job, it can live behind
   the runtime interface without changing the contracts.
+
+## Addendum (S003c): a reply without a tool call does not end the run
+
+Decided by the human on 2026-11-14 (open decision OD-5). Until S003c the loop
+ended at the first reply that contained no tool call, so with a small model an
+unprompted run lasted seconds. Now the runtime answers such a reply with a
+fixed *continuation message* and calls the model again; the run ends only at
+its step limit, its deadline, or a failure.
+
+- The text is part of the experimental condition. It comes from the
+  experiment's `continuation.message`; when that is omitted, from the default
+  in the experiment-config schema bundled with the world: *"No one has
+  replied. The world is still running, and the tools available to you are
+  unchanged."* It states facts about the run and gives no instruction. The
+  Simulation holds no copy of the default.
+- Each time it is used it is recorded as an `environment.message` event before
+  the model sees it.
+- A world whose bundled contracts cannot express or record it (built before
+  0.3.0) is refused rather than run with the old behaviour.
+- Because runs now last as long as their limits allow, the context guard drops
+  the oldest whole turns, keeping the initial prompt and the latest message,
+  once blanking old tool results is not enough, and records it.
+- Whether the final protocol for S010 and S012 also gives the agent time
+  notices is a separate question (`notify_agent_before_s`, still refused).
+

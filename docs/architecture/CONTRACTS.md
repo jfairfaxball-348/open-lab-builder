@@ -234,4 +234,6 @@ time only, so a crash does not eat into an experiment's time budget.
 | --- | --- | --- | --- |
 | 2026-11-13 | all | 1.0.0 | Initial versions (S001) |
 | 2026-11-13 | (protocol) | — | Invocation protocol gains the `OPEN_LAB_WORKSPACE` variable, the empty child environment and the `denied` outcome; event-log canonical form and hash chain defined in OBSERVATION.md. No schema change (S003a) |
+| 2026-11-14 | observation-event | 1.1.0 | New event type `environment.message` (payload `kind`, `text`, optional `after_seq`; recorder `agent_runtime` only): text the infrastructure gives the model as a conversation turn (S003c) |
+| 2026-11-14 | experiment-config | 1.1.0 | New optional `continuation.message`, with its default text in the schema: what the runtime says when the model replies without a tool call (decision OD-5, S003c) |
 | 2026-11-13 | capability | 1.0.1 | Descriptions of `invocation.entrypoint` and `invocation.command` now state where the module is found, the working directory, the meaning of `python` and how an error is reported. No structural change (S002) |

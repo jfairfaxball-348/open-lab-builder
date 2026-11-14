@@ -22,6 +22,7 @@ flowchart TD
     S002 --> S003a["S003a Runtime skeleton"]
     S003a --> S003b["S003b Local model loop"]
     S003a --> S004["S004 Basic Window"]
+    S003b --> S003c["S003c Continuation + model trial"]
     S002 --> S005a["S005a Registry index"]
     S003b --> S005b["S005b Discovery meta-tools"]
     S005a --> S005b
@@ -193,6 +194,41 @@ and in `state.json`.
   4 GB manages it, record the evidence and escalate the orchestrator decision
   before continuing.
 - **Next session should:** S004.
+
+---
+
+### S003c — Continuation Fallback and Orchestrator Candidates
+
+- **Repository:** open-lab-simulation (contracts and world in the Builder; one
+  view in the Window)
+- **Status:** complete
+- **Objective:** Settle two decisions taken by the human after S004: a reply
+  without a tool call must not end a run (OD-5), and better orchestrator
+  models are to be tried (OD-2).
+- **Prerequisites:** S003b. **Human action:** authorised in chat on
+  2026-11-14 ("try the better models"; "no tool doesn't end session, there
+  is a fallback").
+- **Scope:** observation-event 1.1.0 adds `environment.message` (text the
+  infrastructure gives the agent); experiment-config 1.1.0 adds an optional
+  `continuation.message` whose default text lives in the schema. The runtime
+  answers a reply without tool calls with that message, records it, and
+  continues until the step limit or the deadline. The context guard, after
+  blanking old tool results, drops the oldest whole turns (never the initial
+  prompt) and records how many. Pull, measure and trial models that fit the
+  4 GB GPU; rebuild the minimal world with the new contracts and the measured
+  models (0.3.0); the Window renders `environment.message`.
+- **Exclusions:** the time-remaining notice (`notify_agent_before_s`);
+  choosing the experimental protocol's final wording (S010); memory.
+- **Acceptance tests:** scripted and fake-server tests that a reply without a
+  tool call is followed by a recorded continuation and further model calls;
+  the run then ends only by step limit, deadline or a failure; the guard keeps
+  the initial prompt and records dropped turns; the runtime may record
+  `environment.message` and nothing new besides. Manual: each candidate
+  model measured and given the same open trial; archives verify.
+- **Exit criteria:** tests pass in all three repositories; world 0.3.0 built,
+  verified and published; trial results documented in `docs/experiments/`;
+  OD-5 closed; OD-2 updated with the evidence.
+- **Next session should:** S005a.
 
 ---
 

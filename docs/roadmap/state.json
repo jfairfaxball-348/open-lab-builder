@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T08:09:00Z",
-  "last_session": "S004",
+  "updated_at": "2026-11-14T09:04:00Z",
+  "last_session": "S003c",
   "completed_milestones": [
     {
       "id": "S001",
@@ -48,6 +48,15 @@
         "e752d64"
       ],
       "summary": "Window bootstrap and first version: loopback-only standard-library server with a JSON API and a static front end (no build step). Run list, run summary with frozen configuration, paginated timeline with type filters, tool call and result pairs, artifact previews, live tail by polling, event-log check against the archive's own schemas and hash chain. Read-only guarantees are tested. Front-end stack decided (ADR-0008)."
+    },
+    {
+      "id": "S003c",
+      "completed_at": "2026-11-14T09:04:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "ada84f0"
+      ],
+      "summary": "A reply without a tool call no longer ends a run: the runtime answers with the experiment's continuation message (default text in experiment-config 1.1.0), recorded as an environment.message event (observation-event 1.1.0); the context guard drops whole old turns and records it. Three candidate orchestrators (qwen3.5:2b, qwen3:4b, granite4.1:3b) pulled with authorisation, measured, recorded in minimal world 0.3.0 and compared with llama3.2:3b in eight archived open-trial runs. The Window renders environment.message."
     }
   ],
   "next_milestone": {
@@ -110,14 +119,14 @@
     },
     {
       "id": "KI-11",
-      "summary": "Unprompted, the 3B local model does not use the tool-call channel and describes surroundings that do not exist; runs end within seconds.",
+      "summary": "No local candidate that fits the 4 GB GPU behaves as an autonomous tool user under an unprompted premise.",
       "affects": [
         "S005b",
         "S010",
         "S011a",
         "S012"
       ],
-      "detail": "Observed in the S003b trial runs (docs/experiments/2026-11-14-local-model-check.md). Prompted tool use works. See OD-2 and OD-5."
+      "detail": "Runs no longer end at the first reply without a tool call (S003c), but llama3.2:3b mostly applies text.stats to the text it was given and invents surroundings, and the other candidates ask for a task. See docs/experiments/2026-11-14-orchestrator-candidates.md and OD-2."
     },
     {
       "id": "KI-12",
@@ -127,7 +136,7 @@
         "S007a",
         "S011a"
       ],
-      "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Long runs need a larger context (server setting or the native API) and memory; the runtime's guard only blanks old tool results."
+      "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Since S003c the runtime blanks old tool results and then drops whole old turns (never the initial prompt), recording both, so nothing is cut silently; but with 4096 tokens the conversation keeps only a few recent turns. Long runs need a larger context (server setting or the native API) and memory."
     },
     {
       "id": "KI-13",
@@ -146,6 +155,16 @@
         "S010"
       ],
       "detail": "A run without summary.json is shown as 'not finished' with its last recorded state and last event time; nothing in the archive says whether the supervisor is still alive (S006b's recovery records could). The JSON API and the read-only guarantees are tested; rendering was checked by hand in a browser."
+    },
+    {
+      "id": "KI-15",
+      "summary": "Thinking models spend most of their output budget on reasoning the record never sees, and it cannot be switched off through the endpoint in use.",
+      "affects": [
+        "S007a",
+        "S010",
+        "S012"
+      ],
+      "detail": "max_output_tokens covers the hidden reasoning: qwen3:4b at 512 produced only empty replies. Asking Ollama 0.40.16 for reasoning_effort 'none' moved the reasoning into the reply text, which would be recorded as said, so the runtime sends no such option. If a thinking model is chosen (OD-2) the protocol must say how much unrecorded computation is acceptable."
     }
   ],
   "open_decisions": [
@@ -160,53 +179,55 @@
     },
     {
       "id": "OD-2",
-      "summary": "Which orchestrator model to use. llama3.2:3b fits and calls tools when asked, but is not reliable unprompted.",
+      "summary": "Which orchestrator model to use. Four models that fit the 4 GB GPU have been compared; none behaves as an autonomous tool user unprompted.",
       "affects": [
         "S007a",
         "S010",
         "S012"
       ],
-      "detail": "Evidence in docs/experiments/2026-11-14-local-model-check.md. Options: measure one or two other models that fit 4 GB (each needs a download to be authorised), accept a slower partially offloaded larger model, or explicitly enable an external provider. ADR-0005.",
+      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools.",
       "needs_human": true
-    },
-    {
-      "id": "OD-5",
-      "summary": "What a run does when the model replies without calling a tool.",
-      "affects": [
-        "S010",
-        "S011a"
-      ],
-      "needs_human": true,
-      "detail": "Today the run ends as completed. Alternatives (a neutral continuation turn, a time notice) change what the agent is told and so are part of the experimental protocol, to be decided in S010 at the latest."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T08:09:00Z",
+    "ran_at": "2026-11-14T09:04:00Z",
     "commands": [
+      {
+        "command": "open-lab-simulation: uv run ruff check .",
+        "result": "All checks passed"
+      },
+      {
+        "command": "open-lab-simulation: uv run pytest",
+        "result": "106 passed (fake model server; no model)"
+      },
       {
         "command": "open-lab-window: uv run ruff check .",
         "result": "All checks passed"
       },
       {
         "command": "open-lab-window: uv run pytest",
-        "result": "37 passed (two real fixture archives plus synthetic ones; no model)"
+        "result": "38 passed"
       },
       {
-        "command": "open-lab-window: uv run olw serve (manual, in a browser, real data root)",
-        "result": "Run list, summary, timeline with filters, tool pairs and the record check displayed for the real archives; no console errors; POST answered 405, a foreign Host header 403; SHA-256 over every file under runs/ identical before and after"
+        "command": "open-lab-simulation: uv run ols measure-model http://127.0.0.1:11434/v1 <qwen3.5:2b | qwen3:4b | granite4.1:3b>",
+        "result": "Warm: 1773/2236/2245 MB VRAM plus 1052/1135/392 MB RAM; 42/33/58 output tokens per second"
       },
       {
-        "command": "open-lab-simulation: uv run ols run <450-step scripted experiment> --data-root <scratch copy>, watched with olw serve --data-root <scratch copy>",
-        "result": "Manual, no model: the Window listed the run as not finished and its timeline followed the log as it grew (event 1309 to 1531 in six seconds); the run completed with 2706 events and the view switched to completed"
+        "command": "uv run olb world build worlds/minimal --publish; uv run olb world verify releases/minimal/0.3.0 --self-test",
+        "result": "Built minimal 0.3.0 (digest 52d1fb64...058ff9); release intact, self-tests passed"
       },
       {
-        "command": "open-lab-simulation: uv run ols verify <that archive>",
-        "result": "Run archive is intact"
+        "command": "open-lab-simulation: uv run ols run experiments/open-trial-*.json (and four variants: seed 2, or max_output_tokens 2048)",
+        "result": "Manual, real models: eight runs, each ended by its step limit or deadline, with 5 to 20 continuations recorded; results in docs/experiments/2026-11-14-orchestrator-candidates.md"
       },
       {
-        "command": "open-lab-window: artifact and agent-claim views (manual, synthetic archive)",
-        "result": "Text and PNG previews displayed, binary refused, HTML in model output and file content shown as inert text, agent.statement drawn distinctly. Synthetic archive only: see KI-13"
+        "command": "open-lab-simulation: uv run ols verify <each of the eight archives>",
+        "result": "Run archive is intact (8 of 8)"
+      },
+      {
+        "command": "open-lab-window: olw serve, a trial archive in a browser (manual)",
+        "result": "environment.message events shown with their text and the output they answer; no console errors"
       },
       {
         "command": "uv run ruff check .",
@@ -214,7 +235,7 @@
       },
       {
         "command": "uv run olb check --tests",
-        "result": "Health check passed (6 checks and the test suite: 242 passed)"
+        "result": "Health check passed (6 checks and the test suite: 252 passed)"
       }
     ]
   }
