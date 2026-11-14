@@ -203,15 +203,22 @@ normal completion/cooperative operator pause. `ols resume <archive>` restores a
 verified checkpoint and appends a recovery segment to the same event log.
 Corrupt snapshots are rejected in favour of earlier valid ones. Existing
 observations survive rollback; step/time budgets are not reset. Hard deadline
-termination retains the previous safe snapshot. Automatic crash recovery and
-the graceful `checkpoint_then_stop` mode remain S006b.
+termination retains the previous safe snapshot. S006b implements
+`checkpoint_then_stop` with a fixed additional grace allowance (default zero),
+a complete-step snapshot and supervisor termination before acknowledging the
+barrier. See [ADR-0010](../decisions/ADR-0010-bounded-deadline-checkpoints.md).
+Automatic recovery remains S006d; resource enforcement remains S006e.
 
-### Runtime supervisor — Simulation (S003a minimal, S006b full)
+### Runtime supervisor — Simulation (S003a, S006b partial; S006d/S006e planned)
 
-A separate OS process and the parent of the runtime. It alone enforces the
-wall-clock deadline, memory/CPU/process/disk limits, permissions, checkpoint
-cadence, crash recovery and termination. It does not read the agent's output to
-decide anything: a limit is a limit regardless of what the agent says.
+Implemented: the CLI supervisor is a separate OS process and the parent of
+the runtime; it owns the recorder, deadlines and process-tree termination.
+Graceful deadlines are implemented in S006b. Automatic recovery, stale-lock
+handling and resource limits/sampling are still planned (S006d/S006e).
+
+The full design also adds memory/CPU/process/disk limits, crash recovery and
+resource sampling. The supervisor does not read the agent's output to decide
+anything: a limit is a limit regardless of what the agent says.
 
 ```mermaid
 stateDiagram-v2

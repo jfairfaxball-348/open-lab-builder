@@ -34,7 +34,7 @@ raising a limit, changing permissions or contacting the supervisor.
 - **Shutdown.** The supervisor is the parent process and owns the clock. At the
   deadline it checkpoints (if configured) and kills the process tree. The
   agent runtime has no veto and is not asked.
-- **Resources.** Memory, CPU, process count and workspace size are limited by
+- **Resources (planned S006e).** Memory, CPU, process count and workspace size will be limited by
   the operating system or by the supervisor's own checks, not by asking the
   agent to behave.
 - **Permissions.** The tool host checks each call's capability permissions
@@ -49,7 +49,7 @@ Decision and alternatives: [ADR-0006](../decisions/ADR-0006-isolation.md).
 
 | Tier | Mechanism | Sufficient for | Status on the development machine |
 | --- | --- | --- | --- |
-| `process` | Supervised child processes; workspace confinement by path validation in the tool host; OS job limits; minimal environment | Worlds whose capabilities are all builder-written and take validated JSON arguments | Available now |
+| `process` | Supervised child processes; workspace confinement by path validation in the tool host; OS job limits; minimal environment | Worlds whose capabilities are all builder-written and take validated JSON arguments | Process supervision available; resource limits planned in S006e |
 | `container` | Capabilities and agent-written code run inside a container or VM with no host mounts except the workspace, and no network | Any capability that executes agent-supplied code or shell commands; agent-created tools; long unattended runs | **Not available**: no container engine, WSL not functional |
 
 The honest limit of the `process` tier: it is an *architectural* boundary. It

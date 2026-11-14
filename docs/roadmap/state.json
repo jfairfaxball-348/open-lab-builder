@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T10:40:21Z",
-  "last_session": "S006a",
+  "updated_at": "2026-11-14T10:55:02Z",
+  "last_session": "S006b",
   "completed_milestones": [
     {
       "id": "S001",
@@ -81,12 +81,21 @@
         "62139ac"
       ],
       "summary": "Durable SQLite memory capabilities in minimal world 0.6.0; working-notes convention; complete-step checkpoint barriers with conversation, runtime cursor/counters, SQLite backup and workspace ZIP; validated atomic publication, retention and cooperative pause/ols resume. Resume preserves the log and artifact history, falls back from corruption and retains original time/step budgets while excluding downtime. ADR-0009 refines live memory location and append-only rollback; checkpoint-metadata 1.0.1 clarifies the boundary. Scripted/CLI and fake-model acceptance verified; automatic crash/stale-lock recovery and graceful deadline checkpointing remain S006b."
+    },
+    {
+      "id": "S006b",
+      "completed_at": "2026-11-14T10:55:02Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "ce102f9"
+      ],
+      "summary": "The original supervisor milestone was split before implementation: S006b graceful deadlines, S006d recovery, S006e resource enforcement. Bounded checkpoint_then_stop requires checkpointing, uses one fixed grace allowance, snapshots at a complete-step barrier and kills before acknowledgement. Expiry/timeouts preserve prior safe checkpoints; post-kill barriers cannot snapshot. Original budgets remain unchanged. Scripted native CLI archive verifies; 159 Simulation and 305 Builder tests pass. ADR-0010 documents semantics and limits. Automatic recovery and resource enforcement remain unimplemented."
     }
   ],
   "next_milestone": {
-    "id": "S006b",
+    "id": "S006d",
     "repository": "open-lab-simulation",
-    "title": "Independent Supervisor and Recovery"
+    "title": "Runtime and Interrupted-Run Recovery"
   },
   "blockers": [],
   "known_issues": [
@@ -119,7 +128,7 @@
         "S012"
       ],
       "needs_human": true,
-      "detail": "Crash recovery (S006b) is mandatory. Power and update settings need review before multi-hour runs."
+      "detail": "Crash recovery (S006d) is mandatory. Power and update settings need review before multi-hour runs."
     },
     {
       "id": "KI-7",
@@ -129,7 +138,9 @@
         "S004",
         "S006c",
         "S006a",
-        "S006b"
+        "S006b",
+        "S006d",
+        "S006e"
       ],
       "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there. SQLite memory, checkpoint ZIP/backup, resume and writer-lock tests have also only run on Windows."
     },
@@ -176,10 +187,10 @@
       "id": "KI-14",
       "summary": "The Window cannot tell a run in progress from one that was interrupted, and its front end has no automated tests.",
       "affects": [
-        "S006b",
+        "S006d",
         "S010"
       ],
-      "detail": "A run without summary.json is shown as 'not finished' with its last recorded state and last event time; nothing in the archive says whether the supervisor is still alive (S006b's recovery records could). The JSON API and the read-only guarantees are tested; rendering was checked by hand in a browser."
+      "detail": "A run without summary.json is shown as 'not finished' with its last recorded state and last event time; nothing in the archive says whether the supervisor is still alive (S006d's recovery records could). The JSON API and the read-only guarantees are tested; rendering was checked by hand in a browser."
     },
     {
       "id": "KI-15",
@@ -193,11 +204,11 @@
     },
     {
       "id": "KI-16",
-      "summary": "Automatic crash/reboot recovery, stale-writer-lock handling and checkpoint_then_stop are not implemented.",
+      "summary": "Automatic crash/reboot recovery and stale-writer-lock handling are not implemented.",
       "affects": [
-        "S006b"
+        "S006d"
       ],
-      "detail": "S006a supports complete-step cooperative pause and manual resume of stopped runs with summaries. Hard deadlines retain the preceding safe checkpoint and do not snapshot partial tools; checkpoint_then_stop is explicitly refused. Native console-signal delivery, uninterruptible host I/O and large/long-run performance remain unverified. See ADR-0009 and docs/experiments/2026-11-14-memory-checkpoints.md."
+      "detail": "S006a provides complete-step checkpoints and manual resume of stopped runs with summaries. S006b now implements checkpoint_then_stop with a fixed grace allowance and supervisor termination. Automatic recovery, verified stale-lock ownership and model-server health checks remain S006d. Resource limits and sampling remain S006e. Native console signals, uninterruptible host I/O and large/long-run timing remain unverified. See ADR-0010."
     }
   ],
   "open_decisions": [
@@ -224,43 +235,39 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T10:40:21Z",
+    "ran_at": "2026-11-14T10:55:02Z",
     "commands": [
       {
         "command": "uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Dependencies synced; S006a next; 299 passed and all six health checks passed"
+        "result": "Dependencies synced; original S006b next; all six health checks and 305 tests passed"
       },
       {
         "command": "open-lab-simulation: uv sync; uv run pytest (baseline)",
-        "result": "Dependencies synced; 126 passed"
+        "result": "Dependencies synced; 147 tests passed"
+      },
+      {
+        "command": "open-lab-simulation: uv run ruff check .; uv run pytest (final)",
+        "result": "Lint passed; 159 tests passed in 105.40 seconds, including 12 new graceful-deadline tests with native Windows workers/capabilities and one queued-barrier regression"
       },
       {
         "command": "uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 passed and all six health checks passed"
+        "result": "Lint passed; all six health checks and 305 tests passed in 59.72 seconds"
       },
       {
-        "command": "uv run olb world build worlds/minimal; uv run olb world verify releases/minimal/0.6.0 --self-test; uv run olb world build worlds/minimal --publish",
-        "result": "Eight capabilities self-tested; local release intact; published matching digest 1ccc407cc300e7622bcca348ff22c5982bff5cf3a10559ee741304350e960da5"
+        "command": "open-lab-simulation: uv run ols run experiments/scripted-graceful-deadline.json; uv run ols verify <archive>",
+        "result": "run-20261114t104818z-7d6fec terminated for deadline in 2.703 active seconds; one complete step, two successful tool calls, two checkpoints, two supervisor actions, 19 events; following step absent; archive intact"
       },
       {
-        "command": "open-lab-simulation: uv run ruff check .; uv run pytest",
-        "result": "Lint passed; 147 passed (scripted and fake model server). Acceptance covers equivalent restored files/memory, gap-free append-only log, corruption fallback, downtime exclusion, unchanged budgets, retention, safe paths, cleanup/deadline handling and saved fake-model conversation/identity"
+        "command": "Builder health.check_privacy on Builder and Simulation committable files; git diff --check in both repositories",
+        "result": "Both privacy checks and whitespace checks passed; no archives, weights, personal paths or raw diagnostics staged"
       },
       {
-        "command": "open-lab-simulation: compare staged fixture blobs with copied built release files",
-        "result": "35 of 35 fixture files byte-identical; copied from the Builder release, never hand edited"
+        "command": "open-lab-simulation: git commit; git push origin main; git status --short; git rev-list --left-right --count HEAD...origin/main",
+        "result": "Committed and pushed ce102f9; clean main; local and origin/main agree (0 ahead, 0 behind)"
       },
       {
-        "command": "open-lab-simulation: uv run ols run experiments/scripted-memory-checkpoint.json --pause-after-steps 2; uv run ols verify <archive>; uv run ols resume <archive>; uv run ols verify <archive> (two runs)",
-        "result": "run-20261114t101754z-4732b4 and run-20261114t102559z-6ec3af each paused after two steps, resumed with the same run id, completed with 46 events and verified intact"
-      },
-      {
-        "command": "open-lab-simulation: uv run ols run experiments/scripted-memory-checkpoint.json; compare files and SQLite records with resumed runs",
-        "result": "Uninterrupted run-20261114t101845z-72daf9 completed with 38 events. Ordinary file bytes match; all memory states equal (plan, revised, revision 2). Second resumed run: 213.468 s wall time, 1.531 s active time"
-      },
-      {
-        "command": "Builder health.check_privacy on Builder and Simulation committable files",
-        "result": "Both passed; no raw archive, model weight, personal path or host diagnostic committed"
+        "command": "uv run olb check; uv run olb state (after final state/docs update)",
+        "result": "All six health checks passed; S006b complete; S006d Runtime and Interrupted-Run Recovery next"
       }
     ]
   }

@@ -142,6 +142,13 @@ permissions. Normal completion and operator pause get a safe checkpoint before
 shutdown; hard deadline termination keeps the preceding checkpoint. Retained
 corrupt snapshots remain visible to verification even when recovery succeeds.
 
+S006b records the nominal deadline request as `supervisor.action` with action
+`limit_enforced` and extension stage `deadline_checkpoint_requested`. It records
+termination after saving a complete-step snapshot or exhausting the fixed grace
+allowance. Both are supervisor observations. No deadline notice is delivered
+to the model. The worker remains blocked until killed; queued barriers after
+termination never cause a snapshot. See ADR-0010.
+
 `model.json` (S003b) records exactly which model drove the run: gateway id,
 provider, the provider's own name for the model, sampling parameters, and the
 digest and server version the model server reported at launch.

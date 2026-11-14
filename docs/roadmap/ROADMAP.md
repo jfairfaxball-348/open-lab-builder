@@ -27,8 +27,10 @@ flowchart TD
     S003b --> S005b["S005b Discovery meta-tools"]
     S005a --> S005b
     S003b --> S006a["S006a Memory + checkpoints"]
-    S006a --> S006b["S006b Supervisor + recovery"]
-    S006b --> S006c["S006c Container tier"]
+    S006a --> S006b["S006b Graceful deadlines"]
+    S006b --> S006d["S006d Recovery"]
+    S006d --> S006e["S006e Resource enforcement"]
+    S006e --> S006c["S006c Container tier"]
     S003b --> S007a["S007a Model gateway"]
     S007a --> S007b["S007b Vision model"]
     S007a --> S008a["S008a Audio"]
@@ -37,7 +39,7 @@ flowchart TD
     S006c --> S008d["S008d Scripting"]
     S008d --> S009["S009 Agent-created tools"]
     S005b --> S009
-    S006b --> S010["S010 Experimental protocol"]
+    S006e --> S010["S010 Experimental protocol"]
     S004 --> S010
     S010 --> S011a["S011a 1-hour runs"]
     S011a --> S011b["S011b 12-hour runs"]
@@ -348,23 +350,73 @@ and in `state.json`.
 
 ---
 
-### S006b — Independent Supervisor and Recovery
+### S006b — Graceful Deadline Checkpoints
 
 - **Repository:** open-lab-simulation
-- **Objective:** Limits and recovery enforced from outside the runtime.
+- **Status:** complete
+- **Split:** the former Independent Supervisor and Recovery milestone was too
+  large for one session. S006b delivers graceful deadlines; S006d delivers
+  recovery; S006e delivers resource enforcement. S006c keeps its existing id.
+- **Objective:** Stop at a complete-step checkpoint within a bounded grace
+  period, with the supervisor retaining authority over termination.
 - **Prerequisites:** S006a.
-- **Scope:** supervisor as a separate long-lived process; Job Object limits
-  (memory, process count, CPU); workspace disk quota check; periodic
-  `resource.sample` events including VRAM; automatic restart from checkpoint
-  on runtime crash with a retry budget; detection of an interrupted run at
-  start-up (host reboot) and resumption; model-server health checks; stale writer
-  lock handling and graceful `checkpoint_then_stop` deadline orchestration.
-- **Acceptance tests:** kill the runtime process and observe automatic
-  recovery; a capability allocating beyond the memory limit is killed and
-  recorded; quota breach denies further writes; the deadline still fires
-  after a recovery.
+- **Scope:** enable `checkpoint_then_stop` only with checkpointing; at the
+  original deadline request a stop at the next complete-step barrier; use
+  `grace_period_s` (default zero) as a fixed additional allowance for the
+  in-flight step and snapshot, then kill the tree. Record the deadline request
+  and termination as supervisor actions. Preserve hard-stop behaviour.
+- **Exclusions:** time-remaining notices, automatic recovery, stale locks,
+  resource limits and sampling (S006d/S006e).
+- **Acceptance tests:** a step finishing during grace is snapshotted with files,
+  memory and conversation consistent; no following step starts; hung model or
+  capability is killed at the grace boundary; zero grace behaves as hard stop;
+  snapshot timeout retains the earlier checkpoint; original budgets survive
+  manual resume; configurations without checkpointing are refused.
+- **Exit criteria:** each deadline path has tested supervisor actions; all
+  tests and archive verification pass; semantics and limits documented.
+- **Delivered:** supervisor-owned fixed grace, complete-step snapshot and kill
+  before barrier acknowledgement; timeout/expiry fallback and post-kill barrier
+  rejection; original budgets preserved. Simulation 159 tests and Builder 305
+  tests passed, with a verified shipped CLI archive. ADR-0010 and
+  [validation record](../experiments/2026-11-14-graceful-deadlines.md).
+- **Next session should:** S006d.
+
+---
+
+### S006d — Runtime and Interrupted-Run Recovery
+
+- **Repository:** open-lab-simulation
+- **Status:** planned
+- **Objective:** Recover under a long-lived supervisor without granting new budgets.
+- **Prerequisites:** S006b.
+- **Scope:** automatic restart from checkpoint on runtime crash with an explicit
+  retry budget; interrupted-run detection at start-up (including host reboot);
+  stale writer-lock handling using verified owner identity; model-server health
+  checks. Preserve observations and original active-time/step budgets.
+- **Acceptance tests:** kill the runtime and observe automatic recovery; retry
+  exhaustion stops; a live writer is never displaced; interrupted-run recovery
+  keeps the event chain and excludes downtime; deadline fires after recovery.
+- **Exit criteria:** all recovery/refusal paths tested and recorded with
+  supervisor actions; configuration and recovery protocol documented.
+- **Next session should:** S006e.
+
+---
+
+### S006e — Resource Enforcement and Sampling
+
+- **Repository:** open-lab-simulation
+- **Status:** planned
+- **Objective:** Enforce resource limits outside the runtime.
+- **Prerequisites:** S006d.
+- **Scope:** Windows Job Object memory/process-count/CPU limits; workspace disk
+  quota checks; periodic `resource.sample` events including available VRAM;
+  refuse limits that cannot be honoured on a platform.
+- **Acceptance tests:** a test capability exceeding memory is killed and
+  recorded; process-count and CPU paths are tested; quota breach denies further
+  writes; samples distinguish unavailable values from measured zero.
 - **Exit criteria:** every enforcement path has a test and produces a
-  `supervisor.action` event.
+  `supervisor.action` event. The original S006b supervisor scope is complete
+  only after S006b, S006d and S006e are all verified.
 - **Next session should:** S006c if WSL has been repaired; otherwise S007a.
 
 ---
@@ -373,7 +425,7 @@ and in `state.json`.
 
 - **Repository:** open-lab-simulation (documentation in the Builder)
 - **Objective:** A real OS-level sandbox for executing code.
-- **Prerequisites:** S006b. **Human action:** repair WSL 2 and approve a
+- **Prerequisites:** S006e. **Human action:** repair WSL 2 and approve a
   container engine.
 - **Scope:** choose and record the mechanism (update ADR-0006); a container
   image built from the world release; isolation backend running capabilities
@@ -521,7 +573,7 @@ and in `state.json`.
 
 - **Repository:** all three
 - **Objective:** Controlled, repeatable, comparable experiments.
-- **Prerequisites:** S006b, S004.
+- **Prerequisites:** S006e, S004.
 - **Scope:** experiment templates and conditions; replicate launching with
   recorded seeds; verified fresh-world reset between runs; a pre-registration
   note per experiment (question, conditions, what will be measured) in

@@ -339,14 +339,24 @@ event with key/revision/call correlation in payload extensions. `NOTES.md` is
 the optional free-form working-notes convention.
 
 Hard deadline termination retains the earlier safe snapshot, not a snapshot
-of a partially executed tool. `checkpoint_then_stop` remains explicitly
-unsupported pending S006b, as do automatic crash/reboot recovery and stale-lock
-recovery. Stopped runs must have a valid summary for manual resume in S006a.
+of a partially executed tool. S006b enables `checkpoint_then_stop` only with
+checkpointing. At the original deadline the supervisor requests a stop at the
+next complete-step barrier. `grace_period_s` (default zero) is one fixed extra
+allowance for that step and snapshot; on success the tree is killed before
+acknowledging the barrier, and on expiry the preceding safe snapshot is kept.
+An interval snapshot crossing the nominal deadline can serve as the final safe
+snapshot. Grace counts as active elapsed time and does not replenish the
+original budget. Hard stop ignores grace. The deadline request is a
+`supervisor.action: limit_enforced` with extension stage
+`deadline_checkpoint_requested`; termination is also a supervisor action.
+See ADR-0010. Automatic crash/reboot and stale-lock recovery remain S006d.
+Stopped runs must have a valid summary for manual resume.
 
 ## Change log
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-14 | (supervisor protocol) | — | S006b implements bounded checkpoint_then_stop using existing fields and event extensions; ADR-0010 defines grace and termination. No schema change |
 | 2026-11-14 | checkpoint-metadata | 1.0.1 | Clarifies that last_event_seq is the snapshot boundary; resume appends after the existing tail and records rollback/replay. Structure and constraints unchanged. S006a protocol, agent-owned memory and world 0.6.0 documented in ADR-0009 |
 | 2026-11-14 | observation-event | 1.2.0 | Adds environment.message kind preamble for the generic discovery system message; minimal world 0.5.0 bundles it. Four meta-tool protocol specified (S005b) |
 | 2026-11-14 | (release layout / protocol) | — | Generated registry format 1.0.0 and full documentation; disposable self-test workspaces; minimal world 0.4.0 adds workspace.write, workspace.list and time.now. No schema change (S005a) |

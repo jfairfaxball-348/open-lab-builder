@@ -62,6 +62,12 @@ preserves the event chain, rejects corrupt snapshots and excludes paused time
 from the budget. Minimal world 0.6.0 includes the memory capabilities and
 checkpoint-metadata 1.0.1; [validation and limits](docs/experiments/2026-11-14-memory-checkpoints.md).
 
+S006b adds bounded graceful deadline checkpointing: one fixed grace allowance
+for the in-flight step and snapshot, followed by supervisor termination before
+another step starts. Hard stop remains available. Automatic recovery and
+resource enforcement are still planned as S006d and S006e; see
+[deadline validation](docs/experiments/2026-11-14-graceful-deadlines.md).
+
 In the sibling `open-lab-window` repository, S004 is complete: `olw serve`
 gives a read-only browser view of the run archives (run list, frozen
 configuration, timeline with type filters, tool call and result pairs,
