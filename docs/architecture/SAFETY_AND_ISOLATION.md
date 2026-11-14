@@ -39,9 +39,13 @@ raising a limit, changing permissions or contacting the supervisor.
   requires a verified dead/reused local process birth identity. Runtime
   crashes, prompts and model outputs cannot replenish retry/time/step budgets.
   Startup scanning is explicit (`ols recover`); no OS startup task is installed.
-- **Resources (planned S006e).** Memory, CPU, process count and workspace size will be limited by
-  the operating system or by the supervisor's own checks, not by asking the
-  agent to behave.
+- **Resources (S006e).** Windows job ceilings bound aggregate memory,
+  CPU cycle share and process count. The child joins its job while suspended.
+  Workspace quotas use supervisor admission and periodic checks: they can
+  overshoot during a write, deny subsequent writes and terminate an observed
+  live writer above quota. Unsupported limits are refused. Model servers and
+  the supervisor are outside the runtime job; VRAM sampling grants no GPU
+  privilege. This remains a process tier, not an OS filesystem sandbox.
 - **Permissions.** The tool host checks each call's capability permissions
   against the experiment's permissions before executing. A denied call produces
   a `tool.result` with status `denied` and a `supervisor.action` event.
@@ -54,7 +58,7 @@ Decision and alternatives: [ADR-0006](../decisions/ADR-0006-isolation.md).
 
 | Tier | Mechanism | Sufficient for | Status on the development machine |
 | --- | --- | --- | --- |
-| `process` | Supervised child processes; workspace confinement by path validation in the tool host; OS job limits; minimal environment | Worlds whose capabilities are all builder-written and take validated JSON arguments | Process supervision available; resource limits planned in S006e |
+| `process` | Supervised child processes; workspace confinement by path validation in the tool host; OS job limits; minimal environment | Worlds whose capabilities are all builder-written and take validated JSON arguments | Windows job limits and supervisor quota checks implemented (S006e); not an OS sandbox |
 | `container` | Capabilities and agent-written code run inside a container or VM with no host mounts except the workspace, and no network | Any capability that executes agent-supplied code or shell commands; agent-created tools; long unattended runs | **Not available**: no container engine, WSL not functional |
 
 The honest limit of the `process` tier: it is an *architectural* boundary. It

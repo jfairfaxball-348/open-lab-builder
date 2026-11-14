@@ -414,7 +414,7 @@ and in `state.json`.
 ### S006e — Resource Enforcement and Sampling
 
 - **Repository:** open-lab-simulation
-- **Status:** planned
+- **Status:** complete
 - **Objective:** Enforce resource limits outside the runtime.
 - **Prerequisites:** S006d.
 - **Scope:** Windows Job Object memory/process-count/CPU limits; workspace disk
@@ -426,7 +426,17 @@ and in `state.json`.
 - **Exit criteria:** every enforcement path has a test and produces a
   `supervisor.action` event. The original S006b supervisor scope is complete
   only after S006b, S006d and S006e are all verified.
-- **Next session should:** S006c if WSL has been repaired; otherwise S007a.
+- **Delivered:** Windows aggregate job RAM/process-count/CPU-cycle caps;
+  suspended creation before job assignment/resume; supervisor workspace quota
+  admission and in-flight checks; periodic samples with truthful unavailable
+  fields and optional host VRAM used/available. Unsupported limits are refused.
+  Native cap/denial/throttle/startup tests and real CLI archives verified;
+  214 Simulation and 305 Builder tests pass. Disk quotas may overshoot during
+  writes; Windows notification delivery is best effort; CPU active-time samples
+  differ from cycle caps. ADR-0012 and
+  [validation record](../experiments/2026-11-14-resource-enforcement.md).
+- **Next session should:** S007a. WSL status timed out and no container engine
+  is available; S006c remains human-gated. No repair/workaround was attempted.
 
 ---
 

@@ -17,6 +17,7 @@ by rewriting history.
 | [0009](ADR-0009-checkpoint-barriers-and-agent-memory.md) | Complete-step checkpoints, append-only rollback/resume and agent-owned live memory | Accepted; refines ADR-0007 memory location |
 | [0010](ADR-0010-bounded-deadline-checkpoints.md) | Fixed deadline grace, complete-step snapshot and supervisor termination | Accepted; supersedes ADR-0009 deadline-mode refusal |
 | [0011](ADR-0011-bounded-supervisor-recovery.md) | Opt-in bounded restarts, startup recovery, verified writer ownership and model health | Accepted; extends ADR-0009/0010 |
+| [0012](ADR-0012-process-resources-and-sampling.md) | Windows job ceilings, supervisor quota admission and truthful periodic samples | Accepted; completes split supervisor scope |
 
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).

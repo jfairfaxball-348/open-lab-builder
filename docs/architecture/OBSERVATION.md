@@ -8,8 +8,9 @@ Contract: [`observation-event`](../../schemas/v1/observation-event.schema.json),
 Implementation: recording is implemented in `open-lab-simulation` (S003a, S003b);
 viewing is implemented in `open-lab-window` (S004). S006a records checkpoint,
 manual recovery and memory-write events. S006d adds bounded automatic
-recovery, startup recovery and model-health supervisor actions. `agent.statement` and `resource.sample`
-remain defined but are not written yet.
+recovery, startup recovery and model-health supervisor actions. S006e writes
+periodic `resource.sample` and resource installation/enforcement/denial actions.
+`agent.statement` remains defined but is not written yet.
 
 ## Rules
 
@@ -108,6 +109,29 @@ intact; the guard cannot guarantee the server's tokenisation. Each `model.call`
 records `context_truncated_tool_results` and `context_dropped_messages` when
 this happened, so what the model could see at every step can be
 reconstructed.
+
+## Resource measurements (S006e)
+
+Only the supervisor writes resource samples. They can interleave with
+conversation/tool events; `seq` and explicit correlation/after_seq references
+remain authoritative. Default cadence is one second plus initial/final samples;
+`extensions.resource_sampling.interval_s` can select 0.05–60 seconds.
+CPU is job active time, 100 percent per logical core. RAM is summed private
+commit of verified job members; process count is job accounting; workspace disk
+is logical file bytes. Host NVIDIA VRAM used/available is optional, sampled
+asynchronously through existing nvidia-smi, with scope and age in extensions.
+These are best-effort measurements, not atomic whole-host snapshots. A first
+CPU sample or failed/racing memory query can be unavailable. Missing numbers
+are omitted and listed in `payload.extensions.unavailable`; zero remains zero.
+
+Actions with stage `resource_limit_installed` record the applied policy. Stage
+`resource_limit` records quota denials, observed breaches or monitoring failure.
+CPU hard caps throttle cycles in the OS; a sample is not treated as proof of a
+breach. Windows memory/process notifications are best effort; absence is not
+proof that no allocation/process was denied. Disk admission precedes execution;
+a denied writing tool has both a supervisor action and a denied tool result.
+No model output is used as authority or as evidence that a limit was enforced.
+See ADR-0012 for scope and polling limitations.
 
 ## The run archive
 

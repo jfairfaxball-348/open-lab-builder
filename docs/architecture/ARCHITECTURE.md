@@ -8,7 +8,7 @@ recorder, the tool host and the agent loop (S003a), driven either by a
 scripted stand-in or by one local model through Ollama's chat-completions
 endpoint (S003b), now through four discovery meta-tools (S005b), with durable
 memory/checkpoints (S006a), graceful deadlines (S006b) and opt-in bounded
-recovery (S006d). Other sections describe later designs. Each section says
+recovery (S006d) and process resources/sampling (S006e). Other sections describe later designs. Each section says
 which milestone delivers it.
 
 Related: [CONTRACTS.md](CONTRACTS.md) · [OBSERVATION.md](OBSERVATION.md) ·
@@ -211,19 +211,24 @@ barrier. See [ADR-0010](../decisions/ADR-0010-bounded-deadline-checkpoints.md).
 S006d adds opt-in bounded worker restarts and interrupted-run startup scanning,
 with verified writer ownership, original budgets and model-health probes. See
 [ADR-0011](../decisions/ADR-0011-bounded-supervisor-recovery.md). Resource
-enforcement remains S006e.
+enforcement and sampling are implemented in S006e (ADR-0012).
 
-### Runtime supervisor — Simulation (S003a/S006b/S006d; resources planned S006e)
+### Runtime supervisor — Simulation (S003a/S006b/S006d/S006e)
 
 Implemented: the CLI supervisor is a separate OS process and the parent of
 the runtime; it owns the recorder, deadlines and process-tree termination.
 Graceful deadlines are implemented in S006b. S006d implements bounded recovery,
 stale-lock verification and model-health probes. `ols recover` is the explicit
 startup scan for opted-in interrupted runs; it installs no OS startup task.
-Resource limits/sampling are still planned (S006e).
-
-The full design also adds memory/CPU/process/disk limits and
-resource sampling. The supervisor does not read the agent's output to decide
+S006e implements aggregate Windows job memory/process-count/CPU ceilings,
+supervisor workspace quota checks and periodic resource samples. The child
+joins the configured job while suspended, before its launcher can spawn.
+CPU controls govern cycles; samples measure active time. Disk quota checks can
+overshoot during a write; they deny subsequent writing calls and terminate
+observed in-flight overshoots. VRAM limits and unsupported platform limits are
+refused. Available VRAM is an optional host-level observation. See
+[ADR-0012](../decisions/ADR-0012-process-resources-and-sampling.md).
+The supervisor does not read the agent's output to decide
 anything: a limit is a limit regardless of what the agent says.
 
 ```mermaid

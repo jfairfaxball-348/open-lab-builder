@@ -64,8 +64,7 @@ checkpoint-metadata 1.0.1; [validation and limits](docs/experiments/2026-11-14-m
 
 S006b adds bounded graceful deadline checkpointing: one fixed grace allowance
 for the in-flight step and snapshot, followed by supervisor termination before
-another step starts. Hard stop remains available. Resource enforcement remains
-S006e; see
+another step starts. Hard stop remains available; see
 [deadline validation](docs/experiments/2026-11-14-graceful-deadlines.md).
 
 S006d adds opt-in bounded runtime restarts, `ols recover` startup scanning,
@@ -76,13 +75,20 @@ are refused. See [recovery validation](docs/experiments/2026-11-14-supervisor-re
 No OS startup task is installed; physical reboot/power-loss and Linux remain
 unverified.
 
+S006e adds Windows Job Object RAM/process/CPU caps, suspended startup,
+supervisor workspace quota admission and periodic resource samples (including
+available host NVIDIA VRAM when measurable). Unsupported limits are refused.
+Workspace quotas are checked by the supervisor and may overshoot during a
+write; they are not OS filesystem quotas. See
+[resource validation](docs/experiments/2026-11-14-resource-enforcement.md).
+
 In the sibling `open-lab-window` repository, S004 is complete: `olw serve`
 gives a read-only browser view of the run archives (run list, frozen
 configuration, timeline with type filters, tool call and result pairs,
 artifact previews, live tail of a run in progress).
 
 What does **not** exist yet: the full model gateway,
-resource enforcement, container isolation and run comparison. No experiment has
+container isolation and run comparison. No experiment has
 been run: the runs so far are engineering checks, recorded in
 [docs/experiments/](docs/experiments/). Run `uv run olb
 state` for the next milestone.

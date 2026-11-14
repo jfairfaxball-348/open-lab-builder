@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T11:28:04Z",
-  "last_session": "S006d",
+  "updated_at": "2026-11-14T12:01:05Z",
+  "last_session": "S006e",
   "completed_milestones": [
     {
       "id": "S001",
@@ -99,25 +99,34 @@
         "7e636d4"
       ],
       "summary": "Opt-in bounded runtime recovery under one long-lived supervisor; shared persisted restart budget, pre-execution model-attempt reservations and active-time ledger; permanent OS writer guard with hashed installation/PID/birth identity and safe stale-marker retention; ols recover startup scan for opted-in interrupted runs; asynchronous model identity/availability probes. Native worker and exact-supervisor fault injection, append-only restoration, downtime accounting and refusal paths verified. 188 Simulation tests and 305 Builder tests pass. ADR-0011 documents extension semantics and limits. Resource enforcement remains S006e; no OS startup task installed; physical reboot/power-loss, Linux execution and large-run host I/O remain unverified."
+    },
+    {
+      "id": "S006e",
+      "completed_at": "2026-11-14T12:01:05Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "830379c"
+      ],
+      "summary": "Aggregate Windows Job Object RAM/process-count/CPU cycle ceilings, suspended startup before job assignment, supervisor workspace quota admission and active-writer checks, periodic supervisor resource samples with unavailable fields and optional host NVIDIA VRAM used/available. Unsupported/unrepresentable limits are refused, including VRAM, nested wall clock and unenforced model-token limits. Native resource faults, CPU cap/throttle, startup ordering, quota/read admission, resume and failures verified. 214 Simulation and 305 Builder tests pass; shipped CLI and quota archives verify. ADR-0012 documents cycle/active-time differences, polling overshoot and best-effort notifications. Completes the split S006b/S006d/S006e process supervisor scope; container isolation remains human-gated."
     }
   ],
   "next_milestone": {
-    "id": "S006e",
+    "id": "S007a",
     "repository": "open-lab-simulation",
-    "title": "Resource Enforcement and Sampling"
+    "title": "Model Gateway"
   },
   "blockers": [],
   "known_issues": [
     {
       "id": "KI-1",
-      "summary": "WSL is installed but not functional on the development machine, and no container engine is present.",
+      "summary": "WSL status is unresponsive and no container engine is available on the development machine.",
       "affects": [
         "S006c",
         "S008d",
         "S009"
       ],
       "needs_human": true,
-      "detail": "Repairing WSL 2 needs administrator rights. Until then only the process isolation tier is available. See ADR-0006."
+      "detail": "S006e read-only wsl.exe --status timed out after ten seconds; neither Podman nor Docker was found. S006c requires human repair/engine approval. No system change or workaround was attempted; the roadmap explicitly allows proceeding to S007a."
     },
     {
       "id": "KI-3",
@@ -151,7 +160,7 @@
         "S006d",
         "S006e"
       ],
-      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there. SQLite memory, checkpoint ZIP/backup, resume and writer-lock tests have also only run on Windows. S006d native OS writer locks, process birth identity, worker/supervisor termination and startup recovery have been exercised on Windows only. Mocked Linux identity branches are tested, but no Linux OS execution occurred."
+      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there. SQLite memory, checkpoint ZIP/backup, resume and writer-lock tests have also only run on Windows. S006d native OS writer locks, process birth identity, worker/supervisor termination and startup recovery have been exercised on Windows only. Mocked Linux identity branches are tested, but no Linux OS execution occurred. S006e job ceilings, suspended startup, CPU throttling, quota admission and resource samples were tested on Windows only. Non-Windows CPU/RAM/process limits are explicitly refused; optional unavailable samples are marked rather than fabricated."
     },
     {
       "id": "KI-10",
@@ -221,6 +230,16 @@
         "S011c"
       ],
       "detail": "S006d passes native Windows worker/exact-supervisor termination and startup recovery tests. ols recover is an explicit startup scan; no OS boot task was installed. Interrupted accounting uses durable one-second reservations, not an inferred exact death time. Partial observation/artifact writes, invalid accounting and unverifiable legacy/foreign ownership are refused rather than repaired by inference. Uninterruptible host I/O and directory-entry power-loss durability are not guaranteed. See ADR-0011 and docs/experiments/2026-11-14-supervisor-recovery.md."
+    },
+    {
+      "id": "KI-18",
+      "summary": "Resource enforcement retains process-tier limits: disk quota may overshoot during a write and Windows notification delivery is best effort.",
+      "affects": [
+        "S006e",
+        "S006c",
+        "S011a"
+      ],
+      "detail": "OS job RAM/process ceilings and CPU cycle rate are installed independently of notification delivery. CPU active-time samples are not exact short-window equivalents of nominal core cycle budgets. Supervisor disk checks deny future writing calls at quota and kill an observed live writer above quota, but do not impose an OS byte quota or limit archive/model storage. GPU samples are host-wide; VRAM limits and non-Windows CPU/RAM/process limits are refused. Uninterruptible host I/O, physical reboot/power-loss and Linux execution remain unverified. See ADR-0012 and docs/experiments/2026-11-14-resource-enforcement.md."
     }
   ],
   "open_decisions": [
@@ -247,43 +266,55 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T11:28:04Z",
+    "ran_at": "2026-11-14T12:01:05Z",
     "commands": [
       {
         "command": "uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Dependencies synced; S006d next; 305 tests and all six health checks passed"
+        "result": "Dependencies synced; S006e next; 305 tests and all six health checks passed"
       },
       {
         "command": "open-lab-simulation: uv sync; uv run pytest (baseline)",
-        "result": "Dependencies synced; 159 tests passed in 105.18 seconds"
+        "result": "Dependencies synced; 188 tests passed in 123.15 seconds"
       },
       {
         "command": "open-lab-simulation: uv run ruff check .; uv run pytest (final)",
-        "result": "Lint passed; 188 tests passed in 123.11 seconds, including 29 new recovery tests. Native Windows worker/exact-supervisor fault injection, retry/deadline/attempt budgets, stale ownership, startup scan, corruption/refusals, accounting failures and fake-model health probes verified. Linux identity branches have mocked tests only"
+        "result": "Lint passed; 214 tests passed in 140.28 seconds, including 26 resource tests. Native RAM/process denial and recorded termination, CPU cap/throttle, suspended startup ordering, quota admission/live overflow/read availability, resume, setup/monitor failures, unsupported settings and unavailable/zero sampling verified"
+      },
+      {
+        "command": "open-lab-simulation: uv run pytest tests/test_resources.py tests/test_model.py::test_a_reply_without_a_tool_call_is_answered_with_the_continuation",
+        "result": "27 passed. The first full run exposed newly interleaved telemetry in the continuation test; its exact conversation sequence was retained and supervisor sample/interleaving assertions added. No failing test was skipped"
       },
       {
         "command": "uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 56.62 seconds and all six health checks passed"
+        "result": "Lint passed; 305 tests passed in 64.61 seconds and all six health checks passed"
       },
       {
-        "command": "open-lab-simulation: separate CLI fault-injection harness over experiments/scripted-recovery.json; ols verify <archive>",
-        "result": "run-20261114t111831z-64db06 completed after one verified worker kill/restart: 37 events, 3.282 active seconds, 3 completed model calls, 5 reserved attempts; previous log prefix preserved; CLI and independent verification exited zero"
+        "command": "open-lab-simulation: CLI run experiments/scripted-resources.json; separate ols verify <archive>",
+        "result": "run-20261114t115404z-96a2a1 completed in 0.922 active seconds with 27 events, 5 samples and 3 successful tools; all four limits installed; CLI/verification exited zero"
       },
       {
-        "command": "open-lab-simulation: recover_interrupted startup scan after first CLI harness interrupted its supervisor; ols verify <archive>",
-        "result": "The first harness refused injection because launcher and supervisor PIDs differed; cleanup interrupted run-20261114t111721z-d1fda6. Recorded owner/runtime were confirmed absent; startup recovery completed with retained stale-lock evidence, 35 events and 4.078 active seconds; archive verified intact. Harness identity assumption corrected"
+        "command": "open-lab-simulation: independent CLI quota configuration using shipped capabilities; ols verify <archive>",
+        "result": "run-20261114t115011z-113b13 completed in 0.969 active seconds with 49 events, 5 samples, 5 successful writes, one denied write and successful listing. Verified intact; final disk size 1.1444 MiB demonstrates documented overshoot. Live VRAM sample recorded 0 MiB used and 4096 MiB available with host scope/age"
       },
       {
-        "command": "Builder health.check_privacy on both repositories; git diff --check; assert schemas/worlds unchanged",
-        "result": "Both privacy and whitespace checks passed; no schema/world source changes or new dependency; raw evidence remained ignored/outside version control"
+        "command": "open-lab-simulation: independent Windows CPU rate query and two-second busy-loop measurement",
+        "result": "Kernel query confirmed flags 5 and rate 125/10000 for nominal 0.2 cores on 16 logical processors. Active CPU sample was 30.46875 percent; cycle budget and short-window active-time measurement are explicitly distinguished"
+      },
+      {
+        "command": "open-lab-simulation: read-only wsl.exe --status with ten-second timeout; locate podman/docker",
+        "result": "WSL status timed out; no container engine available. S006c remains human-gated; S007a selected by the roadmap fallback. Raw output remained ignored; no repair/system changes"
+      },
+      {
+        "command": "Builder health.check_privacy on both repositories; git diff --check",
+        "result": "Both privacy checks and whitespace checks passed; no schema/world source, copied fixture or dependency changes; raw evidence/large local quota configuration remained ignored"
       },
       {
         "command": "open-lab-simulation: git commit; git push origin main; git status --short; git rev-list --left-right --count HEAD...origin/main",
-        "result": "Committed and pushed 7e636d4; main clean; local and origin/main agree (0 ahead, 0 behind)"
+        "result": "Committed and pushed 830379c; clean main; local and origin/main agree (0 ahead, 0 behind)"
       },
       {
         "command": "uv run ruff check .; uv run olb check; uv run olb state (after final docs/state update)",
-        "result": "Lint and all six health checks passed; S006d complete and S006e Resource Enforcement and Sampling next"
+        "result": "Lint and all six health checks passed; S006e complete; S007a Model Gateway next; S006c remains human-gated"
       }
     ]
   }

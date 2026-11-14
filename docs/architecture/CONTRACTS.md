@@ -388,10 +388,42 @@ the durable reservation while excluding wall-clock downtime. Successful
 revalidation/restoration time is charged. See ADR-0011 for implementation limits,
 including unverified physical reboot/power-loss, Linux and host I/O timing.
 
+### Resource enforcement and sample extension (S006e)
+
+Existing experiment `limits.resources` fields now enforce run-tree `ram_mb`,
+`max_processes` and `cpu_cores` through Windows Job Objects, and workspace
+`disk_mb` through supervisor checks/admission. Numeric storage/memory units are
+MiB. CPU becomes `floor(cpu_cores * 10000 / logical_processors)` out of 10000
+host cycles under ENABLE | HARD_CAP; this differs from sampled active CPU time.
+All descendants/launchers count. The supervisor and model servers are outside
+this job. Limits are reinstalled on resume. Unsupported platform limits,
+unrepresentable CPU/integer bounds, VRAM limits (including zero), nested resource
+wall clocks and unenforced max_model_tokens are refused. Use the top-level
+experiment deadline. No schema or release version changed.
+
+Disk is a supervisor quota, not an OS filesystem ceiling. Writing tool calls
+and demonstrations at quota receive an infrastructure acknowledgement denial
+before execution. The tool host records status denied. Reads remain available.
+Periodic checks run every 0.1 seconds; a completed write can overshoot, while
+an observed active writer above quota causes tree termination. Resource
+termination does not automatically restart. Linked/unreadable quota paths fail
+closed. Archives and model files are excluded from workspace byte counts.
+
+`extensions.resource_sampling.interval_s` defaults to 1 and accepts finite
+0.05–60 seconds. Samples are supervisor-owned and may interleave with existing
+events. CPU/RAM/process/disk use job/process/workspace observations. Host NVIDIA
+VRAM is optional and never claimed to be run-attributable. Sample payload
+extensions name unavailable fields, CPU/RAM bases, VRAM scope/available MiB/age.
+Missing fields are omitted; observed zero is numeric zero. Stage
+`resource_limit_installed` records policy; `resource_limit` records observed
+enforcement/denial/failure in supervisor actions. CPU records the applied rate;
+Windows notification delivery and disk checks have the limitations in ADR-0012.
+
 ## Change log
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-14 | (resource protocol) | — | S006e applies existing resource fields through Windows jobs/supervisor quota admission and trials sample metadata/config extensions; ADR-0012. No schema change |
 | 2026-11-14 | (recovery protocol) | — | S006d trials extensions.recovery, conserved model-attempt and restart reservations, OS writer guard, interrupted startup scan and model health; ADR-0011. No schema change |
 | 2026-11-14 | (supervisor protocol) | — | S006b implements bounded checkpoint_then_stop using existing fields and event extensions; ADR-0010 defines grace and termination. No schema change |
 | 2026-11-14 | checkpoint-metadata | 1.0.1 | Clarifies that last_event_seq is the snapshot boundary; resume appends after the existing tail and records rollback/replay. Structure and constraints unchanged. S006a protocol, agent-owned memory and world 0.6.0 documented in ADR-0009 |
