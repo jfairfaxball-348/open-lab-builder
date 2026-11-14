@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T19:16:54Z",
-  "last_session": "S007d",
+  "updated_at": "2026-11-14T23:50:00Z",
+  "last_session": "S007h",
   "completed_milestones": [
     {
       "id": "S001",
@@ -152,17 +152,27 @@
         "0d63eb1"
       ],
       "summary": "Validated versioned harness/rubric, prior registration 001e941, 24-cell local baseline with complete archive/config/input/annotation audit. NO_GO: A task 0/6; B/C qualifiers 0/6 each; partial real use and 2/2 exposed D fault responses retained, 4/6 D unexposed. No major expansion or universal autonomy conclusion."
+    },
+    {
+      "id": "S007h",
+      "completed_at": "2026-11-14T23:50:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "5806e6e",
+        "78c3f44"
+      ],
+      "summary": "One bounded registered change after S007d-001 NO_GO, chosen by the human: orchestrator llama3.2:3b -> installed qwen3:4b (digest 359d7dd4...), everything else frozen; runtime source identical to the S007d freeze. Registration Builder e3e55a0 before scoring; manifest Simulation 5806e6e. 24/24 cells valid, reviewed and deadline-censored after 7-21 calls; guided 0/6, B 0/6, C 0/6 qualifying -> NO_GO. 7 successful invocations (S007d 27), zero repairs (S007d 275), 38 replies exhausting the 2048-token cap on unrecorded reasoning and 40 empty replies; D exposed 2/6. Same-seed replicates strongly correlated. Independent raw-event recount agreed. No download, system change or further tuning."
     }
   ],
   "next_milestone": {
-    "id": "S007h",
-    "repository": "open-lab-simulation",
-    "title": "Bounded Orchestrator Improvement and Re-evaluation"
+    "id": "S010",
+    "repository": "open-lab-builder",
+    "title": "Experimental Protocol and Comparative Observation"
   },
   "blockers": [
     {
       "id": "B-EXPANSION",
-      "summary": "S007d-001 completed with NO_GO; major capability expansion remains closed.",
+      "summary": "S007d-001 and S007h-001 both completed with NO_GO; major capability expansion remains closed.",
       "affects": [
         "S007e",
         "S007b",
@@ -172,7 +182,7 @@
         "S008d",
         "S009"
       ],
-      "detail": "24/24 scheduled cells verified/reviewed. Guided task completion 0/6 and B/C qualification 0/6 each. Partial tool use and D adaptation do not meet the registered replicated gate. S007h may preregister one bounded change and a new campaign; S010 remains permissible after this negative result. No new campaign or improvement is implemented."
+      "detail": "S007d-001 (llama3.2:3b) and S007h-001 (qwen3:4b, all else frozen) each had 24/24 valid reviewed cells, guided 0/6 and B/C 0/6 qualifying. A failed S007h does not authorise further tuning; the next bounded change, if any, needs a registered decision (OD-9). S010 is permissible after these negative results."
     },
     {
       "id": "B-HOSTED",
@@ -230,7 +240,7 @@
     },
     {
       "id": "KI-11",
-      "summary": "The default model/profile failed the registered S007d readiness gate; partial discovery/use does not establish general autonomy.",
+      "summary": "Both registered local profiles (llama3.2:3b, qwen3:4b) failed the readiness gate; partial discovery/use does not establish general autonomy.",
       "affects": [
         "S007a",
         "S007c",
@@ -239,7 +249,7 @@
         "S010",
         "S012"
       ],
-      "detail": "S003c used a two-tool world, few repeats and differing output/settings; it observed waiting for humans, repetition, invented surroundings and hidden-reasoning budget effects. S005b later achieved directed discovery with argument guidance/recorded repairs. Neither is a preregistered autonomy baseline or a universal model-failure proof. See dated reports and the prospective protocol in docs/experiments/README.md. S007d-001 is a complete valid negative baseline: control task 0/6, B/C qualification 0/6 each; 27 real invocations, zero productive files/retrieved stored notes. Two exposed D runs changed approach on seed 41; four D runs were unexposed. See the registered report; this is not a universal model-failure proof."
+      "detail": "S003c used a two-tool world, few repeats and differing output/settings; it observed waiting for humans, repetition, invented surroundings and hidden-reasoning budget effects. S005b later achieved directed discovery with argument guidance/recorded repairs. Neither is a preregistered autonomy baseline or a universal model-failure proof. See dated reports and the prospective protocol in docs/experiments/README.md. S007d-001 is a complete valid negative baseline: control task 0/6, B/C qualification 0/6 each; 27 real invocations, zero productive files/retrieved stored notes. Two exposed D runs changed approach on seed 41; four D runs were unexposed. See the registered report; this is not a universal model-failure proof. S007h-001 swapped in qwen3:4b with all else frozen: guided 0/6, B/C 0/6, 7 invocations, zero repairs; the model found and described capabilities but rarely invoked them before the 600 s deadline."
     },
     {
       "id": "KI-12",
@@ -273,10 +283,11 @@
       "summary": "Earlier thinking-model pilots spent output budgets on unrecorded reasoning; endpoint behaviour needs controlled revalidation.",
       "affects": [
         "S007a",
+        "S007h",
         "S010",
         "S012"
       ],
-      "detail": "max_output_tokens covers the hidden reasoning: qwen3:4b at 512 produced only empty replies. Asking Ollama 0.40.16 for reasoning_effort 'none' moved the reasoning into the reply text, which would be recorded as said, so the runtime sends no such option. If a thinking model is chosen (OD-2) the protocol must say how much unrecorded computation is acceptable. This is historical evidence from the recorded server/settings, not a universal statement about other current providers. S013 did not remeasure or change reasoning behaviour."
+      "detail": "max_output_tokens covers the hidden reasoning: qwen3:4b at 512 produced only empty replies. Asking Ollama 0.40.16 for reasoning_effort 'none' moved the reasoning into the reply text, which would be recorded as said, so the runtime sends no such option. If a thinking model is chosen (OD-2) the protocol must say how much unrecorded computation is acceptable. This is historical evidence from the recorded server/settings, not a universal statement about other current providers. S013 did not remeasure or change reasoning behaviour. Measured in S007h-001: qwen3:4b averaged about 1,060 reported output tokens and 45 s per call; 38 of 300 replies hit the 2048-token cap and 40 had neither text nor a tool call."
     },
     {
       "id": "KI-17",
@@ -322,6 +333,15 @@
         "S012"
       ],
       "detail": "S007d-001 produced 10.90 MiB across 24 raw archives and 845.078 cumulative active seconds. This bounds one short profile only; measure long-run archive/disk/resource/latency headroom before unattended-duration claims."
+    },
+    {
+      "id": "KI-21",
+      "summary": "Same-seed benchmark replicates are strongly correlated, so six runs per arm are not six independent samples.",
+      "affects": [
+        "S010",
+        "S012"
+      ],
+      "detail": "In S007h-001, seed-41 runs sharing a prompt (C and D are identical) matched on their first 5-9 tool actions with identical output-token counts. S007d-001 used the same seed design. S010 should design replicates and seeds for the independence it claims."
     }
   ],
   "open_decisions": [
@@ -335,7 +355,7 @@
         "S010",
         "S012"
       ],
-      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed.",
+      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner.",
       "needs_human": true
     },
     {
@@ -347,47 +367,66 @@
       ],
       "needs_human": true,
       "detail": "S013 is not external-access/spend authorisation. A separate approved ADR and provider/credential/finite-budget approval must precede code/paid smoke tests. Declining hosting does not block local milestones or S012."
+    },
+    {
+      "id": "OD-9",
+      "needs_human": true,
+      "summary": "Route after S007h-001 NO_GO: proceed to S010, or register one further bounded change first.",
+      "affects": [
+        "S007h",
+        "S010",
+        "S007e"
+      ],
+      "detail": "The roadmap defaults to S010 and forbids an automatic tuning loop. Candidate single changes, none authorised: qwen3:4b with a step-equivalent time budget (separates model from speed), a labelled generic call-shape scaffold for llama3.2:3b, or a larger server context (needs a human system setting). Any choice needs a new registration and campaign id before implementation."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T19:16:54Z",
+    "ran_at": "2026-11-14T23:50:00Z",
     "commands": [
       {
-        "command": "Builder: git status/log; uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Clean e5e6869; S007d next; 305 tests passed in 42.91 seconds and all health checks passed."
+        "command": "All three repositories: git fetch/status/log; Builder uv sync; uv run olb state",
+        "result": "Clean, up to date with origin; next S007h"
       },
       {
-        "command": "Simulation: git status/log; uv sync; uv run pytest (baseline before source edits)",
-        "result": "Clean 80cb67b; 275 tests passed in 250.35 seconds."
+        "command": "Simulation: source_hashes() against campaigns/s007d-001.json",
+        "result": "Runtime source byte-identical to the S007d freeze"
       },
       {
-        "command": "Simulation: uv run pytest (final frozen harness); uv run ruff check .",
-        "result": "289 tests passed without warnings in 257.70 seconds; lint passed. Fake/scripted tests cover metrics/labels, positive/negative/ambiguous ratings, provenance/config conditions, failures, interruptions, concurrent runner refusal and fault eligibility/delivery/exposure."
+        "command": "Simulation: uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest (pre-registration baseline)",
+        "result": "Lint passed; 289 tests passed in 247.93 seconds"
       },
       {
-        "command": "Simulation: four seed-901 pilot cells; archive/config/resource/context checks",
-        "result": "4/4 verified; NOT_SCORED and excluded. Eight-step/60-second pilot ceilings with the common profile were feasible; guided pilot negative and D fault-unexposed. No prompt/profile retuning."
+        "command": "Builder: uv run olb check --tests (pre-registration baseline)",
+        "result": "305 tests and all health checks passed"
       },
       {
-        "command": "git commits/pushes before scoring: Simulation implementation 75ae729 and manifest dbb5865; Builder registration 001e941",
-        "result": "Prior registration froze 24 cells, exact prompts/profile/rubric and LF-normalised source pins. Source pins matched the Git implementation tree. Registration commit recorded verbatim before the first scored cell."
+        "command": "python -m open_lab_simulation.benchmark run campaigns/s007h-pilot-001.json --max-cells 4",
+        "result": "Four NOT_SCORED seed-901 pilot cells valid and deadline-censored after 0-2 calls; zero repairs"
       },
       {
-        "command": "Simulation: benchmark run campaigns/s007d-001.json --registration 001e94177536317a8f3d273b581593584e9f42f9 --max-cells 4 (six supervised batches)",
-        "result": "24/24 launched/completed at max_steps=32; no launch failures, interruptions, replacements or invalid archives. 845.078 cumulative active seconds; all 768 inputs and 24 post-run probes audited. Source unchanged throughout."
+        "command": "Commit/push manifest (Simulation 5806e6e) then registration (Builder e3e55a0) before any scored cell",
+        "result": "Pushed; ledger bound to e3e55a07da1ca4b5e72222af19461d18840f836b"
       },
       {
-        "command": "report_campaign; source-bound investigator annotation validation; separate direct-event archive/config/input/probe/coverage audit",
-        "result": "24/24 valid/reviewed. NO_GO: A task completion 0/6; B/C qualifiers 0/6 each. 27 successful world invocations, zero productive files/retrieved stored notes. D exposed 2/6, changed approach 2/2 exposed (same seed); 4/6 unexposed retained. One unmasked reviewer; no second-rater claim."
+        "command": "python -m open_lab_simulation.benchmark run campaigns/s007h-001.json --registration e3e55a0... --max-cells 24",
+        "result": "24/24 cells launched and finished at the 600 s deadline; no launch failure or interruption; 14,401.9 active seconds"
       },
       {
-        "command": "Derived results export and source/annotation/ledger hashes; Simulation git push/status",
-        "result": "Complete per-cell dataset/report retained in Builder; raw archives/workspaces/ledger remain local only. Simulation commits 75ae729, dbb5865 and README closeout 0d63eb1 pushed; clean main."
+        "command": "24 annotations written and checked with benchmark_analysis.validate_annotation; benchmark.report_campaign",
+        "result": "24 valid, 24 reviewed, 0 qualifying; expansion NO_GO; runtime_source_match true; all archives verify"
       },
       {
-        "command": "Builder: uv run ruff check .; uv run olb check --tests (final); final frozen-source/native report recheck",
-        "result": "Lint passed; 305 tests passed in 43.24 seconds; all health checks passed. Final source pins still match; 24 cells valid/reviewed and NO_GO reproduced. Derived results distinguish three SQLite-state revisions from zero productive non-database files."
+        "command": "Independent recount from raw events (scratch script outside the repositories)",
+        "result": "324 requests, 7 successful invocations, 0 non-database files, 0 returned notes; world/model digests and configurations confirmed"
+      },
+      {
+        "command": "Builder: uv run ruff check .; uv run olb check --tests (final)",
+        "result": "Lint passed; 305 tests passed in 54.91 seconds and all six health checks passed"
+      },
+      {
+        "command": "Simulation: uv run ruff check . (final; source unchanged since the frozen manifest, README only)",
+        "result": "Lint passed; README committed as 78c3f44; suite not rerun because no source changed"
       }
     ]
   }

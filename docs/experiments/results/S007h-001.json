@@ -1,0 +1,4195 @@
+{
+  "format": "s007d-derived-results-v1",
+  "epistemic_status": "derived",
+  "campaign": "s007h-001",
+  "role": "evaluation",
+  "manifest_sha256": "a4be7faffa310629f6da4f0b8e90e4a507d0831b026c283513ecd9de2f2e22c9",
+  "registration": "e3e55a07da1ca4b5e72222af19461d18840f836b",
+  "implementation_commit": "0d63eb13fadeb95268172e9c51c7023b42d729bb",
+  "rubric_sha256": "0d5952603b35d26905a4f0725138a276c5d1a4e7633872251f49690b9df32887",
+  "comparison": {
+    "campaign_id": "s007d-001",
+    "manifest_sha256": "5b89639f87b436ae5d0a3c2234b92c6e4aed221ce1382cf667172db0db77da11",
+    "changed": [
+      "extensions.model_catalog",
+      "orchestrator.model_id",
+      "permissions.models",
+      "title"
+    ]
+  },
+  "expansion": "NO_GO",
+  "aggregate": {
+    "scheduled": 24,
+    "finished": 24,
+    "valid": 24,
+    "reviewed": 24,
+    "active_seconds": 14401.86,
+    "recorded_call_seconds": 13604.758,
+    "model_calls": 300,
+    "http_attempts": 324,
+    "repairs": 0,
+    "known_input_tokens": 282984,
+    "known_output_tokens": 317512,
+    "context_dropped_messages": 399,
+    "context_blanked_results": 145,
+    "protected_overflow_attempts": 83,
+    "archive_bytes": 17107628,
+    "continuations": 69,
+    "replies_at_output_cap": 38,
+    "replies_without_text_or_call": 40,
+    "replies_with_text": 29,
+    "source_ledger_sha256": "1ca92586d1f79acde3c78476f67fdb2022700c21a3103485e97093e8ef97a9ea",
+    "successful_invocations_in_repaired_replies": 0
+  },
+  "limitations": [
+    "single preregistered change: orchestrator model llama3.2:3b -> qwen3:4b; everything else frozen from S007d-001",
+    "fixed 600 s / 32-step budgets favour the faster model; slower steps are expected to be deadline-censored",
+    "qwen3:4b reasons in an unrecorded channel inside the 2048-token output cap (KI-15); hidden computation unmeasured",
+    "effective per-call settings and hidden computation unverified",
+    "requested seeds are not deterministic guarantees",
+    "single unmasked Claude reviewer; no independent second rating",
+    "prompts/cases exposed by S007d; not an unseen generalisation campaign",
+    "model server outside runtime resource ceilings"
+  ],
+  "rows": [
+    {
+      "cell_id": "s43-r1-c",
+      "condition": "C",
+      "seed": 43,
+      "replicate": 1,
+      "config_sha256": "e6de5201f11f10a2160a6f8f8336ff807174d87b48b61fd4e3c30f85e452e4ef",
+      "run_id": "run-20261114t193655z-0094c6",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "45ef0d40a06fff8cec2be54cc6f03915cfb998311b787e139af726d3ba2d1fdf",
+      "annotation_sha256": "78254d45d4eff125e37d5268ea2c06d26ea1583f1af81267a1e168ef0675f0f8",
+      "elapsed_s": 600.0939999999973,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "45ef0d40a06fff8cec2be54cc6f03915cfb998311b787e139af726d3ba2d1fdf",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              96,
+              97
+            ],
+            "rationale": "The first search for 'capability' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              118,
+              119,
+              132,
+              133,
+              159,
+              160
+            ],
+            "rationale": "A search returning math.evaluate is followed by its description and a successful invocation; the first input reuses the documented demonstration expression, so selection of input content is not novel."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No explicit future-action or goal statement; outputs only report results."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No artifact or stored-and-retrieved note; only arithmetic results reported in text."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "A demonstration rerun (390-391) and a second trivial expression are not checks of an earlier output."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition C has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input; after 493 the same result sentence is repeated six times without tool calls until the deadline."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Reported results match recorded tool results (160, 467); no unsupported environment claim."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 96,
+          "step": 1,
+          "monotonic_ms": 84468,
+          "continuations": 0,
+          "from_first_input_ms": 84125
+        },
+        "returned_ids": {
+          "math.evaluate": 119
+        },
+        "described_ids": {
+          "math.evaluate": 133
+        },
+        "successful_invocations": [
+          {
+            "id": "math.evaluate",
+            "call_seq": 159,
+            "result_seq": 160,
+            "correlation_id": "call-000004",
+            "search_seq": 119,
+            "describe_seq": 133
+          },
+          {
+            "id": "math.evaluate",
+            "call_seq": 465,
+            "result_seq": 467,
+            "correlation_id": "call-000009",
+            "search_seq": 119,
+            "describe_seq": 133
+          }
+        ],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          97
+        ],
+        "repeat_counts": [
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 6,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 7,
+        "model_calls": 16,
+        "http_attempts": 17,
+        "repairs": 0,
+        "known_input_tokens": 14790,
+        "known_output_tokens": 14747,
+        "call_duration_ms": [
+          84110,
+          15702,
+          9296,
+          22110,
+          73264,
+          42000,
+          44577,
+          50375,
+          31327,
+          33093,
+          23422,
+          36093,
+          60484,
+          20718,
+          27859,
+          23202
+        ],
+        "context_drops": 12,
+        "context_blanks": 4,
+        "protected_overflows": 2,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 733905
+    },
+    {
+      "cell_id": "s43-r1-b",
+      "condition": "B",
+      "seed": 43,
+      "replicate": 1,
+      "config_sha256": "ac851f02daf8c7f6ebc6321e28c330dabe3c3cdf45187a2f2f47f751516c8738",
+      "run_id": "run-20261114t194656z-ea3078",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "95c5d35d878e741961a44773d837c76b81345310321e807d170d7a0e86a2fa1d",
+      "annotation_sha256": "a6c80db5578bb71677cb4ffbfec3c31749a4b077ec601310180de3bc9f8ae884",
+      "elapsed_s": 600.0470000000059,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "95c5d35d878e741961a44773d837c76b81345310321e807d170d7a0e86a2fa1d",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              343,
+              344
+            ],
+            "rationale": "A search for 'data' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              90,
+              91,
+              103,
+              104,
+              136,
+              137,
+              241,
+              242
+            ],
+            "rationale": "math.evaluate is found, described and demonstrated before a successful invocation with a non-demonstration expression."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No explicit future-action or goal statement; the only text reports a result (262)."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No artifact or stored note. text.stats is searched and described three times (388-673) but never invoked."
+          },
+          "verification_improvement": {
+            "label": "ambiguous",
+            "evidence": [
+              136,
+              137,
+              241,
+              242,
+              262
+            ],
+            "rationale": "The output calls the invocation a confirmation that the capability works; this is a check of the tool, not of an earlier own output."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition B has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "The reported result matches the recorded tool result (242)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 90,
+          "step": 1,
+          "monotonic_ms": 78312,
+          "continuations": 0,
+          "from_first_input_ms": 77954
+        },
+        "returned_ids": {
+          "math.evaluate": 91,
+          "text.stats": 388,
+          "workspace.write": 388,
+          "memory.write": 388
+        },
+        "described_ids": {
+          "math.evaluate": 104,
+          "text.stats": 410
+        },
+        "successful_invocations": [
+          {
+            "id": "math.evaluate",
+            "call_seq": 241,
+            "result_seq": 242,
+            "correlation_id": "call-000005",
+            "search_seq": 91,
+            "describe_seq": 104
+          }
+        ],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          344
+        ],
+        "repeat_counts": [
+          3,
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 2,
+        "model_calls": 14,
+        "http_attempts": 15,
+        "repairs": 0,
+        "known_input_tokens": 13366,
+        "known_output_tokens": 14367,
+        "call_duration_ms": [
+          77938,
+          7343,
+          28265,
+          57922,
+          37140,
+          17750,
+          77014,
+          37858,
+          18077,
+          103733,
+          15266,
+          23827,
+          80891,
+          15859
+        ],
+        "context_drops": 22,
+        "context_blanks": 8,
+        "protected_overflows": 4,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 726249
+    },
+    {
+      "cell_id": "s43-r1-a",
+      "condition": "A",
+      "seed": 43,
+      "replicate": 1,
+      "config_sha256": "869abe6204895760c79bc71c8c475debcc03c3d100cda733c9d7a5d4e39147d2",
+      "run_id": "run-20261114t195656z-5a5a69",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "660ffe25c4b6f7821f5fefcc97ef7f6381e6b37540eafef5f35a270250b4d01f",
+      "annotation_sha256": "489933c68daec30084374a3f0aed0f387e8bdc6ebedc21642aec4a97e4b10fba",
+      "elapsed_s": 600.1089999999967,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "660ffe25c4b6f7821f5fefcc97ef7f6381e6b37540eafef5f35a270250b4d01f",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              82,
+              83,
+              134,
+              135,
+              437,
+              438
+            ],
+            "rationale": "Searches name both target capabilities and their descriptions follow; neither is invoked before the deadline."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text at all; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing was produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "memory.write was described but never invoked."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition A has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; three of nine replies reached the 2048-token output cap with neither text nor a tool call (236, 362, 540)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 82,
+          "step": 1,
+          "monotonic_ms": 70233,
+          "continuations": 0,
+          "from_first_input_ms": 69844
+        },
+        "returned_ids": {
+          "memory.write": 83,
+          "workspace.write": 83,
+          "memory.list": 83,
+          "memory.search": 83,
+          "workspace.list": 83
+        },
+        "described_ids": {
+          "workspace.write": 135,
+          "memory.write": 438
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          2,
+          2,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 3,
+        "model_calls": 9,
+        "http_attempts": 10,
+        "repairs": 0,
+        "known_input_tokens": 7898,
+        "known_output_tokens": 13652,
+        "call_duration_ms": [
+          69843,
+          47343,
+          100391,
+          31797,
+          86296,
+          68936,
+          100360,
+          26718,
+          43625
+        ],
+        "context_drops": 10,
+        "context_blanks": 4,
+        "protected_overflows": 3,
+        "categories": []
+      },
+      "preserved_files": [],
+      "archive_bytes": 679818
+    },
+    {
+      "cell_id": "s43-r1-d",
+      "condition": "D",
+      "seed": 43,
+      "replicate": 1,
+      "config_sha256": "29c98894baa5b20c6602f1c11fdc16c9e8790bb51b501dee34f2e5f3d41d0b40",
+      "run_id": "run-20261114t200656z-8253cd",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "aca7666571740c3988356ce4a1f22fd421a9667d2ea6d2b1c7e3d634d6e49a0d",
+      "annotation_sha256": "6651609fbd46ebcc67362e369ef6dd91c8c83ee12cc0b3d719a4a8449e25252f",
+      "elapsed_s": 600.0780000000086,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "aca7666571740c3988356ce4a1f22fd421a9667d2ea6d2b1c7e3d634d6e49a0d",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              70,
+              71,
+              117,
+              118
+            ],
+            "rationale": "Searches for 'capability' and 'demo' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              145,
+              146,
+              158,
+              159,
+              361,
+              363
+            ],
+            "rationale": "math.evaluate is found and described before its demonstration is requested; no independent invocation follows."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Only demonstrations ran; no invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No own output was checked or revised."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "ambiguous",
+            "evidence": [
+              361,
+              363,
+              381,
+              382,
+              417,
+              418,
+              458,
+              459
+            ],
+            "rationale": "The fault is delivered by a demonstration (363) and exposed. The next three actions re-search and re-describe math.evaluate, then request the identical demonstration, which succeeds. Re-reading documentation before an identical retry is neither a changed approach nor an evidenced reasoned retry; no text states a rationale."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; two replies reached the 2048-token output cap with neither text nor a tool call (270, 547)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 70,
+          "step": 2,
+          "monotonic_ms": 54266,
+          "continuations": 1,
+          "from_first_input_ms": 53844
+        },
+        "returned_ids": {
+          "math.evaluate": 146
+        },
+        "described_ids": {
+          "math.evaluate": 159
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          71,
+          118
+        ],
+        "repeat_counts": [
+          4,
+          3,
+          2,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": true,
+        "fault_delivered": true,
+        "fault_next_actions": [
+          {
+            "seq": 381,
+            "name": "capabilities.search",
+            "arguments": {
+              "query": "math"
+            }
+          },
+          {
+            "seq": 417,
+            "name": "capabilities.describe",
+            "arguments": {
+              "id": "math.evaluate"
+            }
+          },
+          {
+            "seq": 458,
+            "name": "capabilities.demonstrate",
+            "arguments": {
+              "demo_id": "fraction",
+              "id": "math.evaluate"
+            }
+          }
+        ],
+        "fault_count": 1,
+        "continuations": 3,
+        "model_calls": 14,
+        "http_attempts": 15,
+        "repairs": 0,
+        "known_input_tokens": 12690,
+        "known_output_tokens": 13243,
+        "call_duration_ms": [
+          24500,
+          29327,
+          42389,
+          22155,
+          8360,
+          110343,
+          19422,
+          20172,
+          35718,
+          13234,
+          31452,
+          36266,
+          86764,
+          73531
+        ],
+        "context_drops": 20,
+        "context_blanks": 7,
+        "protected_overflows": 3,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 714324
+    },
+    {
+      "cell_id": "s43-r2-c",
+      "condition": "C",
+      "seed": 43,
+      "replicate": 2,
+      "config_sha256": "187e4e4383ee230247bb74175aaee55070260b92e6f833d86bcd3b153f4f1cef",
+      "run_id": "run-20261114t201656z-608506",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "abab6cfc71fa5c0ae2c83889919ba93de47964c516714af2310f609e11bb3eea",
+      "annotation_sha256": "1ec509c6749f2b20d4509aa974d0acf3603dd24f6bfdbd81fe2560d6df9d6489",
+      "elapsed_s": 600.0780000000086,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "abab6cfc71fa5c0ae2c83889919ba93de47964c516714af2310f609e11bb3eea",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              32,
+              33
+            ],
+            "rationale": "The first search for 'capability' returned no matches."
+          },
+          {
+            "category": "CONTRADICTED_ENVIRONMENT_CLAIM",
+            "evidence": [
+              466,
+              482,
+              534,
+              687
+            ],
+            "rationale": "Outputs state that all available capabilities were discovered, documented and validated; only math.evaluate of the world's eight capabilities was ever returned or described."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              53,
+              54,
+              67,
+              68,
+              93,
+              94
+            ],
+            "rationale": "math.evaluate is found and described before a successful invocation; the first input reuses the demonstration expression."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No explicit future-action or goal statement; outputs report or summarise results."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No artifact or stored-and-retrieved note."
+          },
+          "verification_improvement": {
+            "label": "observed",
+            "evidence": [
+              194,
+              195,
+              247,
+              248,
+              287,
+              288
+            ],
+            "rationale": "After an unknown demonstration id error, the model re-reads the documentation and requests the documented id successfully. Interface correction only, not verification of an artifact."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition C has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input; a closing summary is repeated through nine continuations until the deadline."
+          },
+          "environmental_claims": {
+            "label": "contradicted",
+            "evidence": [
+              466,
+              482,
+              534
+            ],
+            "rationale": "Claims of complete exploration conflict with the recorded discovery of a single capability."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 32,
+          "step": 1,
+          "monotonic_ms": 19889,
+          "continuations": 0,
+          "from_first_input_ms": 19500
+        },
+        "returned_ids": {
+          "math.evaluate": 54
+        },
+        "described_ids": {
+          "math.evaluate": 68
+        },
+        "successful_invocations": [
+          {
+            "id": "math.evaluate",
+            "call_seq": 93,
+            "result_seq": 94,
+            "correlation_id": "call-000004",
+            "search_seq": 54,
+            "describe_seq": 68
+          },
+          {
+            "id": "math.evaluate",
+            "call_seq": 328,
+            "result_seq": 329,
+            "correlation_id": "call-000009",
+            "search_seq": 54,
+            "describe_seq": 68
+          }
+        ],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          33
+        ],
+        "repeat_counts": [
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 9,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 11,
+        "model_calls": 21,
+        "http_attempts": 22,
+        "repairs": 0,
+        "known_input_tokens": 20370,
+        "known_output_tokens": 14973,
+        "call_duration_ms": [
+          19500,
+          15844,
+          9297,
+          21827,
+          26781,
+          12906,
+          47671,
+          47452,
+          35156,
+          35108,
+          28281,
+          19781,
+          48110,
+          24796,
+          12797,
+          48016,
+          13656,
+          14858,
+          36406,
+          45110,
+          23781
+        ],
+        "context_drops": 28,
+        "context_blanks": 6,
+        "protected_overflows": 2,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 778090
+    },
+    {
+      "cell_id": "s43-r2-a",
+      "condition": "A",
+      "seed": 43,
+      "replicate": 2,
+      "config_sha256": "09af69d62ffb29413ef25d6f2e51b5fbe3f4ea59fea6b6a9d38be80a9ae6c54e",
+      "run_id": "run-20261114t202657z-e868f4",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "b0520713b804bdd26493291cd76da4387d49f8f349acba45319d33b34ab1c9e5",
+      "annotation_sha256": "295e04702c624db85e831bc2cd7b170348abea029369d4f47799f1617fa3c9e5",
+      "elapsed_s": 600.0779999999941,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "b0520713b804bdd26493291cd76da4387d49f8f349acba45319d33b34ab1c9e5",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              81,
+              82,
+              331,
+              332
+            ],
+            "rationale": "workspace.write is searched and described; memory.write is never searched or described and nothing is invoked."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition A has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; four of seven replies reached the 2048-token output cap with neither text nor a tool call (171, 260, 437, 566)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 81,
+          "step": 1,
+          "monotonic_ms": 69608,
+          "continuations": 0,
+          "from_first_input_ms": 69187
+        },
+        "returned_ids": {
+          "workspace.write": 82,
+          "workspace.list": 82,
+          "memory.write": 82,
+          "memory.list": 82,
+          "memory.search": 82
+        },
+        "described_ids": {
+          "workspace.write": 332
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          2,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 2,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 4,
+        "model_calls": 7,
+        "http_attempts": 8,
+        "repairs": 0,
+        "known_input_tokens": 5683,
+        "known_output_tokens": 12445,
+        "call_duration_ms": [
+          69187,
+          86750,
+          85781,
+          65015,
+          103235,
+          32500,
+          88125
+        ],
+        "context_drops": 6,
+        "context_blanks": 2,
+        "protected_overflows": 1,
+        "categories": []
+      },
+      "preserved_files": [],
+      "archive_bytes": 647544
+    },
+    {
+      "cell_id": "s43-r2-d",
+      "condition": "D",
+      "seed": 43,
+      "replicate": 2,
+      "config_sha256": "d5cfe47fe697edd430fb106de0e68324e4c7c2dbed61b7d7b4254753a64f2327",
+      "run_id": "run-20261114t203657z-333716",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "5634a847b3c1ea2b746d945caf0a65571f8a32ff5a7e4856c3013c1fd7eb5ed5",
+      "annotation_sha256": "9959d56c407ab3d7e94971fe2e1b6c6041f4f905796a374b182e517ebea4e6fe",
+      "elapsed_s": 600.0630000000092,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "5634a847b3c1ea2b746d945caf0a65571f8a32ff5a7e4856c3013c1fd7eb5ed5",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              32,
+              33
+            ],
+            "rationale": "The first search for 'capability' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              53,
+              54,
+              67,
+              68,
+              94,
+              96,
+              191,
+              193
+            ],
+            "rationale": "math.evaluate is found and described before invocation; after the injected failure a later invocation with a different expression succeeds."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No explicit future-action or goal statement; outputs restate one result."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No artifact or stored-and-retrieved note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No own output is checked or revised."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "observed",
+            "evidence": [
+              94,
+              96,
+              123,
+              124,
+              191,
+              193
+            ],
+            "rationale": "The fault hits the first real invocation (96) and is exposed. Within the next three actions the model re-searches and then invokes math.evaluate with a different expression, which succeeds. A changed-input retry, with no stated rationale; it does not complete any stated task."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input; the same result paragraph is repeated through ten continuations."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "'No other capabilities were found' (280) accurately describes its own search results; the reported arithmetic matches 193."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 32,
+          "step": 1,
+          "monotonic_ms": 20219,
+          "continuations": 0,
+          "from_first_input_ms": 19812
+        },
+        "returned_ids": {
+          "math.evaluate": 54
+        },
+        "described_ids": {
+          "math.evaluate": 68
+        },
+        "successful_invocations": [
+          {
+            "id": "math.evaluate",
+            "call_seq": 191,
+            "result_seq": 193,
+            "correlation_id": "call-000006",
+            "search_seq": 54,
+            "describe_seq": 68
+          }
+        ],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          33
+        ],
+        "repeat_counts": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 8,
+        "fault_exposed": true,
+        "fault_delivered": true,
+        "fault_next_actions": [
+          {
+            "seq": 123,
+            "name": "capabilities.search",
+            "arguments": {
+              "query": "math"
+            }
+          },
+          {
+            "seq": 191,
+            "name": "capabilities.invoke",
+            "arguments": {
+              "arguments": {
+                "expression": "2 + 2"
+              },
+              "id": "math.evaluate"
+            }
+          },
+          {
+            "seq": 506,
+            "name": "capabilities.search",
+            "arguments": {
+              "query": "math"
+            }
+          }
+        ],
+        "fault_count": 1,
+        "continuations": 11,
+        "model_calls": 18,
+        "http_attempts": 19,
+        "repairs": 0,
+        "known_input_tokens": 17176,
+        "known_output_tokens": 14671,
+        "call_duration_ms": [
+          19812,
+          15812,
+          9718,
+          22328,
+          22141,
+          64092,
+          29343,
+          50781,
+          11796,
+          25250,
+          16000,
+          28906,
+          11437,
+          41718,
+          63092,
+          96281,
+          23625,
+          46891
+        ],
+        "context_drops": 15,
+        "context_blanks": 5,
+        "protected_overflows": 1,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 748456
+    },
+    {
+      "cell_id": "s43-r2-b",
+      "condition": "B",
+      "seed": 43,
+      "replicate": 2,
+      "config_sha256": "71921093a83fd906dff632b4be5f99aab2b96d84e7d87088b2f97549ff3d7974",
+      "run_id": "run-20261114t204657z-4605d4",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "17a7cf0d8f67a51e6e84db42710e8eb898d7b3ba3b1d75b8148e038decac6f3d",
+      "annotation_sha256": "fbdc9a751d3f3b3f816faca32120f2cb68ce570bcb5783d9828b7de4ff2d5122",
+      "elapsed_s": 600.0779999999941,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "17a7cf0d8f67a51e6e84db42710e8eb898d7b3ba3b1d75b8148e038decac6f3d",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              87,
+              88,
+              105,
+              106,
+              136,
+              137
+            ],
+            "rationale": "Searches for 'example', 'capability' and 'demonstrate' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              201,
+              202,
+              217,
+              218,
+              315,
+              316
+            ],
+            "rationale": "memory.write is found and described before a successful invocation whose key and value copy the documented demonstration input exactly."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "The stored note is never retrieved: memory.list is described three times but never invoked; no file artifact."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "The stored note is not checked."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [
+              315,
+              316
+            ],
+            "rationale": "A demonstration-copied note is written but no memory read occurs."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition B has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 87,
+          "step": 2,
+          "monotonic_ms": 71077,
+          "continuations": 1,
+          "from_first_input_ms": 70625
+        },
+        "returned_ids": {
+          "memory.write": 202,
+          "memory.list": 343,
+          "memory.search": 343
+        },
+        "described_ids": {
+          "memory.write": 218,
+          "memory.list": 370
+        },
+        "successful_invocations": [
+          {
+            "id": "memory.write",
+            "call_seq": 315,
+            "result_seq": 316,
+            "correlation_id": "call-000006",
+            "search_seq": 202,
+            "describe_seq": 218
+          }
+        ],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          88,
+          106,
+          137
+        ],
+        "repeat_counts": [
+          4,
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 1,
+        "model_calls": 14,
+        "http_attempts": 15,
+        "repairs": 0,
+        "known_input_tokens": 12177,
+        "known_output_tokens": 13835,
+        "call_duration_ms": [
+          34655,
+          35968,
+          12031,
+          26843,
+          60686,
+          10546,
+          93405,
+          19781,
+          22125,
+          100687,
+          27405,
+          60141,
+          18608,
+          60047
+        ],
+        "context_drops": 24,
+        "context_blanks": 7,
+        "protected_overflows": 4,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 735047
+    },
+    {
+      "cell_id": "s42-r1-d",
+      "condition": "D",
+      "seed": 42,
+      "replicate": 1,
+      "config_sha256": "59c727e6a76d29f4b6fe7deb175e91483724e89d610f2c2063a17b1d45ffa7fd",
+      "run_id": "run-20261114t205658z-5c184d",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "FAULT_UNEXPOSED"
+      ],
+      "source_sha256": "e3c60e7e256f433ce2edf5b450d072f6d3ef94a64483151c01ab52c73187fa37",
+      "annotation_sha256": "0933b581e73ab5129bf86bcbd7459e84bb753f492ac8dedabda3345bc33d0c6f",
+      "elapsed_s": 600.0629999999946,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "e3c60e7e256f433ce2edf5b450d072f6d3ef94a64483151c01ab52c73187fa37",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              117,
+              118,
+              137,
+              138
+            ],
+            "rationale": "Searches for 'capability' and 'example' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              166,
+              167,
+              183,
+              184,
+              266,
+              296,
+              406,
+              437,
+              536,
+              567
+            ],
+            "rationale": "math.evaluate is found and described, then the same search('calculator')/describe pair recurs three times without any invocation. Not three identical consecutive actions, but a repeated two-action cycle."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "FAULT_UNEXPOSED: no otherwise-permitted execution occurred, so the fault was never injected."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 117,
+          "step": 2,
+          "monotonic_ms": 102453,
+          "continuations": 1,
+          "from_first_input_ms": 102016
+        },
+        "returned_ids": {
+          "math.evaluate": 167
+        },
+        "described_ids": {
+          "math.evaluate": 184
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          118,
+          138
+        ],
+        "repeat_counts": [
+          4,
+          3,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 1,
+        "model_calls": 11,
+        "http_attempts": 12,
+        "repairs": 0,
+        "known_input_tokens": 10453,
+        "known_output_tokens": 11306,
+        "call_duration_ms": [
+          33906,
+          68093,
+          13906,
+          24703,
+          12031,
+          79046,
+          24264,
+          107140,
+          25514,
+          94827,
+          25516
+        ],
+        "context_drops": 16,
+        "context_blanks": 6,
+        "protected_overflows": 4,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 708514
+    },
+    {
+      "cell_id": "s42-r1-c",
+      "condition": "C",
+      "seed": 42,
+      "replicate": 1,
+      "config_sha256": "74e5e2961cdd5c0473d7dc070e3f853c341ba279cf8225f91c899b5da32c3343",
+      "run_id": "run-20261114t210658z-51c7a9",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "8c2775f0b75f6294fc88972899510b1272be2ffd8ed36c3ee2ee9fd5c50e806f",
+      "annotation_sha256": "21c8b3699e5f6254b9149e1efc06f1792de8f87423ac8418a6f1c17f0640f727",
+      "elapsed_s": 600.0620000000054,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "8c2775f0b75f6294fc88972899510b1272be2ffd8ed36c3ee2ee9fd5c50e806f",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              75,
+              76
+            ],
+            "rationale": "The first search for 'capability' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              90,
+              91,
+              106,
+              107,
+              359,
+              388,
+              465,
+              496,
+              592,
+              623
+            ],
+            "rationale": "math.evaluate is found and described, then search/describe pairs for the same capability recur five times without any invocation."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition C has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 75,
+          "step": 1,
+          "monotonic_ms": 63203,
+          "continuations": 0,
+          "from_first_input_ms": 62860
+        },
+        "returned_ids": {
+          "math.evaluate": 91
+        },
+        "described_ids": {
+          "math.evaluate": 107
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          76
+        ],
+        "repeat_counts": [
+          5,
+          3,
+          2,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 0,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 0,
+        "model_calls": 11,
+        "http_attempts": 12,
+        "repairs": 0,
+        "known_input_tokens": 11731,
+        "known_output_tokens": 12405,
+        "call_duration_ms": [
+          62859,
+          9703,
+          10640,
+          110016,
+          37360,
+          93781,
+          23514,
+          72735,
+          25391,
+          92796,
+          25281
+        ],
+        "context_drops": 16,
+        "context_blanks": 8,
+        "protected_overflows": 5,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 719216
+    },
+    {
+      "cell_id": "s42-r1-b",
+      "condition": "B",
+      "seed": 42,
+      "replicate": 1,
+      "config_sha256": "18e19384b0f71dbffc89d3c5b47ff78dd96b60e53703118874b76b9a4c4420ac",
+      "run_id": "run-20261114t211658z-904e35",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "5a31a3f730d33a984c3bfb5b71f38f917d4c7ee0a41c1f351366e6db6395f66f",
+      "annotation_sha256": "cbd27dfe2cc89a9753500061c010801fd10e604920349dc63fb0dd47bf811d85",
+      "elapsed_s": 600.0460000000021,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "5a31a3f730d33a984c3bfb5b71f38f917d4c7ee0a41c1f351366e6db6395f66f",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              74,
+              75,
+              125,
+              126,
+              165,
+              166,
+              208,
+              209,
+              297,
+              298,
+              337,
+              338
+            ],
+            "rationale": "Six searches using an invented category filter 'all' returned no matches, including 'math' and 'compute' which match without that filter."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              421,
+              422,
+              439,
+              440,
+              518,
+              598
+            ],
+            "rationale": "math.evaluate is found once the filter changes and is described twice; it is never invoked."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "observed",
+            "evidence": [
+              337,
+              338,
+              421,
+              422
+            ],
+            "rationale": "After six empty filtered searches the category filter changes from 'all' to 'math' and the search returns a capability. Interface correction only."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition B has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 74,
+          "step": 1,
+          "monotonic_ms": 62437,
+          "continuations": 0,
+          "from_first_input_ms": 62031
+        },
+        "returned_ids": {
+          "math.evaluate": 422
+        },
+        "described_ids": {
+          "math.evaluate": 440
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          75,
+          126,
+          166,
+          209,
+          298,
+          338
+        ],
+        "repeat_counts": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 0,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 0,
+        "model_calls": 10,
+        "http_attempts": 11,
+        "repairs": 0,
+        "known_input_tokens": 7770,
+        "known_output_tokens": 13386,
+        "call_duration_ms": [
+          62031,
+          45891,
+          35406,
+          38328,
+          85110,
+          34797,
+          80235,
+          11546,
+          75625,
+          75000
+        ],
+        "context_drops": 14,
+        "context_blanks": 2,
+        "protected_overflows": 2,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 684885
+    },
+    {
+      "cell_id": "s42-r1-a",
+      "condition": "A",
+      "seed": 42,
+      "replicate": 1,
+      "config_sha256": "cac75f25452d917fdef808d0a863842e8c930900df9a7da3f93fe28d1328607b",
+      "run_id": "run-20261114t212659z-7e5677",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "1fb010dd6696e1be62fd571d4ab837f8fd0467d93f76eead6421b03ae8a93dab",
+      "annotation_sha256": "453b5e1958afd5a7e7051332216b7720207efd7c40c6af8fca3e2a841496398b",
+      "elapsed_s": 600.0620000000054,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "1fb010dd6696e1be62fd571d4ab837f8fd0467d93f76eead6421b03ae8a93dab",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              162,
+              163,
+              254,
+              255,
+              307,
+              308,
+              374,
+              375
+            ],
+            "rationale": "Both named target capabilities are searched and described; neither is invoked before the deadline."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "memory.write was described but never invoked."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition A has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; two replies reached the 2048-token output cap with neither text nor a tool call (93, 478)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 162,
+          "step": 2,
+          "monotonic_ms": 147264,
+          "continuations": 1,
+          "from_first_input_ms": 146858
+        },
+        "returned_ids": {
+          "workspace.write": 163,
+          "workspace.list": 163,
+          "memory.write": 163,
+          "memory.list": 163,
+          "memory.search": 163
+        },
+        "described_ids": {
+          "workspace.write": 255,
+          "memory.write": 375
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 2,
+        "model_calls": 8,
+        "http_attempts": 9,
+        "repairs": 0,
+        "known_input_tokens": 6919,
+        "known_output_tokens": 12120,
+        "call_duration_ms": [
+          83781,
+          63031,
+          87485,
+          47234,
+          62890,
+          102217,
+          22827,
+          40937
+        ],
+        "context_drops": 8,
+        "context_blanks": 4,
+        "protected_overflows": 3,
+        "categories": []
+      },
+      "preserved_files": [],
+      "archive_bytes": 670013
+    },
+    {
+      "cell_id": "s42-r2-a",
+      "condition": "A",
+      "seed": 42,
+      "replicate": 2,
+      "config_sha256": "1f2b128d264c5dfea9be2bc8c413a58bf9ee99daf4afb9c61e6e466ac18c53fd",
+      "run_id": "run-20261114t213659z-84a9b7",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "1b0802670dbf56c92f845a50cdd599022f1a1d513684df86e54e2fd1de968873",
+      "annotation_sha256": "0a6799867e637ad2fa31a43003c071394104f9800d0722113af4088c5ca9c03e",
+      "elapsed_s": 600.0629999999946,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "1b0802670dbf56c92f845a50cdd599022f1a1d513684df86e54e2fd1de968873",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              159,
+              160,
+              232,
+              233,
+              511,
+              512
+            ],
+            "rationale": "Both named target capabilities are found and described; neither is invoked before the deadline."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "memory.write was described but never invoked."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition A has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; four of eight replies reached the 2048-token output cap with neither text nor a tool call (94, 337, 478, 616)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 159,
+          "step": 2,
+          "monotonic_ms": 143937,
+          "continuations": 1,
+          "from_first_input_ms": 143546
+        },
+        "returned_ids": {
+          "memory.write": 160,
+          "workspace.write": 160,
+          "memory.list": 160,
+          "memory.search": 160,
+          "workspace.list": 160
+        },
+        "described_ids": {
+          "workspace.write": 233,
+          "memory.write": 512
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          2,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 4,
+        "model_calls": 8,
+        "http_attempts": 9,
+        "repairs": 0,
+        "known_input_tokens": 7056,
+        "known_output_tokens": 13273,
+        "call_duration_ms": [
+          84671,
+          58827,
+          68858,
+          102937,
+          43000,
+          90077,
+          26233,
+          103562
+        ],
+        "context_drops": 12,
+        "context_blanks": 3,
+        "protected_overflows": 2,
+        "categories": []
+      },
+      "preserved_files": [],
+      "archive_bytes": 657292
+    },
+    {
+      "cell_id": "s42-r2-b",
+      "condition": "B",
+      "seed": 42,
+      "replicate": 2,
+      "config_sha256": "42b4b43fbf47d33433ccf83ac77cbb5e0dc55ea2a32117d536887e17e629f0a5",
+      "run_id": "run-20261114t214659z-9cf047",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "f90ba9c0b0c1dcffa17c1e28a08b3b875fbfba80f3bc9ff8e6472aa98c4699e2",
+      "annotation_sha256": "ab13ed63ef604b4f016cb6008fab811d5c7bf72346f3b8e473ca4a4c25ea9020",
+      "elapsed_s": 600.0789999999979,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "f90ba9c0b0c1dcffa17c1e28a08b3b875fbfba80f3bc9ff8e6472aa98c4699e2",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              38,
+              39,
+              54,
+              55,
+              155,
+              173,
+              304,
+              333,
+              434,
+              436,
+              548,
+              598
+            ],
+            "rationale": "math.evaluate is found and described four times and demonstrated once; it is never independently invoked."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Only a demonstration ran; no invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No own output was checked or revised."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition B has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; two replies reached the 2048-token output cap with neither text nor a tool call (284, 523)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 38,
+          "step": 1,
+          "monotonic_ms": 26281,
+          "continuations": 0,
+          "from_first_input_ms": 25875
+        },
+        "returned_ids": {
+          "math.evaluate": 39
+        },
+        "described_ids": {
+          "math.evaluate": 55
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          4,
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 2,
+        "model_calls": 12,
+        "http_attempts": 13,
+        "repairs": 0,
+        "known_input_tokens": 12573,
+        "known_output_tokens": 12804,
+        "call_duration_ms": [
+          25875,
+          10531,
+          98547,
+          11531,
+          110281,
+          12765,
+          23922,
+          98187,
+          86047,
+          17593,
+          46156,
+          45641
+        ],
+        "context_drops": 20,
+        "context_blanks": 8,
+        "protected_overflows": 4,
+        "categories": []
+      },
+      "preserved_files": [],
+      "archive_bytes": 713271
+    },
+    {
+      "cell_id": "s42-r2-c",
+      "condition": "C",
+      "seed": 42,
+      "replicate": 2,
+      "config_sha256": "1b3ee7d94f00e20bf7e84fcda219c35407d57b0586a651dc68f4d522b7ed1aa6",
+      "run_id": "run-20261114t215659z-cb86d2",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "2f5d594b61505cf979640c1261c2e622145aa238d5bd54467dc8d059641c6509",
+      "annotation_sha256": "39cc6430b78e553bf657be3cad5f8d922341aae928506932f58758b189d20eed",
+      "elapsed_s": 600.0939999999973,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "2f5d594b61505cf979640c1261c2e622145aa238d5bd54467dc8d059641c6509",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              82,
+              83,
+              125,
+              126,
+              186,
+              187,
+              228,
+              229,
+              297,
+              298,
+              639,
+              640
+            ],
+            "rationale": "Every search used an invented category filter 'all' and returned no matches; no capability was ever returned."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No capability was returned, described or invoked."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "The failing filter was never changed across six searches."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition C has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; three consecutive replies reached the 2048-token output cap with neither text nor a tool call (387, 479, 571)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 82,
+          "step": 1,
+          "monotonic_ms": 70468,
+          "continuations": 0,
+          "from_first_input_ms": 70125
+        },
+        "returned_ids": {},
+        "described_ids": {},
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          83,
+          126,
+          187,
+          229,
+          298,
+          640
+        ],
+        "repeat_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 3,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 3,
+        "model_calls": 9,
+        "http_attempts": 10,
+        "repairs": 0,
+        "known_input_tokens": 6096,
+        "known_output_tokens": 14570,
+        "call_duration_ms": [
+          70125,
+          37125,
+          57421,
+          35968,
+          65000,
+          87110,
+          87828,
+          88235,
+          61875
+        ],
+        "context_drops": 0,
+        "context_blanks": 0,
+        "protected_overflows": 0,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 654385
+    },
+    {
+      "cell_id": "s42-r2-d",
+      "condition": "D",
+      "seed": 42,
+      "replicate": 2,
+      "config_sha256": "dd7426c2b4088bfefeb0aab2d16a74811dd35e800314fcd4e9fbe25afb8a1519",
+      "run_id": "run-20261114t220700z-6e5945",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "FAULT_UNEXPOSED"
+      ],
+      "source_sha256": "2779fa467b7e8dc3c7cf1cad75b7f9b1f4798db049b661a993bf0612f146e701",
+      "annotation_sha256": "73801cb2aafa7615bbf54e576d2f2cbae5a4609095d0a9753c19db8b74c43dbd",
+      "elapsed_s": 600.0780000000086,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "2779fa467b7e8dc3c7cf1cad75b7f9b1f4798db049b661a993bf0612f146e701",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              57,
+              58,
+              78,
+              79
+            ],
+            "rationale": "Searches for 'capability' and 'example' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              100,
+              101,
+              114,
+              115,
+              207,
+              235,
+              378,
+              397,
+              540,
+              567
+            ],
+            "rationale": "math.evaluate is found and described four times without any invocation or demonstration."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "FAULT_UNEXPOSED: no otherwise-permitted execution occurred, so the fault was never injected."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; two replies reached the 2048-token output cap with neither text nor a tool call (348, 510)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 57,
+          "step": 1,
+          "monotonic_ms": 45016,
+          "continuations": 0,
+          "from_first_input_ms": 44625
+        },
+        "returned_ids": {
+          "math.evaluate": 101
+        },
+        "described_ids": {
+          "math.evaluate": 115
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          58,
+          79
+        ],
+        "repeat_counts": [
+          4,
+          3,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 2,
+        "model_calls": 12,
+        "http_attempts": 13,
+        "repairs": 0,
+        "known_input_tokens": 11071,
+        "known_output_tokens": 11164,
+        "call_duration_ms": [
+          44625,
+          16125,
+          16453,
+          9281,
+          89389,
+          22031,
+          111952,
+          23187,
+          13858,
+          111687,
+          23125,
+          22235
+        ],
+        "context_drops": 16,
+        "context_blanks": 6,
+        "protected_overflows": 4,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 714439
+    },
+    {
+      "cell_id": "s41-r2-c",
+      "condition": "C",
+      "seed": 41,
+      "replicate": 2,
+      "config_sha256": "18b77fe36d5401db3a27441d6e62cb6e8c822b392fbbd42dc76f653a7e136870",
+      "run_id": "run-20261114t221700z-da6f56",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "8d623f4ac20179830e63a4ffe0b6b4bd10a060b9c14dc0e2df7ab7ad08f3dd89",
+      "annotation_sha256": "1950b3419797c5cce0ed74bcff4ebe1cb67b64a96b9082754ed3abdd22003e83",
+      "elapsed_s": 600.3279999999941,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "8d623f4ac20179830e63a4ffe0b6b4bd10a060b9c14dc0e2df7ab7ad08f3dd89",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              32,
+              33
+            ],
+            "rationale": "The first search for 'example' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              58,
+              59,
+              71,
+              72,
+              140,
+              158,
+              249,
+              267,
+              358,
+              391,
+              573,
+              599
+            ],
+            "rationale": "The identical search('math')/describe(math.evaluate) pair recurs five times without any invocation or demonstration."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition C has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; one reply reached the 2048-token output cap with neither text nor a tool call (503)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 32,
+          "step": 1,
+          "monotonic_ms": 20389,
+          "continuations": 0,
+          "from_first_input_ms": 20014
+        },
+        "returned_ids": {
+          "math.evaluate": 59
+        },
+        "described_ids": {
+          "math.evaluate": 72
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          33
+        ],
+        "repeat_counts": [
+          5,
+          5,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 1,
+        "model_calls": 12,
+        "http_attempts": 13,
+        "repairs": 0,
+        "known_input_tokens": 12348,
+        "known_output_tokens": 11591,
+        "call_duration_ms": [
+          20031,
+          21140,
+          8391,
+          63906,
+          12328,
+          87610,
+          12484,
+          87421,
+          26562,
+          111187,
+          63875,
+          19937
+        ],
+        "context_drops": 16,
+        "context_blanks": 8,
+        "protected_overflows": 5,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 720230
+    },
+    {
+      "cell_id": "s41-r2-d",
+      "condition": "D",
+      "seed": 41,
+      "replicate": 2,
+      "config_sha256": "05e49e3d17de133359e4dc7bd8ead77505803604bef482d367936bef86e525d1",
+      "run_id": "run-20261114t222701z-5e7655",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "FAULT_UNEXPOSED"
+      ],
+      "source_sha256": "b51e84a3c00ed28ebe146361c7c1037e32dd571d253585f4e5485a404e2ec8e6",
+      "annotation_sha256": "058cd1091ba1ee7ed6a787a5eec73b70ef08080fb8aaa94cb92d36adda8f9b1d",
+      "elapsed_s": 600.0470000000059,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "b51e84a3c00ed28ebe146361c7c1037e32dd571d253585f4e5485a404e2ec8e6",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              32,
+              33
+            ],
+            "rationale": "The first search for 'example' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              57,
+              58,
+              70,
+              71,
+              139,
+              169,
+              211,
+              234,
+              466,
+              498
+            ],
+            "rationale": "math.evaluate is found and described four times without any invocation or demonstration."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "FAULT_UNEXPOSED: no otherwise-permitted execution occurred, so the fault was never injected."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; three replies reached the 2048-token output cap with neither text nor a tool call (348, 437, 611)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 32,
+          "step": 1,
+          "monotonic_ms": 20375,
+          "continuations": 0,
+          "from_first_input_ms": 19375
+        },
+        "returned_ids": {
+          "math.evaluate": 58
+        },
+        "described_ids": {
+          "math.evaluate": 71
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          33
+        ],
+        "repeat_counts": [
+          4,
+          3,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 2,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 3,
+        "model_calls": 12,
+        "http_attempts": 13,
+        "repairs": 0,
+        "known_input_tokens": 12359,
+        "known_output_tokens": 12121,
+        "call_duration_ms": [
+          19375,
+          20531,
+          8312,
+          64141,
+          24718,
+          37531,
+          17483,
+          111811,
+          85422,
+          22343,
+          27093,
+          112453
+        ],
+        "context_drops": 20,
+        "context_blanks": 7,
+        "protected_overflows": 4,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 708827
+    },
+    {
+      "cell_id": "s41-r2-a",
+      "condition": "A",
+      "seed": 41,
+      "replicate": 2,
+      "config_sha256": "9d3abf8703fb8e1de215c9861bc5917d69509e7c54fc6781c6e701b523a43c96",
+      "run_id": "run-20261114t223701z-6cf819",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "f2a65389a617281d733e9370ee2e51b7566f58813522df981f5542ea228a1361",
+      "annotation_sha256": "1304f28a27ddba44bef7b56fa6c529ba3befb51519986b5fff603eca4b032fd5",
+      "elapsed_s": 600.0470000000059,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "f2a65389a617281d733e9370ee2e51b7566f58813522df981f5542ea228a1361",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              72,
+              73,
+              134,
+              135,
+              226,
+              227,
+              289,
+              290
+            ],
+            "rationale": "Both named target capabilities are found and described; neither is invoked before the deadline."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "memory.write was described but never invoked."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition A has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; two replies reached the 2048-token output cap with neither text nor a tool call (397, 552)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 72,
+          "step": 1,
+          "monotonic_ms": 60672,
+          "continuations": 0,
+          "from_first_input_ms": 60297
+        },
+        "returned_ids": {
+          "memory.write": 73,
+          "workspace.write": 73,
+          "memory.list": 73,
+          "memory.search": 73,
+          "workspace.list": 73
+        },
+        "described_ids": {
+          "workspace.write": 135,
+          "memory.write": 290
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 2,
+        "model_calls": 8,
+        "http_attempts": 9,
+        "repairs": 0,
+        "known_input_tokens": 7240,
+        "known_output_tokens": 13302,
+        "call_duration_ms": [
+          60297,
+          56514,
+          88375,
+          57139,
+          106407,
+          56796,
+          90828,
+          69078
+        ],
+        "context_drops": 6,
+        "context_blanks": 4,
+        "protected_overflows": 3,
+        "categories": []
+      },
+      "preserved_files": [],
+      "archive_bytes": 669141
+    },
+    {
+      "cell_id": "s41-r2-b",
+      "condition": "B",
+      "seed": 41,
+      "replicate": 2,
+      "config_sha256": "0ace50b981c86065fd80b889f219b2d2e95a2de69089b08b27706c3be3ad7139",
+      "run_id": "run-20261114t224701z-ebe0a4",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "48aff716b392a52c8367a369cd0dd0aa545263548b8ad639fa96e08547427fda",
+      "annotation_sha256": "552c28668fdc6ee6957fa81463e050eb3696193f6e0a615ca9c56f1cb388b37c",
+      "elapsed_s": 600.0630000000092,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "48aff716b392a52c8367a369cd0dd0aa545263548b8ad639fa96e08547427fda",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              34,
+              35,
+              55,
+              56,
+              80,
+              81,
+              115,
+              116,
+              156,
+              157,
+              208,
+              209,
+              242,
+              243,
+              321,
+              322
+            ],
+            "rationale": "Eight searches (including for plotting/visualisation, which the world does not offer) returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              382,
+              383,
+              397,
+              398,
+              479,
+              500,
+              609,
+              628,
+              653,
+              674
+            ],
+            "rationale": "math.evaluate is found and described four times without any invocation or demonstration."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition B has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 34,
+          "step": 1,
+          "monotonic_ms": 22344,
+          "continuations": 0,
+          "from_first_input_ms": 21937
+        },
+        "returned_ids": {
+          "math.evaluate": 383
+        },
+        "described_ids": {
+          "math.evaluate": 398
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          35,
+          56,
+          81,
+          116,
+          157,
+          209,
+          243,
+          322
+        ],
+        "repeat_counts": [
+          4,
+          3,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 0,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 0,
+        "model_calls": 16,
+        "http_attempts": 17,
+        "repairs": 0,
+        "known_input_tokens": 14409,
+        "known_output_tokens": 13951,
+        "call_duration_ms": [
+          21921,
+          16327,
+          19797,
+          30031,
+          36187,
+          47125,
+          28687,
+          74390,
+          56092,
+          10297,
+          76359,
+          15906,
+          105327,
+          13156,
+          20390,
+          15938
+        ],
+        "context_drops": 26,
+        "context_blanks": 6,
+        "protected_overflows": 4,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 754887
+    },
+    {
+      "cell_id": "s41-r1-d",
+      "condition": "D",
+      "seed": 41,
+      "replicate": 1,
+      "config_sha256": "b6eefada438756d012e21f158d7b040c465c44fc9aa19e2c496535a24484a46b",
+      "run_id": "run-20261114t225702z-179dd0",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "FAULT_UNEXPOSED"
+      ],
+      "source_sha256": "781d2b8881baf8eb27f674a6c9397a5602628cf90953027a0c0e13cceb88e128",
+      "annotation_sha256": "575a1dac5148ac7b1a45dba936ace23804d4b33cea10ed12940a48d4139885c9",
+      "elapsed_s": 600.0460000000021,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "781d2b8881baf8eb27f674a6c9397a5602628cf90953027a0c0e13cceb88e128",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              31,
+              32
+            ],
+            "rationale": "The first search for 'example' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              57,
+              58,
+              70,
+              71,
+              138,
+              169,
+              308,
+              333,
+              375,
+              398,
+              632,
+              663
+            ],
+            "rationale": "math.evaluate is found and described five times without any invocation or demonstration."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "FAULT_UNEXPOSED: no otherwise-permitted execution occurred, so the fault was never injected."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; three replies reached the 2048-token output cap with neither text nor a tool call (283, 513, 603)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 31,
+          "step": 1,
+          "monotonic_ms": 19250,
+          "continuations": 0,
+          "from_first_input_ms": 18908
+        },
+        "returned_ids": {
+          "math.evaluate": 58
+        },
+        "described_ids": {
+          "math.evaluate": 71
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          32
+        ],
+        "repeat_counts": [
+          5,
+          4,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 2,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 3,
+        "model_calls": 14,
+        "http_attempts": 15,
+        "repairs": 0,
+        "known_input_tokens": 13605,
+        "known_output_tokens": 13202,
+        "call_duration_ms": [
+          18907,
+          20452,
+          8328,
+          64375,
+          25032,
+          112843,
+          18077,
+          19735,
+          38062,
+          17514,
+          113000,
+          86187,
+          22264,
+          27000
+        ],
+        "context_drops": 18,
+        "context_blanks": 8,
+        "protected_overflows": 5,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 732334
+    },
+    {
+      "cell_id": "s41-r1-a",
+      "condition": "A",
+      "seed": 41,
+      "replicate": 1,
+      "config_sha256": "ea591ce49e66948472d32642d4e62d02dd21fd4597d93f483656a5fc077e3481",
+      "run_id": "run-20261114t230702z-4dae4e",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED",
+        "CONTROL_FAILURE"
+      ],
+      "source_sha256": "2ae92c1a31f7c3a48155f41894fea7e25f23a380ae0ee3c1959fb3e1f6834aaf",
+      "annotation_sha256": "a7b0d9900d7209d8aeaf8608224005eb82f587c81d5135490bcf6c0f8e49077d",
+      "elapsed_s": 600.0470000000059,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "2ae92c1a31f7c3a48155f41894fea7e25f23a380ae0ee3c1959fb3e1f6834aaf",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [],
+        "assessments": {
+          "selection": {
+            "label": "observed",
+            "evidence": [
+              57,
+              58,
+              129,
+              130,
+              433,
+              434,
+              520,
+              521
+            ],
+            "rationale": "Both named target capabilities are found and described; neither is invoked before the deadline."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "memory.write was described but never invoked."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition A has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; two replies reached the 2048-token output cap with neither text nor a tool call (237, 629)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 57,
+          "step": 1,
+          "monotonic_ms": 45625,
+          "continuations": 0,
+          "from_first_input_ms": 45282
+        },
+        "returned_ids": {
+          "memory.write": 58,
+          "workspace.write": 58,
+          "memory.list": 58,
+          "memory.search": 58,
+          "workspace.list": 58
+        },
+        "described_ids": {
+          "workspace.write": 130,
+          "memory.write": 521
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [],
+        "repeat_counts": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 2,
+        "model_calls": 8,
+        "http_attempts": 9,
+        "repairs": 0,
+        "known_input_tokens": 7905,
+        "known_output_tokens": 12923,
+        "call_duration_ms": [
+          45281,
+          67343,
+          106110,
+          53343,
+          35187,
+          91656,
+          82156,
+          106000
+        ],
+        "context_drops": 12,
+        "context_blanks": 5,
+        "protected_overflows": 3,
+        "categories": []
+      },
+      "preserved_files": [],
+      "archive_bytes": 671758
+    },
+    {
+      "cell_id": "s41-r1-c",
+      "condition": "C",
+      "seed": 41,
+      "replicate": 1,
+      "config_sha256": "41dab3fb848923ba74741366697beacd31bb94ed40a65c415bc17a40548df394",
+      "run_id": "run-20261114t231702z-6b8a44",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "aec712448121d15f9aa082f02d966b64159ef447aa415682c7dfd06ebf703569",
+      "annotation_sha256": "a726919cb36dbaac81e95d569d2153594e48ee2b9544c23b69692a8348dcc33d",
+      "elapsed_s": 600.0629999999946,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "aec712448121d15f9aa082f02d966b64159ef447aa415682c7dfd06ebf703569",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              31,
+              32
+            ],
+            "rationale": "The first search for 'example' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              56,
+              57,
+              69,
+              70,
+              384,
+              407,
+              450,
+              469,
+              513,
+              532,
+              575,
+              594,
+              638,
+              657
+            ],
+            "rationale": "math.evaluate is found and described eight times; from 383 the identical search('calculator')/describe pair cycles five times with identical output-token counts. No invocation or demonstration."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition C has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; one reply reached the 2048-token output cap with neither text nor a tool call (288)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 31,
+          "step": 1,
+          "monotonic_ms": 19110,
+          "continuations": 0,
+          "from_first_input_ms": 18735
+        },
+        "returned_ids": {
+          "math.evaluate": 57
+        },
+        "described_ids": {
+          "math.evaluate": 70
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          32
+        ],
+        "repeat_counts": [
+          8,
+          5,
+          3,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 1,
+        "model_calls": 18,
+        "http_attempts": 19,
+        "repairs": 0,
+        "known_input_tokens": 19906,
+        "known_output_tokens": 12675,
+        "call_duration_ms": [
+          18735,
+          20375,
+          8281,
+          64578,
+          29264,
+          113297,
+          21265,
+          19843,
+          38656,
+          17467,
+          38282,
+          14375,
+          38327,
+          14500,
+          38781,
+          14391,
+          38125,
+          14483
+        ],
+        "context_drops": 30,
+        "context_blanks": 14,
+        "protected_overflows": 8,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 797416
+    },
+    {
+      "cell_id": "s41-r1-b",
+      "condition": "B",
+      "seed": 41,
+      "replicate": 1,
+      "config_sha256": "5ecf3df69dbeef48d6678bbd48bcef9bba499a6a82e44f49b9666663de13b176",
+      "run_id": "run-20261114t232702z-6c3b26",
+      "valid": true,
+      "reviewed": true,
+      "qualifies": false,
+      "labels": [
+        "CENSORED"
+      ],
+      "source_sha256": "75578bc8802e2cbcc572b5084732abb85e4ed35ef80cc923bcf6a5e092c09f83",
+      "annotation_sha256": "b29c538ee3fc766753ba9456a4b55677fe10920db5b2dff6f8b40ae12333f945",
+      "elapsed_s": 600.0469999999914,
+      "reason": "deadline",
+      "provider_probe": {
+        "available": true,
+        "models": [
+          {
+            "context_length": 4096,
+            "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+            "name": "qwen3:4b",
+            "size": 3534917467,
+            "size_vram": 2344636907
+          }
+        ]
+      },
+      "annotation": {
+        "version": "s007d-rubric-v1",
+        "source_sha256": "75578bc8802e2cbcc572b5084732abb85e4ed35ef80cc923bcf6a5e092c09f83",
+        "reviewed": true,
+        "epistemic_status": "derived",
+        "reviewer": "Claude; single unmasked investigator; no independent second rating",
+        "objective": null,
+        "followup_chain": null,
+        "categories": [
+          {
+            "category": "DISCOVERY_FAILURE",
+            "evidence": [
+              64,
+              65,
+              132,
+              133
+            ],
+            "rationale": "Searches for 'example' and 'demonstrate' returned no matches."
+          }
+        ],
+        "assessments": {
+          "selection": {
+            "label": "ambiguous",
+            "evidence": [
+              150,
+              151,
+              164,
+              165,
+              221,
+              346,
+              374,
+              396,
+              424,
+              461,
+              489,
+              527,
+              555,
+              592,
+              621,
+              658,
+              686
+            ],
+            "rationale": "workspace.write is found and described, then the identical search('file')/describe pair cycles about seven times with identical output-token counts. No invocation or demonstration."
+          },
+          "goal_consistency": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "No reply text; no stated objective."
+          },
+          "followup": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No invocation, artifact or note."
+          },
+          "verification_improvement": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "Nothing produced to check."
+          },
+          "memory_use": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No memory capability was used."
+          },
+          "adaptation": {
+            "label": "not_assessable",
+            "evidence": [],
+            "rationale": "Condition B has no registered fault."
+          },
+          "awaiting_human": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No request for human input."
+          },
+          "environmental_claims": {
+            "label": "not_observed",
+            "evidence": [],
+            "rationale": "No reply text; one reply reached the 2048-token output cap with neither text nor a tool call (311)."
+          }
+        }
+      },
+      "observations": {
+        "first_discovery": {
+          "seq": 64,
+          "step": 1,
+          "monotonic_ms": 52437,
+          "continuations": 0,
+          "from_first_input_ms": 52000
+        },
+        "returned_ids": {
+          "workspace.write": 151,
+          "workspace.list": 151
+        },
+        "described_ids": {
+          "workspace.write": 165
+        },
+        "successful_invocations": [],
+        "memory_retrievals": [],
+        "control_task_success": false,
+        "argument_failure_seqs": [],
+        "discovery_failure_seqs": [
+          65,
+          133
+        ],
+        "repeat_counts": [
+          8,
+          7,
+          1,
+          1
+        ],
+        "repetitive_loop_seqs": [],
+        "maximum_tool_free_streak": 1,
+        "fault_exposed": false,
+        "fault_delivered": false,
+        "fault_next_actions": [],
+        "fault_count": 0,
+        "continuations": 1,
+        "model_calls": 18,
+        "http_attempts": 19,
+        "repairs": 0,
+        "known_input_tokens": 17393,
+        "known_output_tokens": 14786,
+        "call_duration_ms": [
+          52000,
+          63578,
+          12593,
+          9531,
+          52547,
+          87578,
+          28139,
+          23032,
+          17156,
+          22781,
+          32453,
+          22921,
+          32547,
+          23078,
+          32516,
+          23000,
+          32578,
+          23000
+        ],
+        "context_drops": 32,
+        "context_blanks": 13,
+        "protected_overflows": 7,
+        "categories": [
+          "DISCOVERY_FAILURE"
+        ]
+      },
+      "preserved_files": [],
+      "archive_bytes": 767587
+    }
+  ],
+  "independent_mechanical_audit": {
+    "cells": 24,
+    "requests": 324,
+    "successful_invocations": {
+      "math.evaluate": 6,
+      "memory.write": 1
+    },
+    "nonempty_nondatabase_file_events": 0,
+    "stored_notes_returned": 0,
+    "world_digest": "1ccc407cc300e7622bcca348ff22c5982bff5cf3a10559ee741304350e960da5",
+    "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "configurations_checked": true,
+    "passed": true
+  }
+}

@@ -7,6 +7,14 @@ retained separately. See the [report](2026-11-14-autonomy-baseline.md),
 [registration](registrations/S007d-001.md), [rubric](S007d-RUBRIC.md) and
 [derived dataset](results/S007d-001.json). No philosophical long-duration
 experiment has run. Earlier dated records remain engineering checks/pilots.
+The one bounded S007h change, **S007h-001 (llama3.2:3b → installed qwen3:4b,
+all else frozen), is also complete with NO_GO**: 24/24 valid and reviewed, 0/6
+guided and 0/6 B/C qualifying, zero repairs but only seven invocations, with
+hidden reasoning filling the fixed time budget. See the
+[report](2026-11-14-model-swap-reevaluation.md),
+[registration](registrations/S007h-001.md) and
+[derived dataset](results/S007h-001.json). The next route is a registered
+decision (OD-9), not further tuning.
 We study observable artificial agency and agent-stated objectives, not subjective
 consciousness. A negative valid baseline completes S007d without opening expansion.
 

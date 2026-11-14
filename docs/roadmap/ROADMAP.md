@@ -80,7 +80,8 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S007h, one bounded registered improvement/re-evaluation after S007d-001 NO_GO.
+**Next:** S010 by default. S007h-001 (model swap) is complete with NO_GO; any
+further bounded change needs a registered decision first (OD-9).
 A future current GO can open S007e or a useful narrow S008c capability.
 With INCONCLUSIVE, fix the named validity issue before drawing a conclusion.
 S010 protocol work, optional hosted design and S006c/S006f remain safe
@@ -657,8 +658,8 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S007h — Bounded Orchestrator Improvement and Re-evaluation
 
 - **Repository / streams:** Simulation; Builder evidence/configuration. B/D.
-- **Status:** in progress; S007h-001 (model swap to installed qwen3:4b, all else
-  frozen) [registered](../experiments/registrations/S007h-001.md) before scoring.
+- **Status:** complete; S007h-001 **NO_GO**
+  ([report](../experiments/2026-11-14-model-swap-reevaluation.md)). Expansion stays closed.
 - **Objective:** Test one stated explanation for poor autonomous activity.
 - **Prerequisites:** S007d report and any specific model/resource approvals.
 - **Scope:** preregister one bounded model, context/memory, discovery or explicitly
@@ -674,8 +675,17 @@ Research campaign gates are not extra paperwork for every routine fix.
   does not open expansion; register a next decision before more implementation.
   Scaffolding success remains labelled scaffolding-dependent.
 - **Risks:** benchmark exposure, multiple comparisons, model drift and operator coaching.
+- **Delivered:** registered model swap to installed qwen3:4b with all else frozen
+  ([registration](../experiments/registrations/S007h-001.md), Builder `e3e55a0`;
+  manifest Simulation `5806e6e`; runtime source identical to the S007d freeze).
+  24/24 cells valid, reviewed and deadline-censored after 7–21 calls; 0/6 guided,
+  0/6 B and 0/6 C qualifying; 7 successful invocations (S007d 27), zero repairs
+  (S007d 275), 38 replies exhausting the 2048-token cap on unrecorded reasoning
+  and 40 empty replies; 2/6 D exposed. Same-seed replicates were strongly
+  correlated. Independent raw-event recount agreed.
 - **Next recommended milestone:** GO → S007e/S008c; otherwise S010 or an explicitly
   chosen bounded route, optionally S007f. No automatic endless tuning loop.
+  After S007h-001: S010 by default; any further bounded change waits on OD-9.
 
 ---
 

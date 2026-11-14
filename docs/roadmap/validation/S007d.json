@@ -1,0 +1,42 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-14T19:16:54Z",
+  "commands": [
+    {
+      "command": "Builder: git status/log; uv sync; uv run olb state; uv run olb check --tests (baseline)",
+      "result": "Clean e5e6869; S007d next; 305 tests passed in 42.91 seconds and all health checks passed."
+    },
+    {
+      "command": "Simulation: git status/log; uv sync; uv run pytest (baseline before source edits)",
+      "result": "Clean 80cb67b; 275 tests passed in 250.35 seconds."
+    },
+    {
+      "command": "Simulation: uv run pytest (final frozen harness); uv run ruff check .",
+      "result": "289 tests passed without warnings in 257.70 seconds; lint passed. Fake/scripted tests cover metrics/labels, positive/negative/ambiguous ratings, provenance/config conditions, failures, interruptions, concurrent runner refusal and fault eligibility/delivery/exposure."
+    },
+    {
+      "command": "Simulation: four seed-901 pilot cells; archive/config/resource/context checks",
+      "result": "4/4 verified; NOT_SCORED and excluded. Eight-step/60-second pilot ceilings with the common profile were feasible; guided pilot negative and D fault-unexposed. No prompt/profile retuning."
+    },
+    {
+      "command": "git commits/pushes before scoring: Simulation implementation 75ae729 and manifest dbb5865; Builder registration 001e941",
+      "result": "Prior registration froze 24 cells, exact prompts/profile/rubric and LF-normalised source pins. Source pins matched the Git implementation tree. Registration commit recorded verbatim before the first scored cell."
+    },
+    {
+      "command": "Simulation: benchmark run campaigns/s007d-001.json --registration 001e94177536317a8f3d273b581593584e9f42f9 --max-cells 4 (six supervised batches)",
+      "result": "24/24 launched/completed at max_steps=32; no launch failures, interruptions, replacements or invalid archives. 845.078 cumulative active seconds; all 768 inputs and 24 post-run probes audited. Source unchanged throughout."
+    },
+    {
+      "command": "report_campaign; source-bound investigator annotation validation; separate direct-event archive/config/input/probe/coverage audit",
+      "result": "24/24 valid/reviewed. NO_GO: A task completion 0/6; B/C qualifiers 0/6 each. 27 successful world invocations, zero productive files/retrieved stored notes. D exposed 2/6, changed approach 2/2 exposed (same seed); 4/6 unexposed retained. One unmasked reviewer; no second-rater claim."
+    },
+    {
+      "command": "Derived results export and source/annotation/ledger hashes; Simulation git push/status",
+      "result": "Complete per-cell dataset/report retained in Builder; raw archives/workspaces/ledger remain local only. Simulation commits 75ae729, dbb5865 and README closeout 0d63eb1 pushed; clean main."
+    },
+    {
+      "command": "Builder: uv run ruff check .; uv run olb check --tests (final); final frozen-source/native report recheck",
+      "result": "Lint passed; 305 tests passed in 43.24 seconds; all health checks passed. Final source pins still match; 24 cells valid/reviewed and NO_GO reproduced. Derived results distinguish three SQLite-state revisions from zero productive non-database files."
+    }
+  ]
+}
