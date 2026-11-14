@@ -14,6 +14,7 @@ by rewriting history.
 | [0006](ADR-0006-isolation.md) | Two isolation tiers: supervised process now, container before agent-written code | Accepted; container mechanism open |
 | [0007](ADR-0007-durable-state.md) | Append-only JSONL event log as the record; SQLite for indexes and memory | Accepted |
 | [0008](ADR-0008-component-communication.md) | Components communicate through files under a data root; Window is read-only | Accepted; front-end stack decided in S004 |
+| [0009](ADR-0009-checkpoint-barriers-and-agent-memory.md) | Complete-step checkpoints, append-only rollback/resume and agent-owned live memory | Accepted; refines ADR-0007 memory location |
 
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).

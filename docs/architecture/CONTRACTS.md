@@ -291,10 +291,63 @@ See [OBSERVATION.md](OBSERVATION.md).
 resumed run continues the same sequence. `progress.elapsed_s` counts active
 time only, so a crash does not eat into an experiment's time budget.
 
+S006a implements the protocol in [ADR-0009](../decisions/ADR-0009-checkpoint-barriers-and-agent-memory.md).
+Each checkpoint has `checkpoint.json`, `conversation.json`, `runtime_state.json`,
+`memory.sqlite` and `workspace.zip`. Metadata lists the four components with
+byte counts and SHA-256 digests. The runtime state holds the scripted cursor,
+completed-step count, tool correlation counter, token count and whether a live
+memory file existed. The conversation is in chat-completions message form.
+SQLite backup produces a consistent memory copy; the ZIP excludes its live
+database/sidecars and retains all other files and empty directories. Restore
+rejects absolute paths, traversal, backslashes, drive syntax and duplicate names.
+
+The supervisor publishes only complete, validated staging directories. Its
+`checkpoint.created.payload.extensions` binds the metadata digest and names
+older checkpoint ids pruned by `keep_last`. Metadata extensions bind the world
+content digest and the hash of `last_event_seq`. The runtime sees neither
+checkpoint paths nor recorder handles. It supplies state only at completed-step
+barriers and waits for acknowledgement. Defaults, when `checkpointing` is
+enabled, are interval 60 seconds and retention 3; checkpointing is otherwise off.
+Interval snapshots occur at the first barrier at/after the interval, with an
+initial snapshot and snapshots before normal completion/operator pause.
+
+Resume takes the newest usable, unpruned checkpoint and appends after the
+**current log tail**, not after the snapshot boundary. A recovery event records
+the chosen id; its payload extensions record the snapshot event boundary,
+rejected ids and accumulated active time. No event is removed. When fallback
+rolls state back, later work may be replayed and restoration may produce new
+artifact observations. Correlation ids, artifact ids/revisions and the hash
+chain continue. All consumed model steps still count against the original
+limit, including replayed work. Paused downtime is excluded from elapsed time;
+the original budget is never replenished. The world/model digests must match.
+
+Verification checks component hashes/sizes, metadata binding, snapshot identity,
+SQLite integrity and ZIP integrity/paths. Corrupt snapshots remain forensic
+evidence: resume can bypass them, but `ols verify` still reports their corruption.
+Pruned snapshots are distinguished by the recorded pruning list. Prior segment
+summaries are retained under `segments/`; the original stderr log is appended.
+Former workspaces are retained beside the restored workspace so operator edits
+are not discarded. A writer lock prevents concurrent supervisor segments.
+
+`memory.write`, `memory.search` and `memory.list` use the ordinary filesystem
+permission checks and a fixed `.memory.sqlite` path inside the workspace.
+Writes upsert a key/value and increment its revision. Reads do not create a
+missing database; search uses literal substring matching (SQLite ASCII lower),
+listing is sorted by key, and results are bounded. These are agent notes, never
+privileges. Successful writes produce a supervisor-authored `memory.written`
+event with key/revision/call correlation in payload extensions. `NOTES.md` is
+the optional free-form working-notes convention.
+
+Hard deadline termination retains the earlier safe snapshot, not a snapshot
+of a partially executed tool. `checkpoint_then_stop` remains explicitly
+unsupported pending S006b, as do automatic crash/reboot recovery and stale-lock
+recovery. Stopped runs must have a valid summary for manual resume in S006a.
+
 ## Change log
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-14 | checkpoint-metadata | 1.0.1 | Clarifies that last_event_seq is the snapshot boundary; resume appends after the existing tail and records rollback/replay. Structure and constraints unchanged. S006a protocol, agent-owned memory and world 0.6.0 documented in ADR-0009 |
 | 2026-11-14 | observation-event | 1.2.0 | Adds environment.message kind preamble for the generic discovery system message; minimal world 0.5.0 bundles it. Four meta-tool protocol specified (S005b) |
 | 2026-11-14 | (release layout / protocol) | — | Generated registry format 1.0.0 and full documentation; disposable self-test workspaces; minimal world 0.4.0 adds workspace.write, workspace.list and time.now. No schema change (S005a) |
 | 2026-11-13 | all | 1.0.0 | Initial versions (S001) |

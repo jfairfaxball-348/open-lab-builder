@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T09:56:29Z",
-  "last_session": "S005b",
+  "updated_at": "2026-11-14T10:40:21Z",
+  "last_session": "S006a",
   "completed_milestones": [
     {
       "id": "S001",
@@ -72,12 +72,21 @@
         "32c23cc"
       ],
       "summary": "Four discovery meta-tools backed by the built registry and generated documentation; restricted search/describe and permission-checked real demonstrations/invocations. Generic recorded system preamble (observation-event 1.2.0, minimal world 0.5.0). Context guard preserves fresh tool results and both initial messages; original tool-call arguments are archived separately from recorded syntactic repairs. Scripted acceptance passes; final directed llama3.2:3b trial archives a successful search/describe/invoke sequence with no tool names in its initial prompt. Earlier failures retained; no autonomous reliability claim."
+    },
+    {
+      "id": "S006a",
+      "completed_at": "2026-11-14T10:40:21Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "62139ac"
+      ],
+      "summary": "Durable SQLite memory capabilities in minimal world 0.6.0; working-notes convention; complete-step checkpoint barriers with conversation, runtime cursor/counters, SQLite backup and workspace ZIP; validated atomic publication, retention and cooperative pause/ols resume. Resume preserves the log and artifact history, falls back from corruption and retains original time/step budgets while excluding downtime. ADR-0009 refines live memory location and append-only rollback; checkpoint-metadata 1.0.1 clarifies the boundary. Scripted/CLI and fake-model acceptance verified; automatic crash/stale-lock recovery and graceful deadline checkpointing remain S006b."
     }
   ],
   "next_milestone": {
-    "id": "S006a",
+    "id": "S006b",
     "repository": "open-lab-simulation",
-    "title": "Durable Memory and Checkpoints"
+    "title": "Independent Supervisor and Recovery"
   },
   "blockers": [],
   "known_issues": [
@@ -118,9 +127,11 @@
       "affects": [
         "S003a",
         "S004",
-        "S006c"
+        "S006c",
+        "S006a",
+        "S006b"
       ],
-      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there."
+      "detail": "The digest hashes stored bytes and the repository forces LF line endings, so it should be identical on Linux. The Simulation kills the run's process tree with a Job Object on Windows and a process group on POSIX; only the Windows path has been exercised. Check both the first time a Linux environment is available. The Window uses only pathlib and the standard-library HTTP server and should behave the same on Linux; its tests have not been run there. SQLite memory, checkpoint ZIP/backup, resume and writer-lock tests have also only run on Windows."
     },
     {
       "id": "KI-10",
@@ -179,6 +190,14 @@
         "S012"
       ],
       "detail": "max_output_tokens covers the hidden reasoning: qwen3:4b at 512 produced only empty replies. Asking Ollama 0.40.16 for reasoning_effort 'none' moved the reasoning into the reply text, which would be recorded as said, so the runtime sends no such option. If a thinking model is chosen (OD-2) the protocol must say how much unrecorded computation is acceptable."
+    },
+    {
+      "id": "KI-16",
+      "summary": "Automatic crash/reboot recovery, stale-writer-lock handling and checkpoint_then_stop are not implemented.",
+      "affects": [
+        "S006b"
+      ],
+      "detail": "S006a supports complete-step cooperative pause and manual resume of stopped runs with summaries. Hard deadlines retain the preceding safe checkpoint and do not snapshot partial tools; checkpoint_then_stop is explicitly refused. Native console-signal delivery, uninterruptible host I/O and large/long-run performance remain unverified. See ADR-0009 and docs/experiments/2026-11-14-memory-checkpoints.md."
     }
   ],
   "open_decisions": [
@@ -205,51 +224,43 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T09:56:29Z",
+    "ran_at": "2026-11-14T10:40:21Z",
     "commands": [
       {
         "command": "uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Dependencies synced; S005b next; 297 passed and all six health checks passed"
+        "result": "Dependencies synced; S006a next; 299 passed and all six health checks passed"
       },
       {
         "command": "open-lab-simulation: uv sync; uv run pytest (baseline)",
-        "result": "Dependencies synced; 108 passed"
+        "result": "Dependencies synced; 126 passed"
       },
       {
-        "command": "uv run ruff check .",
-        "result": "All checks passed"
+        "command": "uv run ruff check .; uv run olb check --tests",
+        "result": "Lint passed; 305 passed and all six health checks passed"
       },
       {
-        "command": "uv run olb check --tests",
-        "result": "299 passed; all six health checks and test suite passed"
-      },
-      {
-        "command": "uv run olb world build worlds/minimal; uv run olb world verify releases/minimal/0.5.0 --self-test; uv run olb world build worlds/minimal --publish",
-        "result": "Built, self-tested, verified and published minimal 0.5.0 with observation-event 1.2.0; matching digest 21474d3b0b84a6bb0829a08e9c5fd18fb983292749c0533b8afd08f71cfbff0c"
+        "command": "uv run olb world build worlds/minimal; uv run olb world verify releases/minimal/0.6.0 --self-test; uv run olb world build worlds/minimal --publish",
+        "result": "Eight capabilities self-tested; local release intact; published matching digest 1ccc407cc300e7622bcca348ff22c5982bff5cf3a10559ee741304350e960da5"
       },
       {
         "command": "open-lab-simulation: uv run ruff check .; uv run pytest",
-        "result": "All checks passed; 126 passed with scripted replies and fake server; no real model in the suite"
+        "result": "Lint passed; 147 passed (scripted and fake model server). Acceptance covers equivalent restored files/memory, gap-free append-only log, corruption fallback, downtime exclusion, unchanged budgets, retention, safe paths, cleanup/deadline handling and saved fake-model conversation/identity"
       },
       {
-        "command": "open-lab-simulation: compare staged world fixture blobs to copied built files",
-        "result": "All 26 fixture files byte-identical in Git index; no fixture edited by hand"
+        "command": "open-lab-simulation: compare staged fixture blobs with copied built release files",
+        "result": "35 of 35 fixture files byte-identical; copied from the Builder release, never hand edited"
       },
       {
-        "command": "open-lab-simulation: uv run ols run experiments/scripted-discovery.json (twice)",
-        "result": "Two completed scripted runs, each 23 events; search/describe/demonstrate/invoke and two preserved artifacts"
+        "command": "open-lab-simulation: uv run ols run experiments/scripted-memory-checkpoint.json --pause-after-steps 2; uv run ols verify <archive>; uv run ols resume <archive>; uv run ols verify <archive> (two runs)",
+        "result": "run-20261114t101754z-4732b4 and run-20261114t102559z-6ec3af each paused after two steps, resumed with the same run id, completed with 46 events and verified intact"
       },
       {
-        "command": "open-lab-simulation: uv run ols run experiments/discovery-check.json (eleven evolving engineering trials)",
-        "result": "Final runtime archive run-20261114t095356z-fc27df: 54 events, step-limit termination, successful search at seq 23, describe at 27, invoke at 31, actual UTC result at 32. Explicit input-structure guidance and four recorded repairs; all earlier failures documented, no reliability claim"
+        "command": "open-lab-simulation: uv run ols run experiments/scripted-memory-checkpoint.json; compare files and SQLite records with resumed runs",
+        "result": "Uninterrupted run-20261114t101845z-72daf9 completed with 38 events. Ordinary file bytes match; all memory states equal (plan, revised, revision 2). Second resumed run: 213.468 s wall time, 1.531 s active time"
       },
       {
-        "command": "open-lab-simulation: verify_archive (same implementation as ols verify) on all eleven real-model and two scripted archives",
-        "result": "13 of 13 intact; schemas, sequence/hash chain and artifacts verified"
-      },
-      {
-        "command": "open-lab-simulation: inspect final frozen initial prompt and original/repaired arguments",
-        "result": "No world capability ids or meta-tool names in the initial prompt; seq 30 preserves original JSON-encoded input, seq 31 records repaired empty object; no model downloads, no system software installed"
+        "command": "Builder health.check_privacy on Builder and Simulation committable files",
+        "result": "Both passed; no raw archive, model weight, personal path or host diagnostic committed"
       }
     ]
   }

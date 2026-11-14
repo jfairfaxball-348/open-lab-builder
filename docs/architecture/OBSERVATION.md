@@ -6,8 +6,9 @@ question can be answered from evidence the agent could not have shaped.
 Contract: [`observation-event`](../../schemas/v1/observation-event.schema.json),
 [`artifact-metadata`](../../schemas/v1/artifact-metadata.schema.json).
 Implementation: recording is implemented in `open-lab-simulation` (S003a, S003b);
-viewing is implemented in `open-lab-window` (S004). `agent.statement`, `resource.sample`, `checkpoint.created`,
-`recovery` and `memory.written` events are defined but nothing writes them yet.
+viewing is implemented in `open-lab-window` (S004). S006a records checkpoint,
+manual recovery and memory-write events. `agent.statement` and `resource.sample`
+remain defined but are not written yet.
 
 ## Rules
 
@@ -119,11 +120,27 @@ runs/<experiment_id>/<run_id>/
   artifacts/sha256/<aa>/<digest>   preserved file contents
   artifacts/index.jsonl      artifact metadata records
   checkpoints/<checkpoint_id>/                                           (S006a)
+  segments/<event-count>.json   prior stopped-segment summaries (S006a)
   summary.json               final state, counts, world digest
   runtime.stderr.log         anything the runtime process wrote to stderr
 ```
 
 `ols verify <archive>` checks an archive using only its own contents.
+
+S006a adds verified complete-step checkpoints and manual resume. The event log
+is opened for append only after canonical form, identities, sequence and hash
+chain have been checked. A new recovery event states which snapshot was used
+and which were rejected. Restored state can precede existing observations;
+those observations are retained, and any replay produces new events. Artifact
+history is reconstructed before scanning the restored workspace. Paused time
+is excluded from active elapsed time and the event clock. The same initial
+conversation is restored without recording a second preamble.
+
+Only the supervisor writes `checkpoint.created`, `recovery` and `memory.written`.
+The worker's state-barrier messages cannot choose paths, retention, budgets or
+permissions. Normal completion and operator pause get a safe checkpoint before
+shutdown; hard deadline termination keeps the preceding checkpoint. Retained
+corrupt snapshots remain visible to verification even when recovery succeeds.
 
 `model.json` (S003b) records exactly which model drove the run: gateway id,
 provider, the provider's own name for the model, sampling parameters, and the

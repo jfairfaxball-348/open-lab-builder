@@ -19,7 +19,7 @@ raising a limit, changing permissions or contacting the supervisor.
 | --- | --- |
 | Its workspace | Read and write (if granted) |
 | Capabilities in its world | Invoke through the tool host, subject to permissions |
-| Its own memory store | Through memory capabilities |
+| Its own memory store | Through memory capabilities; live `.memory.sqlite` is agent-owned workspace data (ADR-0009), with protected snapshots outside it |
 | Models named in `permissions.models` | Through the model gateway |
 | World release files | Read-only documentation via the registry; never writable |
 | Run archive, event log, checkpoints | None |

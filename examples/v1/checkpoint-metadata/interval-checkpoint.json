@@ -1,14 +1,21 @@
 {
   "schema": "open-lab/checkpoint-metadata",
-  "schema_version": "1.0.0",
+  "schema_version": "1.0.1",
   "checkpoint_id": "ckpt-0001",
   "experiment_id": "creator-returns-pilot-01",
   "run_id": "run-20261113-01",
   "created_at": "2026-11-13T20:10:00Z",
   "reason": "interval",
   "last_event_seq": 7,
-  "progress": { "elapsed_s": 300, "step_count": 3, "model_tokens_used": 470 },
-  "world": { "world_id": "minimal", "version": "0.1.0" },
+  "progress": {
+    "elapsed_s": 300,
+    "step_count": 3,
+    "model_tokens_used": 470
+  },
+  "world": {
+    "world_id": "minimal",
+    "version": "0.1.0"
+  },
   "orchestrator_model_id": "orchestrator-small",
   "components": [
     {
@@ -27,10 +34,17 @@
     },
     {
       "name": "workspace",
-      "path": "workspace.tar",
+      "path": "workspace.zip",
       "sha256": "baa5a0964d3320fbc0c6a922140453c8513ea24ab8fd0577034804a967248096",
       "size_bytes": 10240,
-      "format": "tar"
+      "format": "zip"
+    },
+    {
+      "name": "runtime_state",
+      "path": "runtime_state.json",
+      "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "size_bytes": 256,
+      "format": "json"
     }
   ],
   "resumable": true

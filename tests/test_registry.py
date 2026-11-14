@@ -74,7 +74,7 @@ def test_generated_release_bytes_and_digest_are_deterministic(tmp_path):
                 f["path"] for f in first.manifest["extensions"]["files"]
             }
     index = json.loads((first.release_dir / "registry/index.json").read_text())
-    assert len(index["capabilities"]) == 5
+    assert len(index["capabilities"]) == 8
     for capability in load_source(SOURCE).capabilities:
         path = first.release_dir / "registry/docs" / f"{capability.manifest['id']}.txt"
         assert path.read_bytes() == documentation(capability.manifest).encode("utf-8")

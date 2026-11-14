@@ -2,9 +2,9 @@
   "schema": "open-lab/world-release",
   "schema_version": "1.0.0",
   "world_id": "minimal",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "name": "Minimal world",
-  "description": "Five simple capabilities: text statistics, exact arithmetic, workspace text writing, directory listing and UTC time, with a deterministic registry and generated documentation.",
+  "description": "Eight simple capabilities, including agent-owned SQLite memory, with a generated discovery registry.",
   "created_at": "2026-11-13T20:00:00Z",
   "status": "draft",
   "builder": {
@@ -17,7 +17,7 @@
     "experiment-config": "1.1.0",
     "observation-event": "1.2.0",
     "artifact-metadata": "1.0.0",
-    "checkpoint-metadata": "1.0.0",
+    "checkpoint-metadata": "1.0.1",
     "common": "1.0.0"
   },
   "capabilities": [
@@ -28,28 +28,46 @@
       "sha256": "0000000000000000000000000000000000000000000000000000000000000001"
     },
     {
+      "id": "memory.list",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/memory.list/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000002"
+    },
+    {
+      "id": "memory.search",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/memory.search/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000003"
+    },
+    {
+      "id": "memory.write",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/memory.write/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000004"
+    },
+    {
       "id": "text.stats",
       "version": "0.1.0",
       "manifest_path": "capabilities/text.stats/capability.json",
-      "sha256": "0000000000000000000000000000000000000000000000000000000000000002"
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000005"
     },
     {
       "id": "time.now",
       "version": "0.1.0",
       "manifest_path": "capabilities/time.now/capability.json",
-      "sha256": "0000000000000000000000000000000000000000000000000000000000000003"
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000006"
     },
     {
       "id": "workspace.list",
       "version": "0.1.0",
       "manifest_path": "capabilities/workspace.list/capability.json",
-      "sha256": "0000000000000000000000000000000000000000000000000000000000000004"
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000007"
     },
     {
       "id": "workspace.write",
       "version": "0.1.0",
       "manifest_path": "capabilities/workspace.write/capability.json",
-      "sha256": "0000000000000000000000000000000000000000000000000000000000000005"
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000008"
     }
   ],
   "model_manifests": [
@@ -85,5 +103,5 @@
     "subprocess": false,
     "gpu": true
   },
-  "notes": "0.5.0 bundles observation-event 1.2.0 so the Simulation can record its generic discovery preamble (S005b). Capabilities, registry format and model selection are unchanged from 0.4.0."
+  "notes": "S006a adds memory.write, memory.search and memory.list, and checkpoint-metadata 1.0.1 clarifies append-only rollback/replay on resume. Model choice is unchanged."
 }

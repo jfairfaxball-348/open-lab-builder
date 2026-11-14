@@ -182,12 +182,29 @@ permissions or write to the run archive except through the recorder.
 
 ### Memory subsystem — Simulation (S006a)
 
+Implemented in S006a, with the detailed protocol in
+[ADR-0009](../decisions/ADR-0009-checkpoint-barriers-and-agent-memory.md).
 Per-run and durable, in three parts: the **conversation state** needed to
 resume the loop; an **agent memory store** (SQLite, exposed to the agent as
 capabilities such as `memory.write` / `memory.search`); and the **workspace**
 file tree. All three are snapshotted together as a checkpoint
 ([contract](CONTRACTS.md#checkpoint-metadata)) stored in the run archive, out of
 the agent's reach.
+
+Live agent memory is `.memory.sqlite` in the workspace, exposed through
+`memory.write`, `memory.search` and `memory.list`. `NOTES.md` is the working-notes
+convention. This refines ADR-0007's originally planned supervisor-area memory:
+the live database is entirely agent-owned data; protected checkpoint copies
+remain in the archive. No authority is read from memory.
+
+The runtime blocks at complete-step barriers while the supervisor takes an
+initial snapshot, interval snapshots when due, and pre-shutdown snapshots for
+normal completion/cooperative operator pause. `ols resume <archive>` restores a
+verified checkpoint and appends a recovery segment to the same event log.
+Corrupt snapshots are rejected in favour of earlier valid ones. Existing
+observations survive rollback; step/time budgets are not reset. Hard deadline
+termination retains the previous safe snapshot. Automatic crash recovery and
+the graceful `checkpoint_then_stop` mode remain S006b.
 
 ### Runtime supervisor — Simulation (S003a minimal, S006b full)
 

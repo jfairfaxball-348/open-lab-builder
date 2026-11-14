@@ -322,6 +322,7 @@ and in `state.json`.
 ### S006a — Durable Memory and Checkpoints
 
 - **Repository:** open-lab-simulation (memory capabilities' manifests in the Builder)
+- **Status:** complete
 - **Objective:** A run's state survives being stopped.
 - **Prerequisites:** S003b.
 - **Scope:** per-run SQLite memory store with `memory.write`, `memory.search`,
@@ -333,6 +334,16 @@ and in `state.json`.
   same final workspace and a gap-free log; corrupt checkpoint is detected and
   the previous one used; elapsed time excludes downtime.
 - **Exit criteria:** tests pass; checkpoint metadata validates.
+- **Delivered:** SQLite memory capabilities and minimal world 0.6.0;
+  complete-step snapshot barriers, digest-bound four-component checkpoints,
+  retention, cooperative operator pause and `ols resume`; append-only
+  recovery/fallback, conversation/cursor restoration, preserved artifact history
+  and original budgets with downtime excluded. Scripted/CLI acceptance and
+  fake-model checks pass; metadata validates. ADR-0009 refines memory location
+  and the rollback protocol. See [validation record](../experiments/2026-11-14-memory-checkpoints.md).
+- **Remaining supervisor work (S006b):** automatic crash/reboot and stale-lock
+  recovery, and graceful `checkpoint_then_stop` orchestration. S006a retains the
+  previous safe snapshot at a hard deadline and explicitly refuses that mode.
 - **Next session should:** S006b.
 
 ---
@@ -346,7 +357,8 @@ and in `state.json`.
   (memory, process count, CPU); workspace disk quota check; periodic
   `resource.sample` events including VRAM; automatic restart from checkpoint
   on runtime crash with a retry budget; detection of an interrupted run at
-  start-up (host reboot) and resumption; model-server health checks.
+  start-up (host reboot) and resumption; model-server health checks; stale writer
+  lock handling and graceful `checkpoint_then_stop` deadline orchestration.
 - **Acceptance tests:** kill the runtime process and observe automatic
   recovery; a capability allocating beyond the memory limit is killed and
   recorded; quota breach denies further writes; the deadline still fires

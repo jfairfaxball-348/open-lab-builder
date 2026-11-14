@@ -29,6 +29,7 @@ uv run pytest
 | `tests/test_tooling.py` | The diagnostic runs on this machine and its sanitised output leaks nothing; the health check passes; the CLI works |
 | `tests/test_registry.py` | Fixed-query relevance, deterministic ranking and index bytes, complete generated documentation |
 | `tests/test_workspace_capabilities.py` | Shipped workspace writing/listing and UTC time, path refusals, disposable self-tests |
+| `tests/test_memory_capabilities.py` | Real SQLite persistence, revisions, literal search, bounded inputs and corruption errors |
 
 The tooling tests run the real machine audit once, so the suite takes some
 tens of seconds.
@@ -83,7 +84,7 @@ fails, no release directory is left behind. `--out DIR` builds elsewhere;
 `open-lab-data` in the home directory).
 
 ```bash
-uv run olb world verify releases/minimal/0.5.0 --self-test
+uv run olb world verify releases/minimal/0.6.0 --self-test
 ```
 
 Recomputes every digest and re-validates the manifests against the contracts
@@ -97,7 +98,7 @@ import json
 from pathlib import Path
 from open_lab_builder.capabilities.registry import search
 
-release = Path("releases/minimal/0.5.0")
+release = Path("releases/minimal/0.6.0")
 index = json.loads((release / "registry/index.json").read_text(encoding="utf-8"))
 matches = search(index, "save notes", category="workspace", limit=3)
 text = (release / matches[0]["documentation_path"]).read_text(encoding="utf-8")
