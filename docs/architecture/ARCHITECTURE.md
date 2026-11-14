@@ -15,6 +15,13 @@ Related: [CONTRACTS.md](CONTRACTS.md) · [OBSERVATION.md](OBSERVATION.md) ·
 [SAFETY_AND_ISOLATION.md](SAFETY_AND_ISOLATION.md) ·
 [decision records](../decisions/README.md)
 
+S013 adds an experimental-readiness plan without changing implemented architecture:
+[Autonomy and experimental readiness](AUTONOMY_AND_EXPERIMENTAL_READINESS.md),
+[prospective baseline and validity gates](../experiments/README.md),
+[ADR-0013](../decisions/ADR-0013-autonomy-as-an-experimental-objective.md).
+The four development streams are conceptual, not new components/repositories.
+Tool competence and uptime remain engineering outcomes, not evidence of autonomy.
+
 ## 1. Three repositories, three roles
 
 | | Builder | Simulation | Window |
@@ -145,13 +152,21 @@ four fixed meta-tools, and everything else is discovered through them:
 This keeps the prompt constant as the world grows and makes discovery itself
 observable behaviour. See [ADR-0003](../decisions/ADR-0003-capability-manifest.md).
 
-### Model gateway — Simulation (S003b minimal, S007 full)
+### Model gateway — Simulation (S003b implemented; S007a/S007e planned)
 
 Implemented so far (S003b): a single chat model client with tool calling,
 tool-call repair, one retry, a context-length guard, and the model's identity
 recorded in the archive. Only the four discovery meta-tools are offered (S005b).
 Not implemented: multiple models, loading and
 unloading, memory scheduling.
+
+Planned S007a separates approved local orchestrator selection from world packaging
+so matched comparisons can keep the world/registry fixed. Bundled manifests remain
+the default; effective catalog/model/settings are frozen in each archive.
+S007e retains specialist consultation and sequential GPU leases. Optional hosted
+support remains disabled pending a separate S007f decision and S007g authorisation;
+provider egress must never imply tool-network permission. S013 implements none
+of these features or contract changes.
 
 One internal interface for every model, whatever serves it. Request and
 response use the OpenAI chat-completions shape, which Ollama, llama.cpp's
@@ -265,7 +280,7 @@ line offsets in memory; it does not need the SQLite index.
 
 ### Experiment manager — Simulation (S003a)
 
-Takes an [experiment configuration](CONTRACTS.md#experiment-config), resolves
+Takes an [experiment configuration](CONTRACTS.md#experiment-configuration), resolves
 and verifies the world release, creates a new `run_id`, a fresh empty
 workspace and a run archive containing frozen copies of the configuration and
 the world manifest, then hands over to the supervisor. Two runs never share a

@@ -18,6 +18,7 @@ by rewriting history.
 | [0010](ADR-0010-bounded-deadline-checkpoints.md) | Fixed deadline grace, complete-step snapshot and supervisor termination | Accepted; supersedes ADR-0009 deadline-mode refusal |
 | [0011](ADR-0011-bounded-supervisor-recovery.md) | Opt-in bounded restarts, startup recovery, verified writer ownership and model health | Accepted; extends ADR-0009/0010 |
 | [0012](ADR-0012-process-resources-and-sampling.md) | Windows job ceilings, supervisor quota admission and truthful periodic samples | Accepted; completes split supervisor scope |
+| [0013](ADR-0013-autonomy-as-an-experimental-objective.md) | Autonomy baseline, explicit interventions and evidence-gated expansion while preserving architecture | Accepted for planning; runtime unchanged |
 
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).

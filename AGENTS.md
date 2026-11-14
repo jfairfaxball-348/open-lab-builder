@@ -22,6 +22,27 @@ path. Read [README.md](README.md) and
 [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) before
 changing anything structural.
 
+## Experimental purpose
+
+The world is an instrument for studying what an inhabitant independently does,
+not just a collection of working tools. Keep engineering correctness separate
+from evidence of exploration, agent-stated objectives and adaptive action.
+Read the current research gates in `docs/experiments/README.md` when a milestone
+changes the orchestrator, environment or experimental conditions.
+
+- A short milestone plan states its engineering outcome, scientific purpose and
+  what the evidence will not establish; routine fixes need only a sentence.
+- Tool counts, text volume and uptime do not establish autonomy. Agent-stated
+  goals are claims; goal-directed behaviour is an evidence-linked assessment,
+  never a fact about internal motivation or subjective consciousness.
+- Freeze prompts, continuation/context/repair policies and comparisons before
+  scored runs. Keep pilots separate; preserve negative and censored results.
+  A valid negative benchmark can complete its report without opening expansion.
+- Respect the roadmap's behavioural and isolation gates. Meaningful model/world
+  changes trigger a documented benchmark repeat, not a rewritten old success.
+- An explicitly authorised strategic session may revise future planning; it does
+  not authorise implementing those future milestones, downloads or API spending.
+
 ## Start of every session
 
 1. Read this file.
@@ -37,6 +58,11 @@ changing anything structural.
    If it fails, fixing that is the first task.
 6. Inspect the existing implementation the milestone builds on.
 7. Make a short plan for that milestone only.
+
+For revised future milestones include objective, prerequisites, scope, exclusions,
+deliverables, acceptance tests, exit criteria, risks and next recommendation.
+Completed historical records are retained as written. Research campaign gates
+do not add a separate approval process to ordinary reversible engineering work.
 
 If the next milestone belongs to another repository, work there, following
 that repository's `AGENTS.md`. The roadmap and `state.json` stay here and are

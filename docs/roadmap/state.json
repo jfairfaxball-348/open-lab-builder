@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T12:01:05Z",
-  "last_session": "S006e",
+  "updated_at": "2026-11-14T13:15:55Z",
+  "last_session": "S013",
   "completed_milestones": [
     {
       "id": "S001",
@@ -108,14 +108,59 @@
         "830379c"
       ],
       "summary": "Aggregate Windows Job Object RAM/process-count/CPU cycle ceilings, suspended startup before job assignment, supervisor workspace quota admission and active-writer checks, periodic supervisor resource samples with unavailable fields and optional host NVIDIA VRAM used/available. Unsupported/unrepresentable limits are refused, including VRAM, nested wall clock and unenforced model-token limits. Native resource faults, CPU cap/throttle, startup ordering, quota/read admission, resume and failures verified. 214 Simulation and 305 Builder tests pass; shipped CLI and quota archives verify. ADR-0012 documents cycle/active-time differences, polling overshoot and best-effort notifications. Completes the split S006b/S006d/S006e process supervisor scope; container isolation remains human-gated."
+    },
+    {
+      "id": "S013",
+      "completed_at": "2026-11-14T13:15:55Z",
+      "repository": "open-lab-builder",
+      "summary": "Strategic planning only under explicit human instruction: audited all three clean checkouts and reverified S006e scope/archives; preserved completed entries/sections and the exact S006e validation object in docs/roadmap/validation/S006e.json. Revised future roadmap into four streams; local S007a gateway/brain swap, S007c explicit interventions, UNEXECUTED S007d autonomy baseline, bounded negative-result response, optional separately authorised hosting and evidence-gated expansion. Hard isolation and later protocol/reliability/null-result gates retained. No runtime/schema/test/world changes or new behavioural run. Checks: Builder 305, Simulation 214, Window 38 passed; next S007a."
     }
   ],
   "next_milestone": {
     "id": "S007a",
     "repository": "open-lab-simulation",
-    "title": "Model Gateway"
+    "title": "Model Gateway and Local Brain Swap"
   },
-  "blockers": [],
+  "blockers": [
+    {
+      "id": "B-ISOLATION",
+      "summary": "S006c awaits human WSL repair and container-engine approval; no process-tier substitution.",
+      "affects": [
+        "S006c",
+        "S008d",
+        "S009",
+        "S011a",
+        "S011b",
+        "S011c",
+        "S012"
+      ],
+      "needs_human": true,
+      "detail": "KI-1/OD-1 remain. Local S007a/S007c/S007d and S010 protocol/Window work do not depend on container setup. Actual isolation tests are required before arbitrary code, computer control, agent tools or unattended certification."
+    },
+    {
+      "id": "B-EXPANSION",
+      "summary": "The prospective S007d autonomy baseline is UNEXECUTED; major capability expansion has no GO evidence.",
+      "affects": [
+        "S007e",
+        "S007b",
+        "S008a",
+        "S008b",
+        "S008c",
+        "S008d",
+        "S009"
+      ],
+      "detail": "Run S007a then S007c then preregister/execute S007d. A complete negative report can complete S007d while keeping expansion closed. S010 can proceed after that report regardless of behavioural outcome."
+    },
+    {
+      "id": "B-HOSTED",
+      "summary": "Hosted adapter work requires its separate approved architecture, provider and bounded spend authorisation.",
+      "affects": [
+        "S007g"
+      ],
+      "needs_human": true,
+      "detail": "Optional S007f/S007g are not prerequisites for local research. Defaults remain local and zero-spend. The S013 planning instruction authorises no API request, credential handling or new download."
+    }
+  ],
   "known_issues": [
     {
       "id": "KI-1",
@@ -174,24 +219,27 @@
     },
     {
       "id": "KI-11",
-      "summary": "No local candidate that fits the 4 GB GPU behaves as an autonomous tool user under an unprompted premise.",
+      "summary": "Reliable unguided discovery and sustained self-directed activity remain unestablished by the local engineering pilots.",
       "affects": [
-        "S005b",
+        "S007a",
+        "S007c",
+        "S007d",
+        "S007h",
         "S010",
-        "S011a",
         "S012"
       ],
-      "detail": "Runs no longer end at the first reply without a tool call (S003c), but llama3.2:3b mostly applies text.stats to the text it was given and invents surroundings, and the other candidates ask for a task. See docs/experiments/2026-11-14-orchestrator-candidates.md and OD-2. S005b reached a bounded directed search/describe/invoke acceptance sequence with explicitly guided argument structure and recorded repairs; eleven debugging trials varied prompts and runtime, so they do not establish reliable or unprompted autonomy. See docs/experiments/2026-11-14-discovery-meta-tools.md."
+      "detail": "S003c used a two-tool world, few repeats and differing output/settings; it observed waiting for humans, repetition, invented surroundings and hidden-reasoning budget effects. S005b later achieved directed discovery with argument guidance/recorded repairs. Neither is a preregistered autonomy baseline or a universal model-failure proof. See dated reports and the prospective protocol in docs/experiments/README.md."
     },
     {
       "id": "KI-12",
-      "summary": "The context window in use is Ollama's default of 4096 tokens, and the server-reported input token count is not the conversation length.",
+      "summary": "Effective context and context-management interventions need explicit pinning; earlier local checks used a 4096-token server default.",
       "affects": [
-        "S006a",
         "S007a",
+        "S007c",
+        "S007d",
         "S011a"
       ],
-      "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Since S003c the runtime blanks old tool results and then drops whole old turns (never the initial prompt), recording both, so nothing is cut silently; but with 4096 tokens the conversation keeps only a few recent turns. Long runs need a larger context (server setting or the native API) and memory. S005b preserves the system preamble, initial user prompt and newest assistant/tool group. Fresh documentation is never blanked before its first use; protected content can still exceed the conservative estimate."
+      "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Since S003c the runtime blanks old tool results and then drops whole old turns (never the initial prompt), recording both, so nothing is cut silently; but with 4096 tokens the conversation keeps only a few recent turns. Long runs need a larger context (server setting or the native API) and memory. S005b preserves the system preamble, initial user prompt and newest assistant/tool group. Fresh documentation is never blanked before its first use; protected content can still exceed the conservative estimate. S013 does not change behaviour or remeasure the server. S007a records effective settings/unknowns and S007c versions intervention policies before S007d evaluation."
     },
     {
       "id": "KI-13",
@@ -211,13 +259,13 @@
     },
     {
       "id": "KI-15",
-      "summary": "Thinking models spend most of their output budget on reasoning the record never sees, and it cannot be switched off through the endpoint in use.",
+      "summary": "Earlier thinking-model pilots spent output budgets on unrecorded reasoning; endpoint behaviour needs controlled revalidation.",
       "affects": [
         "S007a",
         "S010",
         "S012"
       ],
-      "detail": "max_output_tokens covers the hidden reasoning: qwen3:4b at 512 produced only empty replies. Asking Ollama 0.40.16 for reasoning_effort 'none' moved the reasoning into the reply text, which would be recorded as said, so the runtime sends no such option. If a thinking model is chosen (OD-2) the protocol must say how much unrecorded computation is acceptable."
+      "detail": "max_output_tokens covers the hidden reasoning: qwen3:4b at 512 produced only empty replies. Asking Ollama 0.40.16 for reasoning_effort 'none' moved the reasoning into the reply text, which would be recorded as said, so the runtime sends no such option. If a thinking model is chosen (OD-2) the protocol must say how much unrecorded computation is acceptable. This is historical evidence from the recorded server/settings, not a universal statement about other current providers. S013 did not remeasure or change reasoning behaviour."
     },
     {
       "id": "KI-17",
@@ -254,67 +302,96 @@
     },
     {
       "id": "OD-2",
-      "summary": "Which orchestrator model to use. Four models that fit the 4 GB GPU have been compared; none behaves as an autonomous tool user unprompted.",
+      "summary": "Select an orchestrator through registered comparisons; earlier local pilots did not establish reliable unguided autonomy.",
       "affects": [
         "S007a",
+        "S007d",
+        "S007h",
         "S010",
         "S012"
       ],
-      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md.",
+      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates.",
       "needs_human": true
+    },
+    {
+      "id": "OD-6",
+      "summary": "Baseline findings and expansion readiness are undecided until the prospective S007d campaign.",
+      "affects": [
+        "S007d",
+        "S007h",
+        "S007e",
+        "S007b",
+        "S008a",
+        "S008b",
+        "S008c"
+      ],
+      "detail": "Freeze protocol/metrics/thresholds before scoring. GO means replicated basic discovery/use under specified policies, not general autonomy. Valid NO_GO completes the report and directs one bounded improvement; INCONCLUSIVE names a validity repair."
+    },
+    {
+      "id": "OD-7",
+      "summary": "Versioned continuation/idle/context policies must be specified and tested in S007c.",
+      "affects": [
+        "S007c",
+        "S007d",
+        "S010",
+        "S012"
+      ],
+      "detail": "Legacy immediate continuation remains unchanged now. Factual wording is not proven neutral; freeze the primary campaign treatment and distinguish scheduling, retrieval/truncation, checkpoint/replay and human messages."
+    },
+    {
+      "id": "OD-8",
+      "summary": "Whether to pursue an optional hosted comparison remains a separate human decision.",
+      "affects": [
+        "S007f",
+        "S007g"
+      ],
+      "needs_human": true,
+      "detail": "S013 is not external-access/spend authorisation. A separate approved ADR and provider/credential/finite-budget approval must precede code/paid smoke tests. Declining hosting does not block local milestones or S012."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T12:01:05Z",
+    "ran_at": "2026-11-14T13:15:55Z",
     "commands": [
       {
-        "command": "uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Dependencies synced; S006e next; 305 tests and all six health checks passed"
+        "command": "Builder: uv sync; uv run olb state; uv run olb check --tests (audit baseline)",
+        "result": "Clean starting checkout; 305 tests and all six health checks passed in 56.66 seconds"
       },
       {
-        "command": "open-lab-simulation: uv sync; uv run pytest (baseline)",
-        "result": "Dependencies synced; 188 tests passed in 123.15 seconds"
+        "command": "Simulation: uv sync; uv run ruff check .; uv run pytest (read-only source audit)",
+        "result": "Clean head 830379c; lint passed; 214 tests passed in 139.48 seconds, including S006e native resource acceptance"
       },
       {
-        "command": "open-lab-simulation: uv run ruff check .; uv run pytest (final)",
-        "result": "Lint passed; 214 tests passed in 140.28 seconds, including 26 resource tests. Native RAM/process denial and recorded termination, CPU cap/throttle, suspended startup ordering, quota admission/live overflow/read availability, resume, setup/monitor failures, unsupported settings and unavailable/zero sampling verified"
+        "command": "Window: uv sync; uv run ruff check .; uv run pytest (read-only source audit)",
+        "result": "Clean head 9ef9ba4; lint passed; 38 tests passed in 22.70 seconds, including archive immutability and read-only API checks"
       },
       {
-        "command": "open-lab-simulation: uv run pytest tests/test_resources.py tests/test_model.py::test_a_reply_without_a_tool_call_is_answered_with_the_continuation",
-        "result": "27 passed. The first full run exposed newly interleaved telemetry in the continuation test; its exact conversation sequence was retained and supervisor sample/interleaving assertions added. No failing test was skipped"
+        "command": "uv run olb world verify releases/minimal/0.6.0 --self-test",
+        "result": "Release intact and capability self-tests passed; no world rebuilt or modified"
       },
       {
-        "command": "uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 64.61 seconds and all six health checks passed"
+        "command": "Simulation verify_archive on named resource/quota/recovery engineering archives",
+        "result": "run-20261114t115404z-96a2a1, run-20261114t115011z-113b13 and run-20261114t111831z-64db06 all verified intact; no model/behavioural trial run"
       },
       {
-        "command": "open-lab-simulation: CLI run experiments/scripted-resources.json; separate ols verify <archive>",
-        "result": "run-20261114t115404z-96a2a1 completed in 0.922 active seconds with 27 events, 5 samples and 3 successful tools; all four limits installed; CLI/verification exited zero"
+        "command": "Preserve pre-session validation object as docs/roadmap/validation/S006e.json",
+        "result": "Exact structured equality to the S006e validation object from pre-session Git state; historical record not overwritten"
       },
       {
-        "command": "open-lab-simulation: independent CLI quota configuration using shipped capabilities; ols verify <archive>",
-        "result": "run-20261114t115011z-113b13 completed in 0.969 active seconds with 49 events, 5 samples, 5 successful writes, one denied write and successful listing. Verified intact; final disk size 1.1444 MiB demonstrates documented overshoot. Live VRAM sample recorded 0 MiB used and 4096 MiB available with host scope/age"
+        "command": "uv run python .local/realignment/check_plan.py (one-off planning audit)",
+        "result": "Passed: historical completed entries/sections and S006e validation unchanged; unique ids, future templates/prerequisite ids and local links/anchors valid; sibling heads clean/unchanged; only authorised planning/governance files changed. Fixed one pre-existing architecture link anchor; no runtime or test assertion changed"
       },
       {
-        "command": "open-lab-simulation: independent Windows CPU rate query and two-second busy-loop measurement",
-        "result": "Kernel query confirmed flags 5 and rate 125/10000 for nominal 0.2 cores on 16 logical processors. Active CPU sample was 30.46875 percent; cycle budget and short-window active-time measurement are explicitly distinguished"
+        "command": "uv run ruff check .; uv run olb check --tests (final Builder)",
+        "result": "Lint passed; 305 tests passed in 59.05 seconds and all six health checks passed. Simulation/Window source unchanged since their passing audit suites"
       },
       {
-        "command": "open-lab-simulation: read-only wsl.exe --status with ten-second timeout; locate podman/docker",
-        "result": "WSL status timed out; no container engine available. S006c remains human-gated; S007a selected by the roadmap fallback. Raw output remained ignored; no repair/system changes"
+        "command": "git diff --check",
+        "result": "Passed; historical engineering reports, schemas, source/tests/worlds and lockfiles untouched"
       },
       {
-        "command": "Builder health.check_privacy on both repositories; git diff --check",
-        "result": "Both privacy checks and whitespace checks passed; no schema/world source, copied fixture or dependency changes; raw evidence/large local quota configuration remained ignored"
-      },
-      {
-        "command": "open-lab-simulation: git commit; git push origin main; git status --short; git rev-list --left-right --count HEAD...origin/main",
-        "result": "Committed and pushed 830379c; clean main; local and origin/main agree (0 ahead, 0 behind)"
-      },
-      {
-        "command": "uv run ruff check .; uv run olb check; uv run olb state (after final docs/state update)",
-        "result": "Lint and all six health checks passed; S006e complete; S007a Model Gateway next; S006c remains human-gated"
+        "command": "Privacy checks and git ls-remote comparison in all three repositories; final planning audit, lint, health/state and whitespace checks",
+        "result": "All privacy checks passed; audited heads matched remote main before publication; siblings remained clean/unchanged. Final planning audit and Builder lint/health/state passed; next S007a. No runtime, schema, test, world, dependency or historical report edits."
       }
     ]
   }

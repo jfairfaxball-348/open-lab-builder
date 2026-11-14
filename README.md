@@ -150,6 +150,22 @@ docs/
 
 ## Development process
 
+**S013 strategic realignment is complete as planning.** Existing engineering and
+the three-repository architecture are preserved. Next implementation is
+**S007a — Model Gateway and Local Brain Swap**, followed by explicit intervention
+policies (S007c) and a prospective autonomy baseline (S007d). Major capability
+expansion then depends on replicated independent discovery/use; a valid negative
+report remains a completed research result, not a capability claim. Hosted models
+are optional and separately authorised; real isolation remains mandatory for
+agent-authored execution and unattended certification.
+
+See the [research audit/plan](docs/architecture/AUTONOMY_AND_EXPERIMENTAL_READINESS.md),
+[benchmark/validity specification](docs/experiments/README.md) and
+[dependency-aware roadmap](docs/roadmap/ROADMAP.md). The benchmark and new provider,
+policy and sandbox work have **not** been implemented or run in this session.
+S006e's historical validation is preserved in
+[its immutable snapshot](docs/roadmap/validation/S006e.json).
+
 Work proceeds in small, verified milestones (S001, S002, …), one per coding
 session. Each session reads [AGENTS.md](AGENTS.md), finds the next milestone in
 [docs/roadmap/state.json](docs/roadmap/state.json), implements exactly that

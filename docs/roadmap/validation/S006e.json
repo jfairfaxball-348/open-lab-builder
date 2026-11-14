@@ -1,0 +1,54 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-14T12:01:05Z",
+  "commands": [
+    {
+      "command": "uv sync; uv run olb state; uv run olb check --tests (baseline)",
+      "result": "Dependencies synced; S006e next; 305 tests and all six health checks passed"
+    },
+    {
+      "command": "open-lab-simulation: uv sync; uv run pytest (baseline)",
+      "result": "Dependencies synced; 188 tests passed in 123.15 seconds"
+    },
+    {
+      "command": "open-lab-simulation: uv run ruff check .; uv run pytest (final)",
+      "result": "Lint passed; 214 tests passed in 140.28 seconds, including 26 resource tests. Native RAM/process denial and recorded termination, CPU cap/throttle, suspended startup ordering, quota admission/live overflow/read availability, resume, setup/monitor failures, unsupported settings and unavailable/zero sampling verified"
+    },
+    {
+      "command": "open-lab-simulation: uv run pytest tests/test_resources.py tests/test_model.py::test_a_reply_without_a_tool_call_is_answered_with_the_continuation",
+      "result": "27 passed. The first full run exposed newly interleaved telemetry in the continuation test; its exact conversation sequence was retained and supervisor sample/interleaving assertions added. No failing test was skipped"
+    },
+    {
+      "command": "uv run ruff check .; uv run olb check --tests",
+      "result": "Lint passed; 305 tests passed in 64.61 seconds and all six health checks passed"
+    },
+    {
+      "command": "open-lab-simulation: CLI run experiments/scripted-resources.json; separate ols verify <archive>",
+      "result": "run-20261114t115404z-96a2a1 completed in 0.922 active seconds with 27 events, 5 samples and 3 successful tools; all four limits installed; CLI/verification exited zero"
+    },
+    {
+      "command": "open-lab-simulation: independent CLI quota configuration using shipped capabilities; ols verify <archive>",
+      "result": "run-20261114t115011z-113b13 completed in 0.969 active seconds with 49 events, 5 samples, 5 successful writes, one denied write and successful listing. Verified intact; final disk size 1.1444 MiB demonstrates documented overshoot. Live VRAM sample recorded 0 MiB used and 4096 MiB available with host scope/age"
+    },
+    {
+      "command": "open-lab-simulation: independent Windows CPU rate query and two-second busy-loop measurement",
+      "result": "Kernel query confirmed flags 5 and rate 125/10000 for nominal 0.2 cores on 16 logical processors. Active CPU sample was 30.46875 percent; cycle budget and short-window active-time measurement are explicitly distinguished"
+    },
+    {
+      "command": "open-lab-simulation: read-only wsl.exe --status with ten-second timeout; locate podman/docker",
+      "result": "WSL status timed out; no container engine available. S006c remains human-gated; S007a selected by the roadmap fallback. Raw output remained ignored; no repair/system changes"
+    },
+    {
+      "command": "Builder health.check_privacy on both repositories; git diff --check",
+      "result": "Both privacy checks and whitespace checks passed; no schema/world source, copied fixture or dependency changes; raw evidence/large local quota configuration remained ignored"
+    },
+    {
+      "command": "open-lab-simulation: git commit; git push origin main; git status --short; git rev-list --left-right --count HEAD...origin/main",
+      "result": "Committed and pushed 830379c; clean main; local and origin/main agree (0 ahead, 0 behind)"
+    },
+    {
+      "command": "uv run ruff check .; uv run olb check; uv run olb state (after final docs/state update)",
+      "result": "Lint and all six health checks passed; S006e complete; S007a Model Gateway next; S006c remains human-gated"
+    }
+  ]
+}
