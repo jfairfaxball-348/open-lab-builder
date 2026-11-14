@@ -313,6 +313,34 @@ and sampling parameters, limits, permissions, checkpointing and termination.
 A premise in `initial_prompt` grants nothing; only `permissions` and `limits`
 do. `research_question` is never shown to the agent.
 
+S007c uses `extensions.runtime_policy` as a closed experimental configuration
+object. Defaults resolve to `legacy-immediate-v1`; `quiet-until-deadline-v1`
+adds a consecutive tool-free reply threshold, with no automatic wake. Exact
+fields, bounds and semantics are specified in [Runtime policies](RUNTIME_POLICIES.md).
+Unknown fields/versions/turn semantics are refused. Both policies preserve the
+existing continuation field and actual tool permissions.
+
+`policy.json` contains resolved defaults and the canonical experiment SHA-256.
+The launch state event's payload extensions add `policy_sha256`. New model
+provenance includes this policy. Checkpoint runtime-state JSON adds
+`policy_state` (nonnegative tool-free counter, boolean idle latch) and
+`policy_sha256`; existing component digests bind these bytes. New recovery events
+carry the effective policy and digest, including legacy interpretation for old
+archives. Old observations are never rewritten. Configuration or policy changes
+refuse resume.
+
+The worker's pre-request IPC message is `{"model_input": <payload>}`. The
+supervisor records an action `limit_enforced`, stage `model_input`, with exact
+`request`, `context`, `attempt`, `backend` and `policy_sha256` fields, and syncs
+before acknowledging. HTTP is not sent without acknowledgement. Context details
+include before/after message digests, budget, mutation counts and protected
+content overflow. Scripted inputs identify their backend and mark the guard
+unapplied. An idle barrier records stage `runtime_idle`, with counter/latch,
+`wake: none` and restoration status. The worker can request observations but
+cannot submit privileged event types. These protocols use existing extensions;
+no schema or world version changed. Request snapshots contain inputs, never a
+hidden reasoning response channel.
+
 ### Observation event, artifact metadata
 
 See [OBSERVATION.md](OBSERVATION.md).
@@ -455,6 +483,7 @@ Windows notification delivery and disk checks have the limitations in ADR-0012.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-14 | (runtime policy protocol) | - | S007c freezes two scheduling policies, client context and explicit-memory identities; preserves idle checkpoint state and records exact model inputs before attempts. Existing extensions, no schema change |
 | 2026-11-14 | (local gateway protocol) | � | S007a adds pinned model_catalog configuration, canonical catalog/model provenance binding and local adapter routing using existing extensions; no schema change |
 | 2026-11-14 | (resource protocol) | — | S006e applies existing resource fields through Windows jobs/supervisor quota admission and trials sample metadata/config extensions; ADR-0012. No schema change |
 | 2026-11-14 | (recovery protocol) | — | S006d trials extensions.recovery, conserved model-attempt and restart reservations, OS writer guard, interrupted startup scan and model health; ADR-0011. No schema change |

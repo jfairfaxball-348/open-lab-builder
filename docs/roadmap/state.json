@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T17:49:17Z",
-  "last_session": "S007a",
+  "updated_at": "2026-11-14T18:11:14Z",
+  "last_session": "S007c",
   "completed_milestones": [
     {
       "id": "S001",
@@ -132,12 +132,21 @@
         "fd64e3f"
       ],
       "summary": "Independent pinned local model catalog, Ollama and loopback chat-compatible adapter routing, frozen catalog/model/adapter/settings provenance and archive integrity. Two installed models ran against unchanged world 0.6.0; verified engineering evidence only, no autonomy GO."
+    },
+    {
+      "id": "S007c",
+      "completed_at": "2026-11-14T18:09:42Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "80cb67b"
+      ],
+      "summary": "Versioned immediate/quiet scheduling treatments, pinned context and explicit-memory policy, exact supervisor-recorded requests before HTTP attempts, and checkpointed idle counters/latch. Native local-model quiet pause/resume reached its original active deadline without another call. Engineering only; S007d unexecuted."
     }
   ],
   "next_milestone": {
-    "id": "S007c",
+    "id": "S007d",
     "repository": "open-lab-simulation",
-    "title": "Explicit Continuation, Context and Memory Policy"
+    "title": "Autonomy Baseline and Behavioural Benchmark"
   },
   "blockers": [
     {
@@ -152,7 +161,7 @@
         "S008d",
         "S009"
       ],
-      "detail": "S007a is complete. Run S007c, then preregister/execute S007d. A complete negative report can complete S007d while keeping expansion closed. S010 can proceed after that report regardless of behavioural outcome."
+      "detail": "S007a and S007c are complete. Preregister and execute S007d with one frozen primary policy/profile. A complete negative report can complete S007d while keeping expansion closed. S010 can proceed after that report regardless of behavioural outcome."
     },
     {
       "id": "B-HOSTED",
@@ -223,14 +232,14 @@
     },
     {
       "id": "KI-12",
-      "summary": "Effective server settings remain unverified per call; context/intervention policy versioning is pending S007c.",
+      "summary": "Effective server context/sampling/offload remain unverified per call; client policies and exact inputs are now archived.",
       "affects": [
         "S007a",
         "S007c",
         "S007d",
         "S011a"
       ],
-      "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Since S003c the runtime blanks old tool results and then drops whole old turns (never the initial prompt), recording both, so nothing is cut silently; but with 4096 tokens the conversation keeps only a few recent turns. Long runs need a larger context (server setting or the native API) and memory. S005b preserves the system preamble, initial user prompt and newest assistant/tool group. Fresh documentation is never blanked before its first use; protected content can still exceed the conservative estimate. S013 does not change behaviour or remeasure the server. S007a records effective settings/unknowns and S007c versions intervention policies before S007d evaluation. S007a now freezes requested sampling, the client guard and explicit unknown effective context/sampling/offload in each archive. Separate native probes reported 4096 context for both engineering candidates; they do not attest every chat call."
+      "detail": "The OpenAI-compatible endpoint cannot set the context size per request. Since S003c the runtime blanks old tool results and then drops whole old turns (never the initial prompt), recording both, so nothing is cut silently; but with 4096 tokens the conversation keeps only a few recent turns. Long runs need a larger context (server setting or the native API) and memory. S005b preserves the system preamble, initial user prompt and newest assistant/tool group. Fresh documentation is never blanked before its first use; protected content can still exceed the conservative estimate. S013 does not change behaviour or remeasure the server. S007a records effective settings/unknowns and S007c versions intervention policies before S007d evaluation. S007a now freezes requested sampling, the client guard and explicit unknown effective context/sampling/offload in each archive. Separate native probes reported 4096 context for both engineering candidates; they do not attest every chat call. S007c freezes the client guard and versioned context/explicit-memory policies, records exact request bodies before attempts and preserves protected context on reported overflow. This does not set or attest backend tokenisation/context."
     },
     {
       "id": "KI-13",
@@ -290,6 +299,18 @@
         "S011a"
       ],
       "detail": "Per-container memory/CPU/pids ceilings are separate from the runtime's Windows job. Container-made links are WSL reparse points; the disk quota and checkpoint snapshot refuse them, so code able to create links can end a quota-limited run (fail closed). Each call costs about 0.3-2 s of container start. A Windows update breaking WSL makes container worlds unlaunchable. See ADR-0015 and docs/experiments/2026-11-14-container-isolation.md."
+    },
+    {
+      "id": "KI-20",
+      "summary": "Full pre-request snapshots and per-attempt sync increase archive storage and I/O; long-run overhead is unmeasured.",
+      "affects": [
+        "S007c",
+        "S007d",
+        "S011a",
+        "S011b",
+        "S012"
+      ],
+      "detail": "Native directed two-call/quiet pilots passed. S007d must account for input-recording overhead; measure storage, disk/resource headroom and latency before unattended duration claims."
     }
   ],
   "open_decisions": [
@@ -322,14 +343,13 @@
     },
     {
       "id": "OD-7",
-      "summary": "Versioned continuation/idle/context policies must be specified and tested in S007c.",
+      "summary": "Preregister one primary S007d policy/profile; neither implemented treatment is asserted neutral.",
       "affects": [
-        "S007c",
         "S007d",
         "S010",
         "S012"
       ],
-      "detail": "Legacy immediate continuation remains unchanged now. Factual wording is not proven neutral; freeze the primary campaign treatment and distinguish scheduling, retrieval/truncation, checkpoint/replay and human messages."
+      "detail": "S007c implements and versions legacy-immediate-v1 and quiet-until-deadline-v1, context guards and explicit memory retrieval. Native scheduling pilots are not a basis for choosing a behavioural winner. Freeze the primary treatment before scored runs; keep continuation/context/repair/checkpoint/recovery conditions explicit."
     },
     {
       "id": "OD-8",
@@ -344,39 +364,39 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T17:49:17Z",
+    "ran_at": "2026-11-14T18:11:14Z",
     "commands": [
       {
-        "command": "Builder: uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "S007a next; 305 tests passed in 45.86 seconds and all health checks passed."
+        "command": "Builder: git status/log; uv sync; uv run olb state; uv run olb check --tests (baseline)",
+        "result": "Clean b9a6020; S007c next; 305 tests passed in 41.71 seconds and all health checks passed."
       },
       {
-        "command": "Simulation: uv sync; uv run pytest -q (initial suite)",
-        "result": "237 tests passed. This suite overlapped subsequent source edits and is not a pristine-source baseline."
+        "command": "Simulation: git status/log; uv sync; uv run pytest (baseline before source edits)",
+        "result": "Clean fd64e3f; 252 tests passed in 224.89 seconds before source edits."
       },
       {
-        "command": "Simulation: uv run pytest (final); uv run pytest tests/test_model.py -k catalog_routes; uv run ruff check .",
-        "result": "252 tests passed without warnings in 227.91 seconds; final catalog-routing/recovery assertions passed 3 tests; lint passed. Earlier health-probe warning was fixed by preserving the original Ollama monitor and refusing unattestable generic recovery at admission."
+        "command": "Simulation: uv run pytest (final); uv run ruff check .; focused changed-behaviour regression run",
+        "result": "275 tests passed without warnings in 259.68 seconds; lint passed; focused 27 passed. Old event-sequence assertions explicitly include input observations while retaining conversation, step and deadline checks."
       },
       {
-        "command": "Simulation: uv run ols run experiments/s007a-swap-llama.json; uv run ols run experiments/s007a-swap-granite.json; verify_archive on both; paired config comparison",
-        "result": "Both selected installed models against the same world/registry, ended at max_steps=3, and verified without problems. Llama invoked the clock with two repairs; Granite reached documentation only. Configurations differ only in experiment/model ids. No behavioural GO."
+        "command": "Simulation: uv run ols run experiments/s007c-legacy.json; uv run ols run experiments/s007c-quiet.json --pause-after-steps 1; resume_experiment; verify_archive",
+        "result": "Legacy run-20261114t180326z-a87542 made 2 calls, 1 continuation and an empty-result search; max_steps exit. Quiet run-20261114t180340z-bcaf9b made 1 call across pause/resume, no continuation, and terminated at the original 20-second active deadline. Both archives verified; first HTTP request bodies matched exactly."
       },
       {
-        "command": "Simulation: ollama.measure and bounded warm native requests for both installed models",
-        "result": "Llama: 2800 MiB loaded, 2239 VRAM, 561 RAM, 7.18 s unloaded-model load; Granite: 2637 MiB loaded, 2245 VRAM, 392 RAM, 6.92 s load. Native context 4096 for both. No disk-cache cold guarantee; effective per-call settings remain unknown."
+        "command": "Simulation: verify_archive on both historical S007a native archives",
+        "result": "Both unchanged historical archives still verify. No old observations rewritten or retroactive inputs invented."
       },
       {
-        "command": "Builder: uv run olb validate models/local-engineering.json and both Simulation paired configurations; check_privacy on Simulation; git diff --check",
-        "result": "Three documents valid; privacy scan empty; diff checks passed."
+        "command": "Builder: uv run olb validate both S007c configurations; check_privacy on Simulation; git diff --check",
+        "result": "Both configurations valid; committable privacy scan empty; diff checks passed."
       },
       {
         "command": "Simulation: git commit; git push origin main; git status --short --branch",
-        "result": "fd64e3f committed and pushed; clean main agrees with origin/main."
+        "result": "80cb67b committed and pushed; clean main agrees with origin/main."
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests (final)",
-        "result": "Lint passed; 305 tests passed in 48.15 seconds and all health checks passed. Current catalog and both paired configurations validated; historical S006c validation retained separately."
+        "result": "Lint passed; 305 tests passed in 40.96 seconds and all health checks passed. S007a validation retained separately; current state and S007d handoff validated."
       }
     ]
   }

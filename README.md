@@ -99,6 +99,12 @@ S007a adds an independent pinned local model catalog, Ollama and loopback
 chat-compatible routing, and frozen provenance. Two installed orchestrators ran
 against the same unchanged world; see [gateway validation](docs/experiments/2026-11-14-local-gateway.md).
 
+S007c adds versioned immediate-continuation and quiet-until-deadline policies,
+checkpointed idle state and exact pre-request model input records. Native
+pause/resume preserved quiet idling without another model call; see
+[runtime policy validation](docs/experiments/2026-11-14-runtime-policies.md).
+Both policies are experimental treatments, not assertions of neutrality.
+
 What does **not** exist yet: specialist model consultation/GPU leasing,
 container isolation on Linux or with network access, and run comparison. No experiment has
 been run: the runs so far are engineering checks, recorded in
@@ -164,8 +170,8 @@ docs/
 
 **S013 strategic realignment is complete as planning.** Existing engineering and
 the three-repository architecture are preserved. S007a local gateway is complete.
-Next implementation is **S007c (Explicit Continuation, Context and Memory
-Policy)**, followed by the prospective autonomy baseline (S007d). Major capability
+Next is **S007d (Autonomy Baseline and Behavioural Benchmark)**, which must
+preregister one frozen primary policy/profile before scored runs. Major capability
 expansion then depends on replicated independent discovery/use; a valid negative
 report remains a completed research result, not a capability claim. Hosted models
 are optional and separately authorised; real isolation remains mandatory for
@@ -173,9 +179,9 @@ agent-authored execution and unattended certification.
 
 See the [research audit/plan](docs/architecture/AUTONOMY_AND_EXPERIMENTAL_READINESS.md),
 [benchmark/validity specification](docs/experiments/README.md) and
-[dependency-aware roadmap](docs/roadmap/ROADMAP.md). The autonomy benchmark,
-new intervention policies and hosted providers remain
-unimplemented. S007a local routing is engineering evidence only.
+[dependency-aware roadmap](docs/roadmap/ROADMAP.md). The autonomy benchmark
+and hosted providers remain unimplemented. S007a local routing and S007c policies
+are engineering evidence only.
 S006e's historical validation is preserved in
 [its immutable snapshot](docs/roadmap/validation/S006e.json).
 

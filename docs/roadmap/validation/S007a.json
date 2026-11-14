@@ -1,0 +1,38 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-14T17:49:17Z",
+  "commands": [
+    {
+      "command": "Builder: uv sync; uv run olb state; uv run olb check --tests (baseline)",
+      "result": "S007a next; 305 tests passed in 45.86 seconds and all health checks passed."
+    },
+    {
+      "command": "Simulation: uv sync; uv run pytest -q (initial suite)",
+      "result": "237 tests passed. This suite overlapped subsequent source edits and is not a pristine-source baseline."
+    },
+    {
+      "command": "Simulation: uv run pytest (final); uv run pytest tests/test_model.py -k catalog_routes; uv run ruff check .",
+      "result": "252 tests passed without warnings in 227.91 seconds; final catalog-routing/recovery assertions passed 3 tests; lint passed. Earlier health-probe warning was fixed by preserving the original Ollama monitor and refusing unattestable generic recovery at admission."
+    },
+    {
+      "command": "Simulation: uv run ols run experiments/s007a-swap-llama.json; uv run ols run experiments/s007a-swap-granite.json; verify_archive on both; paired config comparison",
+      "result": "Both selected installed models against the same world/registry, ended at max_steps=3, and verified without problems. Llama invoked the clock with two repairs; Granite reached documentation only. Configurations differ only in experiment/model ids. No behavioural GO."
+    },
+    {
+      "command": "Simulation: ollama.measure and bounded warm native requests for both installed models",
+      "result": "Llama: 2800 MiB loaded, 2239 VRAM, 561 RAM, 7.18 s unloaded-model load; Granite: 2637 MiB loaded, 2245 VRAM, 392 RAM, 6.92 s load. Native context 4096 for both. No disk-cache cold guarantee; effective per-call settings remain unknown."
+    },
+    {
+      "command": "Builder: uv run olb validate models/local-engineering.json and both Simulation paired configurations; check_privacy on Simulation; git diff --check",
+      "result": "Three documents valid; privacy scan empty; diff checks passed."
+    },
+    {
+      "command": "Simulation: git commit; git push origin main; git status --short --branch",
+      "result": "fd64e3f committed and pushed; clean main agrees with origin/main."
+    },
+    {
+      "command": "Builder: uv run ruff check .; uv run olb check --tests (final)",
+      "result": "Lint passed; 305 tests passed in 48.15 seconds and all health checks passed. Current catalog and both paired configurations validated; historical S006c validation retained separately."
+    }
+  ]
+}

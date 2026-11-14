@@ -1,5 +1,11 @@
 # Autonomy and experimental readiness — S013 realignment
 
+Current implementation update: S007a local routing and S007c versioned runtime
+policies are complete as engineering. See [policy specification](RUNTIME_POLICIES.md)
+and [validation](../experiments/2026-11-14-runtime-policies.md). S007d remains
+UNEXECUTED; this update does not promote earlier pilots to behavioural evidence.
+
+
 Date: 2026-11-14. Status: strategic planning, not a runtime release or experiment.
 Decision: [ADR-0013](../decisions/ADR-0013-autonomy-as-an-experimental-objective.md).
 Execution plan: [ROADMAP](../roadmap/ROADMAP.md). Authoritative prospective

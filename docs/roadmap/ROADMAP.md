@@ -80,7 +80,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S007c then S007d (S007a complete). With expansion GO, S007e then the most useful
+**Next:** S007d (S007a/S007c complete). With expansion GO, S007e then the most useful
 feasible capability; narrow S008c can precede vision. With NO_GO, start S007h.
 With INCONCLUSIVE, fix the named validity issue before drawing a conclusion.
 S010 protocol work, optional hosted design and S006c/S006f remain safe
@@ -599,7 +599,7 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S007c — Explicit Continuation, Context and Memory Policy
 
 - **Repository / streams:** Simulation; Builder contracts/protocol. B/D.
-- **Status:** planned; S013 does not change current runtime behaviour.
+- **Status:** complete (S007c); [validation](../experiments/2026-11-14-runtime-policies.md).
 - **Objective:** Control environmental interventions and permit observable inactivity
   without manufacturing activity through repeated messages.
 - **Prerequisites:** S007a and S006a/S006b/S006d.

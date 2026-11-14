@@ -197,6 +197,16 @@ loop:
 The runtime holds no authority. It cannot extend its deadline, change its
 permissions or write to the run archive except through the recorder.
 
+S007c adds selectable archived runtime policies, defaulting to the legacy
+immediate continuation. The quiet alternative stops inference at its bounded
+tool-free reply threshold, with no automatic wake until the active deadline.
+Checkpoint state preserves counters and the idle latch; the existing supervisor
+retains deadline/pause authority during idle. Exact outgoing requests and guard
+mutations are recorded before each HTTP attempt, outside the agent workspace.
+Memory retrieval remains explicit. See [Runtime policies](RUNTIME_POLICIES.md)
+and [ADR-0016](../decisions/ADR-0016-versioned-runtime-treatments.md). Both policies
+are treatments; neither is asserted neutral. No S007d benchmark has run.
+
 ### Memory subsystem — Simulation (S006a)
 
 Implemented in S006a, with the detailed protocol in

@@ -100,6 +100,23 @@ before the unchanged initial user prompt. It describes only the four fixed
 discovery interfaces and grants no permissions. The same text is recorded for
 scripted runs. A world whose contracts cannot record it is refused at launch.
 
+**S007c policy/input records.** New runs archive `policy.json`, bound to the
+launch event and experiment digest. Legacy continuation remains the default;
+the selectable quiet policy idles after its reply threshold with no further
+model input or automatic wake. Supervisor `runtime_idle` actions record the
+counter/latch and whether this segment restored it. Recovery events freeze the
+policy and checkpoint progress. These observations do not interpret prose as
+intent or inactivity as failure.
+
+Before each HTTP attempt, a dedicated IPC request has the supervisor sync an
+exact `model_input` snapshot in a `limit_enforced` action. It contains messages,
+tools, requested settings, context before/after digests, changes and overflow.
+The worker waits for acknowledgement before HTTP. Retries have separate attempt
+records, even when no reply follows. Scripted snapshots identify their ignored
+conversation input. No hidden reasoning response is recorded. These records
+permit exact input reconstruction for new runs; historical archives do not gain
+retroactive inputs. Storage and fsync overhead for long runs remain unverified.
+
 **Context.** When the conversation outgrows the model's context window, the
 runtime first blanks the oldest long tool results, then drops the oldest whole
 turns, preserving the system preamble, the initial prompt and the latest

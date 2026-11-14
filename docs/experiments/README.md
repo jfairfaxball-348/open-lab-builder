@@ -10,6 +10,7 @@ agent-stated objectives and adaptive action, not subjective consciousness.
 
 | Engineering record | Established | Not established |
 | --- | --- | --- |
+| [Runtime policies](2026-11-14-runtime-policies.md) | Versioned scheduling, exact inputs and checkpointed idle continuity | Neutrality, useful reflection or autonomy |
 | [Local gateway](2026-11-14-local-gateway.md) | Two pinned catalog selections against the same world; frozen provenance and local adapter tests | Autonomy, matched compute or effective setting guarantees |
 | [Local model](2026-11-14-local-model-check.md), [candidate comparisons](2026-11-14-orchestrator-candidates.md) | Local calls/continuations and recorded differences | General autonomy or a controlled success rate; settings/output budgets varied |
 | [Discovery](2026-11-14-discovery-meta-tools.md) | Directed search/describe/invoke with recorded repairs | Reliable independent discovery; the final prompt gives procedural argument guidance |
@@ -161,17 +162,23 @@ unseen evaluation. Generalisation claims need registered held-out cases/seeds.
 
 ## Continuation, context and memory are experimental conditions
 
-Current runtime immediately delivers its configured continuation after each
-tool-free reply, records it, then calls the model again until a limit. Its default
-says no one replied and the world/tools are unchanged. Factual wording may still
-nudge activity or sustain an instruction-following loop; it is not proven neutral.
-It is infrastructure input, not another human instruction. There is currently no
-explicit quiet/idle treatment, and intent to rest cannot be inferred from prose.
+S007c implements two versioned, archived scheduling treatments. The default
+`legacy-immediate-v1` retains immediate recorded continuation. The alternative
+`quiet-until-deadline-v1` permits a configured number of consecutive tool-free
+replies (1-16), then stops model calls without adding text. There is no automatic
+wake; pause/resume/recovery preserve idle state and the original active budget.
+The remaining wall-clock budget bounds waiting. Prose never supplies intent or
+scheduling authority. Both treatments can affect behaviour and neither is proven
+neutral. See [the specification](../architecture/RUNTIME_POLICIES.md) and
+[engineering evidence](2026-11-14-runtime-policies.md). S007d is still UNEXECUTED;
+it must preregister one primary policy/profile and pin all settings.
 
-S007c will specify one bounded alternative: no coerced tool use, explicit
-waiting/reflection budgets, exact wake semantics and deadline authority while
-inactive. Version and record all scheduling/model inputs. S013 changes none of
-this runtime behaviour. A tool-free reply is not itself evidence of failure.
+New archives freeze exact continuation, context/memory/turn versions and client
+guard in `policy.json`. Before every HTTP attempt, supervisor-owned records
+preserve exact request bodies and guard mutations; retries and failed calls
+retain inputs. These are infrastructure observations, not new human messages.
+Explicit memory retrieval remains the only route for stored notes to return as
+tool-result data. No silent summary or automatic retrieval is introduced.
 
 The current guard blanks old tool results then drops whole old turns, preserving
 the initial prompt, preamble and newest assistant/tool group. Fresh documentation
