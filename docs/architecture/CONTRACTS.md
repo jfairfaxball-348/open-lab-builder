@@ -114,8 +114,37 @@ then ascending id determines order. An optional exact category slug filters
 results. Empty/no-match queries and non-positive limits yield an empty list.
 Results carry the entry and its score. An unsupported format version is refused.
 This is derived release data, not a new JSON Schema contract; existing schemas
-are unchanged. Runtime discovery integration belongs to S005b. Older releases
+were unchanged by S005a. Runtime discovery integration is implemented in S005b. Older releases
 without the registry remain verifiable.
+
+**Discovery protocol (S005b).** The Simulation independently reads and checks
+this index; it imports no Builder code. A run requires complete format 1.0.0
+discovery data and preamble support in observation-event 1.2.0. Older worlds
+remain verifiable, but this runtime refuses to launch them. Exactly four tools
+are offered, with names mapped to chat API function names by replacing dots
+with underscores:
+
+- `capabilities.search(query, category?)`: up to ten ranked summaries with
+  id, categories and score; filters out unavailable/ungranted capabilities.
+- `capabilities.describe(id)`: full generated documentation, structured input
+  schema, and an `example_call` derived from the first demonstration's input.
+- `capabilities.demonstrate(id, demo_id?)`: executes the named demonstration,
+  or the first in manifest order, in the actual run workspace. Returns id,
+  demo id, input, real execution `outcome`, and expected output/comparison if
+  present. An execution failure is kept in the nested outcome; it is never
+  replaced with the expected output. Demonstrations may create artifacts.
+- `capabilities.invoke(id, arguments)`: validates and executes the capability
+  and returns its actual outcome.
+
+Meta-tool argument objects are closed. Describe, demonstrate and invoke enforce
+the experiment's allow/deny lists and permissions; demonstration inputs grant
+nothing. Direct capability names and recursive meta-invocation are refused.
+Each meta-call produces a correlated `tool.call`/`tool.result` pair naming the
+meta-tool, with the target id in its arguments. Invocation/demonstration
+execution does not emit a second nested pair. Workspace scans occur after that
+result; artifact producer metadata names the target capability and correlates
+to the recorded meta-call. Schemas for these four built-in interfaces live in
+the Simulation; world capability schemas remain in their manifests.
 
 **Content digest.** `content_digest.value` is computed as follows.
 
@@ -266,6 +295,7 @@ time only, so a crash does not eat into an experiment's time budget.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-14 | observation-event | 1.2.0 | Adds environment.message kind preamble for the generic discovery system message; minimal world 0.5.0 bundles it. Four meta-tool protocol specified (S005b) |
 | 2026-11-14 | (release layout / protocol) | — | Generated registry format 1.0.0 and full documentation; disposable self-test workspaces; minimal world 0.4.0 adds workspace.write, workspace.list and time.now. No schema change (S005a) |
 | 2026-11-13 | all | 1.0.0 | Initial versions (S001) |
 | 2026-11-13 | (protocol) | — | Invocation protocol gains the `OPEN_LAB_WORKSPACE` variable, the empty child environment and the `denied` outcome; event-log canonical form and hash chain defined in OBSERVATION.md. No schema change (S003a) |

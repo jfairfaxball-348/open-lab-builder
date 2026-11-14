@@ -5,6 +5,15 @@ from __future__ import annotations
 from open_lab_builder.contracts import validate_document, validate_event_stream
 
 
+def test_generic_preamble_is_a_runtime_observation_with_versioned_support(events):
+    event = dict(by_type(events, "environment.message"))
+    event["schema_version"] = "1.2.0"
+    event["payload"] = {"kind": "preamble", "text": "Discover tools through the environment."}
+    assert validate_document(event) == []
+    event["recorder"] = "agent"
+    assert validate_document(event)
+
+
 def by_type(events, event_type):
     return next(e for e in events if e["type"] == event_type)
 

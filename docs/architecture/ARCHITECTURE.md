@@ -6,7 +6,7 @@ and five simple capabilities (S005a), and in
 `open-lab-simulation` the experiment manager, a minimal supervisor, the
 recorder, the tool host and the agent loop (S003a), driven either by a
 scripted stand-in or by one local model through Ollama's chat-completions
-endpoint (S003b). Everything else in this document is design that later
+endpoint (S003b), now through four discovery meta-tools (S005b). Everything else in this document is design that later
 milestones build. Each section says
 which milestone delivers it.
 
@@ -124,8 +124,12 @@ Implemented in S005a: build-time `registry/index.json`, full generated
 `registry/docs/<id>.txt`, and pure-Python weighted keyword search in the Builder
 (format and ranking in CONTRACTS.md). Minimal world 0.4.0 contains five
 capabilities, including workspace text writing/listing and UTC time. The
-Simulation still presents capabilities directly; the four meta-tools below
-are S005b and are not yet implemented.
+Simulation serves the four meta-tools below (S005b); these are the only tools
+presented to the model. Its generic system preamble names no world capability.
+Search uses the bundled index, describe reads the generated documentation and
+includes the input schema and a manifest-derived example call, demonstrate
+executes a shipped example, and invoke validates and runs the actual tool.
+Allow/deny lists and permissions apply to discovery as well as execution.
 
 The agent's initial prompt does **not** list the tools. The runtime exposes
 four fixed meta-tools, and everything else is discovered through them:
@@ -144,8 +148,8 @@ observable behaviour. See [ADR-0003](../decisions/ADR-0003-capability-manifest.m
 
 Implemented so far (S003b): a single chat model client with tool calling,
 tool-call repair, one retry, a context-length guard, and the model's identity
-recorded in the archive. Capabilities are presented to the model directly as
-tools; the meta-tools are S005b. Not implemented: multiple models, loading and
+recorded in the archive. Only the four discovery meta-tools are offered (S005b).
+Not implemented: multiple models, loading and
 unloading, memory scheduling.
 
 One internal interface for every model, whatever serves it. Request and

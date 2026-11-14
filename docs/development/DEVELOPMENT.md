@@ -83,7 +83,7 @@ fails, no release directory is left behind. `--out DIR` builds elsewhere;
 `open-lab-data` in the home directory).
 
 ```bash
-uv run olb world verify releases/minimal/0.4.0 --self-test
+uv run olb world verify releases/minimal/0.5.0 --self-test
 ```
 
 Recomputes every digest and re-validates the manifests against the contracts
@@ -97,7 +97,7 @@ import json
 from pathlib import Path
 from open_lab_builder.capabilities.registry import search
 
-release = Path("releases/minimal/0.4.0")
+release = Path("releases/minimal/0.5.0")
 index = json.loads((release / "registry/index.json").read_text(encoding="utf-8"))
 matches = search(index, "save notes", category="workspace", limit=3)
 text = (release / matches[0]["documentation_path"]).read_text(encoding="utf-8")
@@ -105,7 +105,7 @@ text = (release / matches[0]["documentation_path"]).read_text(encoding="utf-8")
 
 The index and documentation are generated from validated manifests and covered
 by the release digest. Search is a pure function; it executes no capabilities.
-The Simulation will implement discovery meta-tools in S005b without importing
+The Simulation implements discovery meta-tools (S005b) without importing
 Builder code. Filesystem self-test demonstrations run in independent empty
 temporary workspaces; do not assume a previous demonstration created a file.
 

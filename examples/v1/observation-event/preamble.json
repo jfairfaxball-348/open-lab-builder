@@ -1,0 +1,20 @@
+{
+  "schema": "open-lab/observation-event",
+  "schema_version": "1.2.0",
+  "event_id": "evt-0000",
+  "experiment_id": "creator-returns-pilot-01",
+  "run_id": "run-20261113-01",
+  "seq": 0,
+  "timestamp": "2026-11-13T20:05:00Z",
+  "monotonic_ms": 0,
+  "recorder": "agent_runtime",
+  "actor": {
+    "kind": "system"
+  },
+  "type": "environment.message",
+  "epistemic_status": "observed",
+  "payload": {
+    "kind": "preamble",
+    "text": "Discover capabilities through the environment meta-tools."
+  }
+}

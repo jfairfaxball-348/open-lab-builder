@@ -33,4 +33,5 @@ def capability() -> dict:
 
 @pytest.fixture
 def events() -> list[dict]:
-    return copy.deepcopy(load_documents(EXAMPLES["observation-event"][0]))
+    path = ROOT / "examples" / "v1" / "observation-event" / "run-excerpt.jsonl"
+    return copy.deepcopy(load_documents(path))

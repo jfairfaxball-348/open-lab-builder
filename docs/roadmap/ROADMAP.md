@@ -294,6 +294,7 @@ and in `state.json`.
 ### S005b — Discovery Meta-tools
 
 - **Repository:** open-lab-simulation
+- **Status:** complete
 - **Objective:** The agent discovers tools through the environment, not its
   prompt.
 - **Prerequisites:** S005a, S003b.
@@ -305,6 +306,14 @@ and in `state.json`.
   about; the archive shows the search → describe → invoke sequence.
 - **Exit criteria:** above demonstrated and archived; the initial prompt of
   the test experiment contains no tool names.
+- **Delivered:** four permission-checked meta-tools, generic recorded system
+  preamble (observation-event 1.2.0, minimal world 0.5.0), independent registry
+  search and documentation reader, real demonstrations, scripted/fake-server
+  coverage. A final directed llama3.2:3b run archived a successful search →
+  describe → invoke sequence with recorded argument repairs; its initial
+  prompt contains no tool names. Earlier failed trials remain documented;
+  this is not evidence of reliable autonomous discovery. See
+  [acceptance record](../experiments/2026-11-14-discovery-meta-tools.md).
 - **Risks:** small-model competence with indirection (see ADR-0003).
 - **Next session should:** S006a.
 

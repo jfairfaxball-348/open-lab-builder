@@ -84,16 +84,25 @@ originate in the supervisor. A refused request is itself recorded as an
 **Everything the agent is told is in the record.** The initial prompt is in
 the frozen `experiment.json`. Anything the infrastructure adds to the
 conversation afterwards is an `environment.message` event recorded before the
-model sees it, with the text verbatim. Since S003c the only such message is
-the *continuation*: when the model replies without calling a tool, the run
+model sees it, with the text verbatim. S003c introduced the *continuation*:
+when the model replies without calling a tool, the run
 does not end; the runtime answers with the experiment's `continuation.message`
 (or the default stated in the experiment-config schema) and asks the model
 again (decision OD-5). The event's `after_seq` names the output it answers. A
 run therefore ends only at its step limit, its deadline or a failure.
 
+S005b also records an `environment.message` of kind `preamble` before the first
+model call (observation-event 1.2.0). This text becomes a system turn immediately
+before the unchanged initial user prompt. It describes only the four fixed
+discovery interfaces and grants no permissions. The same text is recorded for
+scripted runs. A world whose contracts cannot record it is refused at launch.
+
 **Context.** When the conversation outgrows the model's context window, the
 runtime first blanks the oldest long tool results, then drops the oldest whole
-turns, never the initial prompt or the latest message. Each `model.call`
+turns, preserving the system preamble, the initial prompt and the latest
+assistant/tool group. Fresh documentation reaches the model at least once.
+If this protected content alone exceeds the conservative estimate, it is sent
+intact; the guard cannot guarantee the server's tokenisation. Each `model.call`
 records `context_truncated_tool_results` and `context_dropped_messages` when
 this happened, so what the model could see at every step can be
 reconstructed.
@@ -126,6 +135,18 @@ calls recovered from malformed output), `retries`, and
 `context_truncated_tool_results` (older tool results blanked to fit the
 context window). The model's text is always recorded as it was written; a
 repair changes what is executed, never what is recorded as said.
+
+S005b additionally repairs syntactic invocation argument wrappers: an encoded
+JSON input object can be decoded, and an exact extra `arguments` envelope
+containing both `id` and `arguments` can be removed. No id or input field is
+invented, and the repaired call still passes the same schema and permission
+checks. `model.call.repaired_tool_calls` counts the affected calls, while the
+original assistant tool arguments remain verbatim in the conversation. Since
+S005b, `agent.output.payload.extensions.raw_tool_calls` also stores the emitted
+names and argument strings held by the client, so repairs are auditable even
+when the model used the structured tool channel and emitted no reply text.
+For a textual fallback, the original reply text and extracted argument object
+are preserved. Reasoning fields remain ignored.
 
 **Readable after the run and after the workspace is gone.** Artifacts are found
 by the supervisor scanning the workspace, not by the agent announcing them. On

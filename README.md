@@ -45,19 +45,24 @@ exists and works:
 - `olb check` — project health check.
 - Architecture, decision records, and a multi-session roadmap.
 
-In the sibling `open-lab-simulation` repository, S003a, S003b and S003c are
+In the sibling `open-lab-simulation` repository, S003a, S003b, S003c and S005b are
 also complete: `ols run` launches a supervised, fully recorded run driven by a
 scripted stand-in or by one small local model (`llama3.2:3b` through Ollama). A reply without a tool call no longer ends a run: the
 runtime answers with a fixed, recorded continuation message (S003c). Three
 more candidate models were measured and compared
 ([orchestrator candidates](docs/experiments/2026-11-14-orchestrator-candidates.md)).
+The model now sees only four discovery meta-tools: search, describe,
+demonstrate and invoke. Its generic system preamble is recorded with
+observation-event 1.2.0, bundled in minimal world 0.5.0. A bounded real-model
+search → describe → invoke check passed with recorded argument repairs;
+[results and limits](docs/experiments/2026-11-14-discovery-meta-tools.md).
 
 In the sibling `open-lab-window` repository, S004 is complete: `olw serve`
 gives a read-only browser view of the run archives (run list, frozen
 configuration, timeline with type filters, tool call and result pairs,
 artifact previews, live tail of a run in progress).
 
-What does **not** exist yet: runtime discovery meta-tools, the full model gateway,
+What does **not** exist yet: the full model gateway,
 memory, checkpoints, container isolation and run comparison. No experiment has
 been run: the runs so far are engineering checks, recorded in
 [docs/experiments/](docs/experiments/). Run `uv run olb
@@ -84,7 +89,7 @@ uv run olb world build worlds/minimal
 ```
 
 ```bash
-uv run olb world verify releases/minimal/0.4.0 --self-test
+uv run olb world verify releases/minimal/0.5.0 --self-test
 ```
 
 ```bash
