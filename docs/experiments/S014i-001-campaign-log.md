@@ -53,3 +53,22 @@ unresolved reservation is from `s014i-pilot-001`).
   excluded from every denominator) completed `ok`, showing the refusal had
   cleared before the next scored cell started.
 - The campaign resumed with the one-cell-at-a-time operator script.
+
+## 2026-11-15, second run (09:22Z to 09:49Z)
+
+- Eleven cells completed in manifest order, each terminated at 32 steps:
+  `s43-r2-c`, `s43-r2-a`, `s43-r2-d`, `s43-r2-b`, `s42-r1-d`, `s42-r1-c`,
+  `s42-r1-b`, `s42-r1-a`, `s42-r2-a`, `s42-r2-b`, `s42-r2-c`.
+- `s42-r2-d`: 27 model calls, then `subscription_sharing_usage_limit_exceeded`;
+  **provider-censored**. The one-cell script stopped immediately; no further
+  cell started.
+- The usage page then showed the 5-hour window at exactly **50% left** (weekly
+  66% left) with the app limit at 50%. This confirms that the per-app setting
+  caps the app's share of each 5-hour window as well as the week. Reset in
+  about 3 h 36 min (about 13:25Z).
+
+Accounting: 16 of 24 cells finished (12 complete, 4 provider-censored: three
+from the first stop, including the operator deviation, and one here); all 16
+archives verify. Provider ledger: 508 reservations, 507 outcomes. Eight cells
+remain: the s41 block, in manifest order. Per the registration, none starts
+before the window resets.
