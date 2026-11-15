@@ -261,6 +261,8 @@ S010b now adds reproducible source-linked comparisons and typed investigator
 annotations ([protocol](docs/experiments/STUDY_ANALYSIS.md),
 [report](docs/experiments/2026-11-15-s010b-study-analysis.md)). Window comparison remains S010c. World 0.8.0 is
 unchanged. Export integrity establishes no new autonomy GO or causal comparison.
+S011p has started: Luna admission and a low-effort NOT_SCORED smoke passed
+([record](docs/experiments/2026-11-15-s011p-luna-smoke.md)); the one-hour run is not yet run.
 
 ## Governing principle
 

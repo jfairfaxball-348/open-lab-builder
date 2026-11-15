@@ -1418,7 +1418,7 @@ behavioural success are always reported separately.
 ### S011p — Luna 5.6 Qualification and First One-Hour Run
 
 - **Repository / streams:** Simulation implementation and real-model checks; Builder records protocol, status and report. B/C/D.
-- **Status:** planned; **selected as exact next milestone on 2026-11-15 by owner**, superseding S010c as the immediate session. No Luna compatibility check or one-hour run has yet occurred.
+- **Status:** **in progress (partial)**; selected as exact next milestone on 2026-11-15 by owner, superseding S010c. Done 2026-11-15: `gpt-5.6-luna` listed on the account and the NOT_SCORED low-effort smoke passed live ([record](../experiments/2026-11-15-s011p-luna-smoke.md)). Not done: one-hour configuration, preregistration, owner allowance and run.
 - **Objective:** Verify the actual `gpt-5.6-luna` model on the authenticated ChatGPT plan-usage route, then measure one supervised hour of self-directed activity under bounded infrastructure interventions and honest quota accounting.
 - **Scientific purpose:** Distinguish short-term autonomous initiation, tool use, memory-informed revision and voluntary stopping from mere uptime and tool-call quantity, while quantifying actual model-call pace and the consequences of plan metering. No assumed continuity or consciousness.
 - **Prerequisites:** existing S014d/g hosted adapter and broker, S006c Windows isolation, completed S010a/b offline evidence machinery, current tests, and owner-confirmed finite hosted request budget. Owner must confirm Luna appears in `uv run ols provider models openai-chatgpt`; API docs alone do not grant account access.

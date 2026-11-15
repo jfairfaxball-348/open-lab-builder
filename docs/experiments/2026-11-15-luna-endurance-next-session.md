@@ -1,6 +1,6 @@
 # S011p — Luna 5.6 qualification and first one-hour run (next session)
 
-Status: **planned, not executed**. Owner direction: 2026-11-15. The next coding/experiment session should attempt this milestone, not S010c. This is a roadmap change only: no provider models have been queried, no experiment configuration frozen, no model requests sent and no ChatGPT plan allowance used by this edit.
+Status: **steps 1–4 executed 2026-11-15** ([smoke record](2026-11-15-s011p-luna-smoke.md)); steps 5–9 (one-hour run) not started. Original text below. Owner direction: 2026-11-15. The next coding/experiment session should attempt this milestone, not S010c. This is a roadmap change only: no provider models have been queried, no experiment configuration frozen, no model requests sent and no ChatGPT plan allowance used by this edit.
 
 ## Scientific question
 
