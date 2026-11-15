@@ -308,6 +308,37 @@ parity or deterministic results.
 
 ### Experiment configuration
 
+S007e reserves the existing MCP invocation pair `supervisor-gateway` /
+`models.ask` for a supervisor service (ADR-0018), not an arbitrary network
+MCP server. Its manifest accepts only `{prompt: string}` (1-6000 characters)
+and returns `{text: string}` (at most 6000 characters). The Builder self-test
+injects a labelled fake transport; ordinary build-time invocation without
+that transport refuses the service. No real model runs in a build.
+
+`extensions.specialist` is a closed object requiring `model_id: specialist-text`
+and integer fields: `max_calls` 1-32, `max_prompt_chars` and `max_output_chars`
+1-6000, `max_output_tokens` 1-1024, `timeout_s` 1-120, `lease_s` 1-600. Absence
+disables consultation. The bundled approved digest-pinned Ollama model is
+llama3.2:3b; this milestone permits a hosted or scripted orchestrator only.
+The worker's `{specialist: arguments}` IPC request must match one outstanding
+permitted invocation/demonstration. The supervisor repeats admission checks,
+syncs a `specialist_call_reserved` observation, and acknowledges with
+`specialist_result` only after the gateway returns. Calls count across resume;
+residency never does. An HTTP thread has no recorder and the supervisor polls
+its observations while retaining deadline/resource authority.
+
+Supervisor-action extensions record `specialist_configuration` (policy,
+manifests, adapter and requested settings), `specialist_call_reserved`,
+`specialist_lease_acquired`, `specialist_loaded`, `specialist_reply` (prompt,
+text and reported usage), `specialist_failed`, `specialist_unloaded`,
+`specialist_unload_failed`, `specialist_lease_released` and exceptional
+`specialist_cleanup_pending`. Durations are milliseconds; the pinned model
+digest accompanies lease observations. Replies are untrusted model-output
+observations. No reasoning response channel is copied. An OS lock serializes
+cooperating supervisors under one data root; other resident models cause a
+refusal without unloading unrelated work. Native finite keep-alive bounds
+residency after abrupt supervisor loss, not an immediate unload guarantee.
+
 Holds everything needed to reproduce a launch: prompt, world and digest, model
 and sampling parameters, limits, permissions, checkpointing and termination.
 A premise in `initial_prompt` grants nothing; only `permissions` and `limits`
@@ -505,9 +536,10 @@ Windows notification delivery and disk checks have the limitations in ADR-0012.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-15 | (specialist service protocol) | - | S007e reserves an existing MCP invocation pair, adds bounded specialist configuration/IPC, durable consultation reservations and lease observations; minimal 0.7.0, no schema change; ADR-0018 |
 | 2026-11-14 | (benchmark protocol) | - | S007d adds frozen cells/ledgers, initial-state observations, marked one-shot fault injection and source-bound derived analysis; existing extensions, no schema change |
 | 2026-11-14 | (runtime policy protocol) | - | S007c freezes two scheduling policies, client context and explicit-memory identities; preserves idle checkpoint state and records exact model inputs before attempts. Existing extensions, no schema change |
-| 2026-11-14 | (local gateway protocol) | � | S007a adds pinned model_catalog configuration, canonical catalog/model provenance binding and local adapter routing using existing extensions; no schema change |
+| 2026-11-14 | (local gateway protocol) | — | S007a adds pinned model_catalog configuration, canonical catalog/model provenance binding and local adapter routing using existing extensions; no schema change |
 | 2026-11-14 | (resource protocol) | — | S006e applies existing resource fields through Windows jobs/supervisor quota admission and trials sample metadata/config extensions; ADR-0012. No schema change |
 | 2026-11-14 | (recovery protocol) | — | S006d trials extensions.recovery, conserved model-attempt and restart reservations, OS writer guard, interrupted startup scan and model health; ADR-0011. No schema change |
 | 2026-11-14 | (supervisor protocol) | — | S006b implements bounded checkpoint_then_stop using existing fields and event extensions; ADR-0010 defines grace and termination. No schema change |

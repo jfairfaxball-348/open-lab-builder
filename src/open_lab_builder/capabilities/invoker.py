@@ -92,11 +92,18 @@ def invoke(
     *,
     timeout_s: float | None = None,
     workspace: Path | None = None,
+    service=None,
 ) -> InvocationResult:
     """Invoke a capability once. The manifest must already be a valid capability document."""
     problem = _first_error(manifest["input_schema"], arguments)
     if problem:
         return _error(INVALID_INPUT, problem)
+    if manifest["invocation"] == {"interface": "mcp", "server": "supervisor-gateway",
+                                  "tool": "models.ask"} and service is not None:
+        payload = service(arguments)
+        problem = _first_error(manifest["output_schema"], payload)
+        return (_error(INVALID_OUTPUT, problem) if problem
+                else InvocationResult("ok", output=payload))
     command = _command(manifest, capability_dir)
     if isinstance(command, InvocationResult):
         return command
@@ -153,7 +160,8 @@ def run_self_test(manifest: dict[str, Any], capability_dir: Path) -> list[str]:
         # inherit an operator's workspace or write into the immutable release.
         with tempfile.TemporaryDirectory(prefix="olb-self-test-") as directory:
             result = invoke(manifest, capability_dir, demo["input"], timeout_s=timeout_s,
-                            workspace=Path(directory))
+                            workspace=Path(directory),
+                            service=lambda arguments: {"text": "Build-time fake specialist reply."})
         label = f"{manifest['id']} demonstration '{demo_id}'"
         if not result.ok:
             problems.append(f"{label}: {result.error_kind}: {result.message}")

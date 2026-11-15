@@ -149,6 +149,38 @@
       },
       "status": "available",
       "notes": "Measured on the development machine (4 GB GPU) on 2026-11-14 with 'ols measure-model', warm: 2637 MB loaded, of which 2245 MB on the GPU and 392 MB in system RAM; load 3.0 s warm (11.6 s cold); about 58 output tokens per second warm (the cold measurement, 4 tokens per second, was taken while the model was still being paged in). Candidate compared in S003c."
+    },
+    {
+      "id": "specialist-text",
+      "provider_ref": "llama3.2:3b",
+      "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+      "family": "llama",
+      "parameter_count": "3.2B",
+      "quantization": "Q4_K_M",
+      "roles": [
+        "text_generation"
+      ],
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "context_window_tokens": 4096,
+      "features": {
+        "tool_calling": true,
+        "streaming": true
+      },
+      "footprint": {
+        "disk_mb": 1926,
+        "ram_mb": 561,
+        "vram_mb": 2239,
+        "measured": true
+      },
+      "status": "available",
+      "notes": "Approved installed llama3.2:3b specialist for S007e; measured footprint retained from 2026-11-14. Consult only through the supervisor gateway."
     }
   ]
 }

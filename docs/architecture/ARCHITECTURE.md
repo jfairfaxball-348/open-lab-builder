@@ -16,6 +16,15 @@ Related: [CONTRACTS.md](CONTRACTS.md) · [OBSERVATION.md](OBSERVATION.md) ·
 [SAFETY_AND_ISOLATION.md](SAFETY_AND_ISOLATION.md) ·
 [decision records](../decisions/README.md)
 
+S007e adds `models.ask` in minimal 0.7.0. Its reserved service invocation travels
+over the runtime pipe to the supervisor-owned local gateway, never to a
+capability subprocess. One asynchronous Ollama lease serves the pinned
+specialist while hosted orchestration continues with the same conversation.
+Limits, reservations, recording, expiry and segment cleanup remain outside
+the agent. [ADR-0018](../decisions/ADR-0018-supervisor-specialist-consultation.md)
+and the specialist protocol in CONTRACTS.md specify this boundary. Archived
+0.6.0 remains runnable. Local orchestrator swapping is not implemented.
+
 S013 adds an experimental-readiness plan without changing implemented architecture:
 [Autonomy and experimental readiness](AUTONOMY_AND_EXPERIMENTAL_READINESS.md),
 [prospective baseline and validity gates](../experiments/README.md),

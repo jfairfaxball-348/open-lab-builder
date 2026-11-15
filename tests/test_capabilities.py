@@ -25,6 +25,28 @@ from open_lab_builder.contracts import validate_document
 CAPABILITIES = ROOT / "worlds" / "minimal" / "capabilities"
 
 
+def test_specialist_build_self_test_is_explicitly_fake_and_direct_use_is_refused():
+    manifest, directory = load("models.ask")
+    assert validate_document(manifest) == []
+    assert run_self_test(manifest, directory) == []
+    result = invoke(manifest, directory, {"prompt": "Hello"})
+    assert result.error_kind == UNSUPPORTED_INTERFACE
+    received = []
+
+    def service(arguments):
+        received.append(arguments)
+        return {"text": "Fake reply"}
+
+    assert invoke(manifest, directory, {"prompt": "Hello"}, service=service).output == {
+        "text": "Fake reply"}
+    assert received == [{"prompt": "Hello"}]
+    assert invoke(manifest, directory, {"prompt": "x" * 6001},
+                  service=service).error_kind == INVALID_INPUT
+    assert len(received) == 1
+    assert invoke(manifest, directory, {"prompt": "Hello"},
+                  service=lambda _: {"text": "x" * 6001}).error_kind == INVALID_OUTPUT
+
+
 def load(capability_id: str) -> tuple[dict, Path]:
     directory = CAPABILITIES / capability_id
     return json.loads((directory / "capability.json").read_text(encoding="utf-8")), directory

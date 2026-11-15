@@ -24,6 +24,7 @@ by rewriting history.
 | [0016](ADR-0016-hosted-provider-broker.md) | Hosted providers only through a supervisor-owned broker with secret isolation, reserved budgets and no fallback | Accepted (S014a); amends ADR-0005, supersedes planned S007f; not yet implemented |
 | [0016](ADR-0016-versioned-runtime-treatments.md) | Versioned continuation/quiet treatments, checkpointed idle state and pre-request input records | Accepted; S007c |
 | [0017](ADR-0017-owner-accepted-go-and-capability-testing.md) | Owner-accepted post-hoc GO for S014i-001; test each new capability instead of repeating the baseline | Accepted (owner); supersedes S014n |
+| [0018](ADR-0018-supervisor-specialist-consultation.md) | Supervisor-mediated local specialist capability and one finite GPU lease | Accepted (S007e) |
 
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).
