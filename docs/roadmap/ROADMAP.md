@@ -1455,7 +1455,7 @@ behavioural success are always reported separately.
 ### S011a — Reliability: One-Hour Runs
 
 - **Repository / streams:** Simulation; Builder evidence. C/D.
-- **Status:** planned.
+- **Status:** **registered 2026-11-15** ([S011a-001](../experiments/registrations/S011a-001.md)): three hosted Luna hours, each with a registered runtime kill (300/900/1800 s). Not yet run; launch needs owner allowance.
 - **Objective:** Validate unattended one-hour execution independently of behaviour.
 - **Prerequisites:** S011r hosted recovery (if hosted), S011p qualified first-hour experience, completed S010a/b, S006c and frozen model/policy/world; S010c is deferred for observation UI, not required for these offline-verifiable reliability checks.
 - **Scope:** three consecutive one-hour runs, each with a registered runtime/model
