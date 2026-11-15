@@ -217,5 +217,15 @@
     }
   },
   "interpretation": "Engineering validation only; no evidence of real-model discovery, selection or use.",
-  "simulation_registration_commit": "5e219d0"
+  "simulation_registration_commit": "5e219d0",
+  "builder_registration_commit": "d52789b",
+  "validation": {
+    "builder_tests": 342,
+    "builder_duration_s": 47.54,
+    "simulation_tests": 402,
+    "simulation_duration_s": 362.14,
+    "ruff": "passed in both repositories",
+    "provider_ledger_s008c_reservations": 0,
+    "checked_at": "2026-11-15T14:05:43Z"
+  }
 }

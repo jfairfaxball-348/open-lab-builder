@@ -1,6 +1,6 @@
 {
   "status": "passing",
-  "ran_at": "2026-11-15T14:04:36Z",
+  "ran_at": "2026-11-15T14:05:43Z",
   "commands": [
     {
       "command": "Builder and Simulation: git status; git log --oneline -10; uv sync; Builder: uv run olb state; uv run olb check --tests (start)",
@@ -11,8 +11,8 @@
       "result": "36 new numerical/manifest/invoker tests passed; final Builder suite 342 passed in 47.54 s, all health checks passed; Ruff passed."
     },
     {
-      "command": "Simulation: uv run pytest (start); uv run pytest tests/test_statistics_world.py tests/test_s008c_runner.py; uv run ruff check .",
-      "result": "395 existing tests passed in 359.70 s; 7 new world/runner tests passed in 7.94 s; Ruff passed. A final complete suite is also being recorded in session evidence."
+      "command": "Simulation: uv run pytest (start and final); uv run pytest tests/test_statistics_world.py tests/test_s008c_runner.py; uv run ruff check .",
+      "result": "Start: 395 passed in 359.70 s. Final full suite: 402 passed in 362.14 s. Seven new world/runner tests also passed separately in 7.94 s; Ruff passed. No runtime source changes."
     },
     {
       "command": "Builder: uv run olb world build worlds/minimal --publish; uv run olb world verify <0.6.0/0.7.0/0.8.0> --self-test; fixture/source/runner hash audit",
@@ -20,7 +20,7 @@
     },
     {
       "command": "Simulation: run_experiment(experiments/s008c-scripted.json); verify_archive; uv run python scripts/s008c_check.py (without clearance)",
-      "result": "Scripted statistics run completed; archive intact; real numerical results and a constant-x error recorded. Hosted runner refused before launch without quota confirmation. No S008c hosted archive or started-cell record exists; zero plan requests."
+      "result": "Scripted statistics run completed and archive verifies, including numerical outputs and a constant-x error. Runner without clearance refused before launch. Actual provider ledger has zero S008c reservations; no hosted archive or started-cell record. All four configurations pass schema/hash/budget/prompt checks. S008c remains incomplete pending quota confirmation."
     }
   ]
 }

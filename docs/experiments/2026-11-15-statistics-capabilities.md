@@ -58,7 +58,8 @@ documentation, real demonstrations/invocations, invalid/degenerate inputs and
 deny-list enforcement, with intact archives and no workspace side effects.
 Four test the runner's quota gate, refusal after a provider stop even with a
 clearance argument, four-start ceiling, and reservation of a failed fake cell.
-They use a fake run function and incur no plan use. Ruff passes in both repos.
+They use a fake run function and incur no plan use. The final complete
+Simulation suite passed **402 tests in 362.14 s**. Ruff passes in both repos.
 
 `uv run olb world build worlds/minimal --publish` built and self-tested 0.8.0:
 `8d0f5747888110a85456064b9900fa782e94e566f2e4811aa3b3ac07eee69110`.
@@ -86,7 +87,8 @@ local measurements stay outside Git.
 
 ## Frozen remaining check and handoff
 
-Simulation commit `5e219d0` publishes the generated fixture, acceptance tests,
+Builder commit `d52789b` publishes the world source, numerical tests and
+registration. Simulation commit `5e219d0` publishes the generated fixture, acceptance tests,
 quota-gated runner and all four pinned configurations before any hosted request.
 
 [S008c-001 registration](registrations/S008c-001.md) defines one guided run
@@ -104,7 +106,9 @@ observations, partial closeout or unstarted C3 cell. No allowance is transferred
 
 An actual invocation of the S008c runner **without** clearance refused before
 starting a cell. Inspection confirmed no S008c hosted archive or started-cell
-record. The first authorized launch after the owner confirms availability is:
+record. The actual provider ledger independently contains zero S008c
+reservations, and all four configuration/schema/prompt/budget pins verify.
+The first authorized launch after the owner confirms availability is:
 
 ```text
 uv run python scripts/s008c_check.py --quota-clearance "<actual owner confirmation>"
