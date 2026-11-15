@@ -521,14 +521,14 @@
     },
     {
       "id": "OD-16",
-      "summary": "For S011p verify gpt-5.6-luna plan-route eligibility and freeze the first-hour world, request pace, continuation/quiet policy and finite allowance after a NOT_SCORED tool-use check.",
+      "summary": "For S011p verify gpt-5.6-luna plan-route eligibility and freeze reasoning_effort=low, first-hour world, request pace, continuation/quiet policy and finite allowance after a NOT_SCORED tool-use check.",
       "affects": [
         "S011p",
         "S011a",
         "S011b",
         "S011c"
       ],
-      "detail": "Owner selected Luna 5.6 as the next candidate and instructed a check followed by one supervised one-hour run in the next session; this is not proof of API-route availability or permission for unbounded hosted spend. Resolve with exact model list, a tested live smoke, and an approved pre-registered run. The accepted Sol-specific post-hoc GO does not transfer to Luna. No API price-to-subscription usage inference or model-swap fallback."
+      "detail": "Owner selected Luna 5.6 as the next candidate and instructed a check followed by one supervised one-hour run in the next session; this is not proof of API-route availability or permission for unbounded hosted spend. Resolve with exact model list, a tested live smoke, and an approved pre-registered run. The accepted Sol-specific post-hoc GO does not transfer to Luna. No API price-to-subscription usage inference or model-swap fallback. Owner requirement (2026-11-15): all Luna qualification and one-hour Responses requests must explicitly send reasoning.effort=low, not provider default. Verify accepted on the live smoke before a scored run; no silent fallback to medium/high/none and no unrequested effort comparisons."
     }
   ],
   "validation": {
