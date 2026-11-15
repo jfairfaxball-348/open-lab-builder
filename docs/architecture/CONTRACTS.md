@@ -532,10 +532,22 @@ Missing fields are omitted; observed zero is numeric zero. Stage
 enforcement/denial/failure in supervisor actions. CPU records the applied rate;
 Windows notification delivery and disk checks have the limitations in ADR-0012.
 
+## Offline research contracts (S010a)
+
+`study-manifest` and `evidence-export` 1.0.0 are additive research interfaces,
+separate from the seven runtime contracts. World packaging remains unchanged.
+Simulation receives their schema directory explicitly and copies the needed
+schemas into each portable export, without importing Builder code. See
+[the study protocol](../experiments/STUDY_PROTOCOL.md) for fields, canonical
+configuration pins, outcome denominators, omitted operational records and the
+limits of internal verification. General comparison/annotation validation and
+Window views remain S010b/c. ADR-0019 records this boundary.
+
 ## Change log
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-15 | study-manifest; evidence-export | 1.0.0 | S010a additive offline research interfaces; portable stopped-archive export; no runtime or world schema change |
 | 2026-11-15 | (world capability content) | - | S008c minimal 0.8.0 adds bounded stats.describe and stats.regress using existing Python invocation and numeric JSON schemas; population variance, inclusive quartiles, OLS/correlation edge cases documented in manifests; no shared schema change |
 | 2026-11-15 | (specialist service protocol) | - | S007e reserves an existing MCP invocation pair, adds bounded specialist configuration/IPC, durable consultation reservations and lease observations; minimal 0.7.0, no schema change; ADR-0018 |
 | 2026-11-14 | (benchmark protocol) | - | S007d adds frozen cells/ledgers, initial-state observations, marked one-shot fault injection and source-bound derived analysis; existing extensions, no schema change |

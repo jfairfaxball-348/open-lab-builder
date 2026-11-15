@@ -418,3 +418,13 @@ Summarised here; reasoning and alternatives are in the
 | Durable state | Append-only JSONL as the record; SQLite for indexes and memory |
 | Inter-component communication | Files under the data root; read-only local HTTP for the Window |
 | Window front end | Standard-library HTTP server, JSON API, static HTML and JavaScript with no build step (ADR-0008) |
+
+## Offline study evidence (S010a)
+
+Builder defines two additive research schemas and the study protocol. Simulation
+exports declared cells and verified stopped archives into a portable directory,
+and verifies it without the original data root. This never launches a model,
+imports Builder code or changes original records. See ADR-0019 and
+[STUDY_PROTOCOL.md](../experiments/STUDY_PROTOCOL.md). Requested constants and
+inventory findings are recorded facts, not causal comparability or autonomy
+scores. General analysis and Window comparison remain S010b/c.

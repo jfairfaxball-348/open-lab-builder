@@ -283,3 +283,10 @@ Premises are experimental text, not privileges or assertions of sentience/risk.
 There is one initial human prompt. Later infrastructure interventions must be
 distinguished and recorded. Simulation writes observations; Window presents them
 read-only; research separates observed, claimed and interpreted statements.
+
+## Portable study inventories
+
+S010a adds [the study protocol](STUDY_PROTOCOL.md) and offline evidence export.
+It preserves all declared outcomes without adding a score or changing historical
+research gates. General comparison and annotation checks remain S010b; Window
+comparison remains S010c.

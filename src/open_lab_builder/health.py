@@ -17,7 +17,14 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 from jsonschema.exceptions import SchemaError
 
-from .contracts import CONTRACT_NAMES, load_schema, schema_names, validate_document, validate_file
+from .contracts import (
+    CONTRACT_NAMES,
+    RESEARCH_CONTRACT_NAMES,
+    load_schema,
+    schema_names,
+    validate_document,
+    validate_file,
+)
 from .paths import repo_root
 
 REQUIRED_FILES = [
@@ -55,14 +62,14 @@ def example_files(root: Path) -> dict[str, list[Path]]:
     base = root / "examples" / "v1"
     return {
         name: sorted(p for p in (base / name).glob("*.json*") if p.suffix in {".json", ".jsonl"})
-        for name in CONTRACT_NAMES
+        for name in (*CONTRACT_NAMES, *RESEARCH_CONTRACT_NAMES)
     }
 
 
 def check_schemas(root: Path) -> list[str]:
     problems = []
     names = schema_names(1)
-    for name in (*CONTRACT_NAMES, "common", "development-state"):
+    for name in (*CONTRACT_NAMES, *RESEARCH_CONTRACT_NAMES, "common", "development-state"):
         if name not in names:
             problems.append(f"schemas/v1/{name}.schema.json is missing")
     for name in names:

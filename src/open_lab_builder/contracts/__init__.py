@@ -2,6 +2,7 @@
 
 from .validation import (
     CONTRACT_NAMES,
+    RESEARCH_CONTRACT_NAMES,
     Issue,
     load_documents,
     load_schema,
@@ -13,6 +14,7 @@ from .validation import (
 
 __all__ = [
     "CONTRACT_NAMES",
+    "RESEARCH_CONTRACT_NAMES",
     "Issue",
     "load_documents",
     "load_schema",

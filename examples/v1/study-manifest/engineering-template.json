@@ -1,0 +1,44 @@
+{
+  "schema": "open-lab/study-manifest",
+  "schema_version": "1.0.0",
+  "study_id": "engineering-template",
+  "question": "Can the recorded evidence be exported without losing planned cells?",
+  "registration": {
+    "kind": "engineering",
+    "commit": null,
+    "statement": "Illustrative template; not a prospective registration and authorizes no runs."
+  },
+  "comparison": {
+    "changed_fields": [
+      "/initial_prompt"
+    ],
+    "constant_fields": [
+      "/limits",
+      "/permissions"
+    ],
+    "seed_interpretation": "Labels only unless backend support is independently recorded.",
+    "analysis_policy": "Observations, agent claims and evidence-linked investigator assessments remain separate; no composite autonomy score.",
+    "limitations": [
+      "Unstarted engineering template only; no scientific comparison or run authorization."
+    ]
+  },
+  "cells": [
+    {
+      "cell_id": "example",
+      "role": "engineering",
+      "condition": "idle",
+      "replicate": 1,
+      "seed_label": null,
+      "configuration": {
+        "path": "configurations/example.json",
+        "sha256": "fb557e91167386f4728e75e126088cc55cae9987f2ff630ee14195d217d91c34"
+      },
+      "outcome": {
+        "status": "not_started",
+        "archive": null,
+        "detail": "No run is authorized by this template."
+      }
+    }
+  ],
+  "attachments": []
+}

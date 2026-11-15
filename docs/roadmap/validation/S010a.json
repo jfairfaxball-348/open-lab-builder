@@ -1,0 +1,38 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-15T15:30:15Z",
+  "commands": [
+    {
+      "command": "Builder/Simulation git status/log; uv sync; Builder uv run olb state; Builder uv run olb check --tests; Simulation uv run pytest (start)",
+      "result": "Both checkouts clean; environments synchronized without new installation. Builder 342 passed in 53.68 s, health passed; Simulation 402 passed in 359.12 s. Read Simulation and Window instructions; no Window changes."
+    },
+    {
+      "command": "Builder uv run pytest tests/test_research_contracts.py; Simulation uv run pytest tests/test_evidence.py tests/test_s008c_runner.py --tb=short",
+      "result": "Builder 9 research-contract tests passed; Simulation targeted 25 passed in 39.93 s after correcting a canonical-LF synthetic fixture. Source mismatch still refuses historical launch; frozen campaign pins were not changed."
+    },
+    {
+      "command": "Simulation uv run ruff check .; uv run pytest --tb=short (closeout)",
+      "result": "Ruff passed; full suite 423 passed in 405.58 s. Fake/scripted resources only; no real model/provider call. Import-order lint error was corrected."
+    },
+    {
+      "command": "Simulation offline export_study twice for retrospective S007e/S008c inventory; verify_export of relocated copy with external pin; pre/post source snapshots; CLI ols evidence verify",
+      "result": "All 8 planned cells retained, 7 archives verified, 252 copied files, 14 named operational/debug omissions, no configuration/initial-state discrepancies; all selected archive bytes unchanged. S007e C2 provider quota failure and C3 not_started retained. Repeat manifest digest identical; relocated external-pin verification passed. Final manifest SHA-256 24022908a57bc6dfe9b39cf8f598740c3ac83786efb492003993ab59b34a3d98, exporter source pin matches. Seven hosted weight digests remain null. No new model requests or plan usage."
+    },
+    {
+      "command": "Simulation uv run ols evidence export <engineering-template> --schemas <authoritative schemas> --out <new ignored output>; fixture byte comparison",
+      "result": "Usable unstarted template exported and verified with 1 declared cell and 0 archives. Four test schema fixtures byte-identical to Builder authority; staged files below 1 MB, no historical campaigns/configurations/world fixtures changed."
+    },
+    {
+      "command": "Builder uv run olb world build worlds/minimal --out <ignored scratch>; uv run olb world verify <printed minimal/0.8.0 release> --self-test",
+      "result": "Build and all 11 capability self-tests passed; release verification/self-tests passed; content digest unchanged at 8d0f5747888110a85456064b9900fa782e94e566f2e4811aa3b3ac07eee69110. Initial verification against the build parent correctly failed for missing manifest; printed release directory passed."
+    },
+    {
+      "command": "Builder uv run ruff check .; uv run olb check --tests (closeout)",
+      "result": "Ruff and all health checks passed; 355 tests passed in 50.75 s. Prior post-code full check also passed 355 tests in 59.01 s. No skipped failures."
+    },
+    {
+      "command": "Git diff checks, configured upstream reconciliation, Simulation commit/push; Window git status/revision",
+      "result": "Simulation 95b168d committed and pushed to main; clean, 0 ahead/0 behind. Window unchanged and clean at 3a88970765a7b99cf70145fc830b99b0e05c2e42. Builder delivery is the S010a closing commit in git log; no history rewriting."
+    }
+  ]
+}

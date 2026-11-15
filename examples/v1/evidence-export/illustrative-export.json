@@ -1,0 +1,39 @@
+{
+  "schema": "open-lab/evidence-export",
+  "schema_version": "1.0.0",
+  "study_path": "inputs/study.json",
+  "study_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "exporter": {
+    "id": "ols-evidence",
+    "version": "1.0.0",
+    "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "files": [
+    {
+      "path": "inputs/study.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "size_bytes": 1
+    }
+  ],
+  "omissions": [],
+  "cells": [
+    {
+      "cell_id": "example",
+      "role": "engineering",
+      "declared_status": "not_started",
+      "archive_path": null,
+      "record": null,
+      "findings": []
+    }
+  ],
+  "constant_checks": [
+    {
+      "role": "engineering",
+      "pointer": "/limits",
+      "status": "equal",
+      "cells": [
+        "example"
+      ]
+    }
+  ]
+}

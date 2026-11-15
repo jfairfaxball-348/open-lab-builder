@@ -87,7 +87,8 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S010 — Experimental Protocol and Comparative Observation. S008c's
+**Next:** S010b — Evidence-Linked Comparative Analysis. S010a (study protocol
+and portable evidence export) is complete; parent S010 awaits S010b/c. S008c's
 approved statistics part is complete with all four frozen capability-check
 archives verified (guided use of both; C regression use 2/3, description use
 0/3). No additional hosted-run budget is implied. S007e engineering
@@ -1293,7 +1294,8 @@ behavioural success are always reported separately.
 ### S010 — Experimental Protocol and Comparative Observation
 
 - **Repository / streams:** all three with independent code ownership. D/C.
-- **Status:** planned; core work can follow a negative baseline.
+- **Status:** split before coding into S010a–c; parent remains incomplete until
+  all three parts meet their exits. Core work can follow a negative baseline.
 - **Objective:** Make positive and negative autonomy findings auditable/comparable.
 - **Prerequisites:** S006e/S004/S007a/S007c and S007d report, not a GO result.
 - **Scope:** generalise baseline to contrasts/replicates, frozen world/model/provider/
@@ -1313,6 +1315,95 @@ behavioural success are always reported separately.
   single-rater limits and retain disagreements/uncertainty.
 - **Next recommended milestone:** S011a after S006c. While blocked, finish safe
   protocol/Window work or bounded local comparisons, not unattended certification.
+
+### S010a — Study Protocol and Portable Evidence Export
+
+- **Repository / streams:** Builder research contracts/protocol; Simulation
+  offline export/verification. D/C. Window is read-only context only.
+- **Status:** completed 2026-11-15; split from S010 before implementation.
+  [Report](../experiments/2026-11-15-s010a-evidence-export.md): 8 planned cells,
+  7 archives, deterministic/relocated verification, source bytes unchanged,
+  no new model requests.
+- **Objective / scientific purpose:** preserve a study's complete planned-cell
+  denominator and frozen configurations in a self-contained, verifiable export;
+  make omissions/failures visible without inventing behavioural conclusions.
+- **Prerequisites:** S007d reports, existing archive verifier and recorded runs;
+  no new model, hosted allowance, installation or experimental treatment.
+- **Scope:** additive study-manifest/evidence-export research schemas outside
+  world packaging; protocol/analysis-plan templates; a Simulation CLI that reads
+  operator-selected stopped archives, preserves byte-identical records, hashes
+  and declared pilot/evaluation roles, retains unstarted/failed-launch cells,
+  excludes and identifies private operational/debug files, and verifies exports
+  without the source data root. Explicit retrospective versus prospective status.
+- **Exclusions:** new runs, provider probes, runtime/model/policy/repair changes,
+  automatic ratings, generalised campaign execution, Window code, live archive
+  snapshots, resuming exports, and claims of matched effective compute/autonomy.
+- **Deliverables:** research contracts/examples, protocol guide/templates,
+  `ols evidence export/verify`, deterministic export/file manifest, acceptance
+  tests and a read-only export of existing complete/partial capability checks.
+- **Acceptance tests:** positive, idle, failed/provider-censored and unstarted
+  cases retain cell order/status/configuration and raw observations; unknown
+  provenance stays unknown; source digests unchanged; deterministic repeat;
+  independent relocated verification; tampering, unsafe paths/links, active or
+  changing sources, duplicate cells/archives and output collisions refused.
+- **Exit criteria:** contracts/examples validate; Builder/Simulation checks pass;
+  existing S007e/S008c evidence exports verify with every scheduled cell retained
+  and source bytes unchanged; docs/state/commit/push done. This establishes
+  transport/inventory integrity, not preregistration chronology or scientific
+  comparability. S010 remains incomplete.
+- **Risks:** exporting a selective subset as a full study, concurrent source
+  mutation, private debug data, self-authenticating hashes and overclaiming.
+- **Next recommendation:** S010b.
+
+### S010b — Evidence-Linked Comparative Analysis
+
+- **Repository / streams:** Simulation analysis; Builder protocol/rubric. D/C.
+- **Status:** future; not implemented by S010a.
+- **Objective:** compare registered contrasts while keeping validity, censoring,
+  role separation, unknown settings and investigator assessments explicit.
+- **Prerequisites:** S010a verified exports and protocol; existing evidence only
+  unless the owner separately approves a new run budget and preregistration.
+- **Scope:** generalised offline inventories/contrasts/replicates, requested and
+  effective settings, fresh-state/world checks, repair/context/fault/recovery
+  traces, artifact provenance, source-bound annotations and positive/idle/failed/
+  censored fixtures; distinguish claims from observations and assessments.
+- **Exclusions:** runtime treatment changes, automatic mental-state inference,
+  a composite autonomy score, post-hoc success thresholds and Window writes.
+- **Deliverables:** versioned analysis/rating format, reproducible reports and
+  comparison data, validity-gate coverage and limitations/annotation guide.
+- **Acceptance tests:** all scheduled denominators retained; pilots not pooled
+  with evaluation; invalid/missing/ambiguous/censored evidence stays visible;
+  every reported assessment resolves to its source hash/events; reads do not
+  alter source or export bytes; unequal conditions cannot be called matched.
+- **Exit criteria:** seven S010–S012 validity gates mapped to tested checks or
+  explicit human/unverified requirements; reproducible existing-data comparison
+  with honest positive/negative findings; docs/state/checks/delivery complete.
+- **Risks:** selection bias, correlated repeats, unsupported comparability and
+  treating a mechanical audit as an independent behavioural reviewer.
+- **Next recommendation:** S010c.
+
+### S010c — Read-Only Window Comparison
+
+- **Repository / streams:** Window UI/API; Builder documentation. D.
+- **Status:** future; not implemented by S010a/b.
+- **Objective:** let an observer inspect verified comparisons and their source
+  traces while retaining the Window's strict no-write/no-client boundary.
+- **Prerequisites:** S010a/b formats and existing Window integrity controls.
+- **Scope:** paginated side-by-side protocol/settings/outcome/artifact views,
+  visible missing/censored/unknown states and evidence links; no run control.
+- **Exclusions:** writes/caches/logs, outgoing requests to runs/providers,
+  analysis hidden inside the viewer, archive rewriting and unapproved new runs.
+- **Deliverables:** comparison reader/API/UI, safety and frontend acceptance
+  checks, real existing-export browser verification and documentation.
+- **Acceptance tests:** GET/HEAD only; hostile archive text stays text; no files
+  written or outgoing connections; before/after digests identical; positive,
+  negative, invalid and censored displays match the exported evidence.
+- **Exit criteria:** all comparisons readable with provenance and denominators,
+  Window checks and real browser flow pass; docs/state/checks/delivery complete;
+  only then close parent S010 if all parent exits are met.
+- **Risks:** visual implication of a ranking, hidden missing data, oversized logs
+  and accidental weakening of the read-only contract.
+- **Next recommendation:** S011a under its separate reliability/usage gates.
 
 ---
 
