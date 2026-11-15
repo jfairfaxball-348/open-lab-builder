@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T09:10:00Z",
-  "last_session": "S014d",
+  "updated_at": "2026-11-15T09:30:00Z",
+  "last_session": "S014g",
   "completed_milestones": [
     {
       "id": "S001",
@@ -187,12 +187,21 @@
         "2280785"
       ],
       "summary": "ChatGPT plan usage via Sign in with ChatGPT: dynamic registration with PKCE loopback, RS256 ID-token validation, plan-scope check, DPAPI token storage, serialised refresh, revocation on sign-out; adapter openai-responses-chatgpt-plan 1.0.0 (store=false, stream=true, namespaced strict=false tools, SSE, documented error recovery); broker hooks secret()/decode(). 28 fake tests; 340 Simulation tests pass. OD-10 resolved: Apache-2.0 licence on all three repositories. Live: owner signed in, per-app limit 10%, 12/12 requests ok on gpt-6.1-sol; tool-use round trip with a result-informed answer under a diagnostic 16384 guard; looped without invoking under the 4096 baseline guard (OD-13)."
+    },
+    {
+      "id": "S014g",
+      "completed_at": "2026-11-15T09:30:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "21b8c6c"
+      ],
+      "summary": "Hosted compatibility suite: 18 full supervised runs against a fake Responses server (text, tool call, real invocation, result handling, result-informed turn, whole multi-turn context under the 500k guard, budget, rate limit, plan refusals, bounded temporary failures, timeout, session end, refusal of recovery and resume, no token/reasoning recorded) and two live runs on gpt-6.1-sol (text reply; search/describe/demonstrate/invoke 6*7 = 42 with a result-informed answer; no context drops). openai-chatgpt admitted; error paths verified on fakes only. 358 Simulation tests pass."
     }
   ],
   "next_milestone": {
-    "id": "S014g",
-    "repository": "open-lab-simulation",
-    "title": "Cross-Provider Compatibility Suite"
+    "id": "S014h",
+    "repository": "open-lab-builder",
+    "title": "Comparative Campaign Preregistration"
   },
   "blockers": [
     {
@@ -377,7 +386,7 @@
         "S014h",
         "S014i"
       ],
-      "detail": "The preview route rejects temperature, top_p and max_output_tokens; the Responses API has no seed. These are recorded per run as not sent. Live token refresh and the documented plan-usage errors are tested only against fakes. See docs/experiments/2026-11-15-chatgpt-integration.md."
+      "detail": "The preview route rejects temperature, top_p and max_output_tokens; the Responses API has no seed. These are recorded per run as not sent. Live token refresh and the documented plan-usage errors are tested only against fakes. See docs/experiments/2026-11-15-chatgpt-integration.md. S014g: hosted runs cannot be resumed after interruption (no model digest); a campaign must account such cells as interrupted."
     }
   ],
   "open_decisions": [
@@ -397,55 +406,23 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T09:10:00Z",
+    "ran_at": "2026-11-15T09:30:00Z",
     "commands": [
       {
-        "command": "Simulation: uv run ruff check .; uv run pytest (after the S014d adapter, before the live check)",
-        "result": "Lint passed; 340 tests passed, including 28 new ChatGPT fake-server tests"
+        "command": "Simulation: uv run ruff check .; uv run pytest",
+        "result": "Lint passed. First full run: 357 passed, 1 failed (test_container.py::test_timeout_removes_the_container, container-tier timing); it passed alone and the full rerun passed 358/358"
       },
       {
-        "command": "Window: uv run ruff check .; uv run pytest (after adding the Apache-2.0 licence)",
-        "result": "Lint passed; 38 tests passed"
+        "command": "Simulation: uv run pytest tests/test_hosted_compatibility.py",
+        "result": "18 passed (one test bug fixed before: JSON-escaped documentation compared as parsed value)"
       },
       {
-        "command": "Official SIWC pages re-read (overview, sign-in, models and inference, accounts and sessions, token reference, errors and recovery, preview limitations)",
-        "result": "Eligibility wording unchanged; unsupported-field list grown and namespaced tools now required; adapter follows the current pages"
-      },
-      {
-        "command": "ols provider configure openai-chatgpt (owner-approved: per_run 8, per_day 20, total 30, 2 attempts)",
-        "result": "Profile enabled"
-      },
-      {
-        "command": "ols provider sign-in openai-chatgpt (owner signed in and consented in their browser)",
-        "result": "Client registered; ID token verified against OpenAI JWKS; plan-usage scope granted"
-      },
-      {
-        "command": "ChatGPT settings, Connected App Limits (Chrome, at the owner's request)",
-        "result": "The Open Laboratory limited to 10% of the weekly allowance; confirmed after reload"
-      },
-      {
-        "command": "ols provider models openai-chatgpt",
-        "result": "Eight models listed; gpt-6.1-sol chosen for the smoke check"
-      },
-      {
-        "command": "ols run S014d-chatgpt-smoke.json and S014d-chatgpt-smoke-16k.json",
-        "result": "12/12 requests ok; 4096 guard: search/describe loop, no invoke; 16384 guard: invoke 6*7 = 42 and result-informed answer; both archives verify; ledger 12 reserve/12 outcome; no token found in 41 scanned files"
-      },
-      {
-        "command": "Owner decisions OD-12 (scrap Gemma) and OD-13 (ChatGPT gets the context it needs)",
-        "result": "Recorded; ols provider configure google-gemini --disable -> enabled false"
-      },
-      {
-        "command": "GET https://api.openai.com/v1/models with the plan token (catalog only, no inference)",
-        "result": "gpt-6.1-sol context_window 500000, max_context_window 872000; 500000 registered as the ChatGPT client guard"
-      },
-      {
-        "command": "ols provider configure openai-chatgpt --per-run/--per-day/--total 1000000 (owner: 10% plan limit is the only cap)",
-        "result": "Profile limits nominal; 12 requests reserved so far"
+        "command": "ols run S014g-chatgpt-text.json and S014g-chatgpt-tools.json (gpt-6.1-sol, 500k guard)",
+        "result": "10/10 requests ok; text reply without tools; search/describe/demonstrate/invoke 6*7 = 42 and result-informed answer; no context drops; archives verify; 0 token hits; provider ledger 22 reserve / 22 outcome"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 41.53 seconds and all health checks passed"
+        "result": "Lint passed; 305 tests passed in 44.94 seconds and all health checks passed"
       }
     ]
   }

@@ -85,7 +85,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S014g. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
+**Next:** S014h. S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
 and gave the ChatGPT arm the provider's full 500,000-token context window as
 its client guard (OD-13), relying on the 10% per-app plan limit. The programme
 continues with ChatGPT plan usage alone. On 2026-11-15 the owner chose the hosted-intelligence
@@ -851,7 +851,8 @@ behavioural success are always reported separately.
 ### S014g — Cross-Provider Compatibility Suite
 
 - **Repository / streams:** Simulation tests; Builder record. B/D.
-- **Status:** planned.
+- **Status:** complete (2026-11-15). Simulation `21b8c6c`;
+  [compatibility report](../experiments/2026-11-15-hosted-compatibility.md).
 - **Objective:** Admit only providers that preserve Laboratory tool semantics.
 - **Prerequisites:** S014d. Gemma (S014c) was scrapped and Anthropic excluded,
   so the suite covers ChatGPT plan usage only, with the registered OD-13 guard.
@@ -862,6 +863,11 @@ behavioural success are always reported separately.
   and approved.
 - **Exit criteria:** per-provider pass/fail table; failing providers excluded
   from matched analysis, not silently included. Scripted success is not autonomy.
+- **Delivered:** 18 full supervised fake-provider cases and two live runs on the
+  registered 500k-guard configuration; `openai-chatgpt` passes every case (text,
+  tool call, real invocation, result handling, result-informed turn, whole
+  multi-turn context, archive, budget, errors, timeout, session end, refusal
+  after interruption). Error paths are verified on fakes only.
 - **Next recommended milestone:** S014h.
 
 ### S014h — Comparative Campaign Preregistration

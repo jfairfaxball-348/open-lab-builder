@@ -114,9 +114,11 @@ ChatGPT plan usage are eligible; the owner excluded Anthropic. The broker
 intermittent provider errors on multi-step turns; the owner scrapped it. ChatGPT plan usage (S014d)
 completed a live tool-use round trip on `gpt-6.1-sol`
 ([integration report](docs/experiments/2026-11-15-chatgpt-integration.md)).
-These are integration checks, not behavioural evidence.
+The S014g compatibility suite then admitted ChatGPT plan usage
+([report](docs/experiments/2026-11-15-hosted-compatibility.md)). These are
+integration checks, not behavioural evidence.
 
-What does **not** exist yet: a cross-provider compatibility suite, specialist model consultation/GPU leasing,
+What does **not** exist yet: the hosted comparative campaign (S014h–S014j), specialist model consultation/GPU leasing,
 container isolation on Linux or with network access, and run comparison. The first
 registered short baseline is complete; earlier engineering checks are recorded in
 [docs/experiments/](docs/experiments/). Run `uv run olb
