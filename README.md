@@ -121,6 +121,9 @@ integration checks, not behavioural evidence.
 The registered campaign s014i-001 then ran 24 cells on ChatGPT plan usage:
 **INCONCLUSIVE** under the registered rules, with the open-ended arm qualifying on
 all three seeds ([report](docs/experiments/2026-11-15-hosted-comparison.md)).
+S014l fixed the event-log reader defect behind its one invalid record
+([report](docs/experiments/2026-11-15-event-log-reader-fix.md)); the result
+itself is unchanged.
 
 What does **not** exist yet: a registered GO, specialist model consultation/GPU leasing,
 container isolation on Linux or with network access, and run comparison. The first

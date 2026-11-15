@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T11:30:00Z",
-  "last_session": "S014j",
+  "updated_at": "2026-11-15T13:00:00Z",
+  "last_session": "S014l",
   "completed_milestones": [
     {
       "id": "S001",
@@ -220,12 +220,21 @@
       "repository": "open-lab-builder",
       "commits": [],
       "summary": "Reported s014i-001: registered result INCONCLUSIVE (s41-r2-c INVALID_RECORD from KI-24); qualifying A 1/6, B 0/6, C 5/6 (seeds 41-43), D 2/6 descriptive. 127 successful invocations (local 27 and 7), 22 runs with two distinct capabilities, zero repairs, no context truncation, 2.97M input tokens. Post-hoc sensitivity: GO only with both KI-24 and KI-25 corrected; not claimable without a new registered campaign. Derived dataset with independent recount; next phase S014l-S014n proposed."
+    },
+    {
+      "id": "S014l",
+      "completed_at": "2026-11-15T13:00:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "e277ba1"
+      ],
+      "summary": "Fixed KI-24: every Simulation reader of recorded JSONL (verify_archive, recorder append, campaign and provider ledgers, provider-ledger mirror, artifact index, supervisor recovery, benchmark_analysis) splits on \n only via contracts.jsonl_lines. Six regression tests with U+2028/U+2029/U+0085 (four failed before the fix); 366 tests pass. s014i-001 s41-r2-c verifies with the fixed reader (236 problems on frozen source); reported, not re-scored; S014i-001 stays INCONCLUSIVE."
     }
   ],
   "next_milestone": {
-    "id": "S014l",
-    "repository": "open-lab-simulation",
-    "title": "Event-Log Reader Fix (KI-24)"
+    "id": "S014m",
+    "repository": "open-lab-builder",
+    "title": "Rubric v1.1 and Replication Registration"
   },
   "blockers": [
     {
@@ -413,14 +422,6 @@
       "detail": "The preview route rejects temperature, top_p and max_output_tokens; the Responses API has no seed. These are recorded per run as not sent. Live token refresh and the documented plan-usage errors are tested only against fakes. See docs/experiments/2026-11-15-chatgpt-integration.md. S014g: hosted runs cannot be resumed after interruption (no model digest); a campaign must account such cells as interrupted."
     },
     {
-      "id": "KI-24",
-      "summary": "Event-log readers use str.splitlines(), which splits on U+2028/U+2029 that the recorder writes raw; an intact log then fails verification.",
-      "affects": [
-        "S014l"
-      ],
-      "detail": "Found in s014i-001 cell s41-r2-c, where the model tested text.stats with those characters. A newline-only verifier finds no problem. Simulation readers affected: archive.verify_archive, recorder, benchmark ledger, benchmark_analysis, supervisor, artifacts, the provider ledger and reading a run's provider-ledger mirror. The Window splits bytes on \\n and is unaffected. Fix in S014l."
-    },
-    {
       "id": "KI-25",
       "summary": "The rubric-v1 guided-control check requires the raw stored note as an exact substring of a later output, so a correct JSON-escaped report fails.",
       "affects": [
@@ -456,27 +457,23 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T11:30:00Z",
+    "ran_at": "2026-11-15T13:00:00Z",
     "commands": [
       {
-        "command": "Frozen benchmark.report_campaign on s014i-001 (dataset builder)",
-        "result": "runtime_source_match true; 24 finished; 23 valid and reviewed; expansion INCONCLUSIVE"
+        "command": "Simulation: uv run pytest tests/test_line_separators.py (helper added, readers unchanged)",
+        "result": "4 of 6 failed: verify_archive 'line 7: not JSON' (+38), recorder refused append, ledger JSONDecodeError, 11 splitlines sites"
       },
       {
-        "command": "Independent recount from raw newline-split events",
-        "result": "701 requests = HTTP attempts; 127 successful invocations; 24 non-empty non-database file events; 5 returned notes; world digest and all 24 configurations match"
+        "command": "Simulation: uv run ruff check .; uv run pytest",
+        "result": "Lint passed; 366 passed in 318.91s"
       },
       {
-        "command": "Post-hoc sensitivity (labelled)",
-        "result": "frozen INCONCLUSIVE; KI-24 fixed NO_GO; KI-25 accepted INCONCLUSIVE; both GO"
-      },
-      {
-        "command": "ChatGPT usage page after the campaign (read-only)",
-        "result": "5-hour 27% left, weekly 63% left; app limit 100%"
+        "command": "verify_archive on s014i-001 s41-r2-c (frozen 8301244 vs fixed e277ba1)",
+        "result": "frozen 236 problems; fixed 0; events.jsonl SHA-256 unchanged; all 24 s014i-001 archives verify"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 40.38 seconds and all health checks passed"
+        "result": "Lint passed; 305 tests passed in 43.91 seconds and all health checks passed"
       }
     ]
   }

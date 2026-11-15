@@ -943,7 +943,8 @@ behavioural success are always reported separately.
 ### S014l — Event-Log Reader Fix (KI-24)
 
 - **Repository / streams:** Simulation runtime and analysis; Builder record. B/D.
-- **Status:** planned.
+- **Status:** complete (2026-11-15).
+  [Report](../experiments/2026-11-15-event-log-reader-fix.md).
 - **Objective:** Read and verify event logs that contain U+2028/U+2029 correctly.
 - **Prerequisites:** S014j (the S014i-001 dataset is produced on frozen source).
 - **Scope:** replace `str.splitlines()` with newline-only splitting in every
@@ -957,6 +958,10 @@ behavioural success are always reported separately.
 - **Exit criteria:** no reader of recorded JSONL splits on non-newline separators.
 - **Risks:** source-freeze checks of earlier manifests will report a mismatch;
   historical reports stay bound to their frozen source.
+- **Delivered:** Simulation `e277ba1`: `contracts.jsonl_lines` in all eleven
+  JSONL reader sites; six regression tests (four failed before the fix); 366
+  tests pass. `s41-r2-c` verifies with the fixed reader (frozen source: 236
+  problems); all 24 S014i-001 archives verify; nothing re-scored or edited.
 - **Next recommended milestone:** S014m.
 
 ### S014m — Rubric v1.1 and Replication Registration
