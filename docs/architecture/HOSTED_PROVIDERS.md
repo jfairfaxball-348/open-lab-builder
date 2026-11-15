@@ -24,8 +24,12 @@ Sources: [Gemma on the Gemini API](https://ai.google.dev/gemma/docs/core/gemma_o
 [rate limits](https://aistudio.google.com/docs/rate-limits),
 [function calling](https://aistudio.google.com/docs/function-calling).
 
-- **Models:** `gemma-4-26b-a4b-it` (the preferred candidate) and `gemma-4-31b-it`
-  are listed. Access must still be confirmed against the owner's project.
+- **Models:** `gemma-4-26b-a4b-it` and `gemma-4-31b-it` are listed and accessible
+  on the owner's project (30 RPM, 16K input TPM, 14.4K RPD each, free tier).
+  S014c (2026-11-15): 26B failed every request whose history held two call turns,
+  including a minimal synthetic one; 31B succeeded on 2 of 6 such requests, failing
+  intermittently with HTTP 500. The owner moved the arm to 31B.
+  [Report](../experiments/2026-11-15-gemma-integration.md).
 - **Tools:** function declarations are supported for Gemma; the model returns
   function calls that the client executes and answers. System instructions are
   supported. Thinking is selectable (`high` or `minimal`), so the reasoning

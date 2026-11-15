@@ -1,7 +1,7 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T02:10:00Z",
+  "updated_at": "2026-11-15T08:20:00Z",
   "last_session": "S014b",
   "completed_milestones": [
     {
@@ -180,9 +180,9 @@
     }
   ],
   "next_milestone": {
-    "id": "S014c",
+    "id": "S014d",
     "repository": "open-lab-simulation",
-    "title": "Google Gemma Adapter"
+    "title": "OpenAI Sign in with ChatGPT Plan-Usage Adapter"
   },
   "blockers": [
     {
@@ -209,7 +209,7 @@
         "S014i"
       ],
       "needs_human": true,
-      "detail": "ADR-0016 broker implemented (S014b). Gemma (S014c): owner stores the key with `ols provider set-key google-gemini`, reports the project's actual Gemma limits from AI Studio, confirms region and approves smoke/daily budgets. ChatGPT (S014d): OD-10, per-app usage limit, browser sign-in, budgets. Anthropic was excluded by the owner on 2026-11-15. The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
+      "detail": "ADR-0016 broker implemented (S014b). Gemma (S014c) is configured and credentialed but blocked by intermittent provider HTTP 500 on multi-step tool turns (KI-22, OD-12). ChatGPT (S014d): OD-10, per-app usage limit, browser sign-in, budgets. Anthropic was excluded by the owner. The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
     }
   ],
   "known_issues": [
@@ -360,6 +360,17 @@
         "S012"
       ],
       "detail": "In S007h-001, seed-41 runs sharing a prompt (C and D are identical) matched on their first 5-9 tool actions with identical output-token counts. S007d-001 used the same seed design. S010 should design replicates and seeds for the independence it claims."
+    },
+    {
+      "id": "KI-22",
+      "summary": "Gemma on the free Gemini API returns intermittent HTTP 500 once a conversation holds two tool-call turns.",
+      "affects": [
+        "S014c",
+        "S014g",
+        "S014h",
+        "S014i"
+      ],
+      "detail": "2026-11-15: requests with two or more call turns succeeded 0/6 on gemma-4-26b-a4b-it (including a minimal synthetic conversation) and 2/6 on gemma-4-31b-it (byte-identical bodies both failed and succeeded); single-call requests 9/10. Provider-side; not caused by the Laboratory translation. See docs/experiments/2026-11-15-gemma-integration.md."
     }
   ],
   "open_decisions": [
@@ -384,23 +395,46 @@
         "S014d"
       ],
       "detail": "OpenAI documents plan usage for open-source and locally hosted apps. The repositories are public with no licence, so they are not strictly open source; local hosting appears sufficient. Choosing a licence is the owner's decision. S014d re-checks the official pages before sign-in."
+    },
+    {
+      "id": "OD-12",
+      "needs_human": true,
+      "summary": "Gemma arm: re-probe later, register a higher retry policy, or record Gemma unavailable for the matched campaign.",
+      "affects": [
+        "S014c",
+        "S014g",
+        "S014h"
+      ],
+      "detail": "S014c showed working discovery and invocation but unreliable multi-step turns (KI-22). More retries cost budget and change the provider-error profile, so any policy must be registered before scored runs. Owner chose gemma-4-31b-it over 26B on 2026-11-15. 22 of 32 approved smoke requests are used."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T02:10:00Z",
+    "ran_at": "2026-11-15T08:20:00Z",
     "commands": [
       {
-        "command": "Simulation: uv run ruff check .; uv run pytest tests/test_providers.py",
-        "result": "Lint passed; 13 broker/ledger/credential/CLI tests passed with a fake adapter and fake upstream"
+        "command": "Simulation: uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest (after adapter 1.1.0)",
+        "result": "Lint passed; 312 tests passed in 263.98 seconds"
       },
       {
-        "command": "Simulation: OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
-        "result": "302 tests passed in 263.82 seconds"
+        "command": "AI Studio rate-limit page for the Open Lab project (read in the owner's Chrome with permission)",
+        "result": "Gemma 4 26B and 31B: 30 RPM, 16K input TPM, 14.4K RPD, free tier, no prior usage"
+      },
+      {
+        "command": "ols provider configure google-gemini (owner-approved: per_run 8, per_day/total 20 then 32, 15 s spacing)",
+        "result": "Profile enabled; credential stored by the owner"
+      },
+      {
+        "command": "ols run docs/experiments/configs/S014c-gemma-smoke.json and S014c-gemma-31b-smoke.json (x2)",
+        "result": "All three: search/describe/invoke ok (6*7 = 42), then provider HTTP 500 on the multi-step turn; runs failed with recorded errors; archives verify"
+      },
+      {
+        "command": "Six single-request diagnostics through the broker (replays and a synthetic two-call conversation)",
+        "result": "26B multi-call 0/6; 31B multi-call 2/6; identical 31B bodies both failed and succeeded; 22 of 32 requests used"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 41.75 seconds and all six health checks passed"
+        "result": "Lint passed; 305 tests passed in 46.95 seconds and all six health checks passed"
       }
     ]
   }

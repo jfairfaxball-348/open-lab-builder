@@ -1,0 +1,18 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-15T02:10:00Z",
+  "commands": [
+    {
+      "command": "Simulation: uv run ruff check .; uv run pytest tests/test_providers.py",
+      "result": "Lint passed; 13 broker/ledger/credential/CLI tests passed with a fake adapter and fake upstream"
+    },
+    {
+      "command": "Simulation: OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
+      "result": "302 tests passed in 263.82 seconds"
+    },
+    {
+      "command": "Builder: uv run ruff check .; uv run olb check --tests",
+      "result": "Lint passed; 305 tests passed in 41.75 seconds and all six health checks passed"
+    }
+  ]
+}

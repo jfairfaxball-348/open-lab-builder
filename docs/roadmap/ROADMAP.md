@@ -763,7 +763,11 @@ behavioural success are always reported separately.
 ### S014c — Google Gemma Adapter
 
 - **Repository / streams:** Simulation adapter; Builder provider manifest. B.
-- **Status:** planned; human-gated.
+- **Status:** in progress, blocked by provider reliability (2026-11-15). Adapter
+  built (Simulation `68aa10c`, 1.1.0 `8427403`/`2c4c439`); live runs completed
+  search, describe and invoke, then hit intermittent provider HTTP 500 on
+  multi-step turns. The owner switched the arm to `gemma-4-31b-it`.
+  [Integration report](../experiments/2026-11-15-gemma-integration.md).
 - **Objective:** Run the Laboratory conversation on Gemma through the broker.
 - **Prerequisites:** S014b. **Human:** install the key with `ols provider` (never
   in chat or files); report the project's actual Gemma limits from AI Studio;
@@ -779,7 +783,10 @@ behavioural success are always reported separately.
   capability and answers from its result; archive verifies; ledger reconciles.
 - **Exit criteria:** tool-use round trip demonstrated, not text generation alone.
 - **Risks:** undocumented free-tier limits, model availability, thought handling.
-- **Next recommended milestone:** S014d.
+- **Remaining:** a run-contained result-informed follow-up. Re-probe reliability
+  with a small approved budget, register a retry policy, or record Gemma as
+  unavailable (OD-12).
+- **Next recommended milestone:** S014d (independent of this blocker).
 
 ### S014d — OpenAI Sign in with ChatGPT Plan-Usage Adapter
 
