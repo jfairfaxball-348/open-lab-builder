@@ -80,7 +80,7 @@ flowchart TD
     S010b --> S010c["S010c Window comparison (parked)"]
     S010b --> S011p["S011p Luna admission + first one-hour run"]
     S006c --> S011p
-    S011p --> S011a --> S011b --> S011c --> S012
+    S011p --> S011r["S011r Hosted recovery identity"] --> S011a --> S011b --> S011c --> S012
     S010c --> S012
 ```
 
@@ -90,7 +90,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**S011p complete (2026-11-15)** — see its status below. **Next: S011a**, blocked until the owner decides how to provide fault recovery for hosted runs (hosted resume is refused).
+**S011p complete (2026-11-15)** — see its status below. **S011r complete:** opt-in hosted recovery ([ADR-0021](../decisions/ADR-0021-hosted-recovery-identity.md)). **Next: S011a**, which needs a registration and a new owner allowance before any live request.
 
 _Historical S011p direction:_ **Next (owner-directed 2026-11-15): S011p — Luna 5.6 Qualification and First One-Hour Run.**
 The next session should first confirm `gpt-5.6-luna` is listed for the owner's
@@ -1435,12 +1435,29 @@ behavioural success are always reported separately.
 
 ---
 
+### S011r — Hosted Fault Recovery (identity pin)
+
+- **Repository / streams:** Simulation implementation; Builder decision record. C.
+- **Status:** **complete (2026-11-15)**, Simulation f2ab7ad; added the same day by owner choice ("Design hosted recovery") as S011a's prerequisite. All acceptance tests pass on fake providers; no live request.
+- **Objective:** Let an opted-in hosted run resume from its last complete-step checkpoint after a Laboratory-side fault, under [ADR-0021](../decisions/ADR-0021-hosted-recovery-identity.md).
+- **Scientific purpose:** Make S011a's fault/recovery hours possible on the hosted route without mixing provider identities or continuing past provider refusals. Engineering only; no behavioural claim.
+- **Prerequisites:** S011p, ADR-0016 broker, existing checkpoint/recovery machinery.
+- **Scope:** `extensions.recovery.hosted_identity = "provider-model-version-v1"` opt-in; frozen model-record equality on resume; broker model_version pin (first accepted response, or from the run's ledger on resume) with undelivered terminal `provider_identity_changed` on mismatch; hosted automatic recovery only for unexpected runtime exit; refuse resume after any terminal/budget/identity provider stop; no Ollama health monitor for hosted runs; `hosted_identity_pin` records.
+- **Exclusions:** any live provider request; a cryptographic identity claim; changing local digest rules; resuming after provider stops; S011a runs themselves.
+- **Deliverables:** code and fake-provider tests in Simulation; ADR-0021; updated runtime documentation.
+- **Acceptance tests:** a hosted fake-provider run whose runtime is killed mid-run recovers automatically, keeps one run id, shares the request ceiling and stays pinned; a mismatched model_version stops the run without delivering the reply; a provider usage-limit or unavailable outcome does not trigger recovery and blocks operator resume; non-opted hosted runs still refuse recovery; changed broker profile refuses resume; archives verify.
+- **Exit criteria:** all acceptance tests pass with full Simulation and Builder suites; no live request made.
+- **Risks:** provider can change weights behind an unchanged version string (stated limit); replayed in-flight requests cost allowance.
+- **Next recommendation:** S011a, registered on the hosted route with a runtime-crash fault per run and a new owner allowance.
+
+---
+
 ### S011a — Reliability: One-Hour Runs
 
 - **Repository / streams:** Simulation; Builder evidence. C/D.
 - **Status:** planned.
 - **Objective:** Validate unattended one-hour execution independently of behaviour.
-- **Prerequisites:** S011p qualified first-hour experience, completed S010a/b, S006c and frozen model/policy/world; S010c is deferred for observation UI, not required for these offline-verifiable reliability checks.
+- **Prerequisites:** S011r hosted recovery (if hosted), S011p qualified first-hour experience, completed S010a/b, S006c and frozen model/policy/world; S010c is deferred for observation UI, not required for these offline-verifiable reliability checks.
 - **Scope:** three consecutive one-hour runs, each with a registered runtime/model
   fault; recovery, limits and preserved behavioural/intervention records.
 - **Exclusions:** calling uptime autonomous success or claiming physical reboot tested.

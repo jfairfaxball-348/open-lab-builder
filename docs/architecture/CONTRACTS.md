@@ -476,6 +476,15 @@ boolean (default false). Optional `health_check_interval_s` and
 Unknown fields, boolean numbers and recovery without checkpointing are refused.
 Absence disables automatic recovery.
 
+Hosted runs (S011r, [ADR-0021](../decisions/ADR-0021-hosted-recovery-identity.md))
+accept recovery only with `hosted_identity: "provider-model-version-v1"`; local
+runs refuse that field. The broker pins the first accepted provider-reported
+`model_version` and withholds any reply reporting another (terminal
+`provider_identity_changed`). Hosted automatic recovery follows only an
+unexpected runtime exit; a resume is refused after any provider stop or with a
+changed model record or broker profile. Resumed hosted segments record stage
+`hosted_identity_pin`. No schema or world release changes.
+
 `supervisor.action.payload.extensions.stage` names `recovery_restart`,
 `model_step_reserved`, `model_health`, `recovery_exhausted`, `recovery_refused`
 and `manual_resume`. Restart actions debit one shared retry budget before a

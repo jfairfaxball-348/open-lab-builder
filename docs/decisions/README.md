@@ -27,6 +27,7 @@ by rewriting history.
 | [0018](ADR-0018-supervisor-specialist-consultation.md) | Supervisor-mediated local specialist capability and one finite GPU lease | Accepted (S007e) |
 | [0019](ADR-0019-study-manifests-and-evidence-exports.md) | Offline study inventories and portable stopped-archive exports, separate from runtime/world contracts | Accepted (S010a) |
 | [0020](ADR-0020-source-bound-study-analysis.md) | Source-bound descriptive analysis and typed investigator annotations over verified exports | Accepted (S010b) |
+| [0021](ADR-0021-hosted-recovery-identity.md) | Opt-in hosted run recovery: frozen request identity plus provider-reported model_version pin; provider stops never trigger recovery | Accepted (owner); S011r, amends ADR-0016 |
 
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).

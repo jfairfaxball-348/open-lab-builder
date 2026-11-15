@@ -115,6 +115,8 @@ confirmation.
   than any provider's calendar day in any time zone.
 - Hosted runs refuse automatic recovery (no attestable weight digest); resume
   keeps per-run accounting because the ledger is keyed by run id.
+  *Amended by [ADR-0021](ADR-0021-hosted-recovery-identity.md):* opted-in hosted runs may
+  resume under a provider-reported model_version pin; provider stops never trigger recovery.
 
 ## Alternatives
 

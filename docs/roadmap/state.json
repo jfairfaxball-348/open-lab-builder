@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T22:30:00Z",
-  "last_session": "S011p",
+  "updated_at": "2026-11-15T23:30:00Z",
+  "last_session": "S011r",
   "completed_milestones": [
     {
       "id": "S001",
@@ -286,6 +286,15 @@
         "a6baa2d"
       ],
       "summary": "gpt-5.6-luna admitted on the ChatGPT plan route (context_window 272000, default effort medium); low effort sent and accepted on every request. NOT_SCORED smoke passed (4 requests, invoke 6*7=42). Preregistered S011p-hour-001 ran one hour: completed-idle, 22/180 requests all ok, 20 s cadence binding, idle from 423.5 s after six recorded continuations; orientation, two memory writes (second result-informed), time.now; no use of math/stats/text/workspace.write. Archive intact. Broker pacing test added."
+    },
+    {
+      "id": "S011r",
+      "completed_at": "2026-11-15T23:30:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "f2ab7ad"
+      ],
+      "summary": "ADR-0021 hosted recovery: opt-in hosted_identity provider-model-version-v1; broker pins first accepted model_version and withholds mismatches as terminal provider_identity_changed; hosted auto-recovery only after unexpected runtime exit; resume refused after provider stops or changed model record/broker profile; no Ollama health monitor for hosted runs; hosted_identity_pin records. Fake-provider tests incl. real runtime kill. No live request."
     }
   ],
   "next_milestone": {
@@ -304,15 +313,15 @@
       "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign. S010b used existing evidence only and made zero new model requests."
     },
     {
-      "id": "B-S011A-HOSTED-RECOVERY",
-      "summary": "S011a needs a recovered fault in each of three one-hour runs, but hosted resume is refused (no pinned provider identity). An owner decision is needed: build/test a hosted recovery design, or use a local orchestrator; plus any new hosted allowance.",
+      "id": "B-S011A-ALLOWANCE",
+      "summary": "Hosted recovery now exists (S011r). S011a still needs its registration (three hosted one-hour runs, each with a runtime-crash fault) and a new owner-approved finite request allowance before any live request.",
       "affects": [
         "S011a",
         "S011b",
         "S011c"
       ],
       "needs_human": true,
-      "detail": "S011p complete 2026-11-15 (smoke run-20261115t191118z-edcba8; hour run-20261115t211242z-c3a8e6). The S011p allowance is spent as far as needed (ledger 1030; profile still per_run 180 / total 1188, which grants nothing further without owner approval). No automatic recovery is supported for hosted providers (supervisor refuses). Do not weaken this to run S011a."
+      "detail": "S011p complete 2026-11-15 (smoke run-20261115t191118z-edcba8; hour run-20261115t211242z-c3a8e6). The S011p allowance is spent as far as needed (ledger 1030; profile still per_run 180 / total 1188, which grants nothing further without owner approval). No automatic recovery is supported for hosted providers (supervisor refuses). Do not weaken this to run S011a. 2026-11-15 S011r (Simulation f2ab7ad, ADR-0021) implemented opt-in hosted recovery with a provider-reported model_version pin. It is not cryptographic; a provider change behind an unchanged version string is undetectable."
     }
   ],
   "known_issues": [
@@ -542,38 +551,18 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T22:30:00Z",
+    "ran_at": "2026-11-15T23:30:00Z",
     "commands": [
       {
-        "command": "Builder git pull --ff-only (6 owner S011p roadmap commits); uv sync; uv run olb state; uv run olb check --tests (start)",
-        "result": "Fast-forwarded cleanly; health check and test suite passed. Simulation clean, synchronized; uv run pytest passed."
+        "command": "Simulation uv run pytest tests/test_hosted_recovery.py tests/test_hosted_compatibility.py",
+        "result": "26 passed: runtime kill recovers under one run id with pin record and shared ledger; mismatched model_version withheld and terminal; usage-limit refusal and provider unavailability not recovered and not resumable; changed broker profile refuses operator resume, restored profile resumes with pin gpt-compat-1; closed policy values; unreported version cannot pin."
       },
       {
-        "command": "Simulation uv run ols provider models openai-chatgpt; one GET /models metadata read for gpt-5.6-luna",
-        "result": "gpt-5.6-luna listed; context_window 272000, default_reasoning_level medium, low supported. No inference."
+        "command": "Simulation uv run ruff check .; uv run pytest (full)",
+        "result": "Ruff passed; full suite passed after updating one parametrized refusal message in test_providers.py. Fake providers only; no live request."
       },
       {
-        "command": "Simulation uv run pytest tests/test_s011p_luna.py; uv run ruff check .; uv run pytest (full)",
-        "result": "3 new tests passed (frozen config pins, low effort on every fake-provider request with invoke=42, per-run ceiling stop). Ruff passed; full suite passed. Fake provider only."
-      },
-      {
-        "command": "Simulation uv run ols provider configure openai-chatgpt (owner-approved finite ceiling); uv run ols run experiments/s011p/smoke.json; uv run ols verify <archive>",
-        "result": "Live NOT_SCORED run-20261115t191118z-edcba8: 4 requests, all ok, every body reasoning.effort=low, model_version gpt-5.6-luna; search/describe/invoke 6*7=42 and result-stating reply; ended at registered quiet deadline; archive intact."
-      },
-      {
-        "command": "Builder uv run ruff check .; uv run olb check --tests (closeout)",
-        "result": "(first closeout) Ruff passed; health check passed."
-      },
-      {
-        "command": "Simulation uv run pytest tests/test_s011p_luna.py tests/test_providers.py; uv run ruff check .; uv run pytest (full)",
-        "result": "New hour-config tests (registered differences only; quiet idle after three tool-free replies with low effort) and broker min_interval pacing test passed; full suite passed after one timing-tolerance fix (Windows wall-clock resolution) and two assertion fixes in the new tests."
-      },
-      {
-        "command": "Owner-approved ols provider configure (per_run 180, per_day/total 1188, min_interval 20, attempts 2); uv run ols run experiments/s011p/hour-001.json; uv run ols verify <archive>",
-        "result": "run-20261115t211242z-c3a8e6: terminated at 3600 s deadline, completed-idle (idle from 423.5 s); 22 requests all ok with reasoning.effort=low; 3751 events; archive intact."
-      },
-      {
-        "command": "Builder uv run ruff check .; uv run olb check --tests (final closeout)",
+        "command": "Builder uv run ruff check .; uv run olb check --tests",
         "result": "Ruff passed; health check passed (documents, state, privacy, test suite)."
       }
     ]

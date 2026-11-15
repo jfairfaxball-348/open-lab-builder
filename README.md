@@ -262,7 +262,8 @@ annotations ([protocol](docs/experiments/STUDY_ANALYSIS.md),
 [report](docs/experiments/2026-11-15-s010b-study-analysis.md)). Window comparison remains S010c. World 0.8.0 is
 unchanged. Export integrity establishes no new autonomy GO or causal comparison.
 S011p is complete: Luna passed a low-effort smoke and one registered unguided hour ended completed-idle after 423.5 s of activity
-([report](docs/experiments/2026-11-15-s011p-hour-001.md)). S011a awaits a hosted fault-recovery decision.
+([report](docs/experiments/2026-11-15-s011p-hour-001.md)). S011r then added opt-in hosted fault recovery under a provider-reported model-version pin
+([ADR-0021](docs/decisions/ADR-0021-hosted-recovery-identity.md)); S011a is next.
 
 ## Governing principle
 
