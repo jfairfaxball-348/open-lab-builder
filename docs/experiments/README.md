@@ -21,7 +21,10 @@ reader defect), with qualifying A 1/6, B 0/6 and C 5/6 and far more tool use
 than either local model. A post-hoc GO depends on two measurement defects and
 needs a registered replication. See the [report](2026-11-15-hosted-comparison.md),
 [registration](registrations/S014i-001.md) and
-[derived dataset](results/S014i-001.json).
+[derived dataset](results/S014i-001.json). A confirmatory replication,
+**s014i-002**, is [registered](registrations/S014i-002.md) under
+[rubric v1.1](S007d-RUBRIC-v1.1.md) (faithful note reports, explicit provider
+censoring); it has not run.
 We study observable artificial agency and agent-stated objectives, not subjective
 consciousness. A negative valid baseline completes S007d without opening expansion.
 

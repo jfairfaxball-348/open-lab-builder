@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T13:00:00Z",
-  "last_session": "S014l",
+  "updated_at": "2026-11-15T14:30:00Z",
+  "last_session": "S014m",
   "completed_milestones": [
     {
       "id": "S001",
@@ -229,12 +229,22 @@
         "e277ba1"
       ],
       "summary": "Fixed KI-24: every Simulation reader of recorded JSONL (verify_archive, recorder append, campaign and provider ledgers, provider-ledger mirror, artifact index, supervisor recovery, benchmark_analysis) splits on \n only via contracts.jsonl_lines. Six regression tests with U+2028/U+2029/U+0085 (four failed before the fix); 366 tests pass. s014i-001 s41-r2-c verifies with the fixed reader (236 problems on frozen source); reported, not re-scored; S014i-001 stays INCONCLUSIVE."
+    },
+    {
+      "id": "S014m",
+      "completed_at": "2026-11-15T14:30:00Z",
+      "repository": "open-lab-builder",
+      "commits": [
+        "92bdcba",
+        "3f3ff80"
+      ],
+      "summary": "Rubric v1.1 (two changes: faithful exact/trimmed/JSON-escaped report of the returned note, KI-25; PROVIDER_CENSORED label, INCONCLUSIVE only when censoring could change the decision) implemented beside unchanged v1 in Simulation 92bdcba with campaign v1.1 seed labels and the provider-stop runner rule. s014i-002 manifest frozen (3f3ff80, seeds 51-53, otherwise as s014i-001). NOT_SCORED pilot s014i-002-pilot-001: 4/4 valid, 32 requests ok, 63,630 input tokens, D fault exposed, A ran out of steps before reporting. Registration committed before any scored cell. OD-14 partial: app limit stays 100%."
     }
   ],
   "next_milestone": {
-    "id": "S014m",
-    "repository": "open-lab-builder",
-    "title": "Rubric v1.1 and Replication Registration"
+    "id": "S014n",
+    "repository": "open-lab-simulation",
+    "title": "Confirmatory Hosted Replication"
   },
   "blockers": [
     {
@@ -253,13 +263,12 @@
     },
     {
       "id": "B-HOSTED",
-      "summary": "Hosted use is bounded by the owner's 10% per-app ChatGPT plan limit; no other spend is authorised.",
+      "summary": "Hosted use is limited to the owner's ChatGPT plan with the per-app limit at 100% (OD-14); S014n needs owner approval of its plan usage; no other spend is authorised.",
       "affects": [
-        "S014h",
-        "S014i"
+        "S014n"
       ],
       "needs_human": false,
-      "detail": "ADR-0016 broker implemented (S014b). ChatGPT plan usage (S014d) is integrated with a 10% per-app plan limit. On 2026-11-15 the owner made that limit the only cap: the ledger ceilings are nominal (1,000,000 per run/day/total) and every attempt is still reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback. Gemma was scrapped (OD-12) and Anthropic excluded. No paid API key, credits or other tier is ever implied."
+      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised."
     }
   ],
   "known_issues": [
@@ -420,14 +429,6 @@
         "S014i"
       ],
       "detail": "The preview route rejects temperature, top_p and max_output_tokens; the Responses API has no seed. These are recorded per run as not sent. Live token refresh and the documented plan-usage errors are tested only against fakes. See docs/experiments/2026-11-15-chatgpt-integration.md. S014g: hosted runs cannot be resumed after interruption (no model digest); a campaign must account such cells as interrupted."
-    },
-    {
-      "id": "KI-25",
-      "summary": "The rubric-v1 guided-control check requires the raw stored note as an exact substring of a later output, so a correct JSON-escaped report fails.",
-      "affects": [
-        "S014m"
-      ],
-      "detail": "Four of five completed s014i-001 A runs reported the returned memory entry as JSON (trailing newline shown as \n) and are CONTROL_FAILURE under the frozen code; the rubric text asks only for a later output reporting returned note data. S014j must report the frozen result and this discrepancy separately; any rubric change needs a new version and campaign."
     }
   ],
   "open_decisions": [
@@ -447,33 +448,36 @@
     {
       "id": "OD-14",
       "needs_human": true,
-      "summary": "Whether to run the confirmatory hosted replication s014i-002 (S014m/S014n) on the ChatGPT plan, and with what app limit.",
+      "summary": "Whether to approve the plan usage of the confirmatory hosted replication s014i-002 (S014n).",
       "affects": [
-        "S014m",
         "S014n"
       ],
-      "detail": "S014i-001 used about 11 points of a weekly ChatGPT Plus allowance (upper bound) for 24 cells plus pilots; one full cell is roughly 3-4% of a 5-hour window. The app limit is currently 100%; at 10% the per-app cap also bounds each 5-hour window to about two cells."
+      "detail": "Partial decision recorded 2026-11-15: the owner leaves The Open Laboratory's ChatGPT app limit at 100%; no API key, credits or settings changes are authorised. S014m pilot usage was authorised and used 32 requests (63,630 input tokens). Still open: approval to run the 24 scored cells (S014i-001 used about 11 points of a weekly ChatGPT Plus allowance, upper bound, and about 3 points of a 5-hour window per full cell)."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T13:00:00Z",
+    "ran_at": "2026-11-15T14:30:00Z",
     "commands": [
       {
-        "command": "Simulation: uv run pytest tests/test_line_separators.py (helper added, readers unchanged)",
-        "result": "4 of 6 failed: verify_archive 'line 7: not JSON' (+38), recorder refused append, ledger JSONDecodeError, 11 splitlines sites"
+        "command": "Simulation: uv run ruff check .; uv run pytest (at 92bdcba)",
+        "result": "Lint passed; 385 passed in 319.85s"
       },
       {
-        "command": "Simulation: uv run ruff check .; uv run pytest",
-        "result": "Lint passed; 366 passed in 318.91s"
+        "command": "python -m open_lab_simulation.benchmark run campaigns/s014i-002-pilot-001.json --max-cells 4",
+        "result": "4/4 terminated at 8 steps; 32 requests all ok (gpt-6.1-sol); no provider stop"
       },
       {
-        "command": "verify_archive on s014i-001 s41-r2-c (frozen 8301244 vs fixed e277ba1)",
-        "result": "frozen 236 problems; fixed 0; events.jsonl SHA-256 unchanged; all 24 s014i-001 archives verify"
+        "command": "python -m open_lab_simulation.benchmark report campaigns/s014i-002-pilot-001.json",
+        "result": "NOT_SCORED, rubric v1.1, runtime_source_match true; 4/4 valid; D fault exposed; A CONTROL_FAILURE (retrieved at its last step)"
+      },
+      {
+        "command": "ChatGPT usage page in the built-in browser (read-only)",
+        "result": "Not read: the browser was not signed in; plan percentage for the pilot unmeasured"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 43.91 seconds and all health checks passed"
+        "result": "Lint passed; 305 tests passed in 39.88 seconds and all health checks passed"
       }
     ]
   }

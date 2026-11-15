@@ -967,7 +967,9 @@ behavioural success are always reported separately.
 ### S014m — Rubric v1.1 and Replication Registration
 
 - **Repository / streams:** Builder rubric and registration; Simulation manifest. D.
-- **Status:** planned; human approval of plan usage required before registration.
+- **Status:** complete (2026-11-15).
+  [Rubric v1.1](../experiments/S007d-RUBRIC-v1.1.md);
+  [registration](../experiments/registrations/S014i-002.md).
 - **Objective:** Correct the guided-control operationalisation and freeze a
   confirmatory replication of S014i-001.
 - **Prerequisites:** S014l; owner decision OD-14.
@@ -978,12 +980,17 @@ behavioural success are always reported separately.
 - **Exclusions:** changes to prompts, world, policies or the artifact requirement.
 - **Exit criteria:** rubric v1.1 and registration committed and pushed before any
   scored cell.
-- **Next recommended milestone:** S014n.
+- **Delivered:** Simulation `92bdcba` (v1.1 analysis, campaign v1.1 seed labels
+  and provider-stop runner; 19 tests; v1 scoring and frozen pins unchanged) and
+  manifest commit `3f3ff80` (`s014i-002`, seeds 51-53). NOT_SCORED pilot
+  `s014i-002-pilot-001`: 4/4 valid, 32 requests, no provider error. OD-14
+  partial: app limit stays at 100%. No scored cell has run.
+- **Next recommended milestone:** S014n, after the owner approves its plan usage.
 
 ### S014n — Confirmatory Hosted Replication
 
 - **Repository / streams:** Simulation execution; Builder report. D.
-- **Status:** planned.
+- **Status:** planned; owner approval of plan usage required (OD-14).
 - **Objective:** Test prospectively whether the post-hoc S014i-001 GO replicates.
 - **Prerequisites:** S014m.
 - **Scope:** run, review and report `s014i-002` under its registration; a GO is

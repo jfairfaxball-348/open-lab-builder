@@ -123,7 +123,10 @@ The registered campaign s014i-001 then ran 24 cells on ChatGPT plan usage:
 all three seeds ([report](docs/experiments/2026-11-15-hosted-comparison.md)).
 S014l fixed the event-log reader defect behind its one invalid record
 ([report](docs/experiments/2026-11-15-event-log-reader-fix.md)); the result
-itself is unchanged.
+itself is unchanged. S014m versioned the rubric
+([v1.1](docs/experiments/S007d-RUBRIC-v1.1.md)) and registered a confirmatory
+replication, [s014i-002](docs/experiments/registrations/S014i-002.md); no
+scored cell of it has run.
 
 What does **not** exist yet: a registered GO, specialist model consultation/GPU leasing,
 container isolation on Linux or with network access, and run comparison. The first
