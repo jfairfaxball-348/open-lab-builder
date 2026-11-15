@@ -118,7 +118,11 @@ The S014g compatibility suite then admitted ChatGPT plan usage
 ([report](docs/experiments/2026-11-15-hosted-compatibility.md)). These are
 integration checks, not behavioural evidence.
 
-What does **not** exist yet: the hosted comparative campaign (S014h–S014j), specialist model consultation/GPU leasing,
+The registered campaign s014i-001 then ran 24 cells on ChatGPT plan usage:
+**INCONCLUSIVE** under the registered rules, with the open-ended arm qualifying on
+all three seeds ([report](docs/experiments/2026-11-15-hosted-comparison.md)).
+
+What does **not** exist yet: a registered GO, specialist model consultation/GPU leasing,
 container isolation on Linux or with network access, and run comparison. The first
 registered short baseline is complete; earlier engineering checks are recorded in
 [docs/experiments/](docs/experiments/). Run `uv run olb

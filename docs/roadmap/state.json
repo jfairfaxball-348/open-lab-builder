@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T10:45:00Z",
-  "last_session": "S014i",
+  "updated_at": "2026-11-15T11:30:00Z",
+  "last_session": "S014j",
   "completed_milestones": [
     {
       "id": "S001",
@@ -213,12 +213,19 @@
       "repository": "open-lab-simulation",
       "commits": [],
       "summary": "Executed s014i-001 (registration 51f9b70) on gpt-6.1-sol: 24/24 cells finished and accounted (20 at 32 steps, 4 provider-censored by the per-app usage limit, none rerun); 24 rubric-v1 reviews bound to event hashes. Owner raised the app limit 10% -> 50% -> 100% mid-campaign (logged deviations); one operator deviation (two cells launched after a usage-limit stop). Frozen report: INCONCLUSIVE (one INVALID_RECORD from a reader defect); qualifying rows A 1/6, B 0/6, C 5/6, D 2/6. Analysis is S014j."
+    },
+    {
+      "id": "S014j",
+      "completed_at": "2026-11-15T11:30:00Z",
+      "repository": "open-lab-builder",
+      "commits": [],
+      "summary": "Reported s014i-001: registered result INCONCLUSIVE (s41-r2-c INVALID_RECORD from KI-24); qualifying A 1/6, B 0/6, C 5/6 (seeds 41-43), D 2/6 descriptive. 127 successful invocations (local 27 and 7), 22 runs with two distinct capabilities, zero repairs, no context truncation, 2.97M input tokens. Post-hoc sensitivity: GO only with both KI-24 and KI-25 corrected; not claimable without a new registered campaign. Derived dataset with independent recount; next phase S014l-S014n proposed."
     }
   ],
   "next_milestone": {
-    "id": "S014j",
-    "repository": "open-lab-builder",
-    "title": "Comparative Analysis and Recommendations"
+    "id": "S014l",
+    "repository": "open-lab-simulation",
+    "title": "Event-Log Reader Fix (KI-24)"
   },
   "blockers": [
     {
@@ -409,16 +416,15 @@
       "id": "KI-24",
       "summary": "Event-log readers use str.splitlines(), which splits on U+2028/U+2029 that the recorder writes raw; an intact log then fails verification.",
       "affects": [
-        "S014j",
-        "S014k"
+        "S014l"
       ],
-      "detail": "Found in s014i-001 cell s41-r2-c, where the model tested text.stats with those characters. A newline-only verifier finds no problem. Readers: archive.verify_archive, recorder, benchmark_analysis, supervisor, artifacts, providers ledger. Fix after the S014j derived dataset is produced (frozen source); the Window should be checked too."
+      "detail": "Found in s014i-001 cell s41-r2-c, where the model tested text.stats with those characters. A newline-only verifier finds no problem. Simulation readers affected: archive.verify_archive, recorder, benchmark ledger, benchmark_analysis, supervisor, artifacts, the provider ledger and reading a run's provider-ledger mirror. The Window splits bytes on \\n and is unaffected. Fix in S014l."
     },
     {
       "id": "KI-25",
       "summary": "The rubric-v1 guided-control check requires the raw stored note as an exact substring of a later output, so a correct JSON-escaped report fails.",
       "affects": [
-        "S014j"
+        "S014m"
       ],
       "detail": "Four of five completed s014i-001 A runs reported the returned memory entry as JSON (trailing newline shown as \n) and are CONTROL_FAILURE under the frozen code; the rubric text asks only for a later output reporting returned note data. S014j must report the frozen result and this discrepancy separately; any rubric change needs a new version and campaign."
     }
@@ -436,35 +442,41 @@
       ],
       "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard.",
       "needs_human": true
+    },
+    {
+      "id": "OD-14",
+      "needs_human": true,
+      "summary": "Whether to run the confirmatory hosted replication s014i-002 (S014m/S014n) on the ChatGPT plan, and with what app limit.",
+      "affects": [
+        "S014m",
+        "S014n"
+      ],
+      "detail": "S014i-001 used about 11 points of a weekly ChatGPT Plus allowance (upper bound) for 24 cells plus pilots; one full cell is roughly 3-4% of a 5-hour window. The app limit is currently 100%; at 10% the per-app cap also bounds each 5-hour window to about two cells."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T10:45:00Z",
+    "ran_at": "2026-11-15T11:30:00Z",
     "commands": [
       {
-        "command": "Operator script: python -m open_lab_simulation.benchmark run campaigns/s014i-001.json --registration 51f9b70... (batch of 4, then one cell at a time)",
-        "result": "24/24 finished: 20 terminated (max_steps), 4 failed with provider usage-limit refusals; no rerun"
+        "command": "Frozen benchmark.report_campaign on s014i-001 (dataset builder)",
+        "result": "runtime_source_match true; 24 finished; 23 valid and reviewed; expansion INCONCLUSIVE"
       },
       {
-        "command": "Out-of-campaign probes s014i-limit-probe after each app-limit change",
-        "result": "Both ok"
+        "command": "Independent recount from raw newline-split events",
+        "result": "701 requests = HTTP attempts; 127 successful invocations; 24 non-empty non-database file events; 5 returned notes; world digest and all 24 configurations match"
       },
       {
-        "command": "python -m open_lab_simulation.benchmark report campaigns/s014i-001.json (frozen source)",
-        "result": "runtime_source_match true; 23 valid and reviewed, 1 INVALID_RECORD (s41-r2-c); expansion INCONCLUSIVE"
+        "command": "Post-hoc sensitivity (labelled)",
+        "result": "frozen INCONCLUSIVE; KI-24 fixed NO_GO; KI-25 accepted INCONCLUSIVE; both GO"
       },
       {
-        "command": "Diagnostic verifier with newline-only splitting on s41-r2-c",
-        "result": "No problems; no other archive contains U+2028/U+2029"
-      },
-      {
-        "command": "24 annotations checked with benchmark_analysis.validate_annotation",
-        "result": "All valid (s41-r2-c against newline-split events)"
+        "command": "ChatGPT usage page after the campaign (read-only)",
+        "result": "5-hour 27% left, weekly 63% left; app limit 100%"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 40.15 seconds and all health checks passed (after fixing a state entry that named a repository instead of a milestone)"
+        "result": "Lint passed; 305 tests passed in 40.38 seconds and all health checks passed"
       }
     ]
   }

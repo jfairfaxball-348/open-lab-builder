@@ -71,6 +71,7 @@ flowchart TD
     S014d --> S014g
     S014g --> S014h["S014h Comparative preregistration"] --> S014i["S014i Interleaved campaign"] --> S014j["S014j Analysis"]
     S014j -. optional .-> S014k["S014k Window comparison view"]
+    S014j --> S014l["S014l Event-log reader fix"] --> S014m["S014m Rubric v1.1 + replication registration"] --> S014n["S014n Confirmatory hosted replication"]
     S007d --> S010["S010 Protocol / comparison, negative allowed"]
     S006e --> S010
     S004 --> S010
@@ -85,7 +86,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S014j, analysing the completed s014i-001 campaign. S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
+**Next:** S014l (event-log reader fix). S014j reported s014i-001 as INCONCLUSIVE; the confirmatory replication (S014m/S014n) needs the owner's plan-usage approval (OD-14). S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
 and gave the ChatGPT arm the provider's full 500,000-token context window as
 its client guard (OD-13), relying on the 10% per-app plan limit. The programme
 continues with ChatGPT plan usage alone. On 2026-11-15 the owner chose the hosted-intelligence
@@ -916,20 +917,75 @@ behavioural success are always reported separately.
 ### S014j — Comparative Analysis and Recommendations
 
 - **Repository / streams:** Builder report; Simulation analysis. D.
-- **Status:** planned.
+- **Status:** complete (2026-11-15).
+  [Report](../experiments/2026-11-15-hosted-comparison.md);
+  [derived dataset](../experiments/results/S014i-001.json).
 - **Deliverables:** 24-cell manifest accounting, source-bound dataset, provider
   reliability separate from behaviour, per-condition tables with evidence-linked
   examples, comparison with S007d-001/S007h-001, request/token/time/quota usage,
   comparability limitations, integration-versus-model failure attribution where
   supported, task-specific findings without a forced ranking, next-phase proposal.
 - **Exit criteria:** complete honest report, including partial or negative results.
-- **Next recommended milestone:** S014k if useful, then the proposal's next phase.
+- **Delivered:** registered result **INCONCLUSIVE** (one `INVALID_RECORD` from
+  KI-24); qualifying A 1/6, B 0/6, C 5/6. 127 successful invocations versus
+  27 and 7 locally; zero repairs; no context truncation. Post-hoc sensitivity:
+  the decision turns on KI-25 (GO only with both defects corrected), which
+  cannot be claimed without a new registered campaign.
+- **Next recommended milestone:** S014l, then S014m and S014n (owner approval
+  of plan usage needed for S014n, OD-14).
 
 ### S014k — Window Provider Comparison View (Optional)
 
 - **Repository / streams:** Window, read-only. D.
 - **Status:** optional, after S014j.
 - **Scope:** read-only comparison of registered campaigns; archives never modified.
+
+### S014l — Event-Log Reader Fix (KI-24)
+
+- **Repository / streams:** Simulation runtime and analysis; Builder record. B/D.
+- **Status:** planned.
+- **Objective:** Read and verify event logs that contain U+2028/U+2029 correctly.
+- **Prerequisites:** S014j (the S014i-001 dataset is produced on frozen source).
+- **Scope:** replace `str.splitlines()` with newline-only splitting in every
+  event-log, ledger and request-mirror reader in the Simulation; regression tests
+  that record and verify text containing U+2028/U+2029/U+0085.
+- **Exclusions:** rubric changes, re-scoring S014i-001, Window changes (the Window
+  already splits on `\n`).
+- **Acceptance tests:** a recorded run containing those characters verifies; the
+  existing suite passes; the S014i-001 `s41-r2-c` archive verifies with the fixed
+  reader (reported, not re-scored).
+- **Exit criteria:** no reader of recorded JSONL splits on non-newline separators.
+- **Risks:** source-freeze checks of earlier manifests will report a mismatch;
+  historical reports stay bound to their frozen source.
+- **Next recommended milestone:** S014m.
+
+### S014m — Rubric v1.1 and Replication Registration
+
+- **Repository / streams:** Builder rubric and registration; Simulation manifest. D.
+- **Status:** planned; human approval of plan usage required before registration.
+- **Objective:** Correct the guided-control operationalisation and freeze a
+  confirmatory replication of S014i-001.
+- **Prerequisites:** S014l; owner decision OD-14.
+- **Scope:** rubric v1.1 (accept a faithful escaped or quoted report of the
+  returned note, KI-25; an explicit provider-censoring label); v1 results kept as
+  they are; `s014i-002` manifest on the same model and route with new seed
+  labels, the one-cell-at-a-time runner rule and NOT_SCORED pilots.
+- **Exclusions:** changes to prompts, world, policies or the artifact requirement.
+- **Exit criteria:** rubric v1.1 and registration committed and pushed before any
+  scored cell.
+- **Next recommended milestone:** S014n.
+
+### S014n — Confirmatory Hosted Replication
+
+- **Repository / streams:** Simulation execution; Builder report. D.
+- **Status:** planned.
+- **Objective:** Test prospectively whether the post-hoc S014i-001 GO replicates.
+- **Prerequisites:** S014m.
+- **Scope:** run, review and report `s014i-002` under its registration; a GO is
+  specific to this model, route and profile and opens no expansion by itself.
+- **Exit criteria:** complete honest report, including a negative result.
+- **Next recommended milestone:** the report's proposal; expansion stays closed
+  without a registered GO.
 
 ---
 
