@@ -13,7 +13,7 @@ milestones in the roadmap.
 
 | Provider route | Officially supported for this use? | Status | Main blockers / human actions |
 | --- | --- | --- | --- |
-| Google Gemma via Gemini API (free tier, owner's key) | Yes: Gemma models are served by the Gemini API with function calling and system instructions | **Eligible**, pending human setup | Key installed through the S014b secure command; owner reads the project's actual Gemma limits in AI Studio; approved request budgets; region decides data-use terms |
+| Google Gemma via Gemini API (free tier, owner's key) | Yes: Gemma models are served by the Gemini API with function calling and system instructions | **Scrapped by the owner (OD-12, 2026-11-15)** after intermittent provider HTTP 500 on multi-step turns | None; profile disabled. Integration record kept |
 | OpenAI via Sign in with ChatGPT plan usage | Yes for open-source and locally hosted apps, self-serve, as a **preview** | **Eligible and integrated (S014d)**, with registered parameter gaps | Done 2026-11-15: Apache-2.0 licence, owner sign-in, per-app limit 10%, approved budgets (8/20/30) |
 | Anthropic via Claude Pro subscription | **Not established.** Published policy directs developers' products, including Agent SDK use, to API keys | **Unavailable** until Anthropic confirms in writing | Owner may ask Anthropic; paid API use needs a separate spend authorisation (not given) |
 

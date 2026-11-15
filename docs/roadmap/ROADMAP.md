@@ -65,9 +65,9 @@ flowchart TD
     S006c --> S008d --> S009
     S007h --> S014a["S014a Hosted compliance + broker architecture"]
     S014a --> S014b["S014b Broker, secrets, quota ledger, fakes"]
-    S014b --> S014c["S014c Gemma adapter"]
+    S014b --> S014c["S014c Gemma adapter (scrapped)"]
     S014b --> S014d["S014d ChatGPT plan-usage adapter"]
-    S014c --> S014g["S014g Cross-provider compatibility"]
+    S014c -. scrapped .-> S014g["S014g Hosted compatibility suite"]
     S014d --> S014g
     S014g --> S014h["S014h Comparative preregistration"] --> S014i["S014i Interleaved campaign"] --> S014j["S014j Analysis"]
     S014j -. optional .-> S014k["S014k Window comparison view"]
@@ -85,9 +85,10 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S014g, after the owner decides OD-12 (Gemma arm) and OD-13 (context
-guard for hosted arms). S014d is complete; S014c remains blocked by provider
-reliability. On 2026-11-15 the owner chose the hosted-intelligence
+**Next:** S014g. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
+and gave the ChatGPT arm the provider's full 500,000-token context window as
+its client guard (OD-13), relying on the 10% per-app plan limit. The programme
+continues with ChatGPT plan usage alone. On 2026-11-15 the owner chose the hosted-intelligence
 comparison programme (S014, [ADR-0016](../decisions/ADR-0016-hosted-provider-broker.md))
 as the response to the two local NO_GO results (S007d-001, S007h-001), resolving
 OD-9. S010 follows the programme or proceeds independently. No hosted request,
@@ -765,11 +766,13 @@ behavioural success are always reported separately.
 ### S014c — Google Gemma Adapter
 
 - **Repository / streams:** Simulation adapter; Builder provider manifest. B.
-- **Status:** in progress, blocked by provider reliability (2026-11-15). Adapter
+- **Status:** closed, not pursued (owner decision OD-12, 2026-11-15). Adapter
   built (Simulation `68aa10c`, 1.1.0 `8427403`/`2c4c439`); live runs completed
   search, describe and invoke, then hit intermittent provider HTTP 500 on
-  multi-step turns. The owner switched the arm to `gemma-4-31b-it`.
-  [Integration report](../experiments/2026-11-15-gemma-integration.md).
+  multi-step turns. The owner scrapped the Gemma arm; its host profile is
+  disabled. The adapter and the
+  [integration report](../experiments/2026-11-15-gemma-integration.md) are kept
+  as a record.
 - **Objective:** Run the Laboratory conversation on Gemma through the broker.
 - **Prerequisites:** S014b. **Human:** install the key with `ols provider` (never
   in chat or files); report the project's actual Gemma limits from AI Studio;
@@ -785,9 +788,7 @@ behavioural success are always reported separately.
   capability and answers from its result; archive verifies; ledger reconciles.
 - **Exit criteria:** tool-use round trip demonstrated, not text generation alone.
 - **Risks:** undocumented free-tier limits, model availability, thought handling.
-- **Remaining:** a run-contained result-informed follow-up. Re-probe reliability
-  with a small approved budget, register a retry policy, or record Gemma as
-  unavailable (OD-12).
+- **Remaining:** none; closed by owner decision.
 - **Next recommended milestone:** S014d (independent of this blocker).
 
 ### S014d — OpenAI Sign in with ChatGPT Plan-Usage Adapter
@@ -852,7 +853,8 @@ behavioural success are always reported separately.
 - **Repository / streams:** Simulation tests; Builder record. B/D.
 - **Status:** planned.
 - **Objective:** Admit only providers that preserve Laboratory tool semantics.
-- **Prerequisites:** S014c and S014d (and S014f if available).
+- **Prerequisites:** S014d. Gemma (S014c) was scrapped and Anthropic excluded,
+  so the suite covers ChatGPT plan usage only, with the registered OD-13 guard.
 - **Scope:** for each provider: text reply; structured tool call; real capability
   invocation; result handling; result-informed second turn; multi-turn context;
   archive verification; budget enforcement; rate-limit/timeout/error handling;
@@ -866,15 +868,15 @@ behavioural success are always reported separately.
 
 - **Repository / streams:** Builder registration; Simulation manifest. D.
 - **Status:** planned; human approval of request budgets required.
-- **Objective:** Freeze a 48-cell interleaved campaign (Gemma and ChatGPT; the
-  owner excluded Anthropic on 2026-11-15, so 72 cells are no longer planned).
+- **Objective:** Freeze a 24-cell campaign on ChatGPT plan usage (the owner
+  excluded Anthropic and scrapped Gemma on 2026-11-15), compared with the local
+  historical group S007d-001/S007h-001.
 - **Scope:** S007d A/B/C/D prompts, world 0.6.0, capabilities, policies and rubric
   v1 unchanged where feasible; three seeds x two replicates per provider; one
-  interleaved schedule (each cell run on every eligible provider in a balanced,
-  preregistered provider order); frozen per-provider settings with every
-  difference from the local profile listed; approved per-run, per-day and
-  campaign request ceilings (32 calls x 48 runs = 1,536 before retries is the
-  upper figure to approve or reduce); NOT_SCORED pilots; fresh workspace and
+  preregistered schedule; frozen settings with every difference from the local
+  profile listed, including the 500,000-token client guard (OD-13) against the
+  local 4096; approved per-run, per-day and campaign request ceilings (32 calls x
+  24 runs = 768 before retries is the upper figure to approve or reduce); NOT_SCORED pilots; fresh workspace and
   memory; replicate independence addressed (KI-21).
 - **Exit criteria:** registration committed and pushed before any scored cell.
 - **Next recommended milestone:** S014i.
@@ -883,7 +885,7 @@ behavioural success are always reported separately.
 
 - **Repository / streams:** Simulation execution; Builder ledger record. D.
 - **Status:** planned.
-- **Objective:** Execute every scheduled cell once, interleaved across providers.
+- **Objective:** Execute every scheduled cell once on the registered provider.
 - **Scope:** one hosted request at a time; resumable between cells without
   repeats; quota exhaustion pauses that provider's cells as pending or
   interrupted while eligible providers continue where registered; no reruns,
@@ -896,7 +898,7 @@ behavioural success are always reported separately.
 
 - **Repository / streams:** Builder report; Simulation analysis. D.
 - **Status:** planned.
-- **Deliverables:** 72-cell manifest accounting, source-bound dataset, provider
+- **Deliverables:** 24-cell manifest accounting, source-bound dataset, provider
   reliability separate from behaviour, per-condition tables with evidence-linked
   examples, comparison with S007d-001/S007h-001, request/token/time/quota usage,
   comparability limitations, integration-versus-model failure attribution where

@@ -87,3 +87,13 @@ A hosted arm under the 4096-token guard is limited by the Laboratory's context
 policy before the model's capability is tested. Whether S014h keeps 4096 for
 comparability with S007d/S007h or registers a larger guard for all hosted arms
 is a decision for S014g/S014h (OD-13), not something this check settles.
+
+## Owner decisions after the check (2026-11-15)
+
+- **OD-12:** Gemma is scrapped. S014c is closed; its host profile is disabled.
+- **OD-13:** the ChatGPT arm gets as much context as it needs. Its client guard
+  is the provider's reported `context_window` for `gpt-6.1-sol`, **500,000
+  tokens** (read from the account's `GET /v1/models`; `max_context_window` is
+  872,000). The owner relies on the 10% per-app plan limit to bound usage. The
+  difference from the local 4096 guard is a registered condition of every
+  comparison with S007d-001/S007h-001, not a hidden one.

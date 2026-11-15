@@ -1,7 +1,7 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T08:40:00Z",
+  "updated_at": "2026-11-15T09:00:00Z",
   "last_session": "S014d",
   "completed_milestones": [
     {
@@ -211,15 +211,14 @@
     },
     {
       "id": "B-HOSTED",
-      "summary": "Live hosted requests need per-provider human setup and approved request budgets.",
+      "summary": "Live hosted requests need approved request budgets.",
       "affects": [
-        "S014c",
         "S014g",
         "S014h",
         "S014i"
       ],
       "needs_human": true,
-      "detail": "ADR-0016 broker implemented (S014b). Gemma (S014c) is configured and credentialed but blocked by intermittent provider HTTP 500 on multi-step tool turns (KI-22, OD-12). ChatGPT (S014d) is integrated: owner signed in, per-app limit 10%, approved budget 8/20/30 (12 used); further live checks need budget within that approval or a new one. Anthropic was excluded by the owner. The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
+      "detail": "ADR-0016 broker implemented (S014b). ChatGPT plan usage (S014d) is integrated: owner signed in, per-app limit 10%, approved budget 8/20/30 (12 used); further live checks need budget within that approval or a new one. Gemma was scrapped (OD-12) and Anthropic excluded by the owner. The ChatGPT client guard is 500,000 tokens (OD-13). The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
     }
   ],
   "known_issues": [
@@ -372,17 +371,6 @@
       "detail": "In S007h-001, seed-41 runs sharing a prompt (C and D are identical) matched on their first 5-9 tool actions with identical output-token counts. S007d-001 used the same seed design. S010 should design replicates and seeds for the independence it claims."
     },
     {
-      "id": "KI-22",
-      "summary": "Gemma on the free Gemini API returns intermittent HTTP 500 once a conversation holds two tool-call turns.",
-      "affects": [
-        "S014c",
-        "S014g",
-        "S014h",
-        "S014i"
-      ],
-      "detail": "2026-11-15: requests with two or more call turns succeeded 0/6 on gemma-4-26b-a4b-it (including a minimal synthetic conversation) and 2/6 on gemma-4-31b-it (byte-identical bodies both failed and succeeded); single-call requests 9/10. Provider-side; not caused by the Laboratory translation. See docs/experiments/2026-11-15-gemma-integration.md."
-    },
-    {
       "id": "KI-23",
       "summary": "ChatGPT plan usage cannot honour temperature, output cap or seed, and its metering is opaque to the app.",
       "affects": [
@@ -406,32 +394,11 @@
       ],
       "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard.",
       "needs_human": true
-    },
-    {
-      "id": "OD-12",
-      "needs_human": true,
-      "summary": "Gemma arm: re-probe later, register a higher retry policy, or record Gemma unavailable for the matched campaign.",
-      "affects": [
-        "S014c",
-        "S014g",
-        "S014h"
-      ],
-      "detail": "S014c showed working discovery and invocation but unreliable multi-step turns (KI-22). More retries cost budget and change the provider-error profile, so any policy must be registered before scored runs. Owner chose gemma-4-31b-it over 26B on 2026-11-15. 22 of 32 approved smoke requests are used."
-    },
-    {
-      "id": "OD-13",
-      "needs_human": true,
-      "summary": "Client context guard for hosted arms: keep the 4096-token local baseline for comparability, or register a larger guard for every hosted arm.",
-      "affects": [
-        "S014g",
-        "S014h"
-      ],
-      "detail": "S014d: under the 4096 guard (which reserves the requested 2048 output tokens) gpt-6.1-sol looped search/describe because the documentation result was truncated after one step; under a diagnostic 16384 guard it completed search, describe, demonstrate, invoke and a result-informed answer. Either choice must be registered before scored runs and applied to all arms; local S007d/S007h results remain the historical 4096 comparison group."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T08:40:00Z",
+    "ran_at": "2026-11-15T09:00:00Z",
     "commands": [
       {
         "command": "Simulation: uv run ruff check .; uv run pytest (after the S014d adapter, before the live check)",
@@ -466,8 +433,16 @@
         "result": "12/12 requests ok; 4096 guard: search/describe loop, no invoke; 16384 guard: invoke 6*7 = 42 and result-informed answer; both archives verify; ledger 12 reserve/12 outcome; no token found in 41 scanned files"
       },
       {
+        "command": "Owner decisions OD-12 (scrap Gemma) and OD-13 (ChatGPT gets the context it needs)",
+        "result": "Recorded; ols provider configure google-gemini --disable -> enabled false"
+      },
+      {
+        "command": "GET https://api.openai.com/v1/models with the plan token (catalog only, no inference)",
+        "result": "gpt-6.1-sol context_window 500000, max_context_window 872000; 500000 registered as the ChatGPT client guard"
+      },
+      {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 40.21 seconds and all health checks passed"
+        "result": "Lint passed; 305 tests passed in 41.53 seconds and all health checks passed"
       }
     ]
   }

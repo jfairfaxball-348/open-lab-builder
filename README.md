@@ -110,8 +110,8 @@ comparing hosted models in the unchanged world. S014a assessed the official
 routes and fixed the architecture ([ADR-0016](docs/decisions/ADR-0016-hosted-provider-broker.md),
 [provider assessment](docs/architecture/HOSTED_PROVIDERS.md)): Google Gemma and
 ChatGPT plan usage are eligible; the owner excluded Anthropic. The broker
-(S014b) and two adapters exist. Gemma (S014c) invokes capabilities but hits
-intermittent provider errors on multi-step turns. ChatGPT plan usage (S014d)
+(S014b) and two adapters exist. Gemma (S014c) invoked capabilities but hit
+intermittent provider errors on multi-step turns; the owner scrapped it. ChatGPT plan usage (S014d)
 completed a live tool-use round trip on `gpt-6.1-sol`
 ([integration report](docs/experiments/2026-11-15-chatgpt-integration.md)).
 These are integration checks, not behavioural evidence.
