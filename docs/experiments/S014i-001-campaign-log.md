@@ -72,3 +72,13 @@ from the first stop, including the operator deviation, and one here); all 16
 archives verify. Provider ledger: 508 reservations, 507 outcomes. Eight cells
 remain: the s41 block, in manifest order. Per the registration, none starts
 before the window resets.
+
+## 2026-11-15, second owner-directed change and resumption
+
+- **Owner-directed deviation:** at the owner's instruction the app limit was
+  raised from 50% to **100%** (confirmed after reload, about 09:57Z), so the
+  campaign may use the plan's remaining 5-hour window (50% left) instead of
+  waiting for the reset. As before, this changes only provider censoring, not
+  the model, prompts, world or runtime.
+- A second out-of-campaign probe (`s014i-limit-probe`, one step, NOT_SCORED)
+  completed `ok` at 09:58Z. The campaign resumed with the one-cell script.
