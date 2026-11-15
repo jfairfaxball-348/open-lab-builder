@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T16:00:00Z",
-  "last_session": "S014m",
+  "updated_at": "2026-11-15T13:46:01Z",
+  "last_session": "S007e",
   "completed_milestones": [
     {
       "id": "S001",
@@ -239,23 +239,33 @@
         "3f3ff80"
       ],
       "summary": "Rubric v1.1 (two changes: faithful exact/trimmed/JSON-escaped report of the returned note, KI-25; PROVIDER_CENSORED label, INCONCLUSIVE only when censoring could change the decision) implemented beside unchanged v1 in Simulation 92bdcba with campaign v1.1 seed labels and the provider-stop runner rule. s014i-002 manifest frozen (3f3ff80, seeds 51-53, otherwise as s014i-001). NOT_SCORED pilot s014i-002-pilot-001: 4/4 valid, 32 requests ok, 63,630 input tokens, D fault exposed, A ran out of steps before reporting. Registration committed before any scored cell. OD-14 partial: app limit stays 100%."
+    },
+    {
+      "id": "S007e",
+      "completed_at": "2026-11-15T13:44:26Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "ff13809",
+        "b825682",
+        "4da399c"
+      ],
+      "summary": "Supervisor-mediated models.ask and one bounded local llama3.2:3b GPU lease in minimal 0.7.0; 0.6.0 unchanged. ADR-0018 written before coding; fake tests and real local load/ask/unload passed. Builder 306 and Simulation 395 tests passed. Frozen capability check closed with explicitly partial coverage after subscription_sharing_usage_limit_exceeded: guided/C1 at 32 steps, C2 PROVIDER_CENSORED after 13, C3 NOT_RUN_PROVIDER_STOP. Only guided consulted and used the answer (one demo, one direct call). 78 reserved hosted attempts, 77 completed calls; no replacement/probe. Owner replied Continue to the partial-closeout question, interpreted as permission to close with coverage explicit and S008c next. No claim of a complete four-cell check or unguided specialist use; see dated report."
     }
   ],
   "next_milestone": {
-    "id": "S007e",
-    "repository": "open-lab-simulation",
-    "title": "Specialist Consultation and GPU Leasing"
+    "id": "S008c",
+    "repository": "open-lab-builder",
+    "title": "Scientific and Proof Tools (approved standard-library statistics part)"
   },
   "blockers": [
     {
       "id": "B-HOSTED",
-      "summary": "Hosted use is limited to the owner's ChatGPT plan with the per-app limit at 100%; approved plan usage is per milestone (S007e and S008c: at most 4 runs x 32 steps each); no other spend is authorised.",
+      "summary": "ChatGPT plan returned subscription_sharing_usage_limit_exceeded during S007e; further hosted capability checks wait for confirmed quota availability. No settings change, probe, fallback or other spend is authorized.",
       "affects": [
-        "S007e",
         "S008c"
       ],
-      "needs_human": false,
-      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised."
+      "needs_human": true,
+      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed."
     }
   ],
   "known_issues": [
@@ -416,6 +426,26 @@
         "S014i"
       ],
       "detail": "The preview route rejects temperature, top_p and max_output_tokens; the Responses API has no seed. These are recorded per run as not sent. Live token refresh and the documented plan-usage errors are tested only against fakes. See docs/experiments/2026-11-15-chatgpt-integration.md. S014g: hosted runs cannot be resumed after interruption (no model digest); a campaign must account such cells as interrupted."
+    },
+    {
+      "id": "KI-26",
+      "summary": "S007e capability evidence is partial; unguided specialist use is not established.",
+      "affects": [
+        "S007e",
+        "S008c"
+      ],
+      "detail": "Guided: discovered, one demo and one direct consultation, result used. C1: summary exposed but no consultation. C2: no specialist exposure/use before provider censoring after 13 steps. C3: NOT_RUN_PROVIDER_STOP. Owner follow-up Continue was interpreted as permission for explicit partial closeout. Do not quote this as three complete C samples or a new autonomy GO."
+    },
+    {
+      "id": "KI-27",
+      "summary": "The specialist GPU lease is cooperative; abrupt supervisor loss relies on finite server keep-alive.",
+      "affects": [
+        "S007e",
+        "S007b",
+        "S008a",
+        "S008b"
+      ],
+      "detail": "OS lock serializes cooperating supervisors under one data root; unrelated host GPU clients are outside the boundary. Resident Ollama models are refused without unloading unrelated work. Orderly expiry/cleanup, timeout and resume are tested; immediate unload after abrupt supervisor loss, Linux execution and local-orchestrator swapping remain unverified or unimplemented. Model servers are outside runtime job limits."
     }
   ],
   "open_decisions": [
@@ -429,21 +459,37 @@
         "S010",
         "S012"
       ],
-      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard.",
+      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use.",
       "needs_human": true
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T15:30:00Z",
+    "ran_at": "2026-11-15T13:46:01Z",
     "commands": [
       {
-        "command": "Read-only rubric v1.1 scoring of s014i-001 with Simulation 92bdcba (fixed readers, v1 reviews)",
-        "result": "24/24 records verify; A 5/6 (seeds 41-43), B 0/6, C 6/6 (seeds 41-43); 4 PROVIDER_CENSORED; expansion GO"
+        "command": "Builder and Simulation: uv sync; Builder: uv run olb state; uv run olb check --tests (start)",
+        "result": "Both environments synced without downloads; starting Builder 305 tests and health checks passed; starting Simulation suite passed."
+      },
+      {
+        "command": "Simulation: uv run pytest; uv run ruff check .",
+        "result": "395 tests passed in 357.90 s; Ruff passed. Frozen runtime source still matches the committed capability-check manifest."
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 41.13 seconds and all health checks passed"
+        "result": "Final closeout: Ruff passed; 306 tests passed in 40.55 s and every health check passed after roadmap/state/report updates."
+      },
+      {
+        "command": "Builder: uv run olb world build worlds/minimal --publish; uv run olb world verify <0.7.0> --self-test; uv run olb world verify <0.6.0> --self-test",
+        "result": "Built/self-tested minimal 0.7.0; both releases verify/self-test. 0.7.0 fixture 37 files byte-identical to publication; 0.6.0 original digest unchanged and fixture unmodified."
+      },
+      {
+        "command": "Simulation: run_experiment(experiments/s007e-local.json); verify_archive(local archive); Ollama /api/ps",
+        "result": "Real local load/ask/unload passed; archive intact; load 8.233 s, load+answer 9.125 s, unload 0.046 s, zero residents afterwards; no hosted requests."
+      },
+      {
+        "command": "Simulation: uv run python scripts/s007e_check.py (three invocations); verify_archive(each created archive)",
+        "result": "Guided and C1 complete at 32 steps; C2 PROVIDER_CENSORED after 13 completed calls, terminal quota refusal on attempt 14; C3 not started. All 3 archives intact. 78 reserved attempts / 77 completed calls; reported input 315572, output 4397 (496 reasoning tokens included), failed-attempt usage and plan percentage unknown. Partial check closed on owner follow-up; no further hosted request."
       }
     ]
   }

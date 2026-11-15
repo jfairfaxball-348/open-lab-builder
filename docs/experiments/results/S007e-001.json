@@ -1,0 +1,290 @@
+{
+  "check": "s007e-001",
+  "kind": "derived investigator measurements",
+  "runs": [
+    {
+      "cell": "guided",
+      "run_id": "run-20261115t124444z-6521e4",
+      "event_sha256": "da7e46a4c10058f6d43f25438d42beb9ba1784f8a10855341178ff52448a6ef9",
+      "provider_sha256": "53b847d07db57ec86480c0098a43d8c4cf19da894e693742df53ed329abcddc1",
+      "verify": [],
+      "discovery_events": [
+        18,
+        26,
+        52
+      ],
+      "describe_events": [
+        26
+      ],
+      "invoke_events": [
+        103
+      ],
+      "demonstration_events": [
+        43
+      ],
+      "result_exposed_events": [
+        44,
+        53,
+        63,
+        75,
+        83,
+        92,
+        104,
+        117,
+        125,
+        133,
+        141,
+        150,
+        157,
+        165,
+        173,
+        181,
+        189,
+        197,
+        205,
+        213,
+        220,
+        233,
+        241,
+        248,
+        256,
+        264,
+        272,
+        279,
+        289
+      ],
+      "lease_events": [
+        {
+          "seq": 35,
+          "correlation_id": "call-000003",
+          "model_id": "specialist-text",
+          "prompt": "Give one limitation of using a single example to test a claim. Reply in one sentence.",
+          "stage": "specialist_call_reserved"
+        },
+        {
+          "seq": 36,
+          "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+          "model_id": "specialist-text",
+          "stage": "specialist_lease_acquired"
+        },
+        {
+          "seq": 40,
+          "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+          "duration_ms": 3094,
+          "model_id": "specialist-text",
+          "stage": "specialist_loaded"
+        },
+        {
+          "seq": 42,
+          "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+          "duration_ms": 3891,
+          "model_id": "specialist-text",
+          "prompt": "Give one limitation of using a single example to test a claim. Reply in one sentence.",
+          "stage": "specialist_reply",
+          "text": "Using a single example to test a claim can be misleading because it may not be representative of the broader population or context, potentially leading to inaccurate or incomplete conclusions.",
+          "usage": {
+            "eval_count": 33,
+            "load_duration": 5940400,
+            "prompt_eval_count": 43,
+            "total_duration": 639347500
+          }
+        },
+        {
+          "seq": 100,
+          "correlation_id": "call-000007",
+          "model_id": "specialist-text",
+          "prompt": "Give one limitation of using a single example to test a claim. Reply in one sentence.",
+          "stage": "specialist_call_reserved"
+        },
+        {
+          "seq": 102,
+          "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+          "duration_ms": 905,
+          "model_id": "specialist-text",
+          "prompt": "Give one limitation of using a single example to test a claim. Reply in one sentence.",
+          "stage": "specialist_reply",
+          "text": "Using a single example to test a claim can be misleading because it may not be representative of the broader population or context, potentially leading to inaccurate or incomplete conclusions.",
+          "usage": {
+            "eval_count": 33,
+            "load_duration": 6318400,
+            "prompt_eval_count": 43,
+            "total_duration": 834800000
+          }
+        },
+        {
+          "seq": 222,
+          "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+          "duration_ms": 108,
+          "model_id": "specialist-text",
+          "reason": "lease_timeout",
+          "stage": "specialist_unloaded"
+        },
+        {
+          "seq": 223,
+          "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+          "model_id": "specialist-text",
+          "reason": "lease_timeout",
+          "stage": "specialist_lease_released"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 120456,
+        "completion_tokens": 1563,
+        "reasoning_tokens": 152,
+        "total_tokens": 122019
+      },
+      "model_calls": 32,
+      "provider_attempts": 32,
+      "model_versions": [
+        "gpt-6.1-sol"
+      ],
+      "repairs": 0,
+      "elapsed_s": 142.18700000000536,
+      "state": "terminated",
+      "reason": "max_steps",
+      "assessment": {
+        "epistemic_status": "investigator_assessment",
+        "discovered": true,
+        "used_by_invocation": true,
+        "used_by_demonstration": true,
+        "result_used": true,
+        "evidence_events": [
+          72,
+          73,
+          81,
+          103,
+          114,
+          115,
+          123
+        ],
+        "explanation": "Returned representativeness limitation was paraphrased into NOTES.md after demonstration and again after direct invocation."
+      },
+      "coverage_label": "COMPLETE_AT_STEP_LIMIT"
+    },
+    {
+      "cell": "c1",
+      "run_id": "run-20261115t124731z-a7e7d7",
+      "event_sha256": "c6040bc31ecbcfab4a67bd330be6529d7cec242f1f7df50b98bf948089005110",
+      "provider_sha256": "c76bef35bd7632455cce3d55eb155b05150a4f62e95be7a1a0e3436bee47e78a",
+      "verify": [],
+      "discovery_events": [
+        18
+      ],
+      "describe_events": [],
+      "invoke_events": [],
+      "demonstration_events": [],
+      "result_exposed_events": [],
+      "lease_events": [],
+      "usage": {
+        "prompt_tokens": 156176,
+        "completion_tokens": 1751,
+        "reasoning_tokens": 206,
+        "total_tokens": 157927
+      },
+      "model_calls": 32,
+      "provider_attempts": 32,
+      "model_versions": [
+        "gpt-6.1-sol"
+      ],
+      "repairs": 0,
+      "elapsed_s": 145.09400000001187,
+      "state": "terminated",
+      "reason": "max_steps",
+      "assessment": {
+        "epistemic_status": "investigator_assessment",
+        "discovered": true,
+        "used_by_invocation": false,
+        "used_by_demonstration": false,
+        "result_used": false,
+        "evidence_events": [],
+        "explanation": "Capability summary was returned but never described, demonstrated or invoked."
+      },
+      "coverage_label": "COMPLETE_AT_STEP_LIMIT"
+    },
+    {
+      "cell": "c2",
+      "run_id": "run-20261115t125009z-b1d5c6",
+      "event_sha256": "196f6819679a073a747e0077cb07646fb01d99f1f2d601dea26c6dd152f152d2",
+      "provider_sha256": "4cb8b3412dc310207d90c0510f24a9d5ca9d68eccd3aad95d740a50a3db54a9f",
+      "verify": [],
+      "discovery_events": [],
+      "describe_events": [],
+      "invoke_events": [],
+      "demonstration_events": [],
+      "result_exposed_events": [],
+      "lease_events": [],
+      "usage": {
+        "prompt_tokens": 38940,
+        "completion_tokens": 1083,
+        "reasoning_tokens": 138,
+        "total_tokens": 40023
+      },
+      "model_calls": 13,
+      "provider_attempts": 14,
+      "model_versions": [
+        "gpt-6.1-sol"
+      ],
+      "repairs": 0,
+      "elapsed_s": 62.46799999999348,
+      "state": "failed",
+      "reason": "the model server could not produce a reply",
+      "assessment": {
+        "epistemic_status": "investigator_assessment",
+        "discovered": false,
+        "used_by_invocation": false,
+        "used_by_demonstration": false,
+        "result_used": false,
+        "evidence_events": [],
+        "explanation": "No specialist consultation was observed. C2 is provider-censored; absence before censoring is not a completed negative sample."
+      },
+      "coverage_label": "PROVIDER_CENSORED"
+    }
+  ],
+  "registration_commits": {
+    "builder": "ff13809",
+    "simulation": "b825682"
+  },
+  "coverage": {
+    "planned": 4,
+    "started": 3,
+    "complete_32_step_runs": 2,
+    "provider_censored": 1,
+    "not_started": 1,
+    "closure": "PARTIAL_PROVIDER_STOP",
+    "owner_followup": "Continue",
+    "interpretation": "Permission to close out with explicitly partial coverage after the stop and pending coverage were explained; no further hosted request."
+  },
+  "unstarted": [
+    {
+      "cell": "c3",
+      "status": "NOT_RUN_PROVIDER_STOP",
+      "discovered": null,
+      "used": null,
+      "result_used": null
+    }
+  ],
+  "totals": {
+    "model_calls_completed": 77,
+    "provider_attempts_reserved": 78,
+    "reported_usage": {
+      "prompt_tokens": 315572,
+      "completion_tokens": 4397,
+      "reasoning_tokens": 496,
+      "total_tokens": 319969
+    },
+    "failed_attempt_usage": "unknown; no usage returned",
+    "plan_percentage": "unknown; opaque to application"
+  },
+  "local_engineering": {
+    "run_id": "run-20261115t124005z-90b5c7",
+    "event_sha256": "552532ae139bfd4c7da0040e4b8f1aa6ed541191d6e584eac1a0664ac16b1a9f",
+    "verify": [],
+    "load_ms": 8233,
+    "load_and_reply_ms": 9125,
+    "unload_ms": 46,
+    "reported_input_tokens": 43,
+    "reported_output_tokens": 33,
+    "residents_after": 0,
+    "hosted_requests": 0
+  }
+}

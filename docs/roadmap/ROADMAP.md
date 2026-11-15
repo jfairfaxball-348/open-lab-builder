@@ -87,7 +87,9 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S007e, then S008c (both owner-approved 2026-11-15, OD-15 resolved). The owner accepted S014i-001 as a GO
+**Next:** S008c (owner-approved 2026-11-15, OD-15 resolved). S007e engineering
+is complete; its capability check closed with explicitly partial coverage after
+a plan-quota stop and owner follow-up (see its report). The owner accepted S014i-001 as a GO
 scored with the fixed readers (S014l) and rubric v1.1 (S014m), so the
 confirmatory replication S014n was not run, and decided that new capabilities
 are tested one at a time instead of by full baseline repeats
@@ -1015,7 +1017,8 @@ behavioural success are always reported separately.
 
 - **Repository / streams:** Simulation gateway/supervisor; Builder world release
   and model manifest. A/B/C.
-- **Status:** planned; **owner-approved 2026-11-15** (OD-15, ADR-0017). Revised
+- **Status:** **complete engineering / partial capability-check closeout**,
+  2026-11-15. **Owner-approved** (OD-15, ADR-0017). Revised
   for the hosted orchestrator; the earlier local-orchestrator plan assumed the
   orchestrator itself had to be unloaded and reloaded around each consultation.
 - **Objective:** Let the orchestrator (`gpt-6.1-sol` via ChatGPT plan usage)
@@ -1062,6 +1065,17 @@ behavioural success are always reported separately.
 - **Risks:** 4 GB VRAM next to other GPU users; the specialist's weak answers
   mistaken for capability failure; lease leaks on crashes; plan usage.
 - **Next recommended milestone:** S008c.
+- **Recorded outcome:** ADR-0018, minimal 0.7.0, supervisor-mediated bounded
+  consultation/lease and deterministic tests shipped. Builder 306 / Simulation
+  395 tests pass; real local load/ask/unload and all three created archives verify.
+  Frozen S007e-001: guided 32 steps, discovery/demo/direct use/result used; C1
+  32 steps, summary discovered but no use; C2 provider-censored after 13 steps;
+  C3 NOT_RUN_PROVIDER_STOP. 78 hosted attempts, no replacement or extra probe.
+  Owner replied "Continue" after being asked to close with partial coverage or
+  leave S007e incomplete; interpreted as permission for this explicit partial
+  closeout and S008c next. **The planned three complete C samples were not
+  obtained; unguided specialist use is not established.** Full accounting and
+  limits: [report](../experiments/2026-11-15-specialist-consultation.md).
 ---
 
 ### S007f — Optional Hosted Brain Swap Architectural Decision

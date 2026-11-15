@@ -1,5 +1,13 @@
 # Experiments and experimental validity
 
+**S007e capability check:** engineering and local loopback consultation passed;
+the frozen four-cell check closed with **partial coverage** after the provider's
+plan limit: guided and C1 finished, C2 was provider-censored, C3 was not started.
+Only the guided sample consulted and used a specialist reply. See the
+[report](2026-11-15-specialist-consultation.md) and
+[registration](registrations/S007e-001.md). This is not a new autonomy GO or
+three completed C samples; expansion still relies on ADR-0017.
+
 The first registered local baseline, **S007d-001, is complete with NO_GO**.
 All 24 scheduled cells and archives verified; guided control and B/C qualification
 were each 0/6. Real partial tool use and two exposed fault-response examples are

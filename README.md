@@ -32,9 +32,10 @@ The three communicate only through the versioned contracts in
 exists and works:
 
 - Seven versioned JSON Schema contracts with validated examples.
-- Eight real capabilities in [`worlds/minimal/`](worlds/minimal/): `text.stats`,
+- Nine real capabilities in [`worlds/minimal/`](worlds/minimal/): `text.stats`,
   `math.evaluate` (exact restricted arithmetic), `workspace.write`,
-  `workspace.list`, `time.now`, `memory.write`, `memory.search` and `memory.list`.
+  `workspace.list`, `time.now`, `memory.write`, `memory.search`, `memory.list`
+  and supervisor-mediated `models.ask` (minimal 0.7.0).
 - S005a: world 0.4.0 includes a deterministic registry index, pure-Python ranked
   keyword search and documentation generated from every manifest section.
 - `olb world build` — validates a world source, runs every capability's
@@ -132,7 +133,19 @@ than by full baseline repeats
 ([ADR-0017](docs/decisions/ADR-0017-owner-accepted-go-and-capability-testing.md)). This is an owner-accepted post-hoc
 GO, not a registered one.
 
-What does **not** exist yet: a registered (prospective) GO, specialist model consultation/GPU leasing,
+S007e adds local llama3.2:3b consultation under one supervisor-owned GPU lease
+beside hosted orchestration. Configuration bounds prompts, replies, calls and
+lease lifetime; the supervisor records and reserves each consultation, keeps
+monitoring during inference and unloads at segment exit/expiry. See
+[ADR-0018](docs/decisions/ADR-0018-supervisor-specialist-consultation.md) and the
+[frozen capability check](docs/experiments/registrations/S007e-001.md).
+World 0.6.0 remains unchanged and runnable. The guided check discovered,
+consulted and used the answer; the unguided check closed with partial coverage
+after a plan-quota stop (C1 no consultation, C2 censored, C3 unstarted).
+[Results and limits](docs/experiments/2026-11-15-specialist-consultation.md).
+Next: **S008c**, with further plan use waiting for quota availability.
+
+What does **not** exist yet: a registered (prospective) GO,
 container isolation on Linux or with network access, and run comparison. The first
 registered short baseline is complete; earlier engineering checks are recorded in
 [docs/experiments/](docs/experiments/). Run `uv run olb
@@ -159,7 +172,7 @@ uv run olb world build worlds/minimal
 ```
 
 ```bash
-uv run olb world verify releases/minimal/0.6.0 --self-test
+uv run olb world verify releases/minimal/0.7.0 --self-test
 ```
 
 ```bash
@@ -198,9 +211,10 @@ docs/
 **S013 strategic realignment is complete as planning.** Existing engineering and
 the three-repository architecture are preserved. S007a local gateway is complete.
 S007d-001 is complete with **NO_GO**: all 24 cells verified, but no complete
-guided control or qualifying unguided run. Next is **S007h (Bounded Orchestrator
-Improvement and Re-evaluation)**. Major capability
-expansion then depends on replicated independent discovery/use; a valid negative
+guided control or qualifying unguided run. S007h also returned NO_GO. Subsequent
+hosted work led to the owner-accepted post-hoc GO in ADR-0017 and per-capability
+checks; S007e is closed with the partial coverage stated above. Next is S008c.
+A valid negative
 report remains a completed research result, not a capability claim. Hosted models
 are optional and separately authorised; real isolation remains mandatory for
 agent-authored execution and unattended certification.
@@ -209,7 +223,8 @@ See the [research audit/plan](docs/architecture/AUTONOMY_AND_EXPERIMENTAL_READIN
 [benchmark/validity specification](docs/experiments/README.md) and
 [dependency-aware roadmap](docs/roadmap/ROADMAP.md). The [registered baseline report](docs/experiments/2026-11-14-autonomy-baseline.md)
 and [derived results](docs/experiments/results/S007d-001.json) retain negative
-and partial findings. Hosted providers and future campaigns remain unimplemented.
+and partial findings. ChatGPT plan usage is implemented; long-duration campaigns
+and other unapproved hosted routes remain future work.
 S006e's historical validation is preserved in
 [its immutable snapshot](docs/roadmap/validation/S006e.json).
 

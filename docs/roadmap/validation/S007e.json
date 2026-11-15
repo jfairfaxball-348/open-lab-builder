@@ -1,0 +1,30 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-15T13:46:01Z",
+  "commands": [
+    {
+      "command": "Builder and Simulation: uv sync; Builder: uv run olb state; uv run olb check --tests (start)",
+      "result": "Both environments synced without downloads; starting Builder 305 tests and health checks passed; starting Simulation suite passed."
+    },
+    {
+      "command": "Simulation: uv run pytest; uv run ruff check .",
+      "result": "395 tests passed in 357.90 s; Ruff passed. Frozen runtime source still matches the committed capability-check manifest."
+    },
+    {
+      "command": "Builder: uv run ruff check .; uv run olb check --tests",
+      "result": "Final closeout: Ruff passed; 306 tests passed in 40.55 s and every health check passed after roadmap/state/report updates."
+    },
+    {
+      "command": "Builder: uv run olb world build worlds/minimal --publish; uv run olb world verify <0.7.0> --self-test; uv run olb world verify <0.6.0> --self-test",
+      "result": "Built/self-tested minimal 0.7.0; both releases verify/self-test. 0.7.0 fixture 37 files byte-identical to publication; 0.6.0 original digest unchanged and fixture unmodified."
+    },
+    {
+      "command": "Simulation: run_experiment(experiments/s007e-local.json); verify_archive(local archive); Ollama /api/ps",
+      "result": "Real local load/ask/unload passed; archive intact; load 8.233 s, load+answer 9.125 s, unload 0.046 s, zero residents afterwards; no hosted requests."
+    },
+    {
+      "command": "Simulation: uv run python scripts/s007e_check.py (three invocations); verify_archive(each created archive)",
+      "result": "Guided and C1 complete at 32 steps; C2 PROVIDER_CENSORED after 13 completed calls, terminal quota refusal on attempt 14; C3 not started. All 3 archives intact. 78 reserved attempts / 77 completed calls; reported input 315572, output 4397 (496 reasoning tokens included), failed-attempt usage and plan percentage unknown. Partial check closed on owner follow-up; no further hosted request."
+    }
+  ]
+}

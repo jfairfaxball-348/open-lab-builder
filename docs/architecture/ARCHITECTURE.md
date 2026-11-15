@@ -162,19 +162,18 @@ four fixed meta-tools, and everything else is discovered through them:
 This keeps the prompt constant as the world grows and makes discovery itself
 observable behaviour. See [ADR-0003](../decisions/ADR-0003-capability-manifest.md).
 
-### Model gateway — Simulation (S003b/S007a implemented; S007e planned)
+### Model gateway — Simulation (S003b/S007a/S014/S007e)
 
 Implemented so far (S003b): a single chat model client with tool calling,
 tool-call repair, one retry, a context-length guard, and the model's identity
 recorded in the archive. Only the four discovery meta-tools are offered (S005b).
-Not implemented: multiple models within a run, explicit loading/unloading
-and memory scheduling.
+S007e adds one supervisor-mediated local specialist beside a hosted orchestrator.
+Local-orchestrator swapping and general multi-model memory scheduling remain future work.
 
 Implemented S007a separates approved local orchestrator selection from world packaging
 so matched comparisons can keep the world/registry fixed. Bundled manifests remain
 the default; effective catalog/model/settings are frozen in each archive.
-S007e retains specialist consultation and sequential GPU leases. Hosted providers
-are designed (ADR-0016, S014) but not implemented: they will be reached only through
+Hosted providers (ADR-0016, S014) are implemented and reached only through
 a supervisor-owned broker that alone holds credentials and egress, reserves request
 budgets before every attempt and never falls back to another model; provider
 egress never implies tool-network permission. See CONTRACTS.md for
@@ -183,13 +182,13 @@ the implemented catalog protocol; effective server settings can remain unknown.
 One internal interface for every model, whatever serves it. Request and
 response use the OpenAI chat-completions shape, which Ollama, llama.cpp's
 server and LM Studio all expose. Provider adapters translate anything else.
-The gateway also owns **memory scheduling**: it knows each model's footprint
-from the model-provider manifest and loads specialist models one at a time,
-unloading the previous one first (see
-[LOCAL_ENVIRONMENT.md](../environment/LOCAL_ENVIRONMENT.md#resource-strategy)).
-Every call is recorded as a `model.call` event by the gateway, not the agent.
-Failure modes: server down (retry, then `error` event and supervisor decision),
-out-of-memory on load (unload others, retry once, then fail the tool call).
+The supervisor gateway owns S007e's single specialist lease. It validates the
+pinned model identity, refuses other resident models, loads on use and unloads
+on expiry or segment exit. It translates the bounded chat request to native
+Ollama chat to enforce finite keep-alive (ADR-0018). Orchestration calls retain
+`model.call`; specialist calls/lease transitions use supervisor-owned observation
+extensions described in CONTRACTS.md. Specialist failure consumes its reserved
+call and returns an error, without retries or unloading unrelated models.
 
 ### Agent runtime — Simulation (S003)
 
