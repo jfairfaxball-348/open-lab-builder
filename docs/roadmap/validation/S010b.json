@@ -1,0 +1,34 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-15T15:58:09Z",
+  "commands": [
+    {
+      "command": "Builder/Simulation git status and git log --oneline -10; uv sync; Builder uv run olb state; Builder uv run olb check --tests; Simulation uv run pytest --tb=short (start)",
+      "result": "Both clean and synchronized; environments already synchronized, no installation. Builder 355 passed in 55.43 s plus all health checks; Simulation 423 passed in 397.54 s. Milestone S010b and affected contracts/protocol/ADRs and Simulation AGENTS read."
+    },
+    {
+      "command": "Builder uv run pytest tests/test_research_contracts.py -q; Simulation uv run pytest tests/test_study_analysis.py --tb=short; two additional targeted mutation/unstarted tests",
+      "result": "Builder 11 research-contract tests passed. Simulation 20 analysis tests passed in 65.86 s; two added input-mutation/all-unstarted checks passed in 5.72 s. A synthetic helper argument collision was fixed and rerun; import lint corrected. Full closeout includes all 22 new cases."
+    },
+    {
+      "command": "Simulation uv run ruff check .; uv run pytest --tb=short (closeout)",
+      "result": "Ruff passed; full suite 445 passed in 469.10 s. Scripted/fake resources only. No real model/provider request."
+    },
+    {
+      "command": "Simulation analyze pinned S010a export twice with six typed historical annotations; verify_analysis; relocated report/export recomputation; ols evidence verify-analysis with external pin",
+      "result": "8 declared cells, 7 archives, 4 role/condition groups, 6 descriptive contrasts and 6 source-linked annotations retained. Repeat hashes identical; relocated pair and CLI external-pin checks passed. Analysis SHA-256 dbd4451df63e825f4c278dcb26dba4d1288da7e57b76e7fcb8ade78cc2ebb8d1 binds export 24022908a57bc6dfe9b39cf8f598740c3ac83786efb492003993ab59b34a3d98. Censored/unstarted coverage retained, all contrasts causal_match and independence not_established; all seven gates have explicit external requirements. Six annotations are descriptive single-unmasked-reviewer evidence, not exhaustive rerating or new GO."
+    },
+    {
+      "command": "Read-only pre/post export/report snapshots; compare original archives with every S010a copied and omitted digest/size; schema fixture comparison; staged-file audit",
+      "result": "Export and report reads changed no bytes; all seven original data-root archives still exactly match their S010a file inventories. Six fixture schemas byte-identical to authority. Staged files under 1 MB; frozen campaigns/configurations/world fixtures unchanged. Zero new requests/plan usage, no specialist switch, no downloads/installs/settings changes; remaining plan quota unknown."
+    },
+    {
+      "command": "Builder uv run ruff check .; uv run olb check --tests (closeout)",
+      "result": "Ruff and every health check passed; 361 tests passed in 50.06 s. Research schemas validate; seven runtime schemas/world packaging unchanged. No Linux execution claimed."
+    },
+    {
+      "command": "Git diff checks; fetch/upstream reconciliation; Simulation commit and push; Window status/revision",
+      "result": "Simulation 4af3a77 committed and pushed to main, clean and 0 ahead/0 behind. Window unchanged and clean at 3a88970765a7b99cf70145fc830b99b0e05c2e42. Builder delivery is the S010b closing commit in git log; no history rewriting."
+    }
+  ]
+}

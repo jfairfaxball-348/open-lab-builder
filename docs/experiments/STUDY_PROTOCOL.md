@@ -1,10 +1,11 @@
 # Study protocol and portable evidence (S010a)
 
 A study is an operator-authored inventory, not permission to run experiments.
-The two research contracts are `study-manifest` and `evidence-export` 1.0.0.
+The two S010a research contracts are `study-manifest` and `evidence-export` 1.0.0.
 They are separate from the seven runtime contracts and are not bundled into
 world releases. Minimal 0.8.0 and all historical registrations remain unchanged.
-See ADR-0019. General comparative analysis is S010b; Window comparison is S010c.
+See ADR-0019. S010b now implements [source-bound descriptive analysis](STUDY_ANALYSIS.md)
+with two additional research contracts; Window comparison remains S010c.
 
 ## Declare the study
 
@@ -25,7 +26,8 @@ pins are SHA-256 of UTF-8 JSON with sorted keys, separators `(',', ':')` and
 `ensure_ascii=False`. Attachment pins hash raw bytes. Paths are portable relative
 paths within the study directory; links, traversal, Windows reserved names and
 case collisions are refused. Attachments may carry registrations, analysis plans
-or annotations; their semantics are not validated in S010a.
+or annotations; their semantics are not validated by export. S010b validates separate source-bound
+annotation inputs against the pinned export.
 
 Registration kinds are prospective, historical and engineering. Prospective
 requires an operator-supplied full commit ID. Neither that field nor a digest
@@ -85,7 +87,7 @@ pinned bundle does not prove authenticity, consent, independent samples, causal
 comparability or agent motivation. Identical inputs and exporter yield identical
 manifest bytes; no host path or timestamp is inserted into the manifest.
 
-## Analysis-plan template (semantics deferred to S010b)
+## Analysis-plan template
 
 Before scoring, write the question, unit of analysis, all conditions/replicates,
 inclusion/exclusion rules, pilot separation, stop/censoring rules and treatment
@@ -98,5 +100,6 @@ Keep three separate fields for each proposed assessment: observed behaviour
 claims, and investigator interpretation with alternatives and uncertainty. Count
 all scheduled cells, including idle, failed, interrupted and unstarted cells.
 Tool counts and text volume do not establish autonomy; there is no composite
-score in S010a. Annotation validation, generalized comparison and the seven
-research-gate assessments remain S010b, and read-only presentation remains S010c.
+score in S010a. S010b implements annotation citation validation, descriptive comparisons and
+seven explicit research-gate checks/requirements; semantic interpretation remains
+a human assessment. Read-only presentation remains S010c.

@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T15:30:15Z",
-  "last_session": "S010a",
+  "updated_at": "2026-11-15T15:58:09Z",
+  "last_session": "S010b",
   "completed_milestones": [
     {
       "id": "S001",
@@ -267,22 +267,31 @@
       "completed_at": "2026-11-15T15:30:15Z",
       "repository": "open-lab-builder",
       "summary": "First part of S010 split before coding: ADR-0019; additive study/export research contracts and protocol; Simulation offline evidence export/verify; all eight S007e/S008c planned cells and seven archives retained, deterministic relocated verification and unchanged sources. No new model requests; S010b/c and parent S010 remain incomplete. Simulation implementation delivered as 95b168d."
+    },
+    {
+      "id": "S010b",
+      "completed_at": "2026-11-15T15:58:09Z",
+      "repository": "open-lab-simulation",
+      "summary": "Source-bound offline descriptive analysis with study-annotations/study-analysis 1.0.0, typed log/sequence/artifact citations and exact quotes, separate role/condition groups, configuration contrasts, seven gate checks/external requirements, deterministic JSON/Markdown and report recomputation. Existing 8-cell/7-archive evidence retained with 6 descriptive annotations; no causal matching, new GO or new model requests. Parent S010 awaits S010c.",
+      "commits": [
+        "4af3a77"
+      ]
     }
   ],
   "next_milestone": {
-    "id": "S010b",
-    "repository": "open-lab-simulation",
-    "title": "Evidence-Linked Comparative Analysis (existing evidence only)"
+    "id": "S010c",
+    "repository": "open-lab-window",
+    "title": "Read-Only Window Comparison"
   },
   "blockers": [
     {
       "id": "B-HOSTED",
-      "summary": "No allowance remains for additional hosted runs; offline S010b/c can use existing evidence without new spend.",
+      "summary": "No allowance remains for additional hosted runs; offline S010c can use existing exports/reports without new spend.",
       "affects": [
         "S010"
       ],
       "needs_human": true,
-      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign."
+      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign. S010b used existing evidence only and made zero new model requests."
     }
   ],
   "known_issues": [
@@ -475,14 +484,13 @@
     },
     {
       "id": "KI-29",
-      "summary": "S010a establishes export/inventory consistency only; generalized comparative analysis and Window comparison remain S010b/c.",
+      "summary": "S010a/b provide export integrity and source-bound descriptive analysis; Window comparison remains S010c and parent S010 is incomplete.",
       "affects": [
         "S010",
-        "S010b",
         "S010c",
         "S012"
       ],
-      "detail": "Exports require stopped sealed archives and cooperative stable sources; unsealed crash residue and writer markers refuse export. External manifest pins do not prove authenticity or preregistration chronology; bundles retain private science data. Annotation semantics, effective-compute comparability and seven validity-gate assessments are deferred to S010b. Failed staging is retained; no resume/publication mechanism. Windows acceptance only; Linux execution not verified here."
+      "detail": "All seven gates now expose mechanical checks or explicit human/unverified requirements; no automatic GO, effective-compute equivalence, chronology proof or interpretation adjudication. Report recomputation needs its associated export and matching aggregate source checkout. Stopped cooperative sources only; failed staging retained. Single unmasked retrospective annotations and unknown hosted identity remain limits. Linux execution and Window report reading are unverified here."
     }
   ],
   "open_decisions": [
@@ -496,45 +504,41 @@
         "S010",
         "S012"
       ],
-      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering and its completed 4-cell capability check add no model-ranking or final orchestrator-selection evidence; the approved gpt-6.1-sol route is retained. S010a portable evidence inventories do not rank models or settle this decision.",
+      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering and its completed 4-cell capability check add no model-ranking or final orchestrator-selection evidence; the approved gpt-6.1-sol route is retained. S010a portable evidence inventories do not rank models or settle this decision. S010b descriptive comparisons and six source-linked retrospective annotations likewise do not select or rank an orchestrator.",
       "needs_human": true
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T15:30:15Z",
+    "ran_at": "2026-11-15T15:58:09Z",
     "commands": [
       {
-        "command": "Builder/Simulation git status/log; uv sync; Builder uv run olb state; Builder uv run olb check --tests; Simulation uv run pytest (start)",
-        "result": "Both checkouts clean; environments synchronized without new installation. Builder 342 passed in 53.68 s, health passed; Simulation 402 passed in 359.12 s. Read Simulation and Window instructions; no Window changes."
+        "command": "Builder/Simulation git status and git log --oneline -10; uv sync; Builder uv run olb state; Builder uv run olb check --tests; Simulation uv run pytest --tb=short (start)",
+        "result": "Both clean and synchronized; environments already synchronized, no installation. Builder 355 passed in 55.43 s plus all health checks; Simulation 423 passed in 397.54 s. Milestone S010b and affected contracts/protocol/ADRs and Simulation AGENTS read."
       },
       {
-        "command": "Builder uv run pytest tests/test_research_contracts.py; Simulation uv run pytest tests/test_evidence.py tests/test_s008c_runner.py --tb=short",
-        "result": "Builder 9 research-contract tests passed; Simulation targeted 25 passed in 39.93 s after correcting a canonical-LF synthetic fixture. Source mismatch still refuses historical launch; frozen campaign pins were not changed."
+        "command": "Builder uv run pytest tests/test_research_contracts.py -q; Simulation uv run pytest tests/test_study_analysis.py --tb=short; two additional targeted mutation/unstarted tests",
+        "result": "Builder 11 research-contract tests passed. Simulation 20 analysis tests passed in 65.86 s; two added input-mutation/all-unstarted checks passed in 5.72 s. A synthetic helper argument collision was fixed and rerun; import lint corrected. Full closeout includes all 22 new cases."
       },
       {
         "command": "Simulation uv run ruff check .; uv run pytest --tb=short (closeout)",
-        "result": "Ruff passed; full suite 423 passed in 405.58 s. Fake/scripted resources only; no real model/provider call. Import-order lint error was corrected."
+        "result": "Ruff passed; full suite 445 passed in 469.10 s. Scripted/fake resources only. No real model/provider request."
       },
       {
-        "command": "Simulation offline export_study twice for retrospective S007e/S008c inventory; verify_export of relocated copy with external pin; pre/post source snapshots; CLI ols evidence verify",
-        "result": "All 8 planned cells retained, 7 archives verified, 252 copied files, 14 named operational/debug omissions, no configuration/initial-state discrepancies; all selected archive bytes unchanged. S007e C2 provider quota failure and C3 not_started retained. Repeat manifest digest identical; relocated external-pin verification passed. Final manifest SHA-256 24022908a57bc6dfe9b39cf8f598740c3ac83786efb492003993ab59b34a3d98, exporter source pin matches. Seven hosted weight digests remain null. No new model requests or plan usage."
+        "command": "Simulation analyze pinned S010a export twice with six typed historical annotations; verify_analysis; relocated report/export recomputation; ols evidence verify-analysis with external pin",
+        "result": "8 declared cells, 7 archives, 4 role/condition groups, 6 descriptive contrasts and 6 source-linked annotations retained. Repeat hashes identical; relocated pair and CLI external-pin checks passed. Analysis SHA-256 dbd4451df63e825f4c278dcb26dba4d1288da7e57b76e7fcb8ade78cc2ebb8d1 binds export 24022908a57bc6dfe9b39cf8f598740c3ac83786efb492003993ab59b34a3d98. Censored/unstarted coverage retained, all contrasts causal_match and independence not_established; all seven gates have explicit external requirements. Six annotations are descriptive single-unmasked-reviewer evidence, not exhaustive rerating or new GO."
       },
       {
-        "command": "Simulation uv run ols evidence export <engineering-template> --schemas <authoritative schemas> --out <new ignored output>; fixture byte comparison",
-        "result": "Usable unstarted template exported and verified with 1 declared cell and 0 archives. Four test schema fixtures byte-identical to Builder authority; staged files below 1 MB, no historical campaigns/configurations/world fixtures changed."
-      },
-      {
-        "command": "Builder uv run olb world build worlds/minimal --out <ignored scratch>; uv run olb world verify <printed minimal/0.8.0 release> --self-test",
-        "result": "Build and all 11 capability self-tests passed; release verification/self-tests passed; content digest unchanged at 8d0f5747888110a85456064b9900fa782e94e566f2e4811aa3b3ac07eee69110. Initial verification against the build parent correctly failed for missing manifest; printed release directory passed."
+        "command": "Read-only pre/post export/report snapshots; compare original archives with every S010a copied and omitted digest/size; schema fixture comparison; staged-file audit",
+        "result": "Export and report reads changed no bytes; all seven original data-root archives still exactly match their S010a file inventories. Six fixture schemas byte-identical to authority. Staged files under 1 MB; frozen campaigns/configurations/world fixtures unchanged. Zero new requests/plan usage, no specialist switch, no downloads/installs/settings changes; remaining plan quota unknown."
       },
       {
         "command": "Builder uv run ruff check .; uv run olb check --tests (closeout)",
-        "result": "Ruff and all health checks passed; 355 tests passed in 50.75 s. Prior post-code full check also passed 355 tests in 59.01 s. No skipped failures."
+        "result": "Ruff and every health check passed; 361 tests passed in 50.06 s. Research schemas validate; seven runtime schemas/world packaging unchanged. No Linux execution claimed."
       },
       {
-        "command": "Git diff checks, configured upstream reconciliation, Simulation commit/push; Window git status/revision",
-        "result": "Simulation 95b168d committed and pushed to main; clean, 0 ahead/0 behind. Window unchanged and clean at 3a88970765a7b99cf70145fc830b99b0e05c2e42. Builder delivery is the S010a closing commit in git log; no history rewriting."
+        "command": "Git diff checks; fetch/upstream reconciliation; Simulation commit and push; Window status/revision",
+        "result": "Simulation 4af3a77 committed and pushed to main, clean and 0 ahead/0 behind. Window unchanged and clean at 3a88970765a7b99cf70145fc830b99b0e05c2e42. Builder delivery is the S010b closing commit in git log; no history rewriting."
       }
     ]
   }

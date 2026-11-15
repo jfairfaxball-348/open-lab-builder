@@ -31,7 +31,7 @@ The three communicate only through the versioned contracts in
 **S001 (foundation) and S002 (minimal world packaging) are complete.** What
 exists and works:
 
-- Seven runtime JSON Schema contracts plus two offline research contracts, with validated examples.
+- Seven runtime JSON Schema contracts plus four offline research contracts, with validated examples.
 - Eleven real capabilities in [`worlds/minimal/`](worlds/minimal/): `text.stats`,
   `math.evaluate` (exact restricted arithmetic), `workspace.write`,
   `workspace.list`, `time.now`, `memory.write`, `memory.search`, `memory.list`
@@ -145,7 +145,9 @@ consulted and used the answer; the unguided check closed with partial coverage
 after a plan-quota stop (C1 no consultation, C2 censored, C3 unstarted).
 [Results and limits](docs/experiments/2026-11-15-specialist-consultation.md).
 S008c's separate four-run capability check is now complete; its own allowance
-was used without reruns. S010 was split before coding. S010a adds study protocols and portable evidence export; next: **S010b — Evidence-Linked Comparative Analysis**.
+was used without reruns. S010 was split before coding. S010a adds study protocols
+and portable evidence export; S010b adds source-bound descriptive comparison and
+annotation checks; next: **S010c — Read-Only Window Comparison**.
 
 S008c's engineering is implemented: bounded population statistics/inclusive
 quartiles and ordinary least-squares regression with Pearson r, using only the
@@ -226,7 +228,8 @@ S007d-001 is complete with **NO_GO**: all 24 cells verified, but no complete
 guided control or qualifying unguided run. S007h also returned NO_GO. Subsequent
 hosted work led to the owner-accepted post-hoc GO in ADR-0017 and per-capability
 checks; S007e is closed with the partial coverage stated above. S008c's approved
-statistics part is complete with its full four-run capability report. S010a is complete; next is S010b. Parent S010 remains incomplete until S010b/c pass.
+statistics part is complete with its full four-run capability report. S010a/b are
+complete; next is S010c. Parent S010 remains incomplete until S010c passes.
 A valid negative
 report remains a completed research result, not a capability claim. Hosted models
 are optional and separately authorised; real isolation remains mandatory for
@@ -254,7 +257,9 @@ and unknown provenance. Its existing-data check retains all eight S007e/S008c
 cells and seven archives, including the quota-censored and unstarted cases;
 no new model requests were made. See [the protocol](docs/experiments/STUDY_PROTOCOL.md)
 and [the report](docs/experiments/2026-11-15-s010a-evidence-export.md).
-General comparison/rating and Window comparison remain S010b/c. World 0.8.0 is
+S010b now adds reproducible source-linked comparisons and typed investigator
+annotations ([protocol](docs/experiments/STUDY_ANALYSIS.md),
+[report](docs/experiments/2026-11-15-s010b-study-analysis.md)). Window comparison remains S010c. World 0.8.0 is
 unchanged. Export integrity establishes no new autonomy GO or causal comparison.
 
 ## Governing principle

@@ -1,0 +1,99 @@
+{
+  "schema": "open-lab/study-analysis",
+  "schema_version": "1.0.0",
+  "source": {
+    "export_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "study_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "analyzer_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "annotations_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "schemas": {}
+  },
+  "study_id": "illustration",
+  "question": "Schema syntax only?",
+  "registration": {
+    "kind": "engineering"
+  },
+  "cells": [],
+  "groups": [],
+  "contrasts": [],
+  "annotations": {
+    "schema": "open-lab/study-annotations",
+    "schema_version": "1.0.0",
+    "export_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "rubric": {
+      "id": "s010b-descriptive-v1",
+      "definition": "Evidence provenance only; no autonomous-behaviour score."
+    },
+    "reviewer": {
+      "id": "unreviewed",
+      "masking": "unknown"
+    },
+    "limitations": [
+      "Schema illustration only, no reviewed traces."
+    ],
+    "entries": []
+  },
+  "validity_gates": [
+    {
+      "id": 1,
+      "mechanical_status": "not_checked",
+      "checks": [],
+      "human_or_unverified": [
+        "Illustration only."
+      ]
+    },
+    {
+      "id": 2,
+      "mechanical_status": "not_checked",
+      "checks": [],
+      "human_or_unverified": [
+        "Illustration only."
+      ]
+    },
+    {
+      "id": 3,
+      "mechanical_status": "not_checked",
+      "checks": [],
+      "human_or_unverified": [
+        "Illustration only."
+      ]
+    },
+    {
+      "id": 4,
+      "mechanical_status": "not_checked",
+      "checks": [],
+      "human_or_unverified": [
+        "Illustration only."
+      ]
+    },
+    {
+      "id": 5,
+      "mechanical_status": "not_checked",
+      "checks": [],
+      "human_or_unverified": [
+        "Illustration only."
+      ]
+    },
+    {
+      "id": 6,
+      "mechanical_status": "not_checked",
+      "checks": [],
+      "human_or_unverified": [
+        "Illustration only."
+      ]
+    },
+    {
+      "id": 7,
+      "mechanical_status": "not_checked",
+      "checks": [],
+      "human_or_unverified": [
+        "Illustration only."
+      ]
+    }
+  ],
+  "limitations": [
+    "Illustrative syntax only; no verified analysis."
+  ],
+  "comparison": {},
+  "requested_constants": []
+}

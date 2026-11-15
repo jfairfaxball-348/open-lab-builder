@@ -1,0 +1,17 @@
+{
+  "schema": "open-lab/study-annotations",
+  "schema_version": "1.0.0",
+  "export_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "rubric": {
+    "id": "s010b-descriptive-v1",
+    "definition": "Evidence provenance only; no autonomous-behaviour score."
+  },
+  "reviewer": {
+    "id": "unreviewed",
+    "masking": "unknown"
+  },
+  "limitations": [
+    "Schema illustration only, no reviewed traces."
+  ],
+  "entries": []
+}

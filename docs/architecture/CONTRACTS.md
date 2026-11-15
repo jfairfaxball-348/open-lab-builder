@@ -540,13 +540,26 @@ Simulation receives their schema directory explicitly and copies the needed
 schemas into each portable export, without importing Builder code. See
 [the study protocol](../experiments/STUDY_PROTOCOL.md) for fields, canonical
 configuration pins, outcome denominators, omitted operational records and the
-limits of internal verification. General comparison/annotation validation and
-Window views remain S010b/c. ADR-0019 records this boundary.
+limits of internal verification. General comparison/annotation validation is implemented by S010b below;
+Window views remain S010c. ADR-0019 records this boundary.
+
+### Study annotations and analysis (S010b)
+
+`study-annotations` and `study-analysis` 1.0.0 add source-bound investigator
+entries and reproducible descriptive reports over verified evidence exports.
+These are research interfaces, not runtime contracts; no world/schema bundle
+changes. Simulation validates citations, preserves missing/failed/censored cells,
+separates roles and emits seven explicit gate requirements. See
+[the analysis protocol](../experiments/STUDY_ANALYSIS.md) and ADR-0020.
+Report directories bundle common plus these two schemas; verifying a report also
+requires its associated pinned evidence export. Causal matching, independence,
+chronology and scientific interpretation are never certified automatically.
 
 ## Change log
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-15 | study-annotations; study-analysis | 1.0.0 | S010b source-bound descriptive reports and typed citations; no runtime/world change |
 | 2026-11-15 | study-manifest; evidence-export | 1.0.0 | S010a additive offline research interfaces; portable stopped-archive export; no runtime or world schema change |
 | 2026-11-15 | (world capability content) | - | S008c minimal 0.8.0 adds bounded stats.describe and stats.regress using existing Python invocation and numeric JSON schemas; population variance, inclusive quartiles, OLS/correlation edge cases documented in manifests; no shared schema change |
 | 2026-11-15 | (specialist service protocol) | - | S007e reserves an existing MCP invocation pair, adds bounded specialist configuration/IPC, durable consultation reservations and lease observations; minimal 0.7.0, no schema change; ADR-0018 |

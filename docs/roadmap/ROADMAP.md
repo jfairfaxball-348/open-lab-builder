@@ -87,8 +87,8 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S010b — Evidence-Linked Comparative Analysis. S010a (study protocol
-and portable evidence export) is complete; parent S010 awaits S010b/c. S008c's
+**Next:** S010c — Read-Only Window Comparison. S010a/b (portable evidence and
+source-bound descriptive analysis) are complete; parent S010 awaits S010c. S008c's
 approved statistics part is complete with all four frozen capability-check
 archives verified (guided use of both; C regression use 2/3, description use
 0/3). No additional hosted-run budget is implied. S007e engineering
@@ -1358,7 +1358,9 @@ behavioural success are always reported separately.
 ### S010b — Evidence-Linked Comparative Analysis
 
 - **Repository / streams:** Simulation analysis; Builder protocol/rubric. D/C.
-- **Status:** future; not implemented by S010a.
+- **Status:** completed 2026-11-15. [Report](../experiments/2026-11-15-s010b-study-analysis.md):
+  8 declared cells, 7 archives, 4 role/condition groups, 6 linked annotations,
+  reproducible/relocated comparison and unchanged sources; no new runs.
 - **Objective:** compare registered contrasts while keeping validity, censoring,
   role separation, unknown settings and investigator assessments explicit.
 - **Prerequisites:** S010a verified exports and protocol; existing evidence only

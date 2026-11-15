@@ -34,7 +34,9 @@ CONTRACT_NAMES = (
     "checkpoint-metadata",
 )
 # Offline research interchange is not bundled into worlds or exposed to agents.
-RESEARCH_CONTRACT_NAMES = ("study-manifest", "evidence-export")
+RESEARCH_CONTRACT_NAMES = (
+    "study-manifest", "evidence-export", "study-annotations", "study-analysis",
+)
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,458 @@
+{
+  "format": "s010b-acceptance-summary-v1",
+  "source": {
+    "analyzer_sha256": "3543531bfbf8539a11566ae0d6d498b20243e61bb74df76dcc27111a91f5faf7",
+    "annotations_sha256": "164a12679c01bb9f8cd96aadd31a096a1f709a2c40f89e58de85e9bfdd3647fe",
+    "export_sha256": "24022908a57bc6dfe9b39cf8f598740c3ac83786efb492003993ab59b34a3d98",
+    "schemas": {
+      "common": "e9728f8503247703a4624800c5c446a80e3d2bf3c2bb0dc0431207821b9430d7",
+      "study-analysis": "50a6a27e6acf0ad2aba3d676cace62191fe742a376376f4bec173bc47582c12e",
+      "study-annotations": "b41e01831e88641cda63c0c51e813c9933b99fd5fcb1da6f78cbcf4e6cdbd7e3"
+    },
+    "study_sha256": "0f914e493037aeb841a15dd27ea862e3d4cfc3ac228d79564488e0ee546723e4"
+  },
+  "verification": {
+    "verified": true,
+    "analysis_sha256": "dbd4451df63e825f4c278dcb26dba4d1288da7e57b76e7fcb8ade78cc2ebb8d1",
+    "cells": 8,
+    "groups": 4,
+    "annotations": 6
+  },
+  "repeat_identical": true,
+  "relocated_verification": true,
+  "export_and_original_archives_unchanged": true,
+  "groups": [
+    {
+      "cells": [
+        "s007e-c1",
+        "s007e-c2",
+        "s007e-c3"
+      ],
+      "condition": "s007e-C",
+      "declared_outcomes": {
+        "not_started": 1,
+        "recorded": 2
+      },
+      "no_archive": 1,
+      "planned": 3,
+      "provider_censored": 1,
+      "recorded_outcomes": {
+        "failed": 1,
+        "terminated": 1
+      },
+      "role": "capability_check",
+      "with_archive": 2
+    },
+    {
+      "cells": [
+        "s007e-guided"
+      ],
+      "condition": "s007e-guided",
+      "declared_outcomes": {
+        "recorded": 1
+      },
+      "no_archive": 0,
+      "planned": 1,
+      "provider_censored": 0,
+      "recorded_outcomes": {
+        "terminated": 1
+      },
+      "role": "capability_check",
+      "with_archive": 1
+    },
+    {
+      "cells": [
+        "s008c-c1",
+        "s008c-c2",
+        "s008c-c3"
+      ],
+      "condition": "s008c-C",
+      "declared_outcomes": {
+        "recorded": 3
+      },
+      "no_archive": 0,
+      "planned": 3,
+      "provider_censored": 0,
+      "recorded_outcomes": {
+        "terminated": 3
+      },
+      "role": "capability_check",
+      "with_archive": 3
+    },
+    {
+      "cells": [
+        "s008c-guided"
+      ],
+      "condition": "s008c-guided",
+      "declared_outcomes": {
+        "recorded": 1
+      },
+      "no_archive": 0,
+      "planned": 1,
+      "provider_censored": 0,
+      "recorded_outcomes": {
+        "terminated": 1
+      },
+      "role": "capability_check",
+      "with_archive": 1
+    }
+  ],
+  "contrasts": [
+    {
+      "causal_match": "not_established",
+      "cells": [
+        "s007e-guided",
+        "s007e-c1",
+        "s007e-c2",
+        "s007e-c3"
+      ],
+      "conditions": [
+        "s007e-C",
+        "s007e-guided"
+      ],
+      "configuration_differences": [
+        "/experiment_id",
+        "/extensions/benchmark/cell_id",
+        "/extensions/benchmark/condition",
+        "/initial_prompt",
+        "/title"
+      ],
+      "independence": "not_established",
+      "recorded_field_agreement": "different",
+      "role": "capability_check"
+    },
+    {
+      "causal_match": "not_established",
+      "cells": [
+        "s007e-c1",
+        "s007e-c2",
+        "s007e-c3",
+        "s008c-c1",
+        "s008c-c2",
+        "s008c-c3"
+      ],
+      "conditions": [
+        "s007e-C",
+        "s008c-C"
+      ],
+      "configuration_differences": [
+        "/experiment_id",
+        "/extensions/benchmark/campaign_id",
+        "/extensions/benchmark/cell_id",
+        "/research_question",
+        "/tags",
+        "/title",
+        "/world/content_digest",
+        "/world/version"
+      ],
+      "independence": "not_established",
+      "recorded_field_agreement": "different",
+      "role": "capability_check"
+    },
+    {
+      "causal_match": "not_established",
+      "cells": [
+        "s007e-c1",
+        "s007e-c2",
+        "s007e-c3",
+        "s008c-guided"
+      ],
+      "conditions": [
+        "s007e-C",
+        "s008c-guided"
+      ],
+      "configuration_differences": [
+        "/experiment_id",
+        "/extensions/benchmark/campaign_id",
+        "/extensions/benchmark/cell_id",
+        "/extensions/benchmark/condition",
+        "/initial_prompt",
+        "/research_question",
+        "/tags",
+        "/title",
+        "/world/content_digest",
+        "/world/version"
+      ],
+      "independence": "not_established",
+      "recorded_field_agreement": "different",
+      "role": "capability_check"
+    },
+    {
+      "causal_match": "not_established",
+      "cells": [
+        "s007e-guided",
+        "s008c-c1",
+        "s008c-c2",
+        "s008c-c3"
+      ],
+      "conditions": [
+        "s007e-guided",
+        "s008c-C"
+      ],
+      "configuration_differences": [
+        "/experiment_id",
+        "/extensions/benchmark/campaign_id",
+        "/extensions/benchmark/cell_id",
+        "/extensions/benchmark/condition",
+        "/initial_prompt",
+        "/research_question",
+        "/tags",
+        "/title",
+        "/world/content_digest",
+        "/world/version"
+      ],
+      "independence": "not_established",
+      "recorded_field_agreement": "different",
+      "role": "capability_check"
+    },
+    {
+      "causal_match": "not_established",
+      "cells": [
+        "s007e-guided",
+        "s008c-guided"
+      ],
+      "conditions": [
+        "s007e-guided",
+        "s008c-guided"
+      ],
+      "configuration_differences": [
+        "/experiment_id",
+        "/extensions/benchmark/campaign_id",
+        "/initial_prompt",
+        "/research_question",
+        "/tags",
+        "/title",
+        "/world/content_digest",
+        "/world/version"
+      ],
+      "independence": "not_established",
+      "recorded_field_agreement": "different",
+      "role": "capability_check"
+    },
+    {
+      "causal_match": "not_established",
+      "cells": [
+        "s008c-guided",
+        "s008c-c1",
+        "s008c-c2",
+        "s008c-c3"
+      ],
+      "conditions": [
+        "s008c-C",
+        "s008c-guided"
+      ],
+      "configuration_differences": [
+        "/experiment_id",
+        "/extensions/benchmark/cell_id",
+        "/extensions/benchmark/condition",
+        "/initial_prompt",
+        "/title"
+      ],
+      "independence": "not_established",
+      "recorded_field_agreement": "different",
+      "role": "capability_check"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "guided-direct-consultation",
+      "kind": "observation",
+      "category": "guided-tool-use",
+      "label": "supported",
+      "evidence": [
+        {
+          "artifacts": [],
+          "cell_id": "s007e-guided",
+          "event_sha256": "da7e46a4c10058f6d43f25438d42beb9ba1784f8a10855341178ff52448a6ef9",
+          "seqs": [
+            99,
+            103
+          ]
+        }
+      ]
+    },
+    {
+      "id": "guided-result-informed-note",
+      "kind": "assessment",
+      "category": "guided-result-use",
+      "label": "supported",
+      "evidence": [
+        {
+          "artifacts": [
+            "3dfd460a81f6faad7e6992782524870218cc4851125cfb9f36ae303e4325ecd5"
+          ],
+          "cell_id": "s007e-guided",
+          "event_sha256": "da7e46a4c10058f6d43f25438d42beb9ba1784f8a10855341178ff52448a6ef9",
+          "seqs": [
+            99,
+            103,
+            116
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s007e-c1-no-target-use",
+      "kind": "observation",
+      "category": "unguided-direct-tool-use",
+      "label": "not_supported",
+      "evidence": [
+        {
+          "artifacts": [],
+          "cell_id": "s007e-c1",
+          "event_sha256": "c6040bc31ecbcfab4a67bd330be6529d7cec242f1f7df50b98bf948089005110",
+          "seqs": [
+            17,
+            26,
+            34,
+            44,
+            52,
+            60,
+            74,
+            83,
+            111,
+            119,
+            127,
+            149,
+            299
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s008c-c1-no-target-use",
+      "kind": "observation",
+      "category": "unguided-direct-tool-use",
+      "label": "not_supported",
+      "evidence": [
+        {
+          "artifacts": [],
+          "cell_id": "s008c-c1",
+          "event_sha256": "2e8a7f16f8b4a05ed768b955a804ce861ad7b9cd8a869a76e71523c42627ecc7",
+          "seqs": [
+            17,
+            25,
+            33,
+            44,
+            54,
+            62,
+            71,
+            81,
+            95,
+            278
+          ]
+        }
+      ]
+    },
+    {
+      "id": "provider-censoring",
+      "kind": "observation",
+      "category": "coverage",
+      "label": "supported",
+      "evidence": [
+        {
+          "artifacts": [],
+          "cell_id": "s007e-c2",
+          "event_sha256": "196f6819679a073a747e0077cb07646fb01d99f1f2d601dea26c6dd152f152d2",
+          "seqs": [
+            136,
+            139
+          ]
+        }
+      ]
+    },
+    {
+      "id": "attributed-model-statement",
+      "kind": "agent_claim",
+      "category": "agent-statement",
+      "label": "uncertain",
+      "evidence": [
+        {
+          "artifacts": [],
+          "cell_id": "s007e-guided",
+          "event_sha256": "da7e46a4c10058f6d43f25438d42beb9ba1784f8a10855341178ff52448a6ef9",
+          "seqs": [
+            81
+          ]
+        }
+      ]
+    }
+  ],
+  "validity_gates": [
+    {
+      "checks": [
+        "Configuration/initial-state inventory and recorded identity/settings retained."
+      ],
+      "human_or_unverified": [
+        "Effective provider identity/settings attestation and independent fresh-state assurance."
+      ],
+      "id": 1,
+      "mechanical_status": "findings"
+    },
+    {
+      "checks": [
+        "Registration kind: historical; prompt/policy/intervention references retained."
+      ],
+      "human_or_unverified": [
+        "External preregistration chronology, intervention completeness and active/elapsed clock interpretation."
+      ],
+      "id": 2,
+      "mechanical_status": "findings"
+    },
+    {
+      "checks": [
+        "Export verified; event/artifact and annotation references checked."
+      ],
+      "human_or_unverified": [
+        "Recorder deployment independence and externally trusted authenticity pins."
+      ],
+      "id": 3,
+      "mechanical_status": "checked"
+    },
+    {
+      "checks": [
+        "All 8 declared cells retained; roles grouped separately."
+      ],
+      "human_or_unverified": [
+        "Original schedule completeness, effective seeds and independence of replicates."
+      ],
+      "id": 4,
+      "mechanical_status": "checked"
+    },
+    {
+      "checks": [
+        "6 typed source-linked annotations; no composite score."
+      ],
+      "human_or_unverified": [
+        "Rubric adequacy, masking, reviewer agreement and interpretation quality."
+      ],
+      "id": 5,
+      "mechanical_status": "checked"
+    },
+    {
+      "checks": [
+        "No automatic baseline-currency certification."
+      ],
+      "human_or_unverified": [
+        "Baseline currency for exact treatments and ADR-0017 change review."
+      ],
+      "id": 6,
+      "mechanical_status": "not_checked"
+    },
+    {
+      "checks": [
+        "Offline analysis makes no model request and grants no launch authority."
+      ],
+      "human_or_unverified": [
+        "Actual isolation/reliability exits and current owner resource/spending approvals."
+      ],
+      "id": 7,
+      "mechanical_status": "not_checked"
+    }
+  ],
+  "limitations": [
+    "Sanitized acceptance summary; full source-pinned report remains local.",
+    "Single unmasked investigator; six descriptive entries do not exhaustively rerate all archived behaviour.",
+    "No causal matching, independent replicate claim, new GO, new model request or external spend."
+  ]
+}

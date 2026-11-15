@@ -427,4 +427,17 @@ and verifies it without the original data root. This never launches a model,
 imports Builder code or changes original records. See ADR-0019 and
 [STUDY_PROTOCOL.md](../experiments/STUDY_PROTOCOL.md). Requested constants and
 inventory findings are recorded facts, not causal comparability or autonomy
-scores. General analysis and Window comparison remain S010b/c.
+scores. S010b adds source-bound analysis below; Window comparison remains S010c.
+
+## Source-bound study analysis (S010b)
+
+Simulation derives deterministic JSON/Markdown reports from verified exports,
+without writing to them or making model requests. Builder owns two additional
+research formats (study-annotations and study-analysis) and the descriptive
+rubric. Typed investigator descriptions/assessments and exact agent quotes have
+validated log/sequence/artifact citations; they never enter observation records.
+Reports retain every declared cell and group by role/condition, expose treatment
+differences and unknown settings, and map all seven research gates to checks or
+explicit external requirements. A report does not certify a launch GO or causal
+matching. See ADR-0020 and [the protocol](../experiments/STUDY_ANALYSIS.md).
+S010c may consume these files in the read-only Window; no Window code changed.

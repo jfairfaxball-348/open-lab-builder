@@ -288,5 +288,6 @@ read-only; research separates observed, claimed and interpreted statements.
 
 S010a adds [the study protocol](STUDY_PROTOCOL.md) and offline evidence export.
 It preserves all declared outcomes without adding a score or changing historical
-research gates. General comparison and annotation checks remain S010b; Window
-comparison remains S010c.
+research gates. S010b adds [descriptive comparisons and typed annotation checks](STUDY_ANALYSIS.md),
+with all seven gates mapped to checked records or explicit human requirements.
+No new GO or runtime change is implied. Window comparison remains S010c.
