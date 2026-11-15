@@ -1,5 +1,11 @@
 # Experiments and experimental validity
 
+**S008c statistics:** engineering tests and a scripted archive pass; the frozen
+[capability check](registrations/S008c-001.md) is **unexecuted** pending owner
+confirmation of ChatGPT plan availability after S007e's quota refusal. No quota
+probe or extra hosted run is authorized. S008c remains incomplete; see its
+[engineering report](2026-11-15-statistics-capabilities.md).
+
 **S007e capability check:** engineering and local loopback consultation passed;
 the frozen four-cell check closed with **partial coverage** after the provider's
 plan limit: guided and C1 finished, C2 was provider-censored, C3 was not started.

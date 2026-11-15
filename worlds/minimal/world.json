@@ -1,8 +1,8 @@
 {
   "world_id": "minimal",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "name": "Minimal world",
-  "description": "Nine capabilities including supervisor-mediated local text consultation.",
+  "description": "Eleven capabilities including bounded descriptive statistics, linear regression and local model consultation.",
   "environment": {
     "platforms": [
       "windows",
@@ -29,5 +29,5 @@
     "subprocess": false,
     "gpu": true
   },
-  "notes": "S007e adds models.ask and the pinned specialist-text manifest. Build self-tests use a fake service; actual inference is separately checked by Simulation."
+  "notes": "S008c adds stats.describe and stats.regress using only the standard library; no code execution, filesystem or network permissions. S007e specialist service is unchanged."
 }

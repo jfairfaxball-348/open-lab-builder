@@ -1,0 +1,26 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-15T14:04:36Z",
+  "commands": [
+    {
+      "command": "Builder and Simulation: git status; git log --oneline -10; uv sync; Builder: uv run olb state; uv run olb check --tests (start)",
+      "result": "Both checkouts clean and environments already synchronized. Builder 306 tests in 44.57 s and all health checks passed; S008c next with B-HOSTED quota confirmation pending."
+    },
+    {
+      "command": "Builder: uv run pytest tests/test_statistics_capabilities.py; uv run ruff check .; uv run olb check --tests",
+      "result": "36 new numerical/manifest/invoker tests passed; final Builder suite 342 passed in 47.54 s, all health checks passed; Ruff passed."
+    },
+    {
+      "command": "Simulation: uv run pytest (start); uv run pytest tests/test_statistics_world.py tests/test_s008c_runner.py; uv run ruff check .",
+      "result": "395 existing tests passed in 359.70 s; 7 new world/runner tests passed in 7.94 s; Ruff passed. A final complete suite is also being recorded in session evidence."
+    },
+    {
+      "command": "Builder: uv run olb world build worlds/minimal --publish; uv run olb world verify <0.6.0/0.7.0/0.8.0> --self-test; fixture/source/runner hash audit",
+      "result": "0.8.0 built with 11 capabilities and self-tests passed; all 3 releases verify and self-test at recorded digests. All 43 generated 0.8.0 fixture files match publication byte-for-byte; old fixtures unmodified; runtime/runner pins match."
+    },
+    {
+      "command": "Simulation: run_experiment(experiments/s008c-scripted.json); verify_archive; uv run python scripts/s008c_check.py (without clearance)",
+      "result": "Scripted statistics run completed; archive intact; real numerical results and a constant-x error recorded. Hosted runner refused before launch without quota confirmation. No S008c hosted archive or started-cell record exists; zero plan requests."
+    }
+  ]
+}

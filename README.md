@@ -32,10 +32,11 @@ The three communicate only through the versioned contracts in
 exists and works:
 
 - Seven versioned JSON Schema contracts with validated examples.
-- Nine real capabilities in [`worlds/minimal/`](worlds/minimal/): `text.stats`,
+- Eleven real capabilities in [`worlds/minimal/`](worlds/minimal/): `text.stats`,
   `math.evaluate` (exact restricted arithmetic), `workspace.write`,
   `workspace.list`, `time.now`, `memory.write`, `memory.search`, `memory.list`
-  and supervisor-mediated `models.ask` (minimal 0.7.0).
+  supervisor-mediated `models.ask` (minimal 0.7.0), and `stats.describe` /
+  `stats.regress` (minimal 0.8.0).
 - S005a: world 0.4.0 includes a deterministic registry index, pure-Python ranked
   keyword search and documentation generated from every manifest section.
 - `olb world build` — validates a world source, runs every capability's
@@ -145,6 +146,13 @@ after a plan-quota stop (C1 no consultation, C2 censored, C3 unstarted).
 [Results and limits](docs/experiments/2026-11-15-specialist-consultation.md).
 Next: **S008c**, with further plan use waiting for quota availability.
 
+S008c's engineering is implemented: bounded population statistics/inclusive
+quartiles and ordinary least-squares regression with Pearson r, using only the
+standard library and no additional permissions. Numeric tests and a scripted
+supervisor archive pass. Its hosted discovery/use check is frozen but **not
+run** pending owner-confirmed plan availability, so S008c remains incomplete.
+[Engineering report](docs/experiments/2026-11-15-statistics-capabilities.md).
+
 What does **not** exist yet: a registered (prospective) GO,
 container isolation on Linux or with network access, and run comparison. The first
 registered short baseline is complete; earlier engineering checks are recorded in
@@ -172,7 +180,7 @@ uv run olb world build worlds/minimal
 ```
 
 ```bash
-uv run olb world verify releases/minimal/0.7.0 --self-test
+uv run olb world verify releases/minimal/0.8.0 --self-test
 ```
 
 ```bash

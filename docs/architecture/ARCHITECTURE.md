@@ -25,6 +25,14 @@ the agent. [ADR-0018](../decisions/ADR-0018-supervisor-specialist-consultation.m
 and the specialist protocol in CONTRACTS.md specify this boundary. Archived
 0.6.0 remains runnable. Local orchestrator swapping is not implemented.
 
+S008c engineering adds `stats.describe` and `stats.regress` in minimal 0.8.0.
+They are ordinary standard-library Python capabilities on the process tier,
+accept bounded numeric data only, and require no filesystem, network, GPU or
+subprocess permission. Their manifests define population variance, inclusive
+quartiles and OLS-with-intercept edge cases. No agent-supplied code is executed.
+The scripted acceptance path is verified; the hosted capability check remains
+unexecuted pending quota confirmation. No runtime or schema changes are needed.
+
 S013 adds an experimental-readiness plan without changing implemented architecture:
 [Autonomy and experimental readiness](AUTONOMY_AND_EXPERIMENTAL_READINESS.md),
 [prospective baseline and validity gates](../experiments/README.md),
