@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T19:30:00Z",
-  "last_session": "S010b",
+  "updated_at": "2026-11-15T22:30:00Z",
+  "last_session": "S011p",
   "completed_milestones": [
     {
       "id": "S001",
@@ -276,12 +276,22 @@
       "commits": [
         "4af3a77"
       ]
+    },
+    {
+      "id": "S011p",
+      "completed_at": "2026-11-15T22:30:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "e6f87de",
+        "a6baa2d"
+      ],
+      "summary": "gpt-5.6-luna admitted on the ChatGPT plan route (context_window 272000, default effort medium); low effort sent and accepted on every request. NOT_SCORED smoke passed (4 requests, invoke 6*7=42). Preregistered S011p-hour-001 ran one hour: completed-idle, 22/180 requests all ok, 20 s cadence binding, idle from 423.5 s after six recorded continuations; orientation, two memory writes (second result-informed), time.now; no use of math/stats/text/workspace.write. Archive intact. Broker pacing test added."
     }
   ],
   "next_milestone": {
-    "id": "S011p",
+    "id": "S011a",
     "repository": "open-lab-simulation",
-    "title": "Luna 5.6 Qualification and First One-Hour Run"
+    "title": "Reliability: One-Hour Runs"
   },
   "blockers": [
     {
@@ -294,16 +304,15 @@
       "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign. S010b used existing evidence only and made zero new model requests."
     },
     {
-      "id": "B-LUNA-PREFLIGHT",
-      "summary": "Luna admission and the NOT_SCORED low-effort smoke passed (2026-11-15). The one-hour run still needs a frozen preregistered configuration and a separate owner-approved finite request allowance before launch.",
+      "id": "B-S011A-HOSTED-RECOVERY",
+      "summary": "S011a needs a recovered fault in each of three one-hour runs, but hosted resume is refused (no pinned provider identity). An owner decision is needed: build/test a hosted recovery design, or use a local orchestrator; plus any new hosted allowance.",
       "affects": [
-        "S011p",
         "S011a",
         "S011b",
         "S011c"
       ],
       "needs_human": true,
-      "detail": "Owner-directed strategic roadmap change (2026-11-15) only. The exact Luna ref may or may not be listed for the authenticated ChatGPT plan connection; standard API price is not a Plus-plan allowance exchange rate. Execute only the bounded model/tool smoke after confirming live access and a finite request budget. A one-hour run needs separately recorded clearance, tested pacing and a frozen policy/configuration. Never alter the owner's app percentage or use credits, API-key billing or another provider automatically. Hosted resume after interruptions is currently refused; 12/72-hour plans require a future tested continuity strategy. Progress 2026-11-15: gpt-5.6-luna listed on the account (context_window 272000, default reasoning medium, low supported). Owner approved at most 12 new smoke requests; smoke run-20261115t191118z-edcba8 used 4, all accepted with reasoning.effort=low, invoke 6*7 -> 42, archive intact. Broker now per_run 8 / per_day 1016 / total 1016 (ledger 1008); the 8 remaining are not a one-hour allowance. See docs/experiments/2026-11-15-s011p-luna-smoke.md."
+      "detail": "S011p complete 2026-11-15 (smoke run-20261115t191118z-edcba8; hour run-20261115t211242z-c3a8e6). The S011p allowance is spent as far as needed (ledger 1030; profile still per_run 180 / total 1188, which grants nothing further without owner approval). No automatic recovery is supported for hosted providers (supervisor refuses). Do not weaken this to run S011a."
     }
   ],
   "known_issues": [
@@ -503,6 +512,17 @@
         "S012"
       ],
       "detail": "All seven gates now expose mechanical checks or explicit human/unverified requirements; no automatic GO, effective-compute equivalence, chronology proof or interpretation adjudication. Report recomputation needs its associated export and matching aggregate source checkout. Stopped cooperative sources only; failed staging retained. Single unmasked retrospective annotations and unknown hosted identity remain limits. Linux execution and Window report reading are unverified here."
+    },
+    {
+      "id": "KI-30",
+      "summary": "S011p Luna hour run went quiet-idle at 423.5 s of 3600 after six continuations; single run, prompt C, low effort, 20 s cadence.",
+      "affects": [
+        "S011a",
+        "S011b",
+        "S011c",
+        "S012"
+      ],
+      "detail": "Activity was orientation (workspace.list, memory.list, time.now) and two status memory writes; no use of math/stats/text/workspace.write, no memory retrieval. Most post-first-minute activity followed recorded continuations. n=1; no effort/policy/prompt comparison. Plan usage % not measured. Report docs/experiments/2026-11-15-s011p-hour-001.md."
     }
   ],
   "open_decisions": [
@@ -518,22 +538,11 @@
       ],
       "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering and its completed 4-cell capability check add no model-ranking or final orchestrator-selection evidence; the approved gpt-6.1-sol route is retained. S010a portable evidence inventories do not rank models or settle this decision. S010b descriptive comparisons and six source-linked retrospective annotations likewise do not select or rank an orchestrator.",
       "needs_human": true
-    },
-    {
-      "id": "OD-16",
-      "summary": "For S011p verify gpt-5.6-luna plan-route eligibility and freeze reasoning_effort=low, first-hour world, request pace, continuation/quiet policy and finite allowance after a NOT_SCORED tool-use check.",
-      "affects": [
-        "S011p",
-        "S011a",
-        "S011b",
-        "S011c"
-      ],
-      "detail": "Owner selected Luna 5.6 as the next candidate and instructed a check followed by one supervised one-hour run in the next session; this is not proof of API-route availability or permission for unbounded hosted spend. Resolve with exact model list, a tested live smoke, and an approved pre-registered run. The accepted Sol-specific post-hoc GO does not transfer to Luna. No API price-to-subscription usage inference or model-swap fallback. Owner requirement (2026-11-15): all Luna qualification and one-hour Responses requests must explicitly send reasoning.effort=low, not provider default. Verify accepted on the live smoke before a scored run; no silent fallback to medium/high/none and no unrequested effort comparisons. 2026-11-15: eligibility and reasoning.effort=low acceptance verified live (NOT_SCORED smoke). Still open: one-hour world/prompt, quiet vs legacy treatment, min_interval_s cadence, per-run request ceiling and owner allowance."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T19:30:00Z",
+    "ran_at": "2026-11-15T22:30:00Z",
     "commands": [
       {
         "command": "Builder git pull --ff-only (6 owner S011p roadmap commits); uv sync; uv run olb state; uv run olb check --tests (start)",
@@ -553,7 +562,19 @@
       },
       {
         "command": "Builder uv run ruff check .; uv run olb check --tests (closeout)",
-        "result": "Ruff passed; health check passed (documents, state, privacy, test suite). Simulation full suite re-run passed. last_session stays S010b because S011p is incomplete."
+        "result": "(first closeout) Ruff passed; health check passed."
+      },
+      {
+        "command": "Simulation uv run pytest tests/test_s011p_luna.py tests/test_providers.py; uv run ruff check .; uv run pytest (full)",
+        "result": "New hour-config tests (registered differences only; quiet idle after three tool-free replies with low effort) and broker min_interval pacing test passed; full suite passed after one timing-tolerance fix (Windows wall-clock resolution) and two assertion fixes in the new tests."
+      },
+      {
+        "command": "Owner-approved ols provider configure (per_run 180, per_day/total 1188, min_interval 20, attempts 2); uv run ols run experiments/s011p/hour-001.json; uv run ols verify <archive>",
+        "result": "run-20261115t211242z-c3a8e6: terminated at 3600 s deadline, completed-idle (idle from 423.5 s); 22 requests all ok with reasoning.effort=low; 3751 events; archive intact."
+      },
+      {
+        "command": "Builder uv run ruff check .; uv run olb check --tests (final closeout)",
+        "result": "Ruff passed; health check passed (documents, state, privacy, test suite)."
       }
     ]
   }

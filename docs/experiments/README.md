@@ -1,9 +1,8 @@
 # Experiments and experimental validity
 
-**S011p (in progress):** `gpt-5.6-luna` is listed on the owner's ChatGPT route and a
-NOT_SCORED smoke passed live with `reasoning.effort=low` on every request (4 requests,
-search/describe/invoke 6*7 = 42, archive intact). This is an engineering check only; the
-one-hour run is not yet registered or run. See the [smoke record](2026-11-15-s011p-luna-smoke.md).
+**S011p complete:** `gpt-5.6-luna` passed a NOT_SCORED low-effort smoke, then one preregistered unguided hour
+ended **completed-idle**: 22 requests, idle from 423.5 s after six recorded continuations, orientation and two memory
+writes only. n = 1; not an autonomy GO. See the [smoke](2026-11-15-s011p-luna-smoke.md), [registration](registrations/S011p-hour-001.md) and [report](2026-11-15-s011p-hour-001.md).
 
 **S008c statistics is complete:** engineering tests, a scripted archive and all
 four frozen hosted check archives pass verification. The guided run used both
