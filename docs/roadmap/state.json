@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T10:00:00Z",
-  "last_session": "S014h",
+  "updated_at": "2026-11-15T10:45:00Z",
+  "last_session": "S014i",
   "completed_milestones": [
     {
       "id": "S001",
@@ -206,12 +206,19 @@
         "8301244"
       ],
       "summary": "Registered s014i-001: the frozen S007d/S007h 24-cell design on ChatGPT plan usage (gpt-6.1-sol, 500k guard; temperature/cap/seed not sent; reasoning effort default) with every difference listed, registered usage-limit/interruption handling and an INCONCLUSIVE rule for provider censoring. Pilot s014i-pilot-001 exposed a provider-lock bug between consecutive cells (fixed in Simulation 38339318, 2 regression tests); s014i-pilot-002 ran 4/4 valid. Manifest canonical SHA-256 1b5837dc81ca2d214079cf94c5e876364238d0ffef30c57945f1b58fb8e7c874."
+    },
+    {
+      "id": "S014i",
+      "completed_at": "2026-11-15T10:45:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [],
+      "summary": "Executed s014i-001 (registration 51f9b70) on gpt-6.1-sol: 24/24 cells finished and accounted (20 at 32 steps, 4 provider-censored by the per-app usage limit, none rerun); 24 rubric-v1 reviews bound to event hashes. Owner raised the app limit 10% -> 50% -> 100% mid-campaign (logged deviations); one operator deviation (two cells launched after a usage-limit stop). Frozen report: INCONCLUSIVE (one INVALID_RECORD from a reader defect); qualifying rows A 1/6, B 0/6, C 5/6, D 2/6. Analysis is S014j."
     }
   ],
   "next_milestone": {
-    "id": "S014i",
-    "repository": "open-lab-simulation",
-    "title": "Interleaved Hosted Campaign"
+    "id": "S014j",
+    "repository": "open-lab-builder",
+    "title": "Comparative Analysis and Recommendations"
   },
   "blockers": [
     {
@@ -397,6 +404,23 @@
         "S014i"
       ],
       "detail": "The preview route rejects temperature, top_p and max_output_tokens; the Responses API has no seed. These are recorded per run as not sent. Live token refresh and the documented plan-usage errors are tested only against fakes. See docs/experiments/2026-11-15-chatgpt-integration.md. S014g: hosted runs cannot be resumed after interruption (no model digest); a campaign must account such cells as interrupted."
+    },
+    {
+      "id": "KI-24",
+      "summary": "Event-log readers use str.splitlines(), which splits on U+2028/U+2029 that the recorder writes raw; an intact log then fails verification.",
+      "affects": [
+        "S014j",
+        "S014k"
+      ],
+      "detail": "Found in s014i-001 cell s41-r2-c, where the model tested text.stats with those characters. A newline-only verifier finds no problem. Readers: archive.verify_archive, recorder, benchmark_analysis, supervisor, artifacts, providers ledger. Fix after the S014j derived dataset is produced (frozen source); the Window should be checked too."
+    },
+    {
+      "id": "KI-25",
+      "summary": "The rubric-v1 guided-control check requires the raw stored note as an exact substring of a later output, so a correct JSON-escaped report fails.",
+      "affects": [
+        "S014j"
+      ],
+      "detail": "Four of five completed s014i-001 A runs reported the returned memory entry as JSON (trailing newline shown as \n) and are CONTROL_FAILURE under the frozen code; the rubric text asks only for a later output reporting returned note data. S014j must report the frozen result and this discrepancy separately; any rubric change needs a new version and campaign."
     }
   ],
   "open_decisions": [
@@ -416,27 +440,31 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T10:00:00Z",
+    "ran_at": "2026-11-15T10:45:00Z",
     "commands": [
       {
-        "command": "python -m open_lab_simulation.benchmark run campaigns/s014i-pilot-001.json --max-cells 4",
-        "result": "C terminated (deadline); B, D, A failed: broker refused the provider lock held by C's in-flight request (reported as laboratory_bad_request); 1 reservation without outcome"
+        "command": "Operator script: python -m open_lab_simulation.benchmark run campaigns/s014i-001.json --registration 51f9b70... (batch of 4, then one cell at a time)",
+        "result": "24/24 finished: 20 terminated (max_steps), 4 failed with provider usage-limit refusals; no rerun"
       },
       {
-        "command": "Simulation: uv run ruff check .; uv run pytest (after the broker lock fix)",
-        "result": "Lint passed; 360 tests passed; both new regression tests fail on the previous broker"
+        "command": "Out-of-campaign probes s014i-limit-probe after each app-limit change",
+        "result": "Both ok"
       },
       {
-        "command": "python -m open_lab_simulation.benchmark run campaigns/s014i-pilot-002.json --max-cells 4",
-        "result": "4/4 terminated (max_steps); 32 requests ok; no context drops; archives verify; 0 token hits; D fault unexposed"
+        "command": "python -m open_lab_simulation.benchmark report campaigns/s014i-001.json (frozen source)",
+        "result": "runtime_source_match true; 23 valid and reviewed, 1 INVALID_RECORD (s41-r2-c); expansion INCONCLUSIVE"
       },
       {
-        "command": "ChatGPT usage page (read-only, Chrome)",
-        "result": "After 62 hosted requests: 5-hour window 97% left, weekly 74% left; app limit still 10%"
+        "command": "Diagnostic verifier with newline-only splitting on s41-r2-c",
+        "result": "No problems; no other archive contains U+2028/U+2029"
+      },
+      {
+        "command": "24 annotations checked with benchmark_analysis.validate_annotation",
+        "result": "All valid (s41-r2-c against newline-split events)"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 39.72 seconds and all health checks passed"
+        "result": "Lint passed; 305 tests passed in 40.15 seconds and all health checks passed (after fixing a state entry that named a repository instead of a milestone)"
       }
     ]
   }

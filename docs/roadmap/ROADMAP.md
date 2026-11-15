@@ -85,7 +85,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S014i, executing the registered s014i-001 campaign. S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
+**Next:** S014j, analysing the completed s014i-001 campaign. S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
 and gave the ChatGPT arm the provider's full 500,000-token context window as
 its client guard (OD-13), relying on the 10% per-app plan limit. The programme
 continues with ChatGPT plan usage alone. On 2026-11-15 the owner chose the hosted-intelligence
@@ -897,7 +897,8 @@ behavioural success are always reported separately.
 ### S014i — Interleaved Hosted Campaign
 
 - **Repository / streams:** Simulation execution; Builder ledger record. D.
-- **Status:** planned.
+- **Status:** complete (2026-11-15).
+  [Campaign log](../experiments/S014i-001-campaign-log.md).
 - **Objective:** Execute every scheduled cell once on the registered provider.
 - **Scope:** one hosted request at a time; resumable between cells without
   repeats; quota exhaustion pauses that provider's cells as pending or
@@ -905,6 +906,11 @@ behavioural success are always reported separately.
   replacements or substitutions.
 - **Exit criteria:** all cells finished or explicitly accounted as blocked,
   interrupted or invalid; per-run reviews bound to event hashes.
+- **Delivered:** all 24 cells finished and accounted (20 at 32 steps, 4
+  provider-censored, none rerun); 24 hash-bound rubric-v1 reviews. Two
+  owner-directed app-limit changes and one operator deviation are logged. Review
+  found an event-log reader defect (U+2028/U+2029) that makes one intact record
+  `INVALID_RECORD`, and a guided-control matching artifact; both go to S014j.
 - **Next recommended milestone:** S014j.
 
 ### S014j — Comparative Analysis and Recommendations

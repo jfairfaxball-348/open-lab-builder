@@ -82,3 +82,46 @@ before the window resets.
   the model, prompts, world or runtime.
 - A second out-of-campaign probe (`s014i-limit-probe`, one step, NOT_SCORED)
   completed `ok` at 09:58Z. The campaign resumed with the one-cell script.
+
+## 2026-11-15, third run and completion (09:58Z to 10:16Z)
+
+- The last eight cells (the s41 block) completed in manifest order, each
+  terminated at 32 steps, with no provider refusal.
+- **All 24 scheduled cells are finished and accounted for:** 20 ran to their
+  32-step limit, 4 are provider-censored (`s43-r1-b`, `s43-r1-a`, `s43-r1-d`,
+  `s42-r2-d`). No cell was rerun, replaced or skipped. The runtime source still
+  matches the frozen manifest.
+- **Per-run reviews:** 24 rubric-v1 annotations by the registered reviewer,
+  each bound to its event-log SHA-256 and checked by the frozen validator,
+  stored with the campaign under the data root.
+
+## Defects found during review (to be handled in S014j, not corrected here)
+
+1. **Event-log reader splits on Unicode line separators.** In `s41-r2-c` the
+   model deliberately tested `text.stats` with U+2028/U+2029. The recorder
+   writes those characters raw; `verify_archive` (and other readers) use
+   Python's `str.splitlines()`, which also splits on them, so the frozen
+   verifier reports `INVALID_RECORD`. A diagnostic copy of the verifier that
+   splits on `\n` only reports no problems, and no other archive contains these
+   characters. The record is intact; the frozen classification stands, and the
+   frozen report cannot load this run's review. Fixing the readers changes
+   frozen source, so it waits until the S014j derived dataset is produced.
+2. **Guided-control check versus JSON-escaped reporting.** Five A runs wrote
+   NOTES.md, stored the same note, retrieved it with `memory.search` and
+   reported the returned entry. Four reported it as JSON, where the stored
+   value's trailing newline appears escaped (`\n`); the frozen check requires
+   the raw value as an exact substring, so those four are `CONTROL_FAILURE`.
+   The one that also quoted the note as plain text passes. The rubric text
+   ("a later output reporting returned note data") and its code disagree here.
+3. **Provider-censored cells carry no dedicated label** in the frozen report;
+   the two with zero model calls appear as `CONTROL_FAILURE`/`NO_INITIATION`
+   and `FAULT_UNEXPOSED`. Their reviews mark every assessment not assessable.
+
+## Frozen mechanical summary (not the analysis)
+
+The frozen report's expansion field reads **INCONCLUSIVE** because one row is
+`INVALID_RECORD`. Qualifying rows under the frozen code and these reviews:
+A 1 of 6 (seed 41); B 0 of 6 (all six explored read-only and preserved
+nothing); C 5 of 6 (seeds 43, 42, 41; the sixth is `s41-r2-c`); D 2 of 6
+(descriptive only). Interpretation, comparison with S007d-001/S007h-001 and the
+treatment of defects 1–3 are S014j's job.
