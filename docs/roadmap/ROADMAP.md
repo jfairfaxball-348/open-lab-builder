@@ -85,7 +85,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S014h. S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
+**Next:** S014i, executing the registered s014i-001 campaign. S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
 and gave the ChatGPT arm the provider's full 500,000-token context window as
 its client guard (OD-13), relying on the 10% per-app plan limit. The programme
 continues with ChatGPT plan usage alone. On 2026-11-15 the owner chose the hosted-intelligence
@@ -873,7 +873,9 @@ behavioural success are always reported separately.
 ### S014h — Comparative Campaign Preregistration
 
 - **Repository / streams:** Builder registration; Simulation manifest. D.
-- **Status:** planned.
+- **Status:** complete (2026-11-15).
+  [Registration](../experiments/registrations/S014i-001.md); Simulation manifest
+  commit `8301244`, implementation `3833931`.
 - **Objective:** Freeze a 24-cell campaign on ChatGPT plan usage (the owner
   excluded Anthropic and scrapped Gemma on 2026-11-15), compared with the local
   historical group S007d-001/S007h-001.
@@ -885,6 +887,11 @@ behavioural success are always reported separately.
   ceilings nominal; registered handling for a usage-limit stop mid-campaign); NOT_SCORED pilots; fresh workspace and
   memory; replicate independence addressed (KI-21).
 - **Exit criteria:** registration committed and pushed before any scored cell.
+- **Delivered:** `s014i-001` (24 cells, S007d/S007h order and design, ChatGPT
+  plan usage with every difference listed) and registered usage-limit and
+  interruption handling. Pilot 001 exposed an in-flight provider-lock bug
+  between consecutive cells (fixed with regression tests, record kept); pilot
+  002 ran 4/4 valid with no provider error or context truncation.
 - **Next recommended milestone:** S014i.
 
 ### S014i — Interleaved Hosted Campaign

@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T09:30:00Z",
-  "last_session": "S014g",
+  "updated_at": "2026-11-15T10:00:00Z",
+  "last_session": "S014h",
   "completed_milestones": [
     {
       "id": "S001",
@@ -196,12 +196,22 @@
         "21b8c6c"
       ],
       "summary": "Hosted compatibility suite: 18 full supervised runs against a fake Responses server (text, tool call, real invocation, result handling, result-informed turn, whole multi-turn context under the 500k guard, budget, rate limit, plan refusals, bounded temporary failures, timeout, session end, refusal of recovery and resume, no token/reasoning recorded) and two live runs on gpt-6.1-sol (text reply; search/describe/demonstrate/invoke 6*7 = 42 with a result-informed answer; no context drops). openai-chatgpt admitted; error paths verified on fakes only. 358 Simulation tests pass."
+    },
+    {
+      "id": "S014h",
+      "completed_at": "2026-11-15T10:00:00Z",
+      "repository": "open-lab-builder",
+      "commits": [
+        "38339318",
+        "8301244"
+      ],
+      "summary": "Registered s014i-001: the frozen S007d/S007h 24-cell design on ChatGPT plan usage (gpt-6.1-sol, 500k guard; temperature/cap/seed not sent; reasoning effort default) with every difference listed, registered usage-limit/interruption handling and an INCONCLUSIVE rule for provider censoring. Pilot s014i-pilot-001 exposed a provider-lock bug between consecutive cells (fixed in Simulation 38339318, 2 regression tests); s014i-pilot-002 ran 4/4 valid. Manifest canonical SHA-256 1b5837dc81ca2d214079cf94c5e876364238d0ffef30c57945f1b58fb8e7c874."
     }
   ],
   "next_milestone": {
-    "id": "S014h",
-    "repository": "open-lab-builder",
-    "title": "Comparative Campaign Preregistration"
+    "id": "S014i",
+    "repository": "open-lab-simulation",
+    "title": "Interleaved Hosted Campaign"
   },
   "blockers": [
     {
@@ -406,23 +416,27 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T09:30:00Z",
+    "ran_at": "2026-11-15T10:00:00Z",
     "commands": [
       {
-        "command": "Simulation: uv run ruff check .; uv run pytest",
-        "result": "Lint passed. First full run: 357 passed, 1 failed (test_container.py::test_timeout_removes_the_container, container-tier timing); it passed alone and the full rerun passed 358/358"
+        "command": "python -m open_lab_simulation.benchmark run campaigns/s014i-pilot-001.json --max-cells 4",
+        "result": "C terminated (deadline); B, D, A failed: broker refused the provider lock held by C's in-flight request (reported as laboratory_bad_request); 1 reservation without outcome"
       },
       {
-        "command": "Simulation: uv run pytest tests/test_hosted_compatibility.py",
-        "result": "18 passed (one test bug fixed before: JSON-escaped documentation compared as parsed value)"
+        "command": "Simulation: uv run ruff check .; uv run pytest (after the broker lock fix)",
+        "result": "Lint passed; 360 tests passed; both new regression tests fail on the previous broker"
       },
       {
-        "command": "ols run S014g-chatgpt-text.json and S014g-chatgpt-tools.json (gpt-6.1-sol, 500k guard)",
-        "result": "10/10 requests ok; text reply without tools; search/describe/demonstrate/invoke 6*7 = 42 and result-informed answer; no context drops; archives verify; 0 token hits; provider ledger 22 reserve / 22 outcome"
+        "command": "python -m open_lab_simulation.benchmark run campaigns/s014i-pilot-002.json --max-cells 4",
+        "result": "4/4 terminated (max_steps); 32 requests ok; no context drops; archives verify; 0 token hits; D fault unexposed"
+      },
+      {
+        "command": "ChatGPT usage page (read-only, Chrome)",
+        "result": "After 62 hosted requests: 5-hour window 97% left, weekly 74% left; app limit still 10%"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 44.94 seconds and all health checks passed"
+        "result": "Lint passed; 305 tests passed in 39.72 seconds and all health checks passed"
       }
     ]
   }

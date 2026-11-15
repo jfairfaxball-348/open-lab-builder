@@ -13,8 +13,10 @@ guided and 0/6 B/C qualifying, zero repairs but only seven invocations, with
 hidden reasoning filling the fixed time budget. See the
 [report](2026-11-14-model-swap-reevaluation.md),
 [registration](registrations/S007h-001.md) and
-[derived dataset](results/S007h-001.json). The next route is a registered
-decision (OD-9), not further tuning.
+[derived dataset](results/S007h-001.json). OD-9 was resolved by the hosted
+programme S014: **S014i-001 is registered** (the same 24 cells on ChatGPT plan
+usage, `gpt-6.1-sol`, with every provider difference listed) and has no scored
+cell yet; see the [registration](registrations/S014i-001.md).
 We study observable artificial agency and agent-stated objectives, not subjective
 consciousness. A negative valid baseline completes S007d without opening expansion.
 
