@@ -87,7 +87,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** a capability milestone (OD-15). The owner accepted S014i-001 as a GO
+**Next:** S007e, then S008c (both owner-approved 2026-11-15, OD-15 resolved). The owner accepted S014i-001 as a GO
 scored with the fixed readers (S014l) and rubric v1.1 (S014m), so the
 confirmatory replication S014n was not run, and decided that new capabilities
 are tested one at a time instead of by full baseline repeats
@@ -1013,23 +1013,55 @@ behavioural success are always reported separately.
 
 ### S007e — Specialist Consultation and GPU Leasing
 
-- **Repository / streams:** Simulation gateway; Builder capability/manifests. A/B/C.
-- **Status:** planned; retains consultation/loading work formerly in S007a.
-- **Objective:** Consult a second local text model and return without losing state.
-- **Prerequisites:** S007a, current S007d expansion GO, approved local availability.
-- **Scope:** one GPU lease, unload/load/reload events, manifest footprints,
-  models.ask capability, preserved conversation and orchestrator restoration.
-- **Exclusions:** hosted spending, multimodal implementation, assumed concurrent
-  residency or general subprocess permissions for the agent.
-- **Deliverables:** lease scheduler, consultation capability and measured switch cost.
-- **Acceptance tests:** fake routing/lease/failure checks; archived local consultation
-  and return; no permission expansion or lost history.
-- **Exit criteria:** deterministic tests and real engineering archive pass;
-  test this capability (ADR-0017): acceptance tests plus a bounded archived real-model check of discovery and use, negative results kept, reporting utility or its absence before the next capability.
-- **Risks:** 4 GB GPU pressure, expensive switching and context re-evaluation.
-- **Next recommended milestone:** useful feasible S008c or S007b, retaining a current
-  expansion decision rather than automatically adding every capability.
-
+- **Repository / streams:** Simulation gateway/supervisor; Builder world release
+  and model manifest. A/B/C.
+- **Status:** planned; **owner-approved 2026-11-15** (OD-15, ADR-0017). Revised
+  for the hosted orchestrator; the earlier local-orchestrator plan assumed the
+  orchestrator itself had to be unloaded and reloaded around each consultation.
+- **Objective:** Let the orchestrator (`gpt-6.1-sol` via ChatGPT plan usage)
+  consult one local text model through a `models.ask` capability, with the local
+  model held under one supervisor-owned GPU lease, and continue without losing
+  conversation state.
+- **Prerequisites:** S007a (gateway), S014d (hosted orchestrator), the
+  owner-accepted GO (ADR-0017). Approved local availability: the already
+  installed `llama3.2:3b` (measured manifest in world 0.6.0) is the specialist.
+  No download. Using another installed model needs a recorded owner choice.
+- **Scope:**
+  - Design first: a short ADR on how a capability reaches the gateway (the tool
+    host runs capabilities as separate processes with no gateway handle; the
+    supervisor must mediate, as for the discovery meta-tools). The agent never
+    gets a model-server address, credential or archive path.
+  - `models.ask` (prompt in, text out; bounded prompt and output sizes, a
+    per-call timeout and a per-run call budget from the experiment config).
+  - One GPU lease: load on first use, keep while leased, unload at run end or
+    on lease timeout; load/unload/lease events recorded by the supervisor with
+    durations and model digest. Specialist use counts against run limits.
+  - The specialist's reply is recorded as an observation of a model output,
+    never as an instruction or a grant of anything.
+  - New world version (minimal 0.7.0) carrying the capability and the
+    specialist's model manifest; 0.6.0 stays unchanged and runnable.
+- **Exclusions:** consulting a hosted model, more than one specialist, concurrent
+  GPU residency, multimodal input, agent-chosen arbitrary models, any extra
+  network or filesystem permission, downloads.
+- **Deliverables:** ADR, world 0.7.0 with self-tested `models.ask` documentation
+  and demonstration, gateway lease implementation, recorded events, docs.
+- **Acceptance tests:** fake-model tests for routing, lease acquire/release,
+  timeout, server failure, oversize prompt/output and per-run budget; no
+  permission escalation; checkpoint/resume keeps lease state honest (lease is
+  reacquired, never assumed); archives verify. One real local check against
+  Ollama on loopback (load, ask, unload) with measured switch cost.
+- **Capability check (ADR-0017):** at most **4 runs × 32 steps** of
+  `gpt-6.1-sol` on world 0.7.0, frozen before running: one guided run (names
+  `models.ask` and asks for a consultation whose answer is used) and three runs
+  with prompt C unchanged, reporting whether `models.ask` is discovered, used
+  and its result used, plus switch costs and plan usage. Negative and no-use
+  results are kept. Owner approval covers this plan usage; anything beyond it
+  needs a new approval.
+- **Exit criteria:** deterministic tests, real local check and capability check
+  done and reported; ROADMAP/state/docs updated.
+- **Risks:** 4 GB VRAM next to other GPU users; the specialist's weak answers
+  mistaken for capability failure; lease leaks on crashes; plan usage.
+- **Next recommended milestone:** S008c.
 ---
 
 ### S007f — Optional Hosted Brain Swap Architectural Decision
@@ -1103,9 +1135,23 @@ behavioural success are always reported separately.
 ### S008c — Scientific and Proof Tools
 
 - **Repository / streams:** Builder capabilities; Simulation acceptance archives. A/B.
-- **Status:** planned; may precede multimodal tools after the same expansion gate.
+- **Status:** planned; **owner-approved 2026-11-15** (OD-15, ADR-0017) for the
+  first part below, which needs no installation.
 - **Objective:** Add useful computational affordances with checkable outputs.
-- **Prerequisites:** S005b, current expansion GO and approved resource availability.
+- **Prerequisites:** S005b, current expansion GO (ADR-0017) and approved resource
+  availability.
+- **First part (this milestone):** standard-library statistics only, no new
+  dependency: `stats.describe` (count, mean, median, variance, standard
+  deviation, quantiles of a bounded numeric list) and `stats.regress` (ordinary
+  least squares on bounded paired lists, with slope, intercept and r), in a new
+  world version, process tier (no agent-supplied code is executed). Capability
+  check (ADR-0017): at most **4 runs × 32 steps** of `gpt-6.1-sol`, frozen before
+  running (one guided run naming the tools, three with prompt C unchanged),
+  reporting discovery, use and use of results; owner approval covers this plan
+  usage. If S007e has shipped first, the new world builds on its version.
+- **Later parts (separate approval each):** plotting (needs matplotlib), SMT
+  checks (needs z3), Lean checks (needs a Lean toolchain and the container tier
+  for anything executable). Each becomes its own milestone when approved.
 - **Scope:** bounded statistics/plotting, SMT/Lean checks, one deliverable at a time;
   review parsing/executable surfaces before selecting the isolation tier.
 - **Exclusions:** arbitrary Python/shell or unsafe proof/numerical plugins. Lean

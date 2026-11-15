@@ -1,7 +1,7 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T15:30:00Z",
+  "updated_at": "2026-11-15T16:00:00Z",
   "last_session": "S014m",
   "completed_milestones": [
     {
@@ -249,8 +249,11 @@
   "blockers": [
     {
       "id": "B-HOSTED",
-      "summary": "Hosted use is limited to the owner's ChatGPT plan with the per-app limit at 100% (OD-14); each hosted run needs the owner's approval of its plan usage; no other spend is authorised.",
-      "affects": [],
+      "summary": "Hosted use is limited to the owner's ChatGPT plan with the per-app limit at 100%; approved plan usage is per milestone (S007e and S008c: at most 4 runs x 32 steps each); no other spend is authorised.",
+      "affects": [
+        "S007e",
+        "S008c"
+      ],
       "needs_human": false,
       "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised."
     }
@@ -428,20 +431,6 @@
       ],
       "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard.",
       "needs_human": true
-    },
-    {
-      "id": "OD-15",
-      "needs_human": true,
-      "summary": "Which capability milestone to add first now that expansion is open (ADR-0017).",
-      "affects": [
-        "S007e",
-        "S008c",
-        "S007b",
-        "S008a",
-        "S008b",
-        "S008d"
-      ],
-      "detail": "The roadmap names S007e (second-model consultation, GPU lease) or a narrow S008c scientific tool as the first step after a GO. Each needs its own approvals (local model availability, installations, plan usage for real-model checks). S007e is recorded as next by graph order until the owner chooses."
     }
   ],
   "validation": {
@@ -454,7 +443,7 @@
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 40.03 seconds and all health checks passed"
+        "result": "Lint passed; 305 tests passed in 41.13 seconds and all health checks passed"
       }
     ]
   }
