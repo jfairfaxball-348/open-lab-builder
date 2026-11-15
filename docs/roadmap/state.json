@@ -1,7 +1,7 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T14:30:00Z",
+  "updated_at": "2026-11-15T15:30:00Z",
   "last_session": "S014m",
   "completed_milestones": [
     {
@@ -242,31 +242,15 @@
     }
   ],
   "next_milestone": {
-    "id": "S014n",
+    "id": "S007e",
     "repository": "open-lab-simulation",
-    "title": "Confirmatory Hosted Replication"
+    "title": "Specialist Consultation and GPU Leasing"
   },
   "blockers": [
     {
-      "id": "B-EXPANSION",
-      "summary": "S007d-001 and S007h-001 both completed with NO_GO; major capability expansion remains closed.",
-      "affects": [
-        "S007b",
-        "S007e",
-        "S008a",
-        "S008b",
-        "S008c",
-        "S008d",
-        "S009"
-      ],
-      "detail": "S007d-001 (llama3.2:3b) and S007h-001 (qwen3:4b, all else frozen) each had 24/24 valid reviewed cells, guided 0/6 and B/C 0/6 qualifying. A failed S007h does not authorise further tuning; the next bounded change, if any, needs a registered decision (OD-9). S010 is permissible after these negative results."
-    },
-    {
       "id": "B-HOSTED",
-      "summary": "Hosted use is limited to the owner's ChatGPT plan with the per-app limit at 100% (OD-14); S014n needs owner approval of its plan usage; no other spend is authorised.",
-      "affects": [
-        "S014n"
-      ],
+      "summary": "Hosted use is limited to the owner's ChatGPT plan with the per-app limit at 100% (OD-14); each hosted run needs the owner's approval of its plan usage; no other spend is authorised.",
+      "affects": [],
       "needs_human": false,
       "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised."
     }
@@ -446,38 +430,31 @@
       "needs_human": true
     },
     {
-      "id": "OD-14",
+      "id": "OD-15",
       "needs_human": true,
-      "summary": "Whether to approve the plan usage of the confirmatory hosted replication s014i-002 (S014n).",
+      "summary": "Which capability milestone to add first now that expansion is open (ADR-0017).",
       "affects": [
-        "S014n"
+        "S007e",
+        "S008c",
+        "S007b",
+        "S008a",
+        "S008b",
+        "S008d"
       ],
-      "detail": "Partial decision recorded 2026-11-15: the owner leaves The Open Laboratory's ChatGPT app limit at 100%; no API key, credits or settings changes are authorised. S014m pilot usage was authorised and used 32 requests (63,630 input tokens). Still open: approval to run the 24 scored cells (S014i-001 used about 11 points of a weekly ChatGPT Plus allowance, upper bound, and about 3 points of a 5-hour window per full cell)."
+      "detail": "The roadmap names S007e (second-model consultation, GPU lease) or a narrow S008c scientific tool as the first step after a GO. Each needs its own approvals (local model availability, installations, plan usage for real-model checks). S007e is recorded as next by graph order until the owner chooses."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T14:30:00Z",
+    "ran_at": "2026-11-15T15:30:00Z",
     "commands": [
       {
-        "command": "Simulation: uv run ruff check .; uv run pytest (at 92bdcba)",
-        "result": "Lint passed; 385 passed in 319.85s"
-      },
-      {
-        "command": "python -m open_lab_simulation.benchmark run campaigns/s014i-002-pilot-001.json --max-cells 4",
-        "result": "4/4 terminated at 8 steps; 32 requests all ok (gpt-6.1-sol); no provider stop"
-      },
-      {
-        "command": "python -m open_lab_simulation.benchmark report campaigns/s014i-002-pilot-001.json",
-        "result": "NOT_SCORED, rubric v1.1, runtime_source_match true; 4/4 valid; D fault exposed; A CONTROL_FAILURE (retrieved at its last step)"
-      },
-      {
-        "command": "ChatGPT usage page in the built-in browser (read-only)",
-        "result": "Not read: the browser was not signed in; plan percentage for the pilot unmeasured"
+        "command": "Read-only rubric v1.1 scoring of s014i-001 with Simulation 92bdcba (fixed readers, v1 reviews)",
+        "result": "24/24 records verify; A 5/6 (seeds 41-43), B 0/6, C 6/6 (seeds 41-43); 4 PROVIDER_CENSORED; expansion GO"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 39.88 seconds and all health checks passed"
+        "result": "Lint passed; 305 tests passed in 40.03 seconds and all health checks passed"
       }
     ]
   }

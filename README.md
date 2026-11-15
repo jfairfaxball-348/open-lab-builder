@@ -125,10 +125,14 @@ S014l fixed the event-log reader defect behind its one invalid record
 ([report](docs/experiments/2026-11-15-event-log-reader-fix.md)); the result
 itself is unchanged. S014m versioned the rubric
 ([v1.1](docs/experiments/S007d-RUBRIC-v1.1.md)) and registered a confirmatory
-replication, [s014i-002](docs/experiments/registrations/S014i-002.md); no
-scored cell of it has run.
+replication, [s014i-002](docs/experiments/registrations/S014i-002.md). The owner
+then accepted S014i-001 as a GO under rubric v1.1 (A 5/6, C 6/6) instead of
+running it, and decided that new capabilities are tested one at a time rather
+than by full baseline repeats
+([ADR-0017](docs/decisions/ADR-0017-owner-accepted-go-and-capability-testing.md)). This is an owner-accepted post-hoc
+GO, not a registered one.
 
-What does **not** exist yet: a registered GO, specialist model consultation/GPU leasing,
+What does **not** exist yet: a registered (prospective) GO, specialist model consultation/GPU leasing,
 container isolation on Linux or with network access, and run comparison. The first
 registered short baseline is complete; earlier engineering checks are recorded in
 [docs/experiments/](docs/experiments/). Run `uv run olb

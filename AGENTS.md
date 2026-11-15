@@ -38,8 +38,12 @@ changes the orchestrator, environment or experimental conditions.
 - Freeze prompts, continuation/context/repair policies and comparisons before
   scored runs. Keep pilots separate; preserve negative and censored results.
   A valid negative benchmark can complete its report without opening expansion.
-- Respect the roadmap's behavioural and isolation gates. Meaningful model/world
-  changes trigger a documented benchmark repeat, not a rewritten old success.
+- Respect the roadmap's behavioural and isolation gates. Add new capabilities
+  one at a time and test each one (acceptance tests plus a bounded real-model
+  check of discovery and use); a full baseline repeat is not required after a
+  capability addition (owner decision, ADR-0017). Orchestrator, context/policy
+  or repair changes still need a new campaign. Never relabel an old result as a
+  success; the one owner-accepted post-hoc GO (S014i-001) is recorded as such.
 - An explicitly authorised strategic session may revise future planning; it does
   not authorise implementing those future milestones, downloads or API spending.
 

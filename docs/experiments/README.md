@@ -24,7 +24,11 @@ needs a registered replication. See the [report](2026-11-15-hosted-comparison.md
 [derived dataset](results/S014i-001.json). A confirmatory replication,
 **s014i-002**, is [registered](registrations/S014i-002.md) under
 [rubric v1.1](S007d-RUBRIC-v1.1.md) (faithful note reports, explicit provider
-censoring); it has not run.
+censoring). **Owner decision (ADR-0017):** the owner accepted S014i-001 as a
+GO scored with the fixed readers and rubic v1.1 (A 5/6 and C 6/6, all three
+seeds each), so s014i-002 was not run. This is an owner-accepted post-hoc GO,
+not a registered one; the registered result stays INCONCLUSIVE. See
+[ADR-0017](../decisions/ADR-0017-owner-accepted-go-and-capability-testing.md).
 We study observable artificial agency and agent-stated objectives, not subjective
 consciousness. A negative valid baseline completes S007d without opening expansion.
 
@@ -177,9 +181,17 @@ multimodal expansion requires GO; never revise the benchmark merely to obtain
 success. Optional hosting is not required. A failed repeat calls for an explicit
 next decision, not unlimited tuning or extra tools as compensation.
 
-Repeat after meaningful model, context/policy, repair, scaffold or world upgrades.
+Repeat after meaningful model, context/policy, repair or scaffold changes.
 Use new campaign ids and disclose development exposure; reused cases are not
 unseen evaluation. Generalisation claims need registered held-out cases/seeds.
+
+**Capability additions (owner decision, ADR-0017).** Expansion is open for
+`gpt-6.1-sol` on ChatGPT plan usage on the strength of the owner-accepted
+S014i-001 GO. New capabilities are added one at a time; each is tested on its
+own (engineering acceptance tests and a bounded archived real-model check of
+whether it is discovered and used, negative results kept). A full baseline
+repeat is not required after a capability addition. A capability check does
+not re-establish basic discovery/use on the original tasks.
 
 ## Continuation, context and memory are experimental conditions
 

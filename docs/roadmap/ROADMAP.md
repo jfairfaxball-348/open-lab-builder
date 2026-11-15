@@ -71,7 +71,8 @@ flowchart TD
     S014d --> S014g
     S014g --> S014h["S014h Comparative preregistration"] --> S014i["S014i Interleaved campaign"] --> S014j["S014j Analysis"]
     S014j -. optional .-> S014k["S014k Window comparison view"]
-    S014j --> S014l["S014l Event-log reader fix"] --> S014m["S014m Rubric v1.1 + replication registration"] --> S014n["S014n Confirmatory hosted replication"]
+    S014j --> S014l["S014l Event-log reader fix"] --> S014m["S014m Rubric v1.1 + replication registration"] -. superseded by ADR-0017 .-> S014n["S014n Confirmatory hosted replication (not run)"]
+    S014m --> Gate
     S007d --> S010["S010 Protocol / comparison, negative allowed"]
     S006e --> S010
     S004 --> S010
@@ -86,7 +87,13 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S014l (event-log reader fix). S014j reported s014i-001 as INCONCLUSIVE; the confirmatory replication (S014m/S014n) needs the owner's plan-usage approval (OD-14). S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
+**Next:** a capability milestone (OD-15). The owner accepted S014i-001 as a GO
+scored with the fixed readers (S014l) and rubric v1.1 (S014m), so the
+confirmatory replication S014n was not run, and decided that new capabilities
+are tested one at a time instead of by full baseline repeats
+([ADR-0017](../decisions/ADR-0017-owner-accepted-go-and-capability-testing.md)). Expansion is open for `gpt-6.1-sol`
+on ChatGPT plan usage; each capability milestone still lists its own human
+approvals. Earlier context: S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
 and gave the ChatGPT arm the provider's full 500,000-token context window as
 its client guard (OD-13), relying on the 10% per-app plan limit. The programme
 continues with ChatGPT plan usage alone. On 2026-11-15 the owner chose the hosted-intelligence
@@ -990,7 +997,10 @@ behavioural success are always reported separately.
 ### S014n — Confirmatory Hosted Replication
 
 - **Repository / streams:** Simulation execution; Builder report. D.
-- **Status:** planned; owner approval of plan usage required (OD-14).
+- **Status:** superseded on 2026-11-15 by owner decision
+  [ADR-0017](../decisions/ADR-0017-owner-accepted-go-and-capability-testing.md); not executed. The owner accepted
+  S014i-001 as a post-hoc GO under rubric v1.1. The s014i-002 registration and
+  manifests remain as historical records.
 - **Objective:** Test prospectively whether the post-hoc S014i-001 GO replicates.
 - **Prerequisites:** S014m.
 - **Scope:** run, review and report `s014i-002` under its registration; a GO is
@@ -1014,9 +1024,8 @@ behavioural success are always reported separately.
 - **Deliverables:** lease scheduler, consultation capability and measured switch cost.
 - **Acceptance tests:** fake routing/lease/failure checks; archived local consultation
   and return; no permission expansion or lost history.
-- **Exit criteria:** deterministic tests and real engineering archive pass; repeat
-  the autonomy baseline after this environment change and report utility or its
-  absence before further major expansion.
+- **Exit criteria:** deterministic tests and real engineering archive pass;
+  test this capability (ADR-0017): acceptance tests plus a bounded archived real-model check of discovery and use, negative results kept, reporting utility or its absence before the next capability.
 - **Risks:** 4 GB GPU pressure, expensive switching and context re-evaluation.
 - **Next recommended milestone:** useful feasible S008c or S007b, retaining a current
   expansion decision rather than automatically adding every capability.
@@ -1083,8 +1092,8 @@ behavioural success are always reported separately.
 - **Deliverables:** capability, measured manifest and bounded archived demonstration.
 - **Acceptance tests:** fake defaults, synthetic colour/text fixtures with frozen
   tolerances, authorised real-resource check and lease restoration.
-- **Exit criteria:** archive/self-tests pass and a baseline repeat reports whether
-  the new affordance is discovered/used; negative utility is retained.
+- **Exit criteria:** archive/self-tests pass and a capability check (ADR-0017)
+  reports whether the new affordance is discovered/used; negative utility is retained.
 - **Risks:** 4 GB VRAM, invented image content and expensive context/reload costs.
 - **Next recommended milestone:** S008a or S010 by utility/feasibility; a failed
   utility repeat pauses further major expansion.
@@ -1106,8 +1115,8 @@ behavioural success are always reported separately.
   measured outputs; split owner-sized parts before coding if needed.
 - **Acceptance tests:** valid/invalid statements, SAT/UNSAT cases, valid plot files,
   parser limits and actual enforcement of each tool's isolation requirements.
-- **Exit criteria:** built-world self-tests and bounded archive pass; repeat the
-  baseline. Unsupported/unsafe variants remain explicitly unshipped.
+- **Exit criteria:** built-world self-tests and bounded archive pass; test this capability (ADR-0017): acceptance tests plus a bounded archived real-model check of discovery and use, negative results kept.
+  Unsupported/unsafe variants remain explicitly unshipped.
 - **Risks:** installations, native resources and proof-language execution surfaces.
 - **Next recommended milestone:** another useful approved capability only if the
   repeat supports expansion; otherwise S007h/S010. Container-needed work waits.
@@ -1126,8 +1135,8 @@ behavioural success are always reported separately.
 - **Deliverables:** measured manifests, synthetic fixtures and archived outputs.
 - **Acceptance tests:** known metadata, generated phrase with frozen word-error
   tolerance, fake defaults and explicit real-resource checks.
-- **Exit criteria:** self-tests/archive verify; repeat baseline reports discovery,
-  use and costs, including negative utility findings.
+- **Exit criteria:** self-tests/archive verify; a capability check (ADR-0017)
+  reports discovery, use and costs, including negative utility findings.
 - **Risks:** dependencies, memory, latency and language/domain errors.
 - **Next recommended milestone:** S008b only when justified; otherwise S010 or a
   bounded response to a failed repeat.
@@ -1147,7 +1156,7 @@ behavioural success are always reported separately.
 - **Acceptance tests:** formats/dimensions/durations, footprints, fake defaults,
   authorised real checks and no effects beyond granted workspace.
 - **Exit criteria:** each attempted item ships passing or is documented infeasible;
-  repeat the baseline before more major expansion. Text volume is not productivity.
+  test this capability (ADR-0017): acceptance tests plus a bounded archived real-model check of discovery and use, negative results kept. Text volume is not productivity.
 - **Risks:** memory/dependencies and expensive artifacts with no observed use.
 - **Next recommended milestone:** S010, or S008d if both gates pass.
 
@@ -1166,7 +1175,7 @@ behavioural success are always reported separately.
 - **Acceptance tests:** host/repository/archive/network/process escapes fail through
   each interface; resources/shutdown cover every descendant.
 - **Exit criteria:** every interface passes isolation and a bounded archived demo;
-  repeat the baseline after adding execution affordances.
+  test this capability (ADR-0017): acceptance tests plus a bounded archived real-model check of discovery and use, negative results kept.
 - **Risks:** wrappers bypassing isolation and host/network side effects.
 - **Next recommended milestone:** S009 if evidence supports expansion; otherwise
   protocol/analysis or improvement, never a process-tier fallback.
@@ -1187,7 +1196,7 @@ behavioural success are always reported separately.
   no privilege expansion; repeat all host/archive/network isolation checks.
 - **Exit criteria:** engineering checks pass and real-model demonstration is archived.
   A negative model result leaves that behavioural exit incomplete; do not relabel
-  scripted success. Repeat baseline with tool authorship available.
+  scripted success. Test this capability (ADR-0017): acceptance tests plus a bounded archived real-model check of discovery and use, negative results kept, with tool authorship available.
 - **Risks:** competence, self-test adequacy and executable escape surfaces.
 - **Next recommended milestone:** S010; resolve a missing model exit or explicitly
   exclude that affordance from the later registered world.
