@@ -37,3 +37,19 @@ against the 5-hour window (reset about 13:25Z). One full cell is about
 Accounting after batch 1: 4 of 24 cells finished (1 complete, 3
 provider-censored); provider ledger 127 reservations, 126 outcomes (the one
 unresolved reservation is from `s014i-pilot-001`).
+
+## 2026-11-15, owner-directed change and resumption
+
+- The owner noted that OpenAI documents the per-app setting as a weekly limit.
+  The observed refusal came after about 1% of the weekly plan and about 10% of
+  the 5-hour window, so in practice the 10% setting also bounded the 5-hour
+  share (undocumented; inferred from the usage page).
+- **Owner-directed deviation:** at the owner's instruction the app limit was
+  raised from 10% to **50%** (confirmed after reload, about 09:22Z). The
+  registration said usage settings would not change during the campaign; this
+  change affects only how often cells are provider-censored, not the model,
+  prompts, world or runtime. Cells already censored stay censored.
+- One out-of-campaign probe (`s014i-limit-probe`, one step, NOT_SCORED,
+  excluded from every denominator) completed `ok`, showing the refusal had
+  cleared before the next scored cell started.
+- The campaign resumed with the one-cell-at-a-time operator script.
