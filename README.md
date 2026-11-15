@@ -109,11 +109,14 @@ Both policies are experimental treatments, not assertions of neutrality.
 comparing hosted models in the unchanged world. S014a assessed the official
 routes and fixed the architecture ([ADR-0016](docs/decisions/ADR-0016-hosted-provider-broker.md),
 [provider assessment](docs/architecture/HOSTED_PROVIDERS.md)): Google Gemma and
-ChatGPT plan usage are eligible; Anthropic subscription use is unavailable
-pending Anthropic's confirmation. No hosted adapter exists and no hosted request
-has been made.
+ChatGPT plan usage are eligible; the owner excluded Anthropic. The broker
+(S014b) and two adapters exist. Gemma (S014c) invokes capabilities but hits
+intermittent provider errors on multi-step turns. ChatGPT plan usage (S014d)
+completed a live tool-use round trip on `gpt-6.1-sol`
+([integration report](docs/experiments/2026-11-15-chatgpt-integration.md)).
+These are integration checks, not behavioural evidence.
 
-What does **not** exist yet: hosted providers, specialist model consultation/GPU leasing,
+What does **not** exist yet: a cross-provider compatibility suite, specialist model consultation/GPU leasing,
 container isolation on Linux or with network access, and run comparison. The first
 registered short baseline is complete; earlier engineering checks are recorded in
 [docs/experiments/](docs/experiments/). Run `uv run olb
@@ -205,3 +208,7 @@ contract for both human contributors and coding agents (Claude Code, Codex).
 
 The Builder engineers the universe. The Simulation inhabits the universe. The
 Window observes the universe. The three must remain independent.
+
+## Licence
+
+Apache License 2.0; see [LICENSE](LICENSE).

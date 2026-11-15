@@ -1,0 +1,87 @@
+{
+  "schema": "open-lab/experiment-config",
+  "schema_version": "1.0.0",
+  "experiment_id": "s014d-chatgpt-smoke",
+  "title": "S014d ChatGPT plan-usage integration smoke check (NOT_SCORED)",
+  "research_question": "Engineering check only: can the hosted model discover, describe and invoke a Laboratory capability and answer from its result?",
+  "created_at": "2026-11-15T00:00:00Z",
+  "tags": [
+    "engineering-check",
+    "tool-use"
+  ],
+  "initial_prompt": "This is an integration check. Use the discovery tools to find a capability that evaluates arithmetic, read its documentation, use it to evaluate 6*7, and then report the value it returned.",
+  "world": {
+    "world_id": "minimal",
+    "version": "0.6.0",
+    "content_digest": "1ccc407cc300e7622bcca348ff22c5982bff5cf3a10559ee741304350e960da5"
+  },
+  "orchestrator": {
+    "provider_id": "openai-chatgpt",
+    "model_id": "orchestrator-gpt-6-1-sol",
+    "sampling": {
+      "temperature": 0.7,
+      "max_output_tokens": 2048,
+      "seed": 41
+    }
+  },
+  "limits": {
+    "wall_clock_s": 300,
+    "max_steps": 6
+  },
+  "permissions": {
+    "filesystem": "workspace_write",
+    "network": "loopback",
+    "gpu": false,
+    "models": [
+      "orchestrator-gpt-6-1-sol"
+    ]
+  },
+  "termination": {
+    "on_deadline": "hard_stop"
+  },
+  "extensions": {
+    "model_catalog": {
+      "document": {
+        "schema": "open-lab/model-provider",
+        "schema_version": "1.0.0",
+        "provider": {
+          "id": "openai-chatgpt",
+          "name": "OpenAI Responses API via Sign in with ChatGPT plan usage (preview)",
+          "kind": "other",
+          "locality": "external",
+          "api": {
+            "protocol": "openai_chat_completions",
+            "base_url": "https://api.openai.com/v1"
+          }
+        },
+        "models": [
+          {
+            "id": "orchestrator-gpt-6-1-sol",
+            "provider_ref": "gpt-6.1-sol",
+            "family": "gpt",
+            "roles": [
+              "orchestrator",
+              "text_generation"
+            ],
+            "modalities": {
+              "input": [
+                "text"
+              ],
+              "output": [
+                "text"
+              ]
+            },
+            "context_window_tokens": 4096,
+            "features": {
+              "tool_calling": true,
+              "streaming": true
+            },
+            "status": "available",
+            "notes": "Hosted by OpenAI under the owner's ChatGPT Plus plan; no weight digest. The 4096 value is the Laboratory's client context guard, kept equal to the local baseline, not the provider's window. Temperature, output cap and seed are not sent (preview route)."
+          }
+        ]
+      },
+      "sha256": "ac2e267c5752d4b3ebd12777417a6aacf6d8547b3315168c4f1d596f718a2d4e"
+    }
+  }
+}

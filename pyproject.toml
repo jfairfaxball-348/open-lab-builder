@@ -3,6 +3,8 @@ name = "open-lab-builder"
 version = "0.1.0"
 description = "World Builder for The Open Laboratory: contracts, capability definitions and versioned world releases."
 readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
 dependencies = [
     "jsonschema>=4.23",

@@ -14,7 +14,7 @@ milestones in the roadmap.
 | Provider route | Officially supported for this use? | Status | Main blockers / human actions |
 | --- | --- | --- | --- |
 | Google Gemma via Gemini API (free tier, owner's key) | Yes: Gemma models are served by the Gemini API with function calling and system instructions | **Eligible**, pending human setup | Key installed through the S014b secure command; owner reads the project's actual Gemma limits in AI Studio; approved request budgets; region decides data-use terms |
-| OpenAI via Sign in with ChatGPT plan usage | Yes for open-source and locally hosted apps, self-serve, as a **preview** | **Eligible**, with registered parameter gaps | Owner signs in through the official browser flow; sets a per-app usage limit in ChatGPT settings; approved budgets; licence question below |
+| OpenAI via Sign in with ChatGPT plan usage | Yes for open-source and locally hosted apps, self-serve, as a **preview** | **Eligible and integrated (S014d)**, with registered parameter gaps | Done 2026-11-15: Apache-2.0 licence, owner sign-in, per-app limit 10%, approved budgets (8/20/30) |
 | Anthropic via Claude Pro subscription | **Not established.** Published policy directs developers' products, including Agent SDK use, to API keys | **Unavailable** until Anthropic confirms in writing | Owner may ask Anthropic; paid API use needs a separate spend authorisation (not given) |
 
 ## Google: Gemma on the Gemini API
@@ -72,10 +72,8 @@ Sources: [overview](https://developers.openai.com/siwc),
 - **Eligibility:** the documentation covers plan usage "for open-source and
   locally hosted apps"; paid or remotely hosted apps go to an interest form.
   Registration is self-serve (dynamic client registration, no client secret).
-  The Laboratory is locally hosted. Its repositories are public but carry **no
-  licence**, so it is not strictly open source; locally hosted use appears to
-  qualify on its own. S014d re-checks this before sign-in; adding a licence is the
-  owner's decision (OD-10), not something this programme assumes.
+  The Laboratory is locally hosted and, since S014d (OD-10, owner decision), all
+  three repositories are licensed Apache-2.0. Wording re-checked 2026-11-15.
 - **Flow:** OAuth with PKCE in the user's browser, loopback redirect on
   `127.0.0.1` only, scopes `offline_access resource.invoke
   chatgpt.tokens.use.direct` (plus `openid profile email`); the granted scopes
@@ -86,12 +84,15 @@ Sources: [overview](https://developers.openai.com/siwc),
   `response.completed`. Never ChatGPT's `backend-api`. Models are those the
   signed-in account lists at `GET /v1/models` (`visibility == "list"`); the ChatGPT
   menu is not evidence of API access.
-- **Unsupported parameters (preview):** `background`, `conversation`,
-  `max_output_tokens`, `temperature`, `top_logprobs`, `top_p`, `truncation`,
-  `user` must be omitted. Seed and reasoning-setting support are not documented
-  and are treated as unknown until verified. Function/custom tools are supported
-  (grouped in namespaces or via `additional_tools`); hosted tools (file search,
-  code interpreter, computer use, hosted MCP, tool search) are not.
+- **Unsupported parameters (preview, re-checked 2026-11-15):** `background`,
+  `conversation`, `max_output_tokens`, `max_tool_calls`, `metadata`,
+  `moderation`, `multi_agent`, `prompt`, `prompt_cache_retention`,
+  `safety_identifier`, `temperature`, `top_logprobs`, `top_p`, `truncation`,
+  `user` must be omitted; so must `previous_response_id` over HTTP. Explicit
+  `system` message items are rejected (use `instructions`). The Responses API
+  has no seed. Function/custom tools must be grouped in a `namespace` tool or
+  sent via `additional_tools`; hosted tools (file search, code interpreter,
+  computer use, hosted MCP, tool search, image generation) are not supported.
 - **Errors:** documented codes include `subscription_sharing_usage_limit_exceeded`
   (429: pause; may be an app-specific limit), `subscription_sharing_user_not_eligible`
   (403: do not retry or loop through OAuth), `subscription_sharing_unsupported_capability`
@@ -102,6 +103,12 @@ Sources: [overview](https://developers.openai.com/siwc),
 - **Comparability consequences:** no temperature, no output cap and an unknown
   seed mean the ChatGPT arm cannot match the local profile's sampling. These are
   registered as provider-specific conditions, never emulated.
+- **Implemented (S014d):** Simulation `chatgpt_auth.py` (sign-in, refresh,
+  revocation) and `chatgpt.py` (adapter `openai-responses-chatgpt-plan` 1.0.0).
+  Live check: [2026-11-15 integration report](../experiments/2026-11-15-chatgpt-integration.md).
+  Tokens refresh serially under a lock; unusable-refresh codes clear tokens and
+  end the run; temporary refresh failures retry and keep tokens. Per-app limit
+  set by the owner to 10% of the weekly allowance.
 
 ## Anthropic: Claude Pro
 

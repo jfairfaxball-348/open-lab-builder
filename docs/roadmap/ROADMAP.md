@@ -85,7 +85,9 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S014b. On 2026-11-15 the owner chose the hosted-intelligence
+**Next:** S014g, after the owner decides OD-12 (Gemma arm) and OD-13 (context
+guard for hosted arms). S014d is complete; S014c remains blocked by provider
+reliability. On 2026-11-15 the owner chose the hosted-intelligence
 comparison programme (S014, [ADR-0016](../decisions/ADR-0016-hosted-provider-broker.md))
 as the response to the two local NO_GO results (S007d-001, S007h-001), resolving
 OD-9. S010 follows the programme or proceeds independently. No hosted request,
@@ -791,7 +793,8 @@ behavioural success are always reported separately.
 ### S014d — OpenAI Sign in with ChatGPT Plan-Usage Adapter
 
 - **Repository / streams:** Simulation adapter/broker; Builder manifest. B.
-- **Status:** planned; human-gated.
+- **Status:** complete (2026-11-15). Simulation `43d429f`; live round trip in
+  [the integration report](../experiments/2026-11-15-chatgpt-integration.md).
 - **Objective:** Run the Laboratory conversation on a ChatGPT-plan model.
 - **Prerequisites:** S014b. **Human:** decide OD-10 (licence/eligibility), set a
   per-app usage limit in ChatGPT settings, sign in through the official browser
@@ -809,7 +812,16 @@ behavioural success are always reported separately.
   round trip; sign-out/refresh failure handling; archive and ledger verify.
 - **Exit criteria:** tool-use round trip and recorded effective settings.
 - **Risks:** preview changes, unknown seed/reasoning support, opaque metering.
-- **Next recommended milestone:** S014g (or S014f if Anthropic is permitted).
+- **Delivered:** OD-10 resolved by licensing all three repositories Apache-2.0;
+  `ols provider sign-in|sign-out|models openai-chatgpt`; adapter
+  `openai-responses-chatgpt-plan` 1.0.0 (namespaced tools, `strict: false`,
+  SSE, documented error recovery); broker hooks `secret()`/`decode()`; 28 fake
+  tests (340 Simulation tests pass). Owner signed in; per-app limit 10%. Live:
+  12/12 requests ok on `gpt-6.1-sol`; under a diagnostic 16384-token client
+  guard the model searched, described, demonstrated, invoked `6*7` and
+  answered "42" from the result. Under the 4096 baseline guard it looped
+  search/describe without invoking (context truncation; OD-13).
+- **Next recommended milestone:** S014g (Anthropic is excluded).
 
 ### S014e — Anthropic Permission Clarification
 

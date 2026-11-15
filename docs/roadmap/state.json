@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T08:20:00Z",
-  "last_session": "S014b",
+  "updated_at": "2026-11-15T08:40:00Z",
+  "last_session": "S014d",
   "completed_milestones": [
     {
       "id": "S001",
@@ -177,12 +177,22 @@
         "afe5281"
       ],
       "summary": "Provider-neutral hosted path: supervisor-owned loopback broker with per-run token, DPAPI credential store under the user profile, host-local profiles disabled by default, fsynced reservation ledger (per run, rolling 24 h, total; retries counted; unknown outcomes spent), one request at a time, bounded retries, terminal errors, egress host check, per-run request mirror, no fallback, hosted recovery refused; `ols provider` administration. 13 fake-provider tests incl. redaction and refusals; 302 Simulation tests pass. No contract change; world 0.6.0 unchanged. No real provider contacted."
+    },
+    {
+      "id": "S014d",
+      "completed_at": "2026-11-15T08:40:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "43d429f",
+        "2280785"
+      ],
+      "summary": "ChatGPT plan usage via Sign in with ChatGPT: dynamic registration with PKCE loopback, RS256 ID-token validation, plan-scope check, DPAPI token storage, serialised refresh, revocation on sign-out; adapter openai-responses-chatgpt-plan 1.0.0 (store=false, stream=true, namespaced strict=false tools, SSE, documented error recovery); broker hooks secret()/decode(). 28 fake tests; 340 Simulation tests pass. OD-10 resolved: Apache-2.0 licence on all three repositories. Live: owner signed in, per-app limit 10%, 12/12 requests ok on gpt-6.1-sol; tool-use round trip with a result-informed answer under a diagnostic 16384 guard; looped without invoking under the 4096 baseline guard (OD-13)."
     }
   ],
   "next_milestone": {
-    "id": "S014d",
+    "id": "S014g",
     "repository": "open-lab-simulation",
-    "title": "OpenAI Sign in with ChatGPT Plan-Usage Adapter"
+    "title": "Cross-Provider Compatibility Suite"
   },
   "blockers": [
     {
@@ -204,12 +214,12 @@
       "summary": "Live hosted requests need per-provider human setup and approved request budgets.",
       "affects": [
         "S014c",
-        "S014d",
+        "S014g",
         "S014h",
         "S014i"
       ],
       "needs_human": true,
-      "detail": "ADR-0016 broker implemented (S014b). Gemma (S014c) is configured and credentialed but blocked by intermittent provider HTTP 500 on multi-step tool turns (KI-22, OD-12). ChatGPT (S014d): OD-10, per-app usage limit, browser sign-in, budgets. Anthropic was excluded by the owner. The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
+      "detail": "ADR-0016 broker implemented (S014b). Gemma (S014c) is configured and credentialed but blocked by intermittent provider HTTP 500 on multi-step tool turns (KI-22, OD-12). ChatGPT (S014d) is integrated: owner signed in, per-app limit 10%, approved budget 8/20/30 (12 used); further live checks need budget within that approval or a new one. Anthropic was excluded by the owner. The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
     }
   ],
   "known_issues": [
@@ -371,6 +381,16 @@
         "S014i"
       ],
       "detail": "2026-11-15: requests with two or more call turns succeeded 0/6 on gemma-4-26b-a4b-it (including a minimal synthetic conversation) and 2/6 on gemma-4-31b-it (byte-identical bodies both failed and succeeded); single-call requests 9/10. Provider-side; not caused by the Laboratory translation. See docs/experiments/2026-11-15-gemma-integration.md."
+    },
+    {
+      "id": "KI-23",
+      "summary": "ChatGPT plan usage cannot honour temperature, output cap or seed, and its metering is opaque to the app.",
+      "affects": [
+        "S014g",
+        "S014h",
+        "S014i"
+      ],
+      "detail": "The preview route rejects temperature, top_p and max_output_tokens; the Responses API has no seed. These are recorded per run as not sent. Live token refresh and the documented plan-usage errors are tested only against fakes. See docs/experiments/2026-11-15-chatgpt-integration.md."
     }
   ],
   "open_decisions": [
@@ -388,15 +408,6 @@
       "needs_human": true
     },
     {
-      "id": "OD-10",
-      "needs_human": true,
-      "summary": "Whether the Laboratory qualifies for ChatGPT plan usage as a locally hosted app, or should add an open-source licence first.",
-      "affects": [
-        "S014d"
-      ],
-      "detail": "OpenAI documents plan usage for open-source and locally hosted apps. The repositories are public with no licence, so they are not strictly open source; local hosting appears sufficient. Choosing a licence is the owner's decision. S014d re-checks the official pages before sign-in."
-    },
-    {
       "id": "OD-12",
       "needs_human": true,
       "summary": "Gemma arm: re-probe later, register a higher retry policy, or record Gemma unavailable for the matched campaign.",
@@ -406,35 +417,57 @@
         "S014h"
       ],
       "detail": "S014c showed working discovery and invocation but unreliable multi-step turns (KI-22). More retries cost budget and change the provider-error profile, so any policy must be registered before scored runs. Owner chose gemma-4-31b-it over 26B on 2026-11-15. 22 of 32 approved smoke requests are used."
+    },
+    {
+      "id": "OD-13",
+      "needs_human": true,
+      "summary": "Client context guard for hosted arms: keep the 4096-token local baseline for comparability, or register a larger guard for every hosted arm.",
+      "affects": [
+        "S014g",
+        "S014h"
+      ],
+      "detail": "S014d: under the 4096 guard (which reserves the requested 2048 output tokens) gpt-6.1-sol looped search/describe because the documentation result was truncated after one step; under a diagnostic 16384 guard it completed search, describe, demonstrate, invoke and a result-informed answer. Either choice must be registered before scored runs and applied to all arms; local S007d/S007h results remain the historical 4096 comparison group."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T08:20:00Z",
+    "ran_at": "2026-11-15T08:40:00Z",
     "commands": [
       {
-        "command": "Simulation: uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest (after adapter 1.1.0)",
-        "result": "Lint passed; 312 tests passed in 263.98 seconds"
+        "command": "Simulation: uv run ruff check .; uv run pytest (after the S014d adapter, before the live check)",
+        "result": "Lint passed; 340 tests passed, including 28 new ChatGPT fake-server tests"
       },
       {
-        "command": "AI Studio rate-limit page for the Open Lab project (read in the owner's Chrome with permission)",
-        "result": "Gemma 4 26B and 31B: 30 RPM, 16K input TPM, 14.4K RPD, free tier, no prior usage"
+        "command": "Window: uv run ruff check .; uv run pytest (after adding the Apache-2.0 licence)",
+        "result": "Lint passed; 38 tests passed"
       },
       {
-        "command": "ols provider configure google-gemini (owner-approved: per_run 8, per_day/total 20 then 32, 15 s spacing)",
-        "result": "Profile enabled; credential stored by the owner"
+        "command": "Official SIWC pages re-read (overview, sign-in, models and inference, accounts and sessions, token reference, errors and recovery, preview limitations)",
+        "result": "Eligibility wording unchanged; unsupported-field list grown and namespaced tools now required; adapter follows the current pages"
       },
       {
-        "command": "ols run docs/experiments/configs/S014c-gemma-smoke.json and S014c-gemma-31b-smoke.json (x2)",
-        "result": "All three: search/describe/invoke ok (6*7 = 42), then provider HTTP 500 on the multi-step turn; runs failed with recorded errors; archives verify"
+        "command": "ols provider configure openai-chatgpt (owner-approved: per_run 8, per_day 20, total 30, 2 attempts)",
+        "result": "Profile enabled"
       },
       {
-        "command": "Six single-request diagnostics through the broker (replays and a synthetic two-call conversation)",
-        "result": "26B multi-call 0/6; 31B multi-call 2/6; identical 31B bodies both failed and succeeded; 22 of 32 requests used"
+        "command": "ols provider sign-in openai-chatgpt (owner signed in and consented in their browser)",
+        "result": "Client registered; ID token verified against OpenAI JWKS; plan-usage scope granted"
+      },
+      {
+        "command": "ChatGPT settings, Connected App Limits (Chrome, at the owner's request)",
+        "result": "The Open Laboratory limited to 10% of the weekly allowance; confirmed after reload"
+      },
+      {
+        "command": "ols provider models openai-chatgpt",
+        "result": "Eight models listed; gpt-6.1-sol chosen for the smoke check"
+      },
+      {
+        "command": "ols run S014d-chatgpt-smoke.json and S014d-chatgpt-smoke-16k.json",
+        "result": "12/12 requests ok; 4096 guard: search/describe loop, no invoke; 16384 guard: invoke 6*7 = 42 and result-informed answer; both archives verify; ledger 12 reserve/12 outcome; no token found in 41 scanned files"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
-        "result": "Lint passed; 305 tests passed in 46.95 seconds and all six health checks passed"
+        "result": "Lint passed; 305 tests passed in 40.21 seconds and all health checks passed"
       }
     ]
   }
