@@ -109,8 +109,8 @@ The start-of-session Builder check passed 342 tests in 53.11 s and all health
 checks. Simulation `uv run pytest` passed **402 tests in 360.63 s**, and Ruff
 passed. The previous [engineering report](2026-11-15-statistics-capabilities.md)
 retains the numerical edge-case tests, immutable-world checks and scripted
-acceptance evidence. End-of-session Builder health/tests and Ruff results are
-passed: **342 tests in 48.83 s**, every health check and Ruff. Commands/results
+acceptance evidence. The end-of-session Builder run passed **342 tests in
+48.83 s**, every health check and Ruff. Commands/results
 are recorded in state.json and the S008c validation snapshot.
 
 ## Limits and next milestone
