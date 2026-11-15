@@ -867,7 +867,7 @@ behavioural success are always reported separately.
 ### S014h — Comparative Campaign Preregistration
 
 - **Repository / streams:** Builder registration; Simulation manifest. D.
-- **Status:** planned; human approval of request budgets required.
+- **Status:** planned.
 - **Objective:** Freeze a 24-cell campaign on ChatGPT plan usage (the owner
   excluded Anthropic and scrapped Gemma on 2026-11-15), compared with the local
   historical group S007d-001/S007h-001.
@@ -875,8 +875,8 @@ behavioural success are always reported separately.
   v1 unchanged where feasible; three seeds x two replicates per provider; one
   preregistered schedule; frozen settings with every difference from the local
   profile listed, including the 500,000-token client guard (OD-13) against the
-  local 4096; approved per-run, per-day and campaign request ceilings (32 calls x
-  24 runs = 768 before retries is the upper figure to approve or reduce); NOT_SCORED pilots; fresh workspace and
+  local 4096; the owner's 10% per-app plan limit as the only usage cap (ledger
+  ceilings nominal; registered handling for a usage-limit stop mid-campaign); NOT_SCORED pilots; fresh workspace and
   memory; replicate independence addressed (KI-21).
 - **Exit criteria:** registration committed and pushed before any scored cell.
 - **Next recommended milestone:** S014i.

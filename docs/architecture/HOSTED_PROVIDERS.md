@@ -108,7 +108,8 @@ Sources: [overview](https://developers.openai.com/siwc),
   Live check: [2026-11-15 integration report](../experiments/2026-11-15-chatgpt-integration.md).
   Tokens refresh serially under a lock; unusable-refresh codes clear tokens and
   end the run; temporary refresh failures retry and keep tokens. Per-app limit
-  set by the owner to 10% of the weekly allowance.
+  set by the owner to 10% of the weekly allowance; on 2026-11-15 the owner made it
+  the only usage cap (ledger ceilings nominal, every attempt still recorded).
 
 ## Anthropic: Claude Pro
 

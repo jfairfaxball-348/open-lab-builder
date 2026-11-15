@@ -1,7 +1,7 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T09:00:00Z",
+  "updated_at": "2026-11-15T09:10:00Z",
   "last_session": "S014d",
   "completed_milestones": [
     {
@@ -211,14 +211,13 @@
     },
     {
       "id": "B-HOSTED",
-      "summary": "Live hosted requests need approved request budgets.",
+      "summary": "Hosted use is bounded by the owner's 10% per-app ChatGPT plan limit; no other spend is authorised.",
       "affects": [
-        "S014g",
         "S014h",
         "S014i"
       ],
-      "needs_human": true,
-      "detail": "ADR-0016 broker implemented (S014b). ChatGPT plan usage (S014d) is integrated: owner signed in, per-app limit 10%, approved budget 8/20/30 (12 used); further live checks need budget within that approval or a new one. Gemma was scrapped (OD-12) and Anthropic excluded by the owner. The ChatGPT client guard is 500,000 tokens (OD-13). The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
+      "needs_human": false,
+      "detail": "ADR-0016 broker implemented (S014b). ChatGPT plan usage (S014d) is integrated with a 10% per-app plan limit. On 2026-11-15 the owner made that limit the only cap: the ledger ceilings are nominal (1,000,000 per run/day/total) and every attempt is still reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback. Gemma was scrapped (OD-12) and Anthropic excluded. No paid API key, credits or other tier is ever implied."
     }
   ],
   "known_issues": [
@@ -398,7 +397,7 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T09:00:00Z",
+    "ran_at": "2026-11-15T09:10:00Z",
     "commands": [
       {
         "command": "Simulation: uv run ruff check .; uv run pytest (after the S014d adapter, before the live check)",
@@ -439,6 +438,10 @@
       {
         "command": "GET https://api.openai.com/v1/models with the plan token (catalog only, no inference)",
         "result": "gpt-6.1-sol context_window 500000, max_context_window 872000; 500000 registered as the ChatGPT client guard"
+      },
+      {
+        "command": "ols provider configure openai-chatgpt --per-run/--per-day/--total 1000000 (owner: 10% plan limit is the only cap)",
+        "result": "Profile limits nominal; 12 requests reserved so far"
       },
       {
         "command": "Builder: uv run ruff check .; uv run olb check --tests",
