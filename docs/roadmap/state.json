@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T14:34:11Z",
-  "last_session": "S007e",
+  "updated_at": "2026-11-15T14:50:58Z",
+  "last_session": "S008c",
   "completed_milestones": [
     {
       "id": "S001",
@@ -250,22 +250,33 @@
         "4da399c"
       ],
       "summary": "Supervisor-mediated models.ask and one bounded local llama3.2:3b GPU lease in minimal 0.7.0; 0.6.0 unchanged. ADR-0018 written before coding; fake tests and real local load/ask/unload passed. Builder 306 and Simulation 395 tests passed. Frozen capability check closed with explicitly partial coverage after subscription_sharing_usage_limit_exceeded: guided/C1 at 32 steps, C2 PROVIDER_CENSORED after 13, C3 NOT_RUN_PROVIDER_STOP. Only guided consulted and used the answer (one demo, one direct call). 78 reserved hosted attempts, 77 completed calls; no replacement/probe. Owner replied Continue to the partial-closeout question, interpreted as permission to close with coverage explicit and S008c next. No claim of a complete four-cell check or unguided specialist use; see dated report."
+    },
+    {
+      "id": "S008c",
+      "completed_at": "2026-11-15T14:49:08Z",
+      "repository": "open-lab-builder",
+      "commits": [
+        "d52789b",
+        "5e219d0",
+        "cde02d0"
+      ],
+      "summary": "Approved standard-library statistics part complete in minimal 0.8.0: bounded population statistics/inclusive quartiles and OLS with Pearson r; existing releases unchanged. Engineering tests/scripted archive pass. After owner quota clearance, S008c-001 ran all four frozen 32-step cells on gpt-6.1-sol; all archives verify. Both capabilities discovered in every C run. Guided used both/results; C1 no statistics invocation; C2/C3 each made 3 regression calls and used the results in preserved aggregation-reversal notes; unguided stats.describe use 0/3. Independent rational oracle matched all 8 direct outputs. Exactly 128 requests, 652054 reported input and 5668 output tokens (503 reasoning tokens included), zero repairs/context truncation/censoring/specialist use; one unmasked assessor and similar C2/C3 traces limit generalisation. No new autonomy GO. Plotting/SMT/Lean unshipped; S010 next."
     }
   ],
   "next_milestone": {
-    "id": "S008c",
+    "id": "S010",
     "repository": "open-lab-builder",
-    "title": "Scientific and Proof Tools (frozen statistics capability check authorized to run)"
+    "title": "Experimental Protocol and Comparative Observation (split owner-sized core work first)"
   },
   "blockers": [
     {
       "id": "B-HOSTED",
-      "summary": "Owner confirmed proceeding with the frozen S008c hosted check (Yes run it); use remains limited to its four 32-step runs, with provider-stop rules and no extra probe, settings change or fallback.",
+      "summary": "S008c completed its four authorized hosted runs; any further hosted campaign needs a separate owner-approved allowance. S010 core protocol/read-only comparison work can use existing archives without new spend.",
       "affects": [
-        "S008c"
+        "S010"
       ],
-      "needs_human": false,
-      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check."
+      "needs_human": true,
+      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only."
     }
   ],
   "known_issues": [
@@ -415,7 +426,7 @@
         "S010",
         "S012"
       ],
-      "detail": "In S007h-001, seed-41 runs sharing a prompt (C and D are identical) matched on their first 5-9 tool actions with identical output-token counts. S007d-001 used the same seed design. S010 should design replicates and seeds for the independence it claims."
+      "detail": "In S007h-001, seed-41 runs sharing a prompt (C and D are identical) matched on their first 5-9 tool actions with identical output-token counts. S007d-001 used the same seed design. S010 should design replicates and seeds for the independence it claims. S008c-001 C2/C3 also chose closely related synthetic aggregation-reversal constructions despite different group-B data; these are descriptive repeated-prompt traces, not independent generalisation evidence."
     },
     {
       "id": "KI-23",
@@ -449,11 +460,12 @@
     },
     {
       "id": "KI-28",
-      "summary": "S008c statistics engineering is validated, but real-model discovery/use remains untested pending quota confirmation.",
+      "summary": "S008c unguided stats.describe use was 0/3; regression use was 2/3 with closely related examples, limiting generalisation.",
       "affects": [
-        "S008c"
+        "S008c",
+        "S010"
       ],
-      "detail": "World 0.8.0 is built/self-tested and its scripted archive verifies. The four S008c-001 configurations and source/runner pins are prepared; no hosted cell or probe has started. Numeric outputs use documented floating-point population/quartile/OLS conventions, not exact symbolic or causal inference. S008c remains incomplete."
+      "detail": "All 4 S008c-001 archives verify; both tool summaries reached all C runs. Guided used both/results. C1 no statistics use; C2/C3 used three regression fits each in preserved notes. One unmasked assessor and correlated constructions; no causal or general-autonomy conclusion, no new baseline GO. Numeric outputs retain documented floating-point/population/quartile/OLS limitations."
     }
   ],
   "open_decisions": [
@@ -467,33 +479,33 @@
         "S010",
         "S012"
       ],
-      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering adds no model-selection evidence; its real-model check is unexecuted pending plan confirmation.",
+      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering and its completed 4-cell capability check add no model-ranking or final orchestrator-selection evidence; the approved gpt-6.1-sol route is retained.",
       "needs_human": true
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T14:05:43Z",
+    "ran_at": "2026-11-15T14:50:58Z",
     "commands": [
       {
-        "command": "Builder and Simulation: git status; git log --oneline -10; uv sync; Builder: uv run olb state; uv run olb check --tests (start)",
-        "result": "Both checkouts clean and environments already synchronized. Builder 306 tests in 44.57 s and all health checks passed; S008c next with B-HOSTED quota confirmation pending."
+        "command": "Builder and Simulation: git status/log; uv sync; Builder: uv run olb state; uv run olb check --tests (start)",
+        "result": "Both checkouts clean and environments already synchronized; starting Builder 342 tests passed in 53.11 s and all health checks passed. Owner Yes run it recorded as quota clearance before launch."
       },
       {
-        "command": "Builder: uv run pytest tests/test_statistics_capabilities.py; uv run ruff check .; uv run olb check --tests",
-        "result": "36 new numerical/manifest/invoker tests passed; final Builder suite 342 passed in 47.54 s, all health checks passed; Ruff passed."
+        "command": "Simulation: uv run pytest; uv run ruff check .",
+        "result": "402 tests passed in 360.63 s; Ruff passed. Runtime/runner/world/configuration source pins remain unchanged."
       },
       {
-        "command": "Simulation: uv run pytest (start and final); uv run pytest tests/test_statistics_world.py tests/test_s008c_runner.py; uv run ruff check .",
-        "result": "Start: 395 passed in 359.70 s. Final full suite: 402 passed in 362.14 s. Seven new world/runner tests also passed separately in 7.94 s; Ruff passed. No runtime source changes."
+        "command": "Simulation: uv run python scripts/s008c_check.py --quota-clearance <recorded owner confirmation>, then three invocations without changing configuration",
+        "result": "All 4 scheduled cells finished at 32 steps; every archive verifies. Both tools used/results used under guidance; unguided stats.regress used/results used in 2/3 C runs, stats.describe 0/3. No retry, replacement, censoring, repair, context truncation or specialist use."
       },
       {
-        "command": "Builder: uv run olb world build worlds/minimal --publish; uv run olb world verify <0.6.0/0.7.0/0.8.0> --self-test; fixture/source/runner hash audit",
-        "result": "0.8.0 built with 11 capabilities and self-tests passed; all 3 releases verify and self-test at recorded digests. All 43 generated 0.8.0 fixture files match publication byte-for-byte; old fixtures unmodified; runtime/runner pins match."
+        "command": "Read-only archive/hash/config/prompt/initial-state audit; independent rational-arithmetic output audit; gateway/provider/global ledger reconciliation",
+        "result": "All four event/provider hashes verify; frozen source/runner/config/prompt/world pins match; every workspace initially empty and memory absent. All 8 direct statistics outputs match independent rational calculations within 1e-12. Exactly 128 reservations/128 completed calls, 652054 input and 5668 reported output tokens (503 reasoning included), all provider outcomes OK and model gpt-6.1-sol. 508.235 active seconds. Raw archives unchanged; plan percentage/remaining quota unknown."
       },
       {
-        "command": "Simulation: run_experiment(experiments/s008c-scripted.json); verify_archive; uv run python scripts/s008c_check.py (without clearance)",
-        "result": "Scripted statistics run completed and archive verifies, including numerical outputs and a constant-x error. Runner without clearance refused before launch. Actual provider ledger has zero S008c reservations; no hosted archive or started-cell record. All four configurations pass schema/hash/budget/prompt checks. S008c remains incomplete pending quota confirmation."
+        "command": "Builder: uv run ruff check .; uv run olb check --tests (closeout)",
+        "result": "Final closeout: Ruff passed; 342 tests passed in 48.83 s and every health check passed after report, roadmap and state updates."
       }
     ]
   }

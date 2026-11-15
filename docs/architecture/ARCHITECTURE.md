@@ -30,8 +30,10 @@ They are ordinary standard-library Python capabilities on the process tier,
 accept bounded numeric data only, and require no filesystem, network, GPU or
 subprocess permission. Their manifests define population variance, inclusive
 quartiles and OLS-with-intercept edge cases. No agent-supplied code is executed.
-The scripted acceptance path is verified; the hosted capability check remains
-unexecuted pending quota confirmation. No runtime or schema changes are needed.
+The scripted acceptance path and four hosted capability-check archives verify.
+Both tools were invoked and their results used under guidance; unguided C
+regression use/result use occurred in 2/3 runs, description use in 0/3. These
+are bounded observations, not a new autonomy GO. No runtime or schema changes.
 
 S013 adds an experimental-readiness plan without changing implemented architecture:
 [Autonomy and experimental readiness](AUTONOMY_AND_EXPERIMENTAL_READINESS.md),

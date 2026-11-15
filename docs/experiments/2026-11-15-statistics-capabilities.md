@@ -1,5 +1,12 @@
 # S008c: Statistics engineering ready; hosted check pending
 
+**Historical engineering checkpoint, retained from before launch.** The
+pending status below was accurate at Builder e89b712. After the owner's
+quota clearance, all four hosted cells completed; the approved statistics
+part is now complete. See the separate
+[capability-check report](2026-11-15-statistics-capability-check.md) for current
+coverage, results, usage and the S010 recommendation.
+
 **S008c is incomplete.** The approved standard-library statistics part is
 implemented and its engineering acceptance passes. The four-cell real-model
 check is prepared but **unexecuted**: the handoff requires owner confirmation

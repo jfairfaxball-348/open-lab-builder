@@ -144,14 +144,18 @@ World 0.6.0 remains unchanged and runnable. The guided check discovered,
 consulted and used the answer; the unguided check closed with partial coverage
 after a plan-quota stop (C1 no consultation, C2 censored, C3 unstarted).
 [Results and limits](docs/experiments/2026-11-15-specialist-consultation.md).
-Next: **S008c**, with further plan use waiting for quota availability.
+S008c's separate four-run capability check is now complete; its own allowance
+was used without reruns. Next: **S010 — Experimental Protocol and Comparative Observation**.
 
 S008c's engineering is implemented: bounded population statistics/inclusive
 quartiles and ordinary least-squares regression with Pearson r, using only the
 standard library and no additional permissions. Numeric tests and a scripted
-supervisor archive pass. Its hosted discovery/use check is frozen but **not
-run** pending owner-confirmed plan availability, so S008c remains incomplete.
-[Engineering report](docs/experiments/2026-11-15-statistics-capabilities.md).
+supervisor archive pass. All four hosted check archives verify: both tools
+were used in the guided run; regression was used with result-linked artifacts
+in 2/3 unguided C runs, while description was not invoked in any C run.
+This completes the approved statistics part without a new autonomy GO.
+[Capability report](docs/experiments/2026-11-15-statistics-capability-check.md),
+[engineering checkpoint](docs/experiments/2026-11-15-statistics-capabilities.md).
 
 What does **not** exist yet: a registered (prospective) GO,
 container isolation on Linux or with network access, and run comparison. The first
@@ -221,7 +225,8 @@ the three-repository architecture are preserved. S007a local gateway is complete
 S007d-001 is complete with **NO_GO**: all 24 cells verified, but no complete
 guided control or qualifying unguided run. S007h also returned NO_GO. Subsequent
 hosted work led to the owner-accepted post-hoc GO in ADR-0017 and per-capability
-checks; S007e is closed with the partial coverage stated above. Next is S008c.
+checks; S007e is closed with the partial coverage stated above. S008c's approved
+statistics part is complete with its full four-run capability report. Next is S010.
 A valid negative
 report remains a completed research result, not a capability claim. Hosted models
 are optional and separately authorised; real isolation remains mandatory for

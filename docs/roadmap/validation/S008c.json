@@ -1,26 +1,26 @@
 {
   "status": "passing",
-  "ran_at": "2026-11-15T14:05:43Z",
+  "ran_at": "2026-11-15T14:50:58Z",
   "commands": [
     {
-      "command": "Builder and Simulation: git status; git log --oneline -10; uv sync; Builder: uv run olb state; uv run olb check --tests (start)",
-      "result": "Both checkouts clean and environments already synchronized. Builder 306 tests in 44.57 s and all health checks passed; S008c next with B-HOSTED quota confirmation pending."
+      "command": "Builder and Simulation: git status/log; uv sync; Builder: uv run olb state; uv run olb check --tests (start)",
+      "result": "Both checkouts clean and environments already synchronized; starting Builder 342 tests passed in 53.11 s and all health checks passed. Owner Yes run it recorded as quota clearance before launch."
     },
     {
-      "command": "Builder: uv run pytest tests/test_statistics_capabilities.py; uv run ruff check .; uv run olb check --tests",
-      "result": "36 new numerical/manifest/invoker tests passed; final Builder suite 342 passed in 47.54 s, all health checks passed; Ruff passed."
+      "command": "Simulation: uv run pytest; uv run ruff check .",
+      "result": "402 tests passed in 360.63 s; Ruff passed. Runtime/runner/world/configuration source pins remain unchanged."
     },
     {
-      "command": "Simulation: uv run pytest (start and final); uv run pytest tests/test_statistics_world.py tests/test_s008c_runner.py; uv run ruff check .",
-      "result": "Start: 395 passed in 359.70 s. Final full suite: 402 passed in 362.14 s. Seven new world/runner tests also passed separately in 7.94 s; Ruff passed. No runtime source changes."
+      "command": "Simulation: uv run python scripts/s008c_check.py --quota-clearance <recorded owner confirmation>, then three invocations without changing configuration",
+      "result": "All 4 scheduled cells finished at 32 steps; every archive verifies. Both tools used/results used under guidance; unguided stats.regress used/results used in 2/3 C runs, stats.describe 0/3. No retry, replacement, censoring, repair, context truncation or specialist use."
     },
     {
-      "command": "Builder: uv run olb world build worlds/minimal --publish; uv run olb world verify <0.6.0/0.7.0/0.8.0> --self-test; fixture/source/runner hash audit",
-      "result": "0.8.0 built with 11 capabilities and self-tests passed; all 3 releases verify and self-test at recorded digests. All 43 generated 0.8.0 fixture files match publication byte-for-byte; old fixtures unmodified; runtime/runner pins match."
+      "command": "Read-only archive/hash/config/prompt/initial-state audit; independent rational-arithmetic output audit; gateway/provider/global ledger reconciliation",
+      "result": "All four event/provider hashes verify; frozen source/runner/config/prompt/world pins match; every workspace initially empty and memory absent. All 8 direct statistics outputs match independent rational calculations within 1e-12. Exactly 128 reservations/128 completed calls, 652054 input and 5668 reported output tokens (503 reasoning included), all provider outcomes OK and model gpt-6.1-sol. 508.235 active seconds. Raw archives unchanged; plan percentage/remaining quota unknown."
     },
     {
-      "command": "Simulation: run_experiment(experiments/s008c-scripted.json); verify_archive; uv run python scripts/s008c_check.py (without clearance)",
-      "result": "Scripted statistics run completed and archive verifies, including numerical outputs and a constant-x error. Runner without clearance refused before launch. Actual provider ledger has zero S008c reservations; no hosted archive or started-cell record. All four configurations pass schema/hash/budget/prompt checks. S008c remains incomplete pending quota confirmation."
+      "command": "Builder: uv run ruff check .; uv run olb check --tests (closeout)",
+      "result": "Final closeout: Ruff passed; 342 tests passed in 48.83 s and every health check passed after report, roadmap and state updates."
     }
   ]
 }

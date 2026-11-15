@@ -87,7 +87,10 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S008c (owner-approved 2026-11-15, OD-15 resolved). S007e engineering
+**Next:** S010 — Experimental Protocol and Comparative Observation. S008c's
+approved statistics part is complete with all four frozen capability-check
+archives verified (guided use of both; C regression use 2/3, description use
+0/3). No additional hosted-run budget is implied. S007e engineering
 is complete; its capability check closed with explicitly partial coverage after
 a plan-quota stop and owner follow-up (see its report). The owner accepted S014i-001 as a GO
 scored with the fixed readers (S014l) and rubric v1.1 (S014m), so the
@@ -1149,10 +1152,9 @@ behavioural success are always reported separately.
 ### S008c — Scientific and Proof Tools
 
 - **Repository / streams:** Builder capabilities; Simulation acceptance archives. A/B.
-- **Status:** engineering implemented and verified; **incomplete**, awaiting
-  owner-confirmed plan availability for the frozen hosted capability check.
-  **Owner-approved 2026-11-15** (OD-15, ADR-0017) for the first part below,
-  which needs no installation. No S008c hosted request has been made.
+- **Status:** **complete for the approved statistics part**, 2026-11-15.
+  **Owner-approved** (OD-15, ADR-0017). All four frozen capability-check runs
+  completed at 32 steps and their archives verify. Later parts remain gated.
 - **Objective:** Add useful computational affordances with checkable outputs.
 - **Prerequisites:** S005b, current expansion GO (ADR-0017) and approved resource
   availability.
@@ -1185,17 +1187,26 @@ behavioural success are always reported separately.
 - **Exit criteria:** built-world self-tests and bounded archive pass; test this capability (ADR-0017): acceptance tests plus a bounded archived real-model check of discovery and use, negative results kept.
   Unsupported/unsafe variants remain explicitly unshipped.
 - **Risks:** installations, native resources and proof-language execution surfaces.
-- **Next recommended milestone:** another useful approved capability only if the
-  repeat supports expansion; otherwise S007h/S010. Container-needed work waits.
-- **Session record:** minimal 0.8.0 adds the two standard-library statistics
+- **Next recommended milestone:** S010 core protocol/read-only comparisons.
+  No further capability, installation or hosted-run budget is authorized here.
+- **Engineering checkpoint:** minimal 0.8.0 adds the two standard-library statistics
   capabilities; existing releases remain unchanged. Thirty-six Builder numeric
   tests, three Simulation world tests and four quota/budget runner tests pass.
   A scripted engineering archive verifies. S008c-001's four configurations and
-  source/runner hashes are prepared before any hosted request; the runner
-  refuses launch without a quota-clearance record. B-HOSTED remains in force.
+  source/runner hashes were prepared before any hosted request; the runner
+  refused launch without a quota-clearance record at that checkpoint.
   See [engineering report](../experiments/2026-11-15-statistics-capabilities.md)
-  and [registration](../experiments/registrations/S008c-001.md). Next action is
-  the remaining S008c hosted check after quota confirmation, not another tool.
+  and [registration](../experiments/registrations/S008c-001.md).
+- **Completed check:** owner clearance recorded before launch (cde02d0).
+  Guided/C1/C2/C3 all completed 32 steps; no rerun, censoring, repair or context
+  truncation. Both summaries were returned in every C run. Guided invoked and
+  used both tools; C1 invoked neither; C2/C3 each invoked stats.regress three
+  times and preserved result-linked aggregation-reversal notes. stats.describe
+  unguided invocation was 0/3. Totals: 128 requests, 652054 reported input and
+  5668 output tokens (503 reasoning tokens included). Independent numerical
+  audit and all four archives pass. Strongly similar C2/C3 constructions and
+  one unmasked assessor limit generalisation. No new autonomy GO; ADR-0017
+  remains the expansion basis. [Full report](../experiments/2026-11-15-statistics-capability-check.md).
 
 ---
 

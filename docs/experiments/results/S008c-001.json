@@ -192,21 +192,475 @@
     ]
   },
   "hosted_check": {
-    "id": "s008c-001",
-    "status": "NOT_RUN_QUOTA_CONFIRMATION_PENDING",
+    "check": "s008c-001",
+    "manifest_sha256": "0c399b908e64b51be2d27ab58c3971bfbdfaadcb020aaa6cf0f9bcb0d8b04ea1",
+    "epistemic_status": "derived measurements; result-use annotations separate",
     "planned_cells": [
       "guided",
       "c1",
       "c2",
       "c3"
     ],
-    "started_cells": [],
-    "discovered": null,
-    "used": null,
-    "result_used": null,
-    "requests": 0,
-    "tokens": 0,
-    "plan_percentage": "unknown; no S008c usage incurred"
+    "runs": [
+      {
+        "cell": "guided",
+        "run_id": "run-20261115t143427z-35ea48",
+        "event_sha256": "264c4454defaec9b2110f31a45f5d096484d7217c173c1e15b2a4afb0c5bf0d1",
+        "provider_sha256": "caf931653c5cf1a76cf59ed6b5821a7b6019830286bd94b644071231d1e73572",
+        "verify": [],
+        "state": "terminated",
+        "reason": "max_steps",
+        "elapsed_s": 121.71900000001187,
+        "model_calls_completed": 32,
+        "provider_attempts": 32,
+        "provider_terminal": [],
+        "model_versions": [
+          "gpt-6.1-sol"
+        ],
+        "capabilities": {
+          "stats.describe": {
+            "discovery_events": [
+              19,
+              29
+            ],
+            "describe_events": [
+              29
+            ],
+            "invoke_events": [
+              55
+            ],
+            "demonstration_events": [],
+            "failed_execution_events": [],
+            "first_result_exposure_event": 56,
+            "result_use_assessment": {
+              "epistemic_status": "investigator_assessment",
+              "result_used": true,
+              "evidence_events": [
+                55,
+                63,
+                91,
+                92,
+                93,
+                102
+              ],
+              "explanation": "Returned summary and fitted line were preserved in STATISTICS.md; predicted y at x=5 is 11."
+            }
+          },
+          "stats.regress": {
+            "discovery_events": [
+              19,
+              37
+            ],
+            "describe_events": [
+              37
+            ],
+            "invoke_events": [
+              63
+            ],
+            "demonstration_events": [
+              46
+            ],
+            "failed_execution_events": [],
+            "first_result_exposure_event": 47,
+            "result_use_assessment": {
+              "epistemic_status": "investigator_assessment",
+              "result_used": true,
+              "evidence_events": [
+                55,
+                63,
+                91,
+                92,
+                93,
+                102
+              ],
+              "explanation": "Returned summary and fitted line were preserved in STATISTICS.md; predicted y at x=5 is 11."
+            }
+          }
+        },
+        "reported_usage": {
+          "prompt_tokens": 185349,
+          "completion_tokens": 1322,
+          "reasoning_tokens": 0,
+          "total_tokens": 186671
+        },
+        "repairs": 0,
+        "context_mutations": [],
+        "specialist_events": [],
+        "independent_numeric_audit": [
+          {
+            "event": 55,
+            "capability": "stats.describe",
+            "independent_rational_oracle_matches": true,
+            "expected": {
+              "count": 4,
+              "mean": 2.5,
+              "median": 2.5,
+              "variance": 1.25,
+              "stdev": 1.118033988749895,
+              "quantiles": {
+                "q1": 1.75,
+                "q2": 2.5,
+                "q3": 3.25
+              }
+            }
+          },
+          {
+            "event": 63,
+            "capability": "stats.regress",
+            "independent_rational_oracle_matches": true,
+            "expected": {
+              "count": 4,
+              "slope": 2.0,
+              "intercept": 1.0,
+              "r": 1.0
+            }
+          }
+        ],
+        "artifacts": [
+          {
+            "path": "STATISTICS.md",
+            "sha256": "411d2bed51c75a4d5a649ab6da8ed168cbd01b46411c0fd2bd547f094420c81b",
+            "event": 93,
+            "bytes": 736
+          }
+        ],
+        "coverage": "COMPLETE_AT_32_STEP_LIMIT",
+        "initial_workspace_verified_empty": true
+      },
+      {
+        "cell": "c1",
+        "run_id": "run-20261115t143715z-d72720",
+        "event_sha256": "2e8a7f16f8b4a05ed768b955a804ce861ad7b9cd8a869a76e71523c42627ecc7",
+        "provider_sha256": "43b0345224d57f194d82631f383ff33b239396134f201a40472e6e92b3dc6332",
+        "verify": [],
+        "state": "terminated",
+        "reason": "max_steps",
+        "elapsed_s": 126.26600000000326,
+        "model_calls_completed": 32,
+        "provider_attempts": 32,
+        "provider_terminal": [],
+        "model_versions": [
+          "gpt-6.1-sol"
+        ],
+        "capabilities": {
+          "stats.describe": {
+            "discovery_events": [
+              18,
+              55
+            ],
+            "describe_events": [],
+            "invoke_events": [],
+            "demonstration_events": [],
+            "failed_execution_events": [],
+            "first_result_exposure_event": null,
+            "result_use_assessment": {
+              "epistemic_status": "investigator_assessment",
+              "result_used": false,
+              "evidence_events": [],
+              "explanation": "No successful execution of this statistics capability occurred; summary exposure alone is not use."
+            }
+          },
+          "stats.regress": {
+            "discovery_events": [
+              55
+            ],
+            "describe_events": [],
+            "invoke_events": [],
+            "demonstration_events": [],
+            "failed_execution_events": [],
+            "first_result_exposure_event": null,
+            "result_use_assessment": {
+              "epistemic_status": "investigator_assessment",
+              "result_used": false,
+              "evidence_events": [],
+              "explanation": "No successful execution of this statistics capability occurred; summary exposure alone is not use."
+            }
+          }
+        },
+        "reported_usage": {
+          "prompt_tokens": 147207,
+          "completion_tokens": 1240,
+          "reasoning_tokens": 192,
+          "total_tokens": 148447
+        },
+        "repairs": 0,
+        "context_mutations": [],
+        "specialist_events": [],
+        "independent_numeric_audit": [],
+        "artifacts": [
+          {
+            "path": "exploration.md",
+            "sha256": "bee27cb1b2df09abe97dffd78b71626253bec237c2fd7184927c0ec05c3977f7",
+            "event": 97,
+            "bytes": 851
+          }
+        ],
+        "coverage": "COMPLETE_AT_32_STEP_LIMIT",
+        "initial_workspace_verified_empty": true
+      },
+      {
+        "cell": "c2",
+        "run_id": "run-20261115t143940z-fe59cc",
+        "event_sha256": "7d7ca4842768a1d018ac1a370f73be2a65d6fd449a78eda703be0e6bbeef24bf",
+        "provider_sha256": "8b1d08f6bdb13e4c9c47cb58103a6c6ec8f6ec73d01bc67841d7c1792e703c8b",
+        "verify": [],
+        "state": "terminated",
+        "reason": "max_steps",
+        "elapsed_s": 133.28200000000652,
+        "model_calls_completed": 32,
+        "provider_attempts": 32,
+        "provider_terminal": [],
+        "model_versions": [
+          "gpt-6.1-sol"
+        ],
+        "capabilities": {
+          "stats.describe": {
+            "discovery_events": [
+              51
+            ],
+            "describe_events": [],
+            "invoke_events": [],
+            "demonstration_events": [],
+            "failed_execution_events": [],
+            "first_result_exposure_event": null,
+            "result_use_assessment": {
+              "epistemic_status": "investigator_assessment",
+              "result_used": false,
+              "evidence_events": [],
+              "explanation": "No successful execution of this statistics capability occurred; summary exposure alone is not use."
+            }
+          },
+          "stats.regress": {
+            "discovery_events": [
+              51,
+              59
+            ],
+            "describe_events": [
+              59
+            ],
+            "invoke_events": [
+              69,
+              77,
+              86
+            ],
+            "demonstration_events": [],
+            "failed_execution_events": [],
+            "first_result_exposure_event": 70,
+            "result_use_assessment": {
+              "epistemic_status": "investigator_assessment",
+              "result_used": true,
+              "evidence_events": [
+                69,
+                77,
+                86,
+                115,
+                116,
+                117,
+                126
+              ],
+              "explanation": "Three returned regression fits were preserved and compared in a synthetic aggregation-reversal note."
+            }
+          }
+        },
+        "reported_usage": {
+          "prompt_tokens": 160887,
+          "completion_tokens": 1543,
+          "reasoning_tokens": 102,
+          "total_tokens": 162430
+        },
+        "repairs": 0,
+        "context_mutations": [],
+        "specialist_events": [],
+        "independent_numeric_audit": [
+          {
+            "event": 69,
+            "capability": "stats.regress",
+            "independent_rational_oracle_matches": true,
+            "expected": {
+              "count": 3,
+              "slope": 1.0,
+              "intercept": 7.0,
+              "r": 1.0
+            }
+          },
+          {
+            "event": 77,
+            "capability": "stats.regress",
+            "independent_rational_oracle_matches": true,
+            "expected": {
+              "count": 3,
+              "slope": 1.0,
+              "intercept": -5.0,
+              "r": 1.0
+            }
+          },
+          {
+            "event": 86,
+            "capability": "stats.regress",
+            "independent_rational_oracle_matches": true,
+            "expected": {
+              "count": 6,
+              "slope": -0.8620689655172413,
+              "intercept": 10.310344827586206,
+              "r": -0.8620689655172413
+            }
+          }
+        ],
+        "artifacts": [
+          {
+            "path": "aggregation-experiment.md",
+            "sha256": "78d144c211a6e858f6f5a6e89c11ed1690aa152e3255c079a9063ece2fec006e",
+            "event": 117,
+            "bytes": 2079
+          }
+        ],
+        "coverage": "COMPLETE_AT_32_STEP_LIMIT",
+        "initial_workspace_verified_empty": true
+      },
+      {
+        "cell": "c3",
+        "run_id": "run-20261115t144202z-4dc09c",
+        "event_sha256": "22aeddf7afb9224967e3d04658a74ae212bb8d3addf95b2e5bc07d62c951bca4",
+        "provider_sha256": "79940236512543fddec1f88ba71a826b13a5d250ad31da37d7569018208584cc",
+        "verify": [],
+        "state": "terminated",
+        "reason": "max_steps",
+        "elapsed_s": 126.96799999999348,
+        "model_calls_completed": 32,
+        "provider_attempts": 32,
+        "provider_terminal": [],
+        "model_versions": [
+          "gpt-6.1-sol"
+        ],
+        "capabilities": {
+          "stats.describe": {
+            "discovery_events": [
+              50
+            ],
+            "describe_events": [],
+            "invoke_events": [],
+            "demonstration_events": [],
+            "failed_execution_events": [],
+            "first_result_exposure_event": null,
+            "result_use_assessment": {
+              "epistemic_status": "investigator_assessment",
+              "result_used": false,
+              "evidence_events": [],
+              "explanation": "No successful execution of this statistics capability occurred; summary exposure alone is not use."
+            }
+          },
+          "stats.regress": {
+            "discovery_events": [
+              50,
+              61
+            ],
+            "describe_events": [
+              61
+            ],
+            "invoke_events": [
+              72,
+              81,
+              89
+            ],
+            "demonstration_events": [],
+            "failed_execution_events": [],
+            "first_result_exposure_event": 73,
+            "result_use_assessment": {
+              "epistemic_status": "investigator_assessment",
+              "result_used": true,
+              "evidence_events": [
+                72,
+                81,
+                89,
+                117,
+                119,
+                120,
+                129
+              ],
+              "explanation": "Three returned regression fits were preserved and compared in a synthetic aggregation-reversal note."
+            }
+          }
+        },
+        "reported_usage": {
+          "prompt_tokens": 158611,
+          "completion_tokens": 1563,
+          "reasoning_tokens": 209,
+          "total_tokens": 160174
+        },
+        "repairs": 0,
+        "context_mutations": [],
+        "specialist_events": [],
+        "independent_numeric_audit": [
+          {
+            "event": 72,
+            "capability": "stats.regress",
+            "independent_rational_oracle_matches": true,
+            "expected": {
+              "count": 3,
+              "slope": 1.0,
+              "intercept": 7.0,
+              "r": 1.0
+            }
+          },
+          {
+            "event": 81,
+            "capability": "stats.regress",
+            "independent_rational_oracle_matches": true,
+            "expected": {
+              "count": 3,
+              "slope": 1.0,
+              "intercept": -7.0,
+              "r": 1.0
+            }
+          },
+          {
+            "event": 89,
+            "capability": "stats.regress",
+            "independent_rational_oracle_matches": true,
+            "expected": {
+              "count": 6,
+              "slope": -0.896774193548387,
+              "intercept": 10.432258064516128,
+              "r": -0.896774193548387
+            }
+          }
+        ],
+        "artifacts": [
+          {
+            "path": "aggregation-experiment.md",
+            "sha256": "9452ad37dcfaf6f3ceea8d8d14f9c555e2804fcbe5228b34d1860d192c9119b8",
+            "event": 120,
+            "bytes": 1771
+          }
+        ],
+        "coverage": "COMPLETE_AT_32_STEP_LIMIT",
+        "initial_workspace_verified_empty": true
+      }
+    ],
+    "unstarted": [],
+    "totals": {
+      "provider_attempts": 128,
+      "model_calls_completed": 128,
+      "reported_usage": {
+        "prompt_tokens": 652054,
+        "completion_tokens": 5668,
+        "reasoning_tokens": 503,
+        "total_tokens": 657722
+      }
+    },
+    "status": "COMPLETE",
+    "quota_clearance": "2026-11-15 owner replied Yes run it to the quota-reset confirmation handoff; proceed within frozen S008c four-run allowance.",
+    "clearance_commit": "cde02d0",
+    "registration_commits": {
+      "builder": "d52789b",
+      "simulation": "5e219d0"
+    },
+    "provider_ledger_reservations_verified": 128,
+    "plan_percentage": "unknown; opaque to application",
+    "active_seconds": 508.23500000001513,
+    "specialist_calls": 0,
+    "local_model_switch_cost_s": 0,
+    "assessment_limit": "One unmasked investigator; three identical C prompts; C2/C3 chose closely related synthetic examples. No independence, causal or general-autonomy claim."
   },
   "limits": {
     "max_items": 10000,
@@ -216,16 +670,16 @@
       "network": "none"
     }
   },
-  "interpretation": "Engineering validation only; no evidence of real-model discovery, selection or use.",
+  "interpretation": "Complete bounded capability check: guided discovery/use/result use for both tools; unguided regression use with result-linked artifacts in 2/3 C runs, descriptive statistics 0/3 C uses. Not a new autonomy GO.",
   "simulation_registration_commit": "5e219d0",
   "builder_registration_commit": "d52789b",
   "validation": {
     "builder_tests": 342,
-    "builder_duration_s": 47.54,
+    "builder_duration_s": 48.83,
     "simulation_tests": 402,
-    "simulation_duration_s": 362.14,
+    "simulation_duration_s": 360.63,
     "ruff": "passed in both repositories",
-    "provider_ledger_s008c_reservations": 0,
-    "checked_at": "2026-11-15T14:05:43Z"
+    "provider_ledger_s008c_reservations": 128,
+    "checked_at": "2026-11-15T14:50:58Z"
   }
 }
