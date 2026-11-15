@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-14T23:50:00Z",
-  "last_session": "S007h",
+  "updated_at": "2026-11-15T00:40:00Z",
+  "last_session": "S014a",
   "completed_milestones": [
     {
       "id": "S001",
@@ -162,20 +162,26 @@
         "78c3f44"
       ],
       "summary": "One bounded registered change after S007d-001 NO_GO, chosen by the human: orchestrator llama3.2:3b -> installed qwen3:4b (digest 359d7dd4...), everything else frozen; runtime source identical to the S007d freeze. Registration Builder e3e55a0 before scoring; manifest Simulation 5806e6e. 24/24 cells valid, reviewed and deadline-censored after 7-21 calls; guided 0/6, B 0/6, C 0/6 qualifying -> NO_GO. 7 successful invocations (S007d 27), zero repairs (S007d 275), 38 replies exhausting the 2048-token cap on unrecorded reasoning and 40 empty replies; D exposed 2/6. Same-seed replicates strongly correlated. Independent raw-event recount agreed. No download, system change or further tuning."
+    },
+    {
+      "id": "S014a",
+      "completed_at": "2026-11-15T00:40:00Z",
+      "repository": "open-lab-builder",
+      "summary": "Owner-initiated hosted-intelligence comparison programme. Confirmed local closeout (S007d-001 and S007h-001 ledgers 24/24 finished and reviewed; records unchanged). Assessed official routes: Gemma on the Gemini API eligible (function calling, per-project limits, region-dependent data terms); Sign in with ChatGPT plan usage eligible as a preview for locally hosted apps (temperature/max_output_tokens unsupported, seed unknown); Anthropic subscription route unavailable pending written confirmation (published policy directs developer products incl. Agent SDK to API keys). ADR-0016 supervisor-owned broker, DPAPI secrets, reserved budgets, no fallback. Roadmap S014a-S014k; S007f/S007g superseded. No credential accessed, no provider request, no code change."
     }
   ],
   "next_milestone": {
-    "id": "S010",
-    "repository": "open-lab-builder",
-    "title": "Experimental Protocol and Comparative Observation"
+    "id": "S014b",
+    "repository": "open-lab-simulation",
+    "title": "Provider Broker, Secret Store and Quota Ledger"
   },
   "blockers": [
     {
       "id": "B-EXPANSION",
       "summary": "S007d-001 and S007h-001 both completed with NO_GO; major capability expansion remains closed.",
       "affects": [
-        "S007e",
         "S007b",
+        "S007e",
         "S008a",
         "S008b",
         "S008c",
@@ -186,12 +192,16 @@
     },
     {
       "id": "B-HOSTED",
-      "summary": "Hosted adapter work requires its separate approved architecture, provider and bounded spend authorisation.",
+      "summary": "Live hosted requests need per-provider human setup and approved request budgets.",
       "affects": [
-        "S007g"
+        "S014c",
+        "S014d",
+        "S014f",
+        "S014h",
+        "S014i"
       ],
       "needs_human": true,
-      "detail": "Optional S007f/S007g are not prerequisites for local research. Defaults remain local and zero-spend. The S013 planning instruction authorises no API request, credential handling or new download."
+      "detail": "ADR-0016 fixes the architecture; S014b needs no approval. Gemma (S014c): owner installs the key via the S014b command, reports the project's actual Gemma limits from AI Studio, confirms region and approves smoke/daily budgets. ChatGPT (S014d): OD-10, per-app usage limit, browser sign-in, budgets. Anthropic: S014e permission or a separate paid budget. The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
     }
   ],
   "known_issues": [
@@ -355,78 +365,49 @@
         "S010",
         "S012"
       ],
-      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner.",
+      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard.",
       "needs_human": true
     },
     {
-      "id": "OD-8",
-      "summary": "Whether to pursue an optional hosted comparison remains a separate human decision.",
-      "affects": [
-        "S007f",
-        "S007g"
-      ],
+      "id": "OD-10",
       "needs_human": true,
-      "detail": "S013 is not external-access/spend authorisation. A separate approved ADR and provider/credential/finite-budget approval must precede code/paid smoke tests. Declining hosting does not block local milestones or S012."
+      "summary": "Whether the Laboratory qualifies for ChatGPT plan usage as a locally hosted app, or should add an open-source licence first.",
+      "affects": [
+        "S014d"
+      ],
+      "detail": "OpenAI documents plan usage for open-source and locally hosted apps. The repositories are public with no licence, so they are not strictly open source; local hosting appears sufficient. Choosing a licence is the owner's decision. S014d re-checks the official pages before sign-in."
     },
     {
-      "id": "OD-9",
+      "id": "OD-11",
       "needs_human": true,
-      "summary": "Route after S007h-001 NO_GO: proceed to S010, or register one further bounded change first.",
+      "summary": "Anthropic access: written confirmation for subscription use, a separately approved paid API budget, or exclusion.",
       "affects": [
-        "S007h",
-        "S010",
-        "S007e"
+        "S014e",
+        "S014f",
+        "S014h"
       ],
-      "detail": "The roadmap defaults to S010 and forbids an automatic tuning loop. Candidate single changes, none authorised: qwen3:4b with a step-equivalent time budget (separates model from speed), a labelled generic call-shape scaffold for llama3.2:3b, or a larger server context (needs a human system setting). Any choice needs a new registration and campaign id before implementation."
+      "detail": "Published policy directs developer products, including Agent SDK use, to API keys and forbids routing consumer plan credentials through third-party products; Claude Code's own loop would also not preserve Laboratory tool semantics. Until resolved, Anthropic is unavailable and the campaign plans for two providers."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-14T23:50:00Z",
+    "ran_at": "2026-11-15T00:40:00Z",
     "commands": [
       {
-        "command": "All three repositories: git fetch/status/log; Builder uv sync; uv run olb state",
-        "result": "Clean, up to date with origin; next S007h"
+        "command": "All three repositories: git fetch/status/log",
+        "result": "Clean and level with origin (Builder d2fca57, Simulation 78c3f44, Window 9ef9ba4)"
       },
       {
-        "command": "Simulation: source_hashes() against campaigns/s007d-001.json",
-        "result": "Runtime source byte-identical to the S007d freeze"
+        "command": "Ledger and annotation counts for campaigns s007d-001 and s007h-001",
+        "result": "Each 24 started / 24 finished / all reviewed (s007d-001 keeps one extra annotation-history file); nothing edited"
       },
       {
-        "command": "Simulation: uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest (pre-registration baseline)",
-        "result": "Lint passed; 289 tests passed in 247.93 seconds"
+        "command": "Official documentation read (Google AI for Developers / AI Studio; OpenAI Sign in with ChatGPT; Claude Code legal and compliance)",
+        "result": "Findings and URLs recorded in docs/architecture/HOSTED_PROVIDERS.md; no account, key or token accessed; no provider request"
       },
       {
-        "command": "Builder: uv run olb check --tests (pre-registration baseline)",
-        "result": "305 tests and all health checks passed"
-      },
-      {
-        "command": "python -m open_lab_simulation.benchmark run campaigns/s007h-pilot-001.json --max-cells 4",
-        "result": "Four NOT_SCORED seed-901 pilot cells valid and deadline-censored after 0-2 calls; zero repairs"
-      },
-      {
-        "command": "Commit/push manifest (Simulation 5806e6e) then registration (Builder e3e55a0) before any scored cell",
-        "result": "Pushed; ledger bound to e3e55a07da1ca4b5e72222af19461d18840f836b"
-      },
-      {
-        "command": "python -m open_lab_simulation.benchmark run campaigns/s007h-001.json --registration e3e55a0... --max-cells 24",
-        "result": "24/24 cells launched and finished at the 600 s deadline; no launch failure or interruption; 14,401.9 active seconds"
-      },
-      {
-        "command": "24 annotations written and checked with benchmark_analysis.validate_annotation; benchmark.report_campaign",
-        "result": "24 valid, 24 reviewed, 0 qualifying; expansion NO_GO; runtime_source_match true; all archives verify"
-      },
-      {
-        "command": "Independent recount from raw events (scratch script outside the repositories)",
-        "result": "324 requests, 7 successful invocations, 0 non-database files, 0 returned notes; world/model digests and configurations confirmed"
-      },
-      {
-        "command": "Builder: uv run ruff check .; uv run olb check --tests (final)",
-        "result": "Lint passed; 305 tests passed in 54.91 seconds and all six health checks passed"
-      },
-      {
-        "command": "Simulation: uv run ruff check . (final; source unchanged since the frozen manifest, README only)",
-        "result": "Lint passed; README committed as 78c3f44; suite not rerun because no source changed"
+        "command": "uv run ruff check .; uv run olb check --tests (Builder)",
+        "result": "Lint passed; 305 tests passed in 42.11 seconds and all six health checks passed. Simulation and Window unchanged (no code change this session)"
       }
     ]
   }

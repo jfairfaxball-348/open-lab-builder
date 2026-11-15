@@ -21,6 +21,7 @@ by rewriting history.
 | [0013](ADR-0013-autonomy-as-an-experimental-objective.md) | Autonomy baseline, explicit interventions and evidence-gated expansion while preserving architecture | Accepted for planning; runtime unchanged |
 | [0014](ADR-0014-rootless-podman-in-wsl2.md) | Rootless Podman in WSL 2 as the container mechanism | Accepted; resolves OD-1, backend is S006c |
 | [0015](ADR-0015-container-capability-backend.md) | Per-call rootless Podman containers for capabilities, supervisor-owned cleanup | Accepted; S006c, refines ADR-0006/0014 |
+| [0016](ADR-0016-hosted-provider-broker.md) | Hosted providers only through a supervisor-owned broker with secret isolation, reserved budgets and no fallback | Accepted (S014a); amends ADR-0005, supersedes planned S007f; not yet implemented |
 | [0016](ADR-0016-versioned-runtime-treatments.md) | Versioned continuation/quiet treatments, checkpointed idle state and pre-request input records | Accepted; S007c |
 
 Unresolved choices are tracked as `open_decisions` in

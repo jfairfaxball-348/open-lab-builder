@@ -1,0 +1,50 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-14T23:50:00Z",
+  "commands": [
+    {
+      "command": "All three repositories: git fetch/status/log; Builder uv sync; uv run olb state",
+      "result": "Clean, up to date with origin; next S007h"
+    },
+    {
+      "command": "Simulation: source_hashes() against campaigns/s007d-001.json",
+      "result": "Runtime source byte-identical to the S007d freeze"
+    },
+    {
+      "command": "Simulation: uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest (pre-registration baseline)",
+      "result": "Lint passed; 289 tests passed in 247.93 seconds"
+    },
+    {
+      "command": "Builder: uv run olb check --tests (pre-registration baseline)",
+      "result": "305 tests and all health checks passed"
+    },
+    {
+      "command": "python -m open_lab_simulation.benchmark run campaigns/s007h-pilot-001.json --max-cells 4",
+      "result": "Four NOT_SCORED seed-901 pilot cells valid and deadline-censored after 0-2 calls; zero repairs"
+    },
+    {
+      "command": "Commit/push manifest (Simulation 5806e6e) then registration (Builder e3e55a0) before any scored cell",
+      "result": "Pushed; ledger bound to e3e55a07da1ca4b5e72222af19461d18840f836b"
+    },
+    {
+      "command": "python -m open_lab_simulation.benchmark run campaigns/s007h-001.json --registration e3e55a0... --max-cells 24",
+      "result": "24/24 cells launched and finished at the 600 s deadline; no launch failure or interruption; 14,401.9 active seconds"
+    },
+    {
+      "command": "24 annotations written and checked with benchmark_analysis.validate_annotation; benchmark.report_campaign",
+      "result": "24 valid, 24 reviewed, 0 qualifying; expansion NO_GO; runtime_source_match true; all archives verify"
+    },
+    {
+      "command": "Independent recount from raw events (scratch script outside the repositories)",
+      "result": "324 requests, 7 successful invocations, 0 non-database files, 0 returned notes; world/model digests and configurations confirmed"
+    },
+    {
+      "command": "Builder: uv run ruff check .; uv run olb check --tests (final)",
+      "result": "Lint passed; 305 tests passed in 54.91 seconds and all six health checks passed"
+    },
+    {
+      "command": "Simulation: uv run ruff check . (final; source unchanged since the frozen manifest, README only)",
+      "result": "Lint passed; README committed as 78c3f44; suite not rerun because no source changed"
+    }
+  ]
+}

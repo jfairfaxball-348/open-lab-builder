@@ -25,7 +25,7 @@ adaptation; subjective consciousness is neither assumed nor measured.
 | Stream | Purpose | Principal milestones |
 | --- | --- | --- |
 | A — World and capabilities | Useful, discoverable, versioned computational affordances | S002/S005; S007e/S007b; S008/S009 |
-| B — Intelligence and autonomy | Model interchangeability, explicit policies and comparative evidence | S007a/S007c/S007d; conditional S007h; optional S007f/S007g |
+| B — Intelligence and autonomy | Model interchangeability, explicit policies and comparative evidence | S007a/S007c/S007d/S007h; hosted comparison S014 (supersedes S007f/S007g) |
 | C — Reliability and safety | Supervision, recovery, limits, isolation and sustained operation | S003/S006; S006c; S011 |
 | D — Observation and experimental science | Read-only Window, provenance and interpretable experiments | S004; S007d; S010/S012 |
 
@@ -63,9 +63,17 @@ flowchart TD
     Gate -->|Yes| S008c["S008c Scientific tools"]
     Gate -->|Yes| S008d["S008d Sandboxed software interfaces"]
     S006c --> S008d --> S009
-    S007a -. optional .-> S007f["S007f Hosted decision"]
-    S007f --> S007g["S007g Separately authorised hosted adapter"]
-    S007g -. repeat baseline .-> S007d
+    S007h --> S014a["S014a Hosted compliance + broker architecture"]
+    S014a --> S014b["S014b Broker, secrets, quota ledger, fakes"]
+    S014b --> S014c["S014c Gemma adapter"]
+    S014b --> S014d["S014d ChatGPT plan-usage adapter"]
+    S014a --> S014e["S014e Anthropic permission"]
+    S014e -. only if permitted .-> S014f["S014f Anthropic adapter"]
+    S014c --> S014g["S014g Cross-provider compatibility"]
+    S014d --> S014g
+    S014f -. if available .-> S014g
+    S014g --> S014h["S014h Comparative preregistration"] --> S014i["S014i Interleaved campaign"] --> S014j["S014j Analysis"]
+    S014j -. optional .-> S014k["S014k Window comparison view"]
     S007d --> S010["S010 Protocol / comparison, negative allowed"]
     S006e --> S010
     S004 --> S010
@@ -80,8 +88,12 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S010 by default. S007h-001 (model swap) is complete with NO_GO; any
-further bounded change needs a registered decision first (OD-9).
+**Next:** S014b. On 2026-11-15 the owner chose the hosted-intelligence
+comparison programme (S014, [ADR-0016](../decisions/ADR-0016-hosted-provider-broker.md))
+as the response to the two local NO_GO results (S007d-001, S007h-001), resolving
+OD-9. S010 follows the programme or proceeds independently. No hosted request,
+credential or spend is authorised by the roadmap itself: each provider milestone
+lists its own human approvals.
 A future current GO can open S007e or a useful narrow S008c capability.
 With INCONCLUSIVE, fix the named validity issue before drawing a conclusion.
 S010 protocol work, optional hosted design and S006c/S006f remain safe
@@ -91,8 +103,8 @@ S006c is complete for Windows hosts (ADR-0015); it did not block
 local gateway, policy, baseline or protocol work. It does block arbitrary code,
 shell, computer/browser control, agent-created tools and unattended long-run
 certification. There is no process-tier workaround. Hosted work is never required
-for the local project or S012. No model download, system installation or API spend
-is authorised by this roadmap.
+for the local project or S012. No model download, system installation, hosted
+request or API spend is authorised by this roadmap.
 
 All revised future milestones include scope/exclusions, deliverables, tests,
 exits, risks and next work. Split before coding if a session cannot contain them.
@@ -689,6 +701,194 @@ Research campaign gates are not extra paperwork for every routine fix.
 
 ---
 
+### S014 — Hosted Intelligence Comparison Programme
+
+Question: to what extent does the orchestrating model affect exploration,
+discovery, tool use, adaptation and productive activity in the **unchanged**
+world? Local results S007d-001 (llama3.2:3b) and S007h-001 (qwen3:4b) are the
+historical comparison group and are never edited. The programme has its own
+identifiers and provenance; it is not a continuation of either preregistered
+campaign. Architecture: [ADR-0016](../decisions/ADR-0016-hosted-provider-broker.md);
+provider facts: [HOSTED_PROVIDERS.md](../architecture/HOSTED_PROVIDERS.md).
+Every milestone validates and hands off on its own. Integration success and
+behavioural success are always reported separately.
+
+### S014a — Hosted Compliance Assessment and Broker Architecture
+
+- **Repository / streams:** Builder; read-only audit of siblings. B/C/D.
+- **Status:** complete (2026-11-15).
+- **Objective:** Establish compliant, bounded routes to hosted models before code.
+- **Prerequisites:** S007h report; the owner's programme instruction.
+- **Scope:** close out local campaigns; assess official Google, OpenAI and
+  Anthropic routes; broker, secret, quota and data-flow architecture; roadmap.
+- **Exclusions:** adapter code, credentials, provider requests or spending.
+- **Deliverables:** ADR-0016, HOSTED_PROVIDERS.md, S014 milestones, state.
+- **Acceptance tests:** both local campaigns 24/24 finished/reviewed and
+  preserved; provider conclusions cite official pages; existing checks pass.
+- **Exit criteria:** documented eligibility/blockers per provider and human
+  actions; no credential accessed and no request made.
+- **Delivered:** local closeout confirmed (S007d-001 and S007h-001 ledgers 24/24
+  finished, all reviewed); Gemma eligible; ChatGPT plan usage eligible as a
+  preview for locally hosted apps with temperature/output-cap gaps; Anthropic
+  subscription route unavailable pending written confirmation.
+- **Next recommended milestone:** S014b.
+
+### S014b — Provider Broker, Secret Store and Quota Ledger
+
+- **Repository / streams:** Simulation broker; Builder contracts. B/C.
+- **Status:** planned; **next**. No human approval needed (no live request).
+- **Objective:** Build the provider-neutral trusted path every hosted adapter uses.
+- **Prerequisites:** S014a.
+- **Scope:** supervisor-started loopback broker with per-run token; DPAPI secret
+  store and interactive `ols provider` set/clear/status (hidden input, nothing in
+  argv/env/logs); host-local provider profiles disabled by default; crash-safe
+  reservation ledger (per run/campaign/period, retries counted, one concurrent
+  request, unknown outcomes spent); bounded backoff; terminal quota/eligibility
+  errors; no fallback; settings-support record; model-provider contract minor
+  version (external locality, auth kind, setting support) with change log.
+- **Exclusions:** any real provider request, provider SDKs, paid tiers.
+- **Deliverables:** broker, ledger, secret store, fake provider server, contract.
+- **Acceptance tests:** fakes cover success, tool calls, 429/503/timeouts,
+  post-send crash, budget exhaustion mid-run, resume with conserved budgets,
+  redaction (secret never in events, archive, env, argv, stderr), refusal when
+  disabled/unapproved, no egress from the runtime except the broker.
+- **Exit criteria:** fake-provider run verifies end to end with identical runtime
+  policies; every enforcement path recorded.
+- **Risks:** secret leakage through exceptions; ledger races; Windows-only DPAPI.
+- **Next recommended milestone:** S014c (Gemma), then S014d.
+
+### S014c — Google Gemma Adapter
+
+- **Repository / streams:** Simulation adapter; Builder provider manifest. B.
+- **Status:** planned; human-gated.
+- **Objective:** Run the Laboratory conversation on Gemma through the broker.
+- **Prerequisites:** S014b. **Human:** install the key with `ols provider` (never
+  in chat or files); report the project's actual Gemma limits from AI Studio;
+  confirm region (data terms); approve smoke-test and daily request budgets.
+- **Scope:** pinned REST interface and model (`gemma-4-26b-a4b-it` if available);
+  function-declaration translation of the four meta-tools, function results back
+  with ids, multi-turn history including any required thought parts; usage and
+  quota accounting; frozen thinking level and generation settings.
+- **Exclusions:** paid tier, billing changes, fallbacks, other Google models.
+- **Deliverables:** adapter, recorded fixtures, measured manifest, smoke archive.
+- **Acceptance tests:** exhaustive fake translations; one approved live smoke run
+  (few requests) that searches, describes and successfully invokes a real
+  capability and answers from its result; archive verifies; ledger reconciles.
+- **Exit criteria:** tool-use round trip demonstrated, not text generation alone.
+- **Risks:** undocumented free-tier limits, model availability, thought handling.
+- **Next recommended milestone:** S014d.
+
+### S014d — OpenAI Sign in with ChatGPT Plan-Usage Adapter
+
+- **Repository / streams:** Simulation adapter/broker; Builder manifest. B.
+- **Status:** planned; human-gated.
+- **Objective:** Run the Laboratory conversation on a ChatGPT-plan model.
+- **Prerequisites:** S014b. **Human:** decide OD-10 (licence/eligibility), set a
+  per-app usage limit in ChatGPT settings, sign in through the official browser
+  flow when prompted, approve smoke-test and period request budgets.
+- **Scope:** official PKCE loopback sign-in with dynamic registration and
+  persisted host id; scope check; DPAPI token storage and refresh; sign-out that
+  deletes local tokens (owner disconnects in ChatGPT settings for revocation);
+  Responses API with `store: false`, `stream: true`, function tools only; model
+  list from `/v1/models`; omit unsupported parameters and record each as a
+  difference; documented error codes handled terminally or with bounded backoff.
+- **Exclusions:** `backend-api`, cookies, scraping, browser automation, paid API
+  keys or automatic fallback.
+- **Deliverables:** sign-in, adapter, fixtures, smoke archive, settings record.
+- **Acceptance tests:** fakes for every documented error; approved live tool-use
+  round trip; sign-out/refresh failure handling; archive and ledger verify.
+- **Exit criteria:** tool-use round trip and recorded effective settings.
+- **Risks:** preview changes, unknown seed/reasoning support, opaque metering.
+- **Next recommended milestone:** S014g (or S014f if Anthropic is permitted).
+
+### S014e — Anthropic Permission Clarification
+
+- **Repository / streams:** Builder record; owner correspondence. B.
+- **Status:** planned; owner action; does not block S014b-S014d.
+- **Objective:** Obtain a definite answer before any Anthropic integration.
+- **Scope:** owner asks Anthropic whether this personal, locally run research
+  harness may use a Claude Pro subscription (for example through the unmodified
+  Claude Code CLI) with its own tool interface; the answer and its date are
+  recorded. Paid API access stays a separate decision.
+- **Exclusions:** any credential access, subscription-backed calls or workarounds.
+- **Exit criteria:** written permission recorded (opens S014f), or Anthropic
+  recorded unavailable for subscription use (programme continues with two).
+- **Next recommended milestone:** S014f only if permitted; else S014g.
+
+### S014f — Anthropic Adapter (Conditional)
+
+- **Repository / streams:** Simulation adapter; Builder manifest. B.
+- **Status:** conditional on S014e permission or an approved paid API budget.
+- **Objective:** Same broker contract and tool semantics for a Claude model.
+- **Scope and tests:** as S014c/S014d. Any harness that substitutes its own agent
+  loop or system prompt is labelled non-equivalent and excluded from the matched
+  campaign.
+- **Next recommended milestone:** S014g.
+
+### S014g — Cross-Provider Compatibility Suite
+
+- **Repository / streams:** Simulation tests; Builder record. B/D.
+- **Status:** planned.
+- **Objective:** Admit only providers that preserve Laboratory tool semantics.
+- **Prerequisites:** S014c and S014d (and S014f if available).
+- **Scope:** for each provider: text reply; structured tool call; real capability
+  invocation; result handling; result-informed second turn; multi-turn context;
+  archive verification; budget enforcement; rate-limit/timeout/error handling;
+  restoration or refusal after interruption. Fakes exhaustively; live checks tiny
+  and approved.
+- **Exit criteria:** per-provider pass/fail table; failing providers excluded
+  from matched analysis, not silently included. Scripted success is not autonomy.
+- **Next recommended milestone:** S014h.
+
+### S014h — Comparative Campaign Preregistration
+
+- **Repository / streams:** Builder registration; Simulation manifest. D.
+- **Status:** planned; human approval of request budgets required.
+- **Objective:** Freeze a 72-cell (or registered partial) interleaved campaign.
+- **Scope:** S007d A/B/C/D prompts, world 0.6.0, capabilities, policies and rubric
+  v1 unchanged where feasible; three seeds x two replicates per provider; one
+  interleaved schedule (each cell run on every eligible provider in a balanced,
+  preregistered provider order); frozen per-provider settings with every
+  difference from the local profile listed; approved per-run, per-day and
+  campaign request ceilings (32 calls x 72 runs = 2,304 before retries is the
+  upper figure to approve or reduce); NOT_SCORED pilots; fresh workspace and
+  memory; replicate independence addressed (KI-21).
+- **Exit criteria:** registration committed and pushed before any scored cell.
+- **Next recommended milestone:** S014i.
+
+### S014i — Interleaved Hosted Campaign
+
+- **Repository / streams:** Simulation execution; Builder ledger record. D.
+- **Status:** planned.
+- **Objective:** Execute every scheduled cell once, interleaved across providers.
+- **Scope:** one hosted request at a time; resumable between cells without
+  repeats; quota exhaustion pauses that provider's cells as pending or
+  interrupted while eligible providers continue where registered; no reruns,
+  replacements or substitutions.
+- **Exit criteria:** all cells finished or explicitly accounted as blocked,
+  interrupted or invalid; per-run reviews bound to event hashes.
+- **Next recommended milestone:** S014j.
+
+### S014j — Comparative Analysis and Recommendations
+
+- **Repository / streams:** Builder report; Simulation analysis. D.
+- **Status:** planned.
+- **Deliverables:** 72-cell manifest accounting, source-bound dataset, provider
+  reliability separate from behaviour, per-condition tables with evidence-linked
+  examples, comparison with S007d-001/S007h-001, request/token/time/quota usage,
+  comparability limitations, integration-versus-model failure attribution where
+  supported, task-specific findings without a forced ranking, next-phase proposal.
+- **Exit criteria:** complete honest report, including partial or negative results.
+- **Next recommended milestone:** S014k if useful, then the proposal's next phase.
+
+### S014k — Window Provider Comparison View (Optional)
+
+- **Repository / streams:** Window, read-only. D.
+- **Status:** optional, after S014j.
+- **Scope:** read-only comparison of registered campaigns; archives never modified.
+
+---
+
 ### S007e — Specialist Consultation and GPU Leasing
 
 - **Repository / streams:** Simulation gateway; Builder capability/manifests. A/B/C.
@@ -714,7 +914,7 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S007f — Optional Hosted Brain Swap Architectural Decision
 
 - **Repository / streams:** Builder decision/protocol only. B/C/D.
-- **Status:** planned, optional; not an external-network authorisation.
+- **Status:** superseded on 2026-11-15 by S014a (ADR-0016); not executed under this id.
 - **Objective:** Decide whether a hosted comparison can be bounded and interpretable.
 - **Prerequisites:** S007a and explicit human interest in this optional route.
 - **Scope:** separate ADR amending ADR-0005 after review: provider broker egress
@@ -737,7 +937,7 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S007g — Optional Hosted Brain Swap Adapter
 
 - **Repository / streams:** Simulation broker/adapter; Builder contracts. B/C/D.
-- **Status:** planned, optional, human-gated; hosted disabled/zero-spend by default.
+- **Status:** superseded on 2026-11-15 by S014b-S014f; not executed under this id.
 - **Objective:** Compare a hosted orchestrator through the same experimental interface.
 - **Prerequisites:** approved S007f ADR and explicit provider/credential/budget
   approval; S007a/S007c. S013 supplies none of these operational approvals.

@@ -164,9 +164,11 @@ and memory scheduling.
 Implemented S007a separates approved local orchestrator selection from world packaging
 so matched comparisons can keep the world/registry fixed. Bundled manifests remain
 the default; effective catalog/model/settings are frozen in each archive.
-S007e retains specialist consultation and sequential GPU leases. Optional hosted
-support remains disabled pending a separate S007f decision and S007g authorisation;
-provider egress must never imply tool-network permission. See CONTRACTS.md for
+S007e retains specialist consultation and sequential GPU leases. Hosted providers
+are designed (ADR-0016, S014) but not implemented: they will be reached only through
+a supervisor-owned broker that alone holds credentials and egress, reserves request
+budgets before every attempt and never falls back to another model; provider
+egress never implies tool-network permission. See CONTRACTS.md for
 the implemented catalog protocol; effective server settings can remain unknown.
 
 One internal interface for every model, whatever serves it. Request and
