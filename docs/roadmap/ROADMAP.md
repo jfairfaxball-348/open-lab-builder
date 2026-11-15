@@ -76,9 +76,12 @@ flowchart TD
     S007d --> S010["S010 Protocol / comparison, negative allowed"]
     S006e --> S010
     S004 --> S010
-    S010 --> S011a --> S011b --> S011c --> S012
-    S006c --> S011a
-    S010 --> S012
+    S010 --> S010a["S010a Evidence export (complete)"] --> S010b["S010b Offline analysis (complete)"]
+    S010b --> S010c["S010c Window comparison (parked)"]
+    S010b --> S011p["S011p Luna admission + first one-hour run"]
+    S006c --> S011p
+    S011p --> S011a --> S011b --> S011c --> S012
+    S010c --> S012
 ```
 
 Solid milestone-to-milestone edges are prerequisites; labelled gate branches and
@@ -87,31 +90,34 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**Next:** S010c — Read-Only Window Comparison. S010a/b (portable evidence and
-source-bound descriptive analysis) are complete; parent S010 awaits S010c. S008c's
-approved statistics part is complete with all four frozen capability-check
-archives verified (guided use of both; C regression use 2/3, description use
-0/3). No additional hosted-run budget is implied. S007e engineering
-is complete; its capability check closed with explicitly partial coverage after
-a plan-quota stop and owner follow-up (see its report). The owner accepted S014i-001 as a GO
-scored with the fixed readers (S014l) and rubric v1.1 (S014m), so the
-confirmatory replication S014n was not run, and decided that new capabilities
-are tested one at a time instead of by full baseline repeats
-([ADR-0017](../decisions/ADR-0017-owner-accepted-go-and-capability-testing.md)). Expansion is open for `gpt-6.1-sol`
-on ChatGPT plan usage; each capability milestone still lists its own human
-approvals. Earlier context: S014g admitted ChatGPT plan usage. On 2026-11-15 the owner scrapped Gemma (OD-12; S014c closed)
-and gave the ChatGPT arm the provider's full 500,000-token context window as
-its client guard (OD-13), relying on the 10% per-app plan limit. The programme
-continues with ChatGPT plan usage alone. On 2026-11-15 the owner chose the hosted-intelligence
-comparison programme (S014, [ADR-0016](../decisions/ADR-0016-hosted-provider-broker.md))
-as the response to the two local NO_GO results (S007d-001, S007h-001), resolving
-OD-9. S010 follows the programme or proceeds independently. No hosted request,
-credential or spend is authorised by the roadmap itself: each provider milestone
-lists its own human approvals.
-A future current GO can open S007e or a useful narrow S008c capability.
-With INCONCLUSIVE, fix the named validity issue before drawing a conclusion.
-S010 protocol work, optional hosted design and S006c/S006f remain safe
-paths after negative behaviour. Do not add major multimodal tools to mask failure.
+**Next (owner-directed 2026-11-15): S011p — Luna 5.6 Qualification and First One-Hour Run.**
+The next session should first confirm `gpt-5.6-luna` is listed for the owner's
+authenticated Sign in with ChatGPT route, then complete a finite NOT_SCORED
+tool-use check, and—only if its gates pass—launch **one** preregistered,
+supervised one-hour unguided run with explicit pacing and allowance safeguards.
+Read the [next-session protocol](../experiments/2026-11-15-luna-endurance-next-session.md).
+Neither provider availability nor a cheaper share of subscription usage has
+been established. No model call or run is authorised merely by this roadmap edit.
+
+**S010c is parked, not cancelled or completed.** S010a (portable evidence)
+and S010b (source-bound offline analysis) are already complete, allowing
+evidence-led reliability preparations without the Window comparison feature.
+The parent S010 stays incomplete until S010c is finished; S012 still requires
+that completed scientific-observation milestone. The reliability sequence is
+S011p (Luna check + first hour), S011a (three registered one-hour fault/recovery
+runs), S011b (12 hours) and S011c (72 hours), each behind its own gates.
+Hosted continuation across quota limits, host interruptions or provider model
+changes is **not** implemented and must not be implied by long-duration plans.
+
+Historical results remain: S008c's approved statistics capability check is
+complete; S007e specialist use was established only in the guided, partial
+campaign; S014i-001 remains INCONCLUSIVE under its original registered rubric,
+while ADR-0017 records the owner's specifically post-hoc accepted GO on
+`gpt-6.1-sol`. That GO does **not** transfer to Luna. Gemma was scrapped and
+Anthropic excluded. The hosted broker has no authorised automatic fallback,
+API credit purchase, app-limit change or unlimited subscription usage. Every
+new live check requires a finite approved request allowance.
+
 
 S006c is complete for Windows hosts (ADR-0015); it did not block
 local gateway, policy, baseline or protocol work. It does block arbitrary code,
@@ -1387,7 +1393,7 @@ behavioural success are always reported separately.
 ### S010c — Read-Only Window Comparison
 
 - **Repository / streams:** Window UI/API; Builder documentation. D.
-- **Status:** future; not implemented by S010a/b.
+- **Status:** planned but **parked by owner 2026-11-15**; not implemented by S010a/b. It remains required to close S010 and before S012, but does not block S011p–S011c offline-verified engineering.
 - **Objective:** let an observer inspect verified comparisons and their source
   traces while retaining the Window's strict no-write/no-client boundary.
 - **Prerequisites:** S010a/b formats and existing Window integrity controls.
@@ -1409,12 +1415,30 @@ behavioural success are always reported separately.
 
 ---
 
+### S011p — Luna 5.6 Qualification and First One-Hour Run
+
+- **Repository / streams:** Simulation implementation and real-model checks; Builder records protocol, status and report. B/C/D.
+- **Status:** planned; **selected as exact next milestone on 2026-11-15 by owner**, superseding S010c as the immediate session. No Luna compatibility check or one-hour run has yet occurred.
+- **Objective:** Verify the actual `gpt-5.6-luna` model on the authenticated ChatGPT plan-usage route, then measure one supervised hour of self-directed activity under bounded infrastructure interventions and honest quota accounting.
+- **Scientific purpose:** Distinguish short-term autonomous initiation, tool use, memory-informed revision and voluntary stopping from mere uptime and tool-call quantity, while quantifying actual model-call pace and the consequences of plan metering. No assumed continuity or consciousness.
+- **Prerequisites:** existing S014d/g hosted adapter and broker, S006c Windows isolation, completed S010a/b offline evidence machinery, current tests, and owner-confirmed finite hosted request budget. Owner must confirm Luna appears in `uv run ols provider models openai-chatgpt`; API docs alone do not grant account access.
+- **Scope:** one model-list/metadata check; a short `NOT_SCORED` live discovery/describe/invoke/result check and archival verification; if passed, a single preregistered 3,600-active-second unguided run on the frozen world/model/policy and fresh workspace. Add/test a deterministic request-pacing mechanism **if required** to cap provider usage, as an explicit model-facing-independent intervention. Use the implemented quiet/continuation policies as predeclared treatments; never silently change one mid-run. Compare only descriptively with the historical Sol and local results.
+- **Exclusions:** downloading local models, generating credentials, switching to API-key billing, raising the app cap, using credits, using another model silently, running an unbounded provider loop, or claiming Luna inherits the Sol-specific post-hoc GO. Do not bypass hosted-resume refusal or force idle models to keep acting simply to fill the hour.
+- **Deliverables:** model/catalog eligibility and frozen settings record, fake-provider/regression tests, one verified bounded smoke archive, one frozen one-hour registration/configuration, verified/censored run archives and a source-linked behaviour/usage report. A blocked model or quota is documented as a blocker, not a pass.
+- **Acceptance tests:** real model appears in permitted model list; direct capability invoke + result-informed response verified; broker per-run/per-day/total request ceilings and stop-on-refusal tested; pacing verified if introduced; frozen config and immutable world/archive verification; record model version, effective/unknown settings and every provider attempt; exact one-hour outcome classified correctly. Preserve silence/idle, activity and known downtime separately.
+- **Exit criteria:** check works live with bounded allowance, and the first hour has been executed and honestly reported with no hidden coaching, replacement or fallback. Censoring or early stop is a valid observed outcome but **does not certify an uninterrupted hour**. If preconditions cannot be met, keep the milestone incomplete and report them.
+- **Risks:** Luna not provisioned to this account; model and plan metering differ from public API prices; faster calls can consume quota faster; no guaranteed provider session across 5-hour resets; hosted resume refused; one hour is insufficient to infer sustained long-run autonomy.
+- **Next recommendation:** S011a for its existing three actual fault/recovery one-hour reliability runs, then S011b (12 hours), S011c (72 hours), and eventually S010c before S012. Never certify 12/72-hour hosted continuity without first resolving its recovery/identity and usage-stop design.
+- **Execution protocol:** [Luna next-session instructions](../experiments/2026-11-15-luna-endurance-next-session.md).
+
+---
+
 ### S011a — Reliability: One-Hour Runs
 
 - **Repository / streams:** Simulation; Builder evidence. C/D.
 - **Status:** planned.
 - **Objective:** Validate unattended one-hour execution independently of behaviour.
-- **Prerequisites:** S010/S006c and frozen model/policy/world.
+- **Prerequisites:** S011p qualified first-hour experience, completed S010a/b, S006c and frozen model/policy/world; S010c is deferred for observation UI, not required for these offline-verifiable reliability checks.
 - **Scope:** three consecutive one-hour runs, each with a registered runtime/model
   fault; recovery, limits and preserved behavioural/intervention records.
 - **Exclusions:** calling uptime autonomous success or claiming physical reboot tested.
