@@ -1,7 +1,7 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T14:05:43Z",
+  "updated_at": "2026-11-15T14:34:11Z",
   "last_session": "S007e",
   "completed_milestones": [
     {
@@ -255,17 +255,17 @@
   "next_milestone": {
     "id": "S008c",
     "repository": "open-lab-builder",
-    "title": "Scientific and Proof Tools (engineering ready; statistics capability check pending quota confirmation)"
+    "title": "Scientific and Proof Tools (frozen statistics capability check authorized to run)"
   },
   "blockers": [
     {
       "id": "B-HOSTED",
-      "summary": "ChatGPT plan returned subscription_sharing_usage_limit_exceeded during S007e; further hosted capability checks wait for confirmed quota availability. No settings change, probe, fallback or other spend is authorized.",
+      "summary": "Owner confirmed proceeding with the frozen S008c hosted check (Yes run it); use remains limited to its four 32-step runs, with provider-stop rules and no extra probe, settings change or fallback.",
       "affects": [
         "S008c"
       ],
-      "needs_human": true,
-      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop."
+      "needs_human": false,
+      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check."
     }
   ],
   "known_issues": [
