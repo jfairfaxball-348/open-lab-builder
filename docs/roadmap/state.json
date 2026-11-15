@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T00:40:00Z",
-  "last_session": "S014a",
+  "updated_at": "2026-11-15T02:10:00Z",
+  "last_session": "S014b",
   "completed_milestones": [
     {
       "id": "S001",
@@ -168,12 +168,21 @@
       "completed_at": "2026-11-15T00:40:00Z",
       "repository": "open-lab-builder",
       "summary": "Owner-initiated hosted-intelligence comparison programme. Confirmed local closeout (S007d-001 and S007h-001 ledgers 24/24 finished and reviewed; records unchanged). Assessed official routes: Gemma on the Gemini API eligible (function calling, per-project limits, region-dependent data terms); Sign in with ChatGPT plan usage eligible as a preview for locally hosted apps (temperature/max_output_tokens unsupported, seed unknown); Anthropic subscription route unavailable pending written confirmation (published policy directs developer products incl. Agent SDK to API keys). ADR-0016 supervisor-owned broker, DPAPI secrets, reserved budgets, no fallback. Roadmap S014a-S014k; S007f/S007g superseded. No credential accessed, no provider request, no code change."
+    },
+    {
+      "id": "S014b",
+      "completed_at": "2026-11-15T02:10:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "afe5281"
+      ],
+      "summary": "Provider-neutral hosted path: supervisor-owned loopback broker with per-run token, DPAPI credential store under the user profile, host-local profiles disabled by default, fsynced reservation ledger (per run, rolling 24 h, total; retries counted; unknown outcomes spent), one request at a time, bounded retries, terminal errors, egress host check, per-run request mirror, no fallback, hosted recovery refused; `ols provider` administration. 13 fake-provider tests incl. redaction and refusals; 302 Simulation tests pass. No contract change; world 0.6.0 unchanged. No real provider contacted."
     }
   ],
   "next_milestone": {
-    "id": "S014b",
+    "id": "S014c",
     "repository": "open-lab-simulation",
-    "title": "Provider Broker, Secret Store and Quota Ledger"
+    "title": "Google Gemma Adapter"
   },
   "blockers": [
     {
@@ -196,12 +205,11 @@
       "affects": [
         "S014c",
         "S014d",
-        "S014f",
         "S014h",
         "S014i"
       ],
       "needs_human": true,
-      "detail": "ADR-0016 fixes the architecture; S014b needs no approval. Gemma (S014c): owner installs the key via the S014b command, reports the project's actual Gemma limits from AI Studio, confirms region and approves smoke/daily budgets. ChatGPT (S014d): OD-10, per-app usage limit, browser sign-in, budgets. Anthropic: S014e permission or a separate paid budget. The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
+      "detail": "ADR-0016 broker implemented (S014b). Gemma (S014c): owner stores the key with `ols provider set-key google-gemini`, reports the project's actual Gemma limits from AI Studio, confirms region and approves smoke/daily budgets. ChatGPT (S014d): OD-10, per-app usage limit, browser sign-in, budgets. Anthropic was excluded by the owner on 2026-11-15. The campaign (S014h) needs approved run/day/campaign ceilings. No paid tier or fallback is ever implied."
     }
   ],
   "known_issues": [
@@ -376,38 +384,23 @@
         "S014d"
       ],
       "detail": "OpenAI documents plan usage for open-source and locally hosted apps. The repositories are public with no licence, so they are not strictly open source; local hosting appears sufficient. Choosing a licence is the owner's decision. S014d re-checks the official pages before sign-in."
-    },
-    {
-      "id": "OD-11",
-      "needs_human": true,
-      "summary": "Anthropic access: written confirmation for subscription use, a separately approved paid API budget, or exclusion.",
-      "affects": [
-        "S014e",
-        "S014f",
-        "S014h"
-      ],
-      "detail": "Published policy directs developer products, including Agent SDK use, to API keys and forbids routing consumer plan credentials through third-party products; Claude Code's own loop would also not preserve Laboratory tool semantics. Until resolved, Anthropic is unavailable and the campaign plans for two providers."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T00:40:00Z",
+    "ran_at": "2026-11-15T02:10:00Z",
     "commands": [
       {
-        "command": "All three repositories: git fetch/status/log",
-        "result": "Clean and level with origin (Builder d2fca57, Simulation 78c3f44, Window 9ef9ba4)"
+        "command": "Simulation: uv run ruff check .; uv run pytest tests/test_providers.py",
+        "result": "Lint passed; 13 broker/ledger/credential/CLI tests passed with a fake adapter and fake upstream"
       },
       {
-        "command": "Ledger and annotation counts for campaigns s007d-001 and s007h-001",
-        "result": "Each 24 started / 24 finished / all reviewed (s007d-001 keeps one extra annotation-history file); nothing edited"
+        "command": "Simulation: OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
+        "result": "302 tests passed in 263.82 seconds"
       },
       {
-        "command": "Official documentation read (Google AI for Developers / AI Studio; OpenAI Sign in with ChatGPT; Claude Code legal and compliance)",
-        "result": "Findings and URLs recorded in docs/architecture/HOSTED_PROVIDERS.md; no account, key or token accessed; no provider request"
-      },
-      {
-        "command": "uv run ruff check .; uv run olb check --tests (Builder)",
-        "result": "Lint passed; 305 tests passed in 42.11 seconds and all six health checks passed. Simulation and Window unchanged (no code change this session)"
+        "command": "Builder: uv run ruff check .; uv run olb check --tests",
+        "result": "Lint passed; 305 tests passed in 41.75 seconds and all six health checks passed"
       }
     ]
   }

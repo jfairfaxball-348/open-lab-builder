@@ -104,6 +104,18 @@ confirmation.
   written confirmation, or with a separately approved paid API budget, and only
   through this same broker and translation contract.
 
+## Implementation notes (S014b, 2026-11-15)
+
+- The broker is a loopback HTTP server running inside the supervisor process,
+  outside the runtime's process tree and job; it never shares the recorder.
+- No contract change was needed: catalogs describe hosted providers with the
+  existing `locality: external`, `kind: other` and the gateway-facing
+  `openai_chat_completions` protocol, so world 0.6.0 and its digest are unchanged.
+- The daily ceiling is enforced over a rolling 24 hours, which is never looser
+  than any provider's calendar day in any time zone.
+- Hosted runs refuse automatic recovery (no attestable weight digest); resume
+  keeps per-run accounting because the ledger is keyed by run id.
+
 ## Alternatives
 
 - **Give the runtime the key and call providers directly.** Simplest, but puts a

@@ -67,11 +67,8 @@ flowchart TD
     S014a --> S014b["S014b Broker, secrets, quota ledger, fakes"]
     S014b --> S014c["S014c Gemma adapter"]
     S014b --> S014d["S014d ChatGPT plan-usage adapter"]
-    S014a --> S014e["S014e Anthropic permission"]
-    S014e -. only if permitted .-> S014f["S014f Anthropic adapter"]
     S014c --> S014g["S014g Cross-provider compatibility"]
     S014d --> S014g
-    S014f -. if available .-> S014g
     S014g --> S014h["S014h Comparative preregistration"] --> S014i["S014i Interleaved campaign"] --> S014j["S014j Analysis"]
     S014j -. optional .-> S014k["S014k Window comparison view"]
     S007d --> S010["S010 Protocol / comparison, negative allowed"]
@@ -736,7 +733,7 @@ behavioural success are always reported separately.
 ### S014b — Provider Broker, Secret Store and Quota Ledger
 
 - **Repository / streams:** Simulation broker; Builder contracts. B/C.
-- **Status:** planned; **next**. No human approval needed (no live request).
+- **Status:** complete (2026-11-15).
 - **Objective:** Build the provider-neutral trusted path every hosted adapter uses.
 - **Prerequisites:** S014a.
 - **Scope:** supervisor-started loopback broker with per-run token; DPAPI secret
@@ -755,6 +752,12 @@ behavioural success are always reported separately.
 - **Exit criteria:** fake-provider run verifies end to end with identical runtime
   policies; every enforcement path recorded.
 - **Risks:** secret leakage through exceptions; ledger races; Windows-only DPAPI.
+- **Delivered:** Simulation `afe5281`: `providers.py` (profiles, fsynced
+  reservation ledger, loopback broker with per-run token, adapter registry,
+  bounded retries, terminal errors, egress host check, request mirror),
+  `credentials.py` (DPAPI store), `ols provider`, supervisor/worker wiring and
+  13 fake-provider tests; 302 Simulation tests pass. No contract change was
+  needed (existing `external`/`other` fields), so world 0.6.0 is unchanged.
 - **Next recommended milestone:** S014c (Gemma), then S014d.
 
 ### S014c — Google Gemma Adapter
@@ -804,7 +807,7 @@ behavioural success are always reported separately.
 ### S014e — Anthropic Permission Clarification
 
 - **Repository / streams:** Builder record; owner correspondence. B.
-- **Status:** planned; owner action; does not block S014b-S014d.
+- **Status:** closed 2026-11-15: the owner excluded Anthropic from the programme.
 - **Objective:** Obtain a definite answer before any Anthropic integration.
 - **Scope:** owner asks Anthropic whether this personal, locally run research
   harness may use a Claude Pro subscription (for example through the unmodified
@@ -818,7 +821,7 @@ behavioural success are always reported separately.
 ### S014f — Anthropic Adapter (Conditional)
 
 - **Repository / streams:** Simulation adapter; Builder manifest. B.
-- **Status:** conditional on S014e permission or an approved paid API budget.
+- **Status:** not pursued (owner decision, 2026-11-15); retained as a record.
 - **Objective:** Same broker contract and tool semantics for a Claude model.
 - **Scope and tests:** as S014c/S014d. Any harness that substitutes its own agent
   loop or system prompt is labelled non-equivalent and excluded from the matched
@@ -844,13 +847,14 @@ behavioural success are always reported separately.
 
 - **Repository / streams:** Builder registration; Simulation manifest. D.
 - **Status:** planned; human approval of request budgets required.
-- **Objective:** Freeze a 72-cell (or registered partial) interleaved campaign.
+- **Objective:** Freeze a 48-cell interleaved campaign (Gemma and ChatGPT; the
+  owner excluded Anthropic on 2026-11-15, so 72 cells are no longer planned).
 - **Scope:** S007d A/B/C/D prompts, world 0.6.0, capabilities, policies and rubric
   v1 unchanged where feasible; three seeds x two replicates per provider; one
   interleaved schedule (each cell run on every eligible provider in a balanced,
   preregistered provider order); frozen per-provider settings with every
   difference from the local profile listed; approved per-run, per-day and
-  campaign request ceilings (32 calls x 72 runs = 2,304 before retries is the
+  campaign request ceilings (32 calls x 48 runs = 1,536 before retries is the
   upper figure to approve or reduce); NOT_SCORED pilots; fresh workspace and
   memory; replicate independence addressed (KI-21).
 - **Exit criteria:** registration committed and pushed before any scored cell.
