@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-15T23:30:00Z",
-  "last_session": "S011r",
+  "updated_at": "2026-11-16T02:40:00Z",
+  "last_session": "S011a",
   "completed_milestones": [
     {
       "id": "S001",
@@ -295,12 +295,21 @@
         "f2ab7ad"
       ],
       "summary": "ADR-0021 hosted recovery: opt-in hosted_identity provider-model-version-v1; broker pins first accepted model_version and withholds mismatches as terminal provider_identity_changed; hosted auto-recovery only after unexpected runtime exit; resume refused after provider stops or changed model record/broker profile; no Ollama health monitor for hosted runs; hosted_identity_pin records. Fake-provider tests incl. real runtime kill. No live request."
+    },
+    {
+      "id": "S011a",
+      "completed_at": "2026-11-16T02:40:00Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "1bc219a"
+      ],
+      "summary": "Registered runtime-kill reliability fault (runtime-kill-at-active-second-v1). S011a-001: three hosted gpt-5.6-luna one-hour runs, kills at 300/900/1800 s, each auto-recovered under the ADR-0021 pin, deadline reached, archives intact: 3/3 clean. 50 requests, all ok, low effort. All kills landed in quiet idle; active-phase live recovery not exercised. Behaviour: orientation then idle at 263-344 s, no memory writes."
     }
   ],
   "next_milestone": {
-    "id": "S011a",
+    "id": "S011b",
     "repository": "open-lab-simulation",
-    "title": "Reliability: One-Hour Runs"
+    "title": "Reliability: Twelve-Hour Runs"
   },
   "blockers": [
     {
@@ -313,15 +322,14 @@
       "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign. S010b used existing evidence only and made zero new model requests."
     },
     {
-      "id": "B-S011A-ALLOWANCE",
-      "summary": "Hosted recovery now exists (S011r). S011a still needs its registration (three hosted one-hour runs, each with a runtime-crash fault) and a new owner-approved finite request allowance before any live request.",
+      "id": "B-S011B-PREP",
+      "summary": "S011b needs owner power/update arrangements for a 12-hour run with registered sleep/resume, a new allowance, and a decision on hosted usage windows (a 12-hour hosted run can hit 5-hour/weekly limits, which end the run by design).",
       "affects": [
-        "S011a",
         "S011b",
         "S011c"
       ],
       "needs_human": true,
-      "detail": "S011p complete 2026-11-15 (smoke run-20261115t191118z-edcba8; hour run-20261115t211242z-c3a8e6). The S011p allowance is spent as far as needed (ledger 1030; profile still per_run 180 / total 1188, which grants nothing further without owner approval). No automatic recovery is supported for hosted providers (supervisor refuses). Do not weaken this to run S011a. 2026-11-15 S011r (Simulation f2ab7ad, ADR-0021) implemented opt-in hosted recovery with a provider-reported model_version pin. It is not cryptographic; a provider change behind an unchanged version string is undetectable."
+      "detail": "S011a complete 2026-11-16 (docs/experiments/2026-11-16-s011a-001.md). Broker profile still per_run 180 / total 1570 (ledger 1080); it grants nothing further without owner approval."
     }
   ],
   "known_issues": [
@@ -532,6 +540,15 @@
         "S012"
       ],
       "detail": "Activity was orientation (workspace.list, memory.list, time.now) and two status memory writes; no use of math/stats/text/workspace.write, no memory retrieval. Most post-first-minute activity followed recorded continuations. n=1; no effort/policy/prompt comparison. Plan usage % not measured. Report docs/experiments/2026-11-15-s011p-hour-001.md."
+    },
+    {
+      "id": "KI-31",
+      "summary": "S011a live faults all hit quiet idle; recovery during active model work and live request replay are tested only with fake providers.",
+      "affects": [
+        "S011b",
+        "S011c"
+      ],
+      "detail": "Luna idled at 263-344 s in every S011a run, before every registered kill (300/900/1800 s). A crash error event records recoverable:false for the failed segment even when the run is then recovered (existing wording). A future registration should place a kill inside the active window."
     }
   ],
   "open_decisions": [
@@ -551,15 +568,15 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-15T23:30:00Z",
+    "ran_at": "2026-11-16T02:40:00Z",
     "commands": [
       {
-        "command": "Simulation uv run pytest tests/test_hosted_recovery.py tests/test_hosted_compatibility.py",
-        "result": "26 passed: runtime kill recovers under one run id with pin record and shared ledger; mismatched model_version withheld and terminal; usage-limit refusal and provider unavailability not recovered and not resumable; changed broker profile refuses operator resume, restored profile resumes with pin gpt-compat-1; closed policy values; unreported version cannot pin."
+        "command": "Simulation uv run pytest tests/test_reliability_fault.py; uv run ruff check .; uv run pytest (full)",
+        "result": "Reliability fault tests passed (scripted recovery, hosted kill during idle stays idle with no new request, invalid configs refused, S011a configs differ only where registered) after one max_steps headroom fix in the new test; full suite passed. Fake providers only."
       },
       {
-        "command": "Simulation uv run ruff check .; uv run pytest (full)",
-        "result": "Ruff passed; full suite passed after updating one parametrized refusal message in test_providers.py. Fake providers only; no live request."
+        "command": "Owner-approved ols provider configure (per_run 180, per_day/total 1570, 20 s, 2 attempts); ols run experiments/s011a/hour-{1,2,3}.json sequentially; ols verify after each",
+        "result": "Three runs terminated at the 3600 s deadline; each one reliability_fault, one recovery_restart, hosted_identity_pin gpt-5.6-luna; 14/18/18 requests all ok with reasoning.effort=low; archives intact; 3/3 clean."
       },
       {
         "command": "Builder uv run ruff check .; uv run olb check --tests",

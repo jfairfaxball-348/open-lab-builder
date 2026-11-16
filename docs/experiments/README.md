@@ -1,5 +1,9 @@
 # Experiments and experimental validity
 
+**S011a complete:** three hosted Luna one-hour runs each recovered from a registered runtime kill (300/900/1800 s) and
+reached the deadline with intact archives: 3/3 clean, 50 requests. Every kill hit quiet idle, so live recovery during active
+work is untested. Behaviour repeated S011p's orientation-then-idle pattern. See the [report](2026-11-16-s011a-001.md).
+
 **S011p complete:** `gpt-5.6-luna` passed a NOT_SCORED low-effort smoke, then one preregistered unguided hour
 ended **completed-idle**: 22 requests, idle from 423.5 s after six recorded continuations, orientation and two memory
 writes only. n = 1; not an autonomy GO. See the [smoke](2026-11-15-s011p-luna-smoke.md), [registration](registrations/S011p-hour-001.md) and [report](2026-11-15-s011p-hour-001.md).

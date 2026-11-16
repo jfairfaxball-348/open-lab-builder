@@ -263,7 +263,8 @@ annotations ([protocol](docs/experiments/STUDY_ANALYSIS.md),
 unchanged. Export integrity establishes no new autonomy GO or causal comparison.
 S011p is complete: Luna passed a low-effort smoke and one registered unguided hour ended completed-idle after 423.5 s of activity
 ([report](docs/experiments/2026-11-15-s011p-hour-001.md)). S011r then added opt-in hosted fault recovery under a provider-reported model-version pin
-([ADR-0021](docs/decisions/ADR-0021-hosted-recovery-identity.md)); S011a is next.
+([ADR-0021](docs/decisions/ADR-0021-hosted-recovery-identity.md)). S011a then ran three hosted one-hour runs, each
+recovering from a registered runtime kill: 3/3 clean ([report](docs/experiments/2026-11-16-s011a-001.md)). S011b is next.
 
 ## Governing principle
 

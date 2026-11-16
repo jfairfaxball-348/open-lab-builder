@@ -90,7 +90,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**S011p complete (2026-11-15)** — see its status below. **S011r complete:** opt-in hosted recovery ([ADR-0021](../decisions/ADR-0021-hosted-recovery-identity.md)). **Next: S011a**, which needs a registration and a new owner allowance before any live request.
+**S011p complete (2026-11-15)** — see its status below. **S011r complete:** opt-in hosted recovery ([ADR-0021](../decisions/ADR-0021-hosted-recovery-identity.md)). **S011a complete (2026-11-16):** 3/3 hosted fault/recovery hours clean ([report](../experiments/2026-11-16-s011a-001.md)). **Next: S011b**, which needs owner power/update arrangements and a new allowance.
 
 _Historical S011p direction:_ **Next (owner-directed 2026-11-15): S011p — Luna 5.6 Qualification and First One-Hour Run.**
 The next session should first confirm `gpt-5.6-luna` is listed for the owner's
@@ -1455,7 +1455,7 @@ behavioural success are always reported separately.
 ### S011a — Reliability: One-Hour Runs
 
 - **Repository / streams:** Simulation; Builder evidence. C/D.
-- **Status:** **registered 2026-11-15** ([S011a-001](../experiments/registrations/S011a-001.md)): three hosted Luna hours, each with a registered runtime kill (300/900/1800 s). Not yet run; launch needs owner allowance.
+- **Status:** **complete (2026-11-16).** [S011a-001](../experiments/registrations/S011a-001.md): three hosted Luna hours, each with a registered runtime kill (300/900/1800 s), all auto-recovered and clean ([report](../experiments/2026-11-16-s011a-001.md)). All kills hit quiet idle; active-phase live recovery remains untested (KI-31).
 - **Objective:** Validate unattended one-hour execution independently of behaviour.
 - **Prerequisites:** S011r hosted recovery (if hosted), S011p qualified first-hour experience, completed S010a/b, S006c and frozen model/policy/world; S010c is deferred for observation UI, not required for these offline-verifiable reliability checks.
 - **Scope:** three consecutive one-hour runs, each with a registered runtime/model
