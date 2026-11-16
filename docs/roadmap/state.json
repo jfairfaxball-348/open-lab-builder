@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-16T16:23:04Z",
-  "last_session": "S020a",
+  "updated_at": "2026-11-16T16:56:32Z",
+  "last_session": "S020b",
   "completed_milestones": [
     {
       "id": "S001",
@@ -371,37 +371,51 @@
         "5121697"
       ],
       "summary": "Habitat 1.1.0 scientific workshop implemented: world-release 1.1.0 optionally pins a local OCI config ID; Simulation refuses missing/mismatched images without pulling and preserves legacy selection. Approved cached base plus 15 hash-locked binary-wheel distributions; NumPy/SciPy/SymPy/mpmath/pandas/Matplotlib/Pillow; exact licences/inventory in image, python.packages discovery, bounded headless plotting/cache/threads. Generated 74-file release fixture byte-identical to Builder build. Direct real sandbox/project repair/artifact revision/isolation/timeout/quota tests pass. No inference, full inhabitant simulation, host system install or provider/profile changes."
+    },
+    {
+      "id": "S020b",
+      "completed_at": "2026-11-16T16:56:32Z",
+      "repository": "open-lab-builder",
+      "commits": [
+        "755194c",
+        "051b2d7"
+      ],
+      "summary": "Habitat 1.2.0 completes phase 1 with immutable licensed Python/SymPy/SciPy references and Iris CSV, library.search/read, sandbox FFmpeg/ffprobe in a new pinned image, procedural science/PCM/GIF/WebM generation/editing and numeric inspection. Exact binary artifacts survive verified checkpoint restore/data-only lineage. Window adds bounded PCM WAV/VP8-VP9 WebM recognition, native controls and GET/HEAD byte ranges without writes/conversion/connections. Direct real container checks and actual Chromium playback pass. No full inhabitant loop, model inference, host installation or provider/profile change."
+    },
+    {
+      "id": "S020",
+      "completed_at": "2026-11-16T16:56:32Z",
+      "repository": "open-lab-builder",
+      "summary": "Phase 1 complete through S020a/S020b: scientific software workshop, four-source licensed offline library, procedural audiovisual creation/editing/inspection, preservation/continuation and basic read-only media previews. All declared exit criteria verified through direct sandbox and component fixtures plus Window browser checks; no inhabitant simulation or inference. S021 follows."
     }
   ],
   "next_milestone": {
-    "id": "S020b",
-    "repository": "open-lab-builder",
-    "title": "Reference library and procedural audiovisual work"
+    "id": "S021",
+    "repository": "open-lab-simulation",
+    "title": "Optional local assistants and visual creation"
   },
   "blockers": [
     {
       "id": "B-PROVISION",
-      "summary": "S020a scientific provisioning complete; later FFmpeg/system software, licensed reference content and model acquisitions retain scoped approval requirements.",
+      "summary": "S020 scientific/reference/FFmpeg provisioning is complete; future new model/runtime/voice acquisitions retain specific approval requirements.",
       "affects": [
-        "S020b",
         "S021",
         "S022"
       ],
       "needs_human": true,
-      "detail": "Owner Run 20a authorised the named scientific workshop and its package provisioning inside a derived image, using the already approved cached base. No base pull, host software install or models needed. Future acquisition is not authorised by this handoff; do not work around a listed human dependency."
+      "detail": "Owner Run next session accepted S020b reference and contained FFmpeg provisioning. No host install or new base/model download. S021 can begin broker/allowlist engineering using installed inventory and fakes; before new weights/system software choose exact artefacts/licences and follow AGENTS approval rules. No inhabitant run is a prerequisite."
     }
   ],
   "known_issues": [
     {
       "id": "KI-3",
-      "summary": "FFmpeg and PyTorch are not installed.",
+      "summary": "FFmpeg/ffprobe are installed in the pinned Habitat 1.2.0 image; PyTorch and media models remain unprovisioned.",
       "affects": [
-        "S020a",
-        "S020b",
         "S021",
         "S022"
       ],
-      "needs_human": true
+      "needs_human": true,
+      "detail": "No FFmpeg host install was needed. Debian image build enables GPL, not nonfree; exact version/package/build inventories and notices retained. AI model/runtime provisioning remains future and specifically scoped."
     },
     {
       "id": "KI-4",
@@ -471,11 +485,11 @@
     },
     {
       "id": "KI-14",
-      "summary": "The Window cannot tell a run in progress from one that was interrupted, and its front end has no automated tests.",
+      "summary": "Window cannot distinguish a running archive from an interrupted one; most front-end flows still lack automated browser coverage.",
       "affects": [
         "S010"
       ],
-      "detail": "The Window still shows a run without summary.json as not finished, using the last recorded state/event time. S006d adds host-local writer/accounting files and recovery actions, but the Window does not interpret them as liveness evidence. JSON API/read-only guarantees are tested; the front end still has no automated rendering tests."
+      "detail": "S020b HTTP/parser/read-only suite and actual Chromium WAV/WebM UI playback passed with archive bytes unchanged and strict CSP. This is narrow media UI coverage, not a complete browser suite or liveness detection."
     },
     {
       "id": "KI-15",
@@ -645,13 +659,12 @@
     },
     {
       "id": "KI-36",
-      "summary": "Habitat v2 is partly implemented: S020a scientific image complete; offline references, FFmpeg/media and local model brokers remain planned.",
+      "summary": "Habitat v2 phase 1 is complete; optional local model brokerage and AI media remain planned.",
       "affects": [
-        "S020b",
         "S021",
         "S022"
       ],
-      "detail": "Habitat 1.1.0 binds the tested local image, adds python.packages and headless numeric/plot defaults. python.run retains 60 s maximum, artifacts 50 MiB/file and workspace default 256 MiB; future media policies require explicit work. No full inhabitant simulation or inference."
+      "detail": "Habitat 1.2.0 includes scientific packages, immutable licensed references and Iris CSV, bounded library.search/read and sandbox FFmpeg. Direct media/science/checkpoint/data-lineage plus read-only browser playback are verified. Existing 60 s Python maximum, 50 MiB file capture cap, 256 MiB workspace default and explicit resource grants remain; no long-media promise."
     },
     {
       "id": "KI-37",
@@ -661,52 +674,64 @@
         "S022"
       ],
       "detail": "Bounded direct local component checks after approved provisioning are required before advertising availability; deterministic mocks prove routing only. Planning made no inference. One heavyweight task at a time, no hosted media fallback or media payloads to hosted orchestrator, no full inhabitant simulation."
+    },
+    {
+      "id": "KI-38",
+      "summary": "Reference library is a small four-source text/CSV corpus; passive previews use bounded header recognition, not full compressed-bitstream certification.",
+      "affects": [
+        "S021",
+        "S022"
+      ],
+      "detail": "Original RST syntax/relative references retained. Small PCM WAV and VP8/VP9 WebM profiles only, 50 MiB/600 s preview limits and resolution/audio bounds; browser decodes. Long/high-resolution workloads and all FFmpeg features are not certified. Windows/WSL evidence only."
     }
   ],
   "open_decisions": [
     {
       "id": "OD-V2-PROVISION",
-      "summary": "Specifically approve later licensed reference editions, FFmpeg/system provisioning and local model/voice acquisitions when reached.",
+      "summary": "Specifically scope future local visual/speech/music model, runtime and voice acquisitions when implementation reaches them.",
       "affects": [
-        "S020b",
         "S021",
         "S022"
       ],
       "needs_human": true,
-      "detail": "S020a workshop provisioning resolved by owner Run 20a: derived local image with approved cached base and hash-locked packages, no host install or model download. Existing gpt-5.6-luna/low ChatGPT-plan connection and limits remain unchanged. No further inhabitant experiment is authorised; actual model/media peak memory and latency remain unmeasured."
+      "detail": "S020a/S020b workshop, reference and contained FFmpeg provisioning resolved by owner execution instructions. No general model download or inference allowance follows. Retain gpt-5.6-luna/low and existing ChatGPT-plan connection/limits. New bounded local component verification follows approved provisioning; no hosted media and no full inhabitant run."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-16T16:23:04Z",
+    "ran_at": "2026-11-16T16:56:32Z",
     "commands": [
       {
-        "command": "Builder git status/log/fetch; uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Clean main at 97b1155 equal origin/main; S020a next. Sync/health passed; 426 tests passed in 62.77 s."
+        "command": "All repositories git status/log/fetch; uv sync; Builder olb state; Builder uv run olb check --tests baseline; Window uv run pytest baseline",
+        "result": "Clean matching main refs: Builder ba336be, Simulation 5121697, Window 3a88970. Sync passed; Builder 437 baseline tests/health passed; Window baseline passed. S020b was next."
       },
       {
-        "command": "Simulation git status/log/fetch; uv sync; workshop uv pip compile (Python 3.12, manylinux target, binary-only, hashes); podman build --pull=never; pip check; Backend.probe for both images",
-        "result": "Clean baseline 7fdc97c equal origin/main. 15 distributions resolved and installed in derived image from existing cached approved base; no host software or base image pull. pip check passed; image ID f1a63cbd...26f6c, 595191083 bytes; both probes pass. Raw build log ignored under .local."
+        "command": "Primary upstream source/licence retrieval; UCI Iris acquisition; Builder source validation and tests",
+        "result": "Pinned Python v3.12.10, SymPy sympy-1.14.0 and SciPy v1.18.1 source text/notices retained; Iris 150 rows with attributed CSV header adaptation. Library catalog sizes/paths/fields/hashes validated. Initial uppercase notice-name refusal corrected; no validation bypass."
       },
       {
-        "command": "Builder targeted contract/capability tests; uv run olb world build worlds/habitat --out .local/s020a-final; olb world verify --self-test; byte comparison against generated Simulation fixture",
-        "result": "Built Habitat 1.1.0 with 23 capabilities, self-tests/verification passed. Content digest 7ee9c976...75a19; all 74 fixture files byte-identical. Initial demo metadata and bare-hex Podman ID handling were corrected; line-ending copy error was repaired by recopying generated bytes, not by altering their digest."
+        "command": "Simulation podman build --pull=never from the existing scientific image; pin FFmpeg version; inspect inventory/buildconf and Backend probe",
+        "result": "Derived local image a0fb028f...41efb, 1495645879 disk bytes, FFmpeg 7:7.1.5-0+deb13u1; GPL enabled, nonfree disabled. Version/package/build/notice inventories retained in image. No host software/system changes, base pull or model download. Raw logs ignored."
       },
       {
-        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_workshop.py -o addopts= -q",
-        "result": "15 passed in 14.05 s: actual scientific imports/identities/numerics/CSV/PNG/docstrings, repair/reuse, artifact revisions and byte hashes, image admission/refusal, real isolation/cgroups, timeout and quota denial. No skip and no inhabitant loop."
+        "command": "Builder olb world build worlds/habitat --out .local/s020b-releases; cross-repository release byte/digest checks",
+        "result": "Habitat 1.2.0, 25 capabilities, self-tests passed. Digest 61d51369...a5dd31. All 89 generated fixture files byte-identical and Simulation load verifies. No shared schema shape/version change needed for optional library content."
       },
       {
-        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_container.py -k \"not container_run_completes and not deadline_stops and not quota_stops\" -q",
-        "result": "20 direct legacy container checks passed; 3 whole-run tests excluded by ADR-0027. Full Simulation suite not run because it launches scripted inhabitant loops; relevant direct component regressions ran instead."
+        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 pytest tests/test_library_media.py tests/test_workshop.py -o addopts= -q; strengthened media-only repeat",
+        "result": "17 passed in 28.73 s; final media-only 2 passed in 11.24 s with all root scientific packages/plot in the new image. Real reference retrieval, synthesis, animation, edit/mux/extraction, numeric inspection, artifact preservation, checkpoint restore and lineage pin verification pass. Host/network/GPU absent; malformed media bounded. No skip/inference/inhabitant loop. Full Simulation suite intentionally not launched under ADR-0027."
       },
       {
-        "command": "Builder uv run pytest tests/test_workshop_packages.py -o addopts= -q; both repositories uv run ruff check .; Builder uv run olb check --tests (closeout)",
-        "result": "2 package/environment tests passed; both lints passed; Builder health and 437 tests passed in 64.28 s. Historical S012 records unchanged. No model invocation or hosted provider probe."
+        "command": "Window uv run pytest -o addopts= -q; uv run ruff check .; node --check static app.js; installed headless Chromium UI check",
+        "result": "45 passed in 22.40 s, Ruff and JS syntax passed. Actual UI plays 128x96 WebM for 2.012 s and PCM WAV for 2 s, controls true/autoplay false, no page errors, all archive bytes unchanged. Initial browser harness eval was blocked by CSP; harness adjusted, CSP not weakened. Ignored screenshot/JSON preserved."
       },
       {
-        "command": "Simulation scoped staged-size/digest audit; commit and push 5121697; remote reconciliation",
-        "result": "83 files, 545409 bytes total, largest 79890 bytes; generated release load verifies. Commit 5121697 pushed; HEAD equals origin/main. No image layers, weights, archives or raw diagnostics committed."
+        "command": "Builder uv run ruff check .; uv run olb check --tests closeout",
+        "result": "Ruff/health passed; 450 tests passed in 70.22 s, including 13 library checks. Historical experimental reports/registrations/validation and prior milestone records retained."
+      },
+      {
+        "command": "Window and Simulation staged-size/blob audits, commit/push 051b2d7 and 755194c",
+        "result": "Window 10 files/105107 bytes; Simulation 93 files/547424 bytes. Staged blobs equal source bytes and generated release digest verifies. Both pushed. diff --check reports two upstream trailing spaces in verbatim SciPy reference and SymPy licence text; intentionally preserved with their exact source/hash, not code whitespace errors. No container images/weights/raw diagnostics/experimental archives committed."
       }
     ]
   }

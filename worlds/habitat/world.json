@@ -1,8 +1,8 @@
 {
   "world_id": "habitat",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": "Habitat",
-  "description": "Habitat scientific workshop: sandboxed NumPy, SciPy, SymPy, pandas, Matplotlib and Pillow with persistent software projects, memory, skills and optional phenomena.",
+  "description": "Habitat workshop and offline library: scientific Python, licensed references and data, procedural images/audio/animation and sandboxed FFmpeg composition.",
   "environment": {
     "platforms": [
       "windows",
@@ -16,7 +16,7 @@
       "ram_mb": 8192,
       "disk_mb": 10240
     },
-    "container_image": "sha256:f1a63cbdd0c4afbe35c533efa8f3ca21ff4f46c80a36d4d9cbba5bca08826f6c"
+    "container_image": "sha256:a0fb028f8e686c80e8c317b88570fc0bd61878be2b0c267a3a14fed27e341efb"
   },
   "default_limits": {
     "wall_clock_s": 3600,
@@ -30,5 +30,5 @@
     "subprocess": true,
     "gpu": false
   },
-  "notes": "S020a workshop image is selected by immutable local OCI configuration ID. Operator provisioning only; no pulls or pip at runtime. Network-free rootless containers retain workspace-only writes. All earlier Habitat tools remain, plus python.packages. No models.ask, inference or full inhabitant demonstration. Existing world versions retain their original image and limits."
+  "notes": "S020b adds bounded library.search/read over immutable licensed text/CSV assets and a new operator-provisioned image containing FFmpeg/ffprobe. All 25 capabilities remain container-tier and network/GPU-free; older image/world versions are unchanged. Media is generated/edited by Python programs using installed FFmpeg, never by hosted or local AI in this slice. Existing explicit experiment grants and data-only lineage remain authoritative."
 }

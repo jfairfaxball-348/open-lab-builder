@@ -112,6 +112,23 @@ re-serialisation. The repository stores text with LF endings
 caches (`__pycache__`, `*.pyc`) are never copied, and symbolic links are
 refused.
 
+**Offline library (S020b).** Optional `library/` source files are copied
+byte-for-byte into releases before their digests are computed. `library/index.json`
+format 1.0.0 lists stable source ids, titles, citations, upstream URLs/revisions,
+licences/notices, relative text paths and SHA-256. Only bounded UTF-8 text/CSV and
+licence files ship, never executable documents. Builder validates the catalog,
+paths, sizes and hashes; read/search capabilities select source ids, not caller
+paths, and return line ranges/citations. The immutable world binds all assets.
+No schema shape changes or runtime import between repositories is needed.
+
+S020b passive media previews extend Window to PCM WAV and WebM only, recognised
+by bounded container/format parsing, with 50 MiB maximum. Serving is GET/HEAD-only
+with one byte range, bounded chunks, no autoplay, media-src self and nosniff.
+Unsupported/malformed media and unsatisfiable/multiple ranges are refused.
+Window never decodes, converts, writes or calls a service; the browser renders
+only recognised media. HTML/SVG/JavaScript remain inert text. Sandbox FFmpeg is
+operator-provisioned in a new image; existing images/releases are never replaced.
+
 **Registry (S005a).** Generated files join the digest before self-tests and are
 not source files. `registry/index.json` has `format_version: "1.0.0"` and a
 `capabilities` array sorted by id. Each entry has `id`, `name`, `summary`,
@@ -714,6 +731,7 @@ chronology and scientific interpretation are never certified automatically.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-16 | (world content / passive observation) | - | S020b Habitat 1.2.0 packages hash-bound licensed library text/CSV, adds library.search/read, sandbox FFmpeg/ffprobe in a new image, and bounded read-only PCM WAV/WebM preview/ranges in Window; no shared schema shape change |
 | 2026-11-16 | world-release | 1.1.0 | S020a adds optional container-only immutable local image configuration ID in environment.container_image; absent preserves legacy image; schema/examples/tests updated. Habitat 1.1.0 adds python.packages and pinned scientific Python, with unchanged sandbox/experiment authority |
 | 2026-11-16 | (planning only) | - | S020p / ADR-0027 plans digest-bound workshop images, local model/media services and offline library; no schema, protocol, capability or world release changed |
 | 2026-11-16 | (world assembly) | - | S019 releases Habitat 1.0.0 with the existing 22 capabilities and unchanged shared schemas/protocols; integrated container supervisor/resume/lineage acceptance and existing read-only Window HTTP/API verified |

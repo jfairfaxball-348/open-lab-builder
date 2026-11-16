@@ -16,7 +16,7 @@ heading must keep the form `### S000 — Title`; the health check reads it.
 
 ## Active programme: Habitat v2 (2026-11-16)
 
-**S020a is complete; S020b is next, starting in Builder.**
+**S020 (S020a/S020b) is complete; S021 is next in Simulation.**
 [Habitat v2](../habitat/HABITAT_V2.md) contains the verified reuse/hardware audit,
 local software/model choices and security dependencies.
 [ADR-0027](../decisions/ADR-0027-habitat-v2.md) governs this programme;
@@ -54,7 +54,8 @@ inhabitant simulation. Completion does not complete any implementation phase.
 
 ### S020 — Workshop, offline library and procedural media
 
-**Status: planned. Phase 1; split into S020a then S020b before implementation.**
+**Status: complete. Phase 1 delivered by S020a and S020b.**
+[Reference/media component evidence](../habitat/demos/S020b.md).
 
 - **Objective:** investigate mathematics/data, create reusable software, consult
   references, draw illustrations, compose sound and produce simple animation.
@@ -114,7 +115,10 @@ additive contract, world metadata and generated release; find/read both AGENTS.
 
 ### S020b — Reference library and procedural audiovisual work
 
-**Status: next; phase 1 completion.**
+**Status: complete; phase 1 completion.**
+Habitat 1.2.0 supplies four cited offline sources, sandbox FFmpeg and independent
+read-only WAV/WebM previews. Direct component/continuation checks and actual
+browser playback pass; no model or inhabitant simulation was run.
 
 - **Objective:** learn from sources and create inspectable images, sound and video.
 - **Prerequisites:** S020a; approved licensed content and FFmpeg image provisioning.
@@ -131,7 +135,7 @@ additive contract, world metadata and generated release; find/read both AGENTS.
 
 ### S021 — Optional local assistants and visual creation
 
-**Status: planned. Phase 2.**
+**Status: next. Phase 2.**
 
 - **Objective:** choose bounded local assistance and create/edit/inspect original
   images, without prescribing projects or delegation.

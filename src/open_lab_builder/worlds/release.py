@@ -176,6 +176,12 @@ def load_source(source: Path) -> WorldSource:
         if not issues:
             world.models.append((path, manifest))
 
+    library = source / "library"
+    if library.exists():
+        from .library import validate_library
+
+        problems.extend(validate_library(library))
+
     if problems:
         raise BuildError(problems)
     return world
@@ -222,6 +228,10 @@ def _stage(world: WorldSource, staging: Path) -> None:
                 )
     for path, _ in world.models:
         _copy(path, staging / "models" / path.name)
+    library = world.root / "library"
+    if library.is_dir():
+        for relative in _files_under(library):
+            _copy(library / relative, staging / "library" / relative)
     registry = staging / "registry"
     (registry / "docs").mkdir(parents=True)
     (staging / INDEX_PATH).write_text(

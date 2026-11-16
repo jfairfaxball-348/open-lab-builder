@@ -2,7 +2,8 @@
 
 Adopted for planning 2026-11-16 under [ADR-0027](../decisions/ADR-0027-habitat-v2.md).
 S020a is implemented in Habitat 1.1.0; [component evidence](demos/S020a.md).
-The remaining phases are planned. Active phases and acceptance are in
+S020b completes phase 1 in Habitat 1.2.0: [reference/media evidence](demos/S020b.md).
+Local-model and AI-media phases remain planned. Active phases and acceptance are in
 [ROADMAP.md](../roadmap/ROADMAP.md); [next session](../../NEXT_SESSION.md).
 
 ## Ambition and evidence
@@ -30,7 +31,7 @@ decision after v2 is useful. Retain existing hosted profile/effort/limits.
 
 ## Current implementation audit
 
-Fetched all remotes on 2026-11-16: only local/remote main branches, clean and
+Planning baseline (before S020a/S020b): fetched all remotes on 2026-11-16: only local/remote main branches, clean and
 equal at Builder `8ae516f`, Simulation `7fdc97c`, Window `3a88970` before edits.
 Read current architecture, contracts, isolation, manifests, Habitat v1,
 ADR-0018/0022–0026, both S012 reports and the relevant runtime/Window code.
@@ -41,25 +42,28 @@ ADR-0018/0022–0026, both S012 reports and the relevant runtime/Window code.
 | Software creation | workspace write/list/read/edit; python.run; stdout, stderr, tracebacks, timeouts; projects can import their own modules | Already permits write/debug/reuse, JSON/CSV/SQLite and unittest. S020a adds installed-package discovery/docstrings, headless plotting and artifact revision checks; no arbitrary host shell or runtime pip |
 | Skills/tools/continuation | skills.save/list/get, tools.create, memory.*, checkpoints, operator data-only lineage | Reuse directly. Child runs inherit files/memory, not trusted registrations, authority or conversation; saved source must be revalidated to register a tool |
 | Images | Binary files can be written by Python; Window previews recognised raster formats | S020a delivers Pillow/Matplotlib PNG, diagrams and raster editing. AI generation, editing and inhabitant visual understanding are absent. Window viewing does not give Lunar vision |
-| Audio/music | Python wave/struct can write PCM; existing file capture | Procedural composition/DSP compose from Python; add scientific stack, soundfile, FFmpeg, local speech/transcription and optional music model. No playback or audio AI capability today |
-| Animation/video | Python can compute frames; Window recognises GIF | Add Pillow animation, FFmpeg assembly/editing/frame extraction, audio muxing and read-only playback. No video AI today |
-| Research/library | Workspace reading, SQLite and memory search; registry searches tools, not knowledge | Add licensed offline content and bounded source/page search/read. memory.search is personal notes, not a reference corpus |
+| Audio/music | Python wave/struct can write PCM; existing file capture | S020b delivers NumPy/SciPy/wave synthesis, FFmpeg editing/mixing and Window PCM WAV playback. Local speech/transcription and optional neural music remain S022; soundfile is optional, not installed in this image |
+| Animation/video | Python can compute frames; Window recognises GIF | S020b delivers Pillow animation, FFmpeg assembly/editing/frame extraction, audio muxing and basic read-only WAV/WebM playback. No video AI today |
+| Research/library | Workspace reading, SQLite and memory search; registry searches tools, not knowledge | S020b adds licensed Python/SymPy/SciPy manuals, Iris CSV and bounded cited search/read. memory.search is personal notes, not a reference corpus |
 | Local delegation | S007e models.ask in minimal world; supervisor specialist.py and finite GPU lease | Single pinned llama3.2:3b only, external/scripted orchestrator, bounded 1–32 calls, ≤6000 input/output chars, ≤1024 output tokens, ≤120 s/call, ≤600 s lease. No models.list or model selection; absent from Habitat |
-| Observation | Versioned artifacts, protected archive and read-only text/raster Window | Reuse. Add WAV and one supported video format, basic native controls; no dashboard, execution, conversion or write path in Window |
+| Observation | Versioned artifacts, protected archive and read-only text/raster Window | Reuse. S020b adds PCM WAV and VP8/VP9 WebM with basic native controls; no dashboard, execution, conversion or write path in Window |
 
 Specific implementation anchors: Simulation container.py now selects the verified world image or the original
 legacy base, and still has no GPU/network path; python.run currently allows 1–60 s and defaults
 to 10 s; artifact preservation defaults to 50 MiB/file. Habitat defaults are
-1 GiB per capability and 256 MiB workspace, unsuitable as implicit media limits.
-The image selector, timeout hierarchy, archive size and resource policy must be
-addressed explicitly, without silently raising existing experiment limits.
+2 GiB per capability in the new world and 256 MiB workspace; explicit experiment
+grants still control actual limits. Initial clips remain below the 50 MiB file
+capture cap and existing timeout hierarchy. Long/large media needs an explicit
+new policy, never silently raised existing experiment limits.
 
 ## Live hardware and deployment feasibility
 
 Read-only probes: olb diagnose --json --save-raw, CIM, nvidia-smi, ollama list/ps,
 WSL inventory, Podman images, read-only Ollama /api/show metadata and Simulation
 Backend().probe(). Raw diagnostics
-remain ignored under .local/. No inference, model loading or container run.
+remain ignored under .local/. These planning probes made no inference, model
+loading or container run. Later S020a/S020b container/component evidence is
+recorded separately; proposed AI media resource use is still unmeasured.
 
 | Resource | Verified on 2026-11-16 |
 | --- | --- |

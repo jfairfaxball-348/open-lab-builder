@@ -2,6 +2,11 @@
 
 Habitat v2 is planned under [ADR-0027](../decisions/ADR-0027-habitat-v2.md).
 S020a implements the pinned scientific image without broadening privileges.
+S020b adds immutable references and sandbox FFmpeg; the library has bounded
+UTF-8 files, source-id selection and verified hashes. Window serves only bounded
+recognised PCM WAV/WebM in addition to raster/text: native browser decoding,
+GET/HEAD ranges, strict CSP and no conversion, writes, active documents or service
+connections. Header checks are not full bitstream validation.
 Local-only media workers and optional model delegation do not yet exist in
 Habitat. See [the security work](../habitat/HABITAT_V2.md#architecture-and-concrete-security-work)
 for bounded service inputs, restricted workers, resource admission and output

@@ -1,54 +1,61 @@
-# Next session — S020b reference library and procedural media
+# Next session — S021 optional local assistants and visual creation
 
-**Development only. Do not launch Lunar, model inference or a full inhabitant
-simulation.** S020a is complete: Habitat 1.1.0 has a digest-bound scientific
-image and python.packages. Read [S020a evidence](docs/habitat/demos/S020a.md),
-[Habitat v2](docs/habitat/HABITAT_V2.md), ADR-0027 and
-[S020b scope](docs/roadmap/ROADMAP.md#s020b--reference-library-and-procedural-audiovisual-work).
+S020 is complete. Habitat 1.2.0 has scientific Python, four licensed offline
+reference/data sources, procedural image/audio/animation/video work, FFmpeg and
+safe read-only Window PCM WAV/WebM previews. Read
+[S020b evidence](docs/habitat/demos/S020b.md),
+[Habitat v2](docs/habitat/HABITAT_V2.md), ADR-0027 and the
+[S021 scope](docs/roadmap/ROADMAP.md#s021--optional-local-assistants-and-visual-creation).
 
-## First task
+## First development task
 
-In Builder, define a small versioned offline reference library with stable source
-ids, citations/licences and bounded library.search/read capabilities. Use actual
-licensed programming/maths/science material; preserve original provenance and
-attribution, no internet retrieval from the inhabitant. Reuse the read-only
-world release and existing discovery. Inspect the existing source/release copier
-before deciding where immutable library bytes belong. No vector database or
-embedding model is necessary. Coordinate Simulation only where runtime support
-is strictly needed; Window changes belong only to its read-only previews.
+In Simulation, inspect existing specialist.py, supervisor service IPC and the
+capability permission checks. Design/implement the smallest extension from the
+single pinned specialist to a frozen allowlist: models.list and models.ask with
+an explicit allowed model id. Reuse reservations, deadline handling, finite
+leases and recorded results; do not give Python containers an endpoint, socket,
+network or GPU device. Builder owns corresponding contracts/manifests/releases.
+Local assistants return bounded untrusted data, have no tools, no recursive
+subtasks and no independent loop. Discovery must not prefer a model or require
+consultation. Preserve the existing primary hosted model/profile/effort/limits.
 
-Complete the remaining phase-1 slice: Pillow/NumPy/SciPy procedural sound/images,
-FFmpeg composition/editing/frame extraction, and basic safe WAV/WebM playback in
-Window. Inspect scope and split in the roadmap before implementation if one
-session cannot deliver it safely. Do not begin S021 or add image/audio models.
-Specific new system software/model/content acquisitions require the existing
-AGENTS.md approval rules. No such acquisitions are authorised by this handoff.
+Installed inventory from metadata includes Llama3.2:3b, Qwen3:4b, Qwen3.5:2b
+and Granite4.1:3b; Qwen3.5 advertises vision. Reinspect current digests/capabilities
+without inference first. Use deterministic fake services for engineering. If the
+whole S021 slice is too large, split it in the roadmap before implementing;
+retain image creation/understanding as required work, not an administrative
+future programme. No model is disqualified as a bounded assistant merely by
+its old autonomous-orchestrator result.
 
-## Reuse and verification
+## Provisioning, local checks and limits
 
-Find sibling checkouts and follow each changed repository's AGENTS. Start with
-status/log/fetch, sync, state and baseline checks. S020a built and tested the
-scientific image already; do not rebuild or replace it casually. Its ID and
-package lock/recipe/notices are described in Simulation workshop/README.md.
-Older worlds retain the S006c image. Build new immutable world versions and copy
-generated fixture bytes exactly; never normalise or hand-edit release fixtures.
+This handoff itself grants no downloads or inference. A future owner instruction
+to execute S021 authorises its ordinary scoped development; specific new model
+or system-software acquisitions still follow AGENTS.md. After approved
+provisioning, bounded direct local component checks can establish availability,
+actual RAM/VRAM/latency and cancellation. A mocked reply does not establish a
+working generator. Do not launch an inhabitant loop to test model feasibility.
 
-Use direct sandbox, tool-host, recorder/checkpoint components and fake-service
-integration, not a scripted inhabitant loop. Test source search/read/citation,
-media creation/editing/muxing, output preservation and malformed/path/size/time
-bounds. Retain Window GET/HEAD-only, no disk writes/conversion, no active HTML or
-calls into a run. Keep initial outputs below the existing 50 MiB capture cap.
-Explicit resource grants remain authoritative; do not alter old experiment pins,
-model settings or provider limits. All media AI remains local-only in later slices.
+The visual path is installed Qwen vision first, with smaller SmolVLM as an
+alternative; SD1.5/stable-diffusion.cpp is the planned local image-generation
+candidate. Check exact release licences, artifact identities and worker isolation
+before acquisition. Share a single-heavy-job resource admission policy across
+local text and media; inspect actual free RAM/VRAM rather than assume fit.
+Keep media bytes out of the hosted orchestrator: local descriptions/measurements
+and artifact references only. No cloud media fallback or new hosted text service.
 
-Run lint and relevant suites in changed repositories plus Builder
-olb check --tests. Record real outcomes/remaining limits in roadmap/state/docs,
-then commit and push scoped work. Existing whole-run tests are outside the v2
-verification programme; use their direct component alternatives.
+## Existing boundaries and closeout
 
-## Following work
+Find sibling checkouts, read their AGENTS, inspect status/log/remote, sync/state
+and baseline checks. Reuse the provisioned 1.1.0/1.2.0 images; never overwrite
+an old release/image selection. Copy generated fixture bytes exactly, including
+embedded line breaks. Use direct sandbox/supervisor-service/recorder components,
+not full scripted supervisor demonstrations. Window remains read-only and does
+not call models or Simulation. Shared schema changes require versions/examples/
+changelog/tests; no imports across repositories.
 
-S021 adds optional local text delegation and local visual creation/understanding;
-S022 adds speech, transcription and audiovisual completion. The 4 GB GPU and
-~6 GB available RAM remain binding constraints. No automatic return to S012:
-only a separate explicit owner decision can authorise a future Lunar experiment.
+Run relevant changed-source suites/lint and Builder olb check --tests. Update
+roadmap/state/docs with actual evidence, then commit and push scoped work.
+All Lunar/full inhabitant runs, endurance/survival studies, comparisons and
+behavioural campaigns remain suspended. The next real Lunar experiment needs a
+separate explicit owner decision after useful Habitat v2 completion.

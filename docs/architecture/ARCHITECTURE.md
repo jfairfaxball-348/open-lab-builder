@@ -2,8 +2,9 @@
 
 Active direction: [Habitat v2](../habitat/HABITAT_V2.md),
 [ADR-0027](../decisions/ADR-0027-habitat-v2.md). S020a implements digest-bound scientific container images and package
-discovery in Habitat 1.1.0. Offline references, supervisor-brokered optional local
-models/media and extended read-only previews remain planned. Three-repository ownership and existing isolation remain.
+discovery in Habitat 1.1.0. S020b adds licensed offline references, procedural
+FFmpeg media and read-only WAV/WebM previews in Habitat 1.2.0. Optional local
+models and AI media remain planned. Three-repository ownership and existing isolation remain.
 All further inhabitant simulations/experiments are suspended; offline component
 verification replaces full-run demonstrations during development. S012-002
 demonstrated sustained prompted activity; its historical report is preserved.
@@ -61,6 +62,16 @@ direct sandbox/tool-host/recorder component fixtures, never an inhabitant loop.
 See [S020a evidence](../habitat/demos/S020a.md). The image requires this S020a
 Simulation implementation; using an older runtime that ignores new semantics
 is unsupported. No local or hosted inference was performed.
+
+S020b packages immutable `library/` text/CSV assets with validated source hashes,
+licences and citations. Ordinary library.search/read capabilities provide bounded
+retrieval with no writable index or network. Python programs use installed
+FFmpeg/ffprobe inside a new pinned image; no host media process or broker is
+introduced. Window independently recognises bounded PCM WAV/WebM headers and
+serves GET/HEAD byte ranges to native browser controls. It never converts, writes
+or contacts Simulation. Direct media/recorder/checkpoint/lineage tests and a real
+browser preview verify this chain without an inhabitant loop. See
+[S020b evidence](../habitat/demos/S020b.md).
 
 ## 1. Three repositories, three roles
 
