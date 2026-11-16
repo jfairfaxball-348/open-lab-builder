@@ -75,6 +75,24 @@ Implemented in S002 by `olb world build` and `olb world verify`
 (`src/open_lab_builder/worlds/`). What follows is the specification the
 Simulation must reproduce without importing that code.
 
+**Scientific workshop image (S020a).** World-release 1.1.0 adds optional
+`environment.container_image`: a string `sha256:<64 lower-case hex>` naming
+the immutable local OCI image configuration ID, not a registry manifest digest,
+tag, URL or agent path. It is valid only with minimum_tier container and a
+schema_version of at least 1.1.0. The verified world content digest binds this
+selection. No experiment or tool argument may override it. Its absence means
+the original S006c pinned base image, so existing worlds retain their behaviour.
+
+Simulation inspects the selected local image without pulling and requires its
+`Id` to equal that ID; uses that ID with `--pull=never`; records the ID in the
+existing isolation.json and per-resume segment isolation metadata. Missing,
+mismatched or malformed selections are refused before workspace/run allocation.
+The archived world and isolation record bind image identity across resume.
+Registry copies and builds may have different IDs: reprovision and issue a new
+world release rather than silently retagging/replacing an old one. Wheel locks,
+notices and build recipe live in Simulation; image binaries are never committed.
+The image grants no network/GPU/host access or resource-limit override.
+
 **Layout.** A release is the directory `<world_id>/<version>/`:
 
 ```
@@ -696,6 +714,7 @@ chronology and scientific interpretation are never certified automatically.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-16 | world-release | 1.1.0 | S020a adds optional container-only immutable local image configuration ID in environment.container_image; absent preserves legacy image; schema/examples/tests updated. Habitat 1.1.0 adds python.packages and pinned scientific Python, with unchanged sandbox/experiment authority |
 | 2026-11-16 | (planning only) | - | S020p / ADR-0027 plans digest-bound workshop images, local model/media services and offline library; no schema, protocol, capability or world release changed |
 | 2026-11-16 | (world assembly) | - | S019 releases Habitat 1.0.0 with the existing 22 capabilities and unchanged shared schemas/protocols; integrated container supervisor/resume/lineage acceptance and existing read-only Window HTTP/API verified |
 | 2026-11-16 | (supervisor-time / runtime policy / lineage) | - | S018 Habitat 0.5.0 adds remaining budget, self-scheduled-v1 bounded waking and data-only operator lineage with pinned snapshots and two-way references; existing MCP, observation extensions and runtime checkpoint component; no shared schema change; ADR-0025 |

@@ -1,10 +1,9 @@
 # Architecture
 
 Active direction: [Habitat v2](../habitat/HABITAT_V2.md),
-[ADR-0027](../decisions/ADR-0027-habitat-v2.md). This is a planned extension,
-not implemented functionality: digest-bound scientific container images,
-offline references, supervisor-brokered optional local models/media and small
-read-only previews. Three-repository ownership and existing isolation remain.
+[ADR-0027](../decisions/ADR-0027-habitat-v2.md). S020a implements digest-bound scientific container images and package
+discovery in Habitat 1.1.0. Offline references, supervisor-brokered optional local
+models/media and extended read-only previews remain planned. Three-repository ownership and existing isolation remain.
 All further inhabitant simulations/experiments are suspended; offline component
 verification replaces full-run demonstrations during development. S012-002
 demonstrated sustained prompted activity; its historical report is preserved.
@@ -50,6 +49,18 @@ S013 adds an experimental-readiness plan without changing implemented architectu
 [ADR-0013](../decisions/ADR-0013-autonomy-as-an-experimental-objective.md).
 The four development streams are conceptual, not new components/repositories.
 Tool competence and uptime remain engineering outcomes, not evidence of autonomy.
+
+S020a adds world-release 1.1.0's optional `environment.container_image` config
+ID. The verified world selects the operator-provisioned image; Simulation checks
+its local identity before allocation and never pulls. Existing worlds select
+the original S006c image. Habitat 1.1.0 contains NumPy/SciPy/SymPy/mpmath/pandas/
+Matplotlib/Pillow, with python.packages discovery and runner-owned headless
+plot/cache/thread defaults. Execution remains network-free and container-only,
+with explicit unchanged experiment resource authority. The evidence consists of
+direct sandbox/tool-host/recorder component fixtures, never an inhabitant loop.
+See [S020a evidence](../habitat/demos/S020a.md). The image requires this S020a
+Simulation implementation; using an older runtime that ignores new semantics
+is unsupported. No local or hosted inference was performed.
 
 ## 1. Three repositories, three roles
 

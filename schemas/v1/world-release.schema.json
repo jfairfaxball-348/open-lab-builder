@@ -3,7 +3,7 @@
   "$id": "urn:open-lab:schema:world-release:v1",
   "title": "World release manifest",
   "description": "Describes one immutable, versioned world that the Simulation can instantiate. Produced only by the World Builder.",
-  "x-schema-version": "1.0.0",
+  "x-schema-version": "1.1.0",
   "type": "object",
   "required": [
     "schema",
@@ -96,6 +96,13 @@
           "uniqueItems": true
         },
         "python": { "description": "PEP 440 version specifier.", "type": "string" },
+        "container_image": {
+          "description": "Immutable local OCI image configuration ID, provisioned by the operator. No tag, registry endpoint or runtime pull. Omit to retain the legacy base image. Requires container isolation and world-release 1.1.0 or later.",
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "minLength": 71,
+          "maxLength": 71
+        },
         "isolation": {
           "type": "object",
           "required": ["minimum_tier"],
@@ -125,6 +132,21 @@
     "notes": { "type": "string" },
     "extensions": { "$ref": "urn:open-lab:schema:common:v1#/$defs/extensions" }
   },
-  "if": { "properties": { "status": { "enum": ["validated", "released"] } } },
-  "then": { "required": ["content_digest"] }
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "enum": ["validated", "released"] } } },
+      "then": { "required": ["content_digest"] }
+    },
+    {
+      "if": { "properties": { "environment": { "required": ["container_image"] } } },
+      "then": {
+        "properties": {
+          "schema_version": { "not": { "pattern": "^1\\.0\\." } },
+          "environment": {
+            "properties": { "isolation": { "properties": { "minimum_tier": { "const": "container" } } } }
+          }
+        }
+      }
+    }
+  ]
 }

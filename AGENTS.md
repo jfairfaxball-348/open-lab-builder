@@ -33,7 +33,8 @@ do.
 **Active development builds Habitat v2 (ADR-0027, 2026-11-16).** Habitat v1
 and S012-001/002 are complete historical records. The active plan is
 `docs/habitat/HABITAT_V2.md`: S020 workshop/library, S021 local assistants and
-visual creation, S022 sound/audiovisual completion. Start with S020a.
+visual creation, S022 sound/audiovisual completion. S020a scientific workshop
+is complete; start with S020b.
 All Lunar runs, behavioural experiments, model comparisons, benchmarks and
 endurance studies are suspended until a separate explicit owner decision after
 v2 is useful. Keep the coupled field optional; do not organise work around it.

@@ -16,7 +16,7 @@ heading must keep the form `### S000 — Title`; the health check reads it.
 
 ## Active programme: Habitat v2 (2026-11-16)
 
-**S020a is next, in Simulation with Builder contract/release work.**
+**S020a is complete; S020b is next, starting in Builder.**
 [Habitat v2](../habitat/HABITAT_V2.md) contains the verified reuse/hardware audit,
 local software/model choices and security dependencies.
 [ADR-0027](../decisions/ADR-0027-habitat-v2.md) governs this programme;
@@ -81,7 +81,9 @@ inhabitant simulation. Completion does not complete any implementation phase.
 
 ### S020a — Digest-bound scientific Python workshop
 
-**Status: next; not implemented.** Lead: open-lab-simulation. Builder owns the
+**Status: complete.** [Component evidence](../habitat/demos/S020a.md).
+Habitat 1.1.0 and its real scientific image pass direct offline fixtures; no
+inhabitant run or inference. Lead: open-lab-simulation. Builder owns the
 additive contract, world metadata and generated release; find/read both AGENTS.
 
 - **Objective:** write, execute, inspect and improve actual scientific programs.
@@ -112,7 +114,7 @@ additive contract, world metadata and generated release; find/read both AGENTS.
 
 ### S020b — Reference library and procedural audiovisual work
 
-**Status: planned; phase 1 completion.**
+**Status: next; phase 1 completion.**
 
 - **Objective:** learn from sources and create inspectable images, sound and video.
 - **Prerequisites:** S020a; approved licensed content and FFmpeg image provisioning.

@@ -1,55 +1,54 @@
-# Next session — S020a scientific Python workshop
+# Next session — S020b reference library and procedural media
 
-**Development only. Do not launch Lunar or any full inhabitant simulation.**
-Owner direction: [ADR-0027](docs/decisions/ADR-0027-habitat-v2.md).
-Read [Habitat v2](docs/habitat/HABITAT_V2.md) and the
-[S020a scope](docs/roadmap/ROADMAP.md#s020a--digest-bound-scientific-python-workshop).
-The earlier S012 launch handoff is obsolete; reports/registrations and historical
-Git versions remain intact. Both S012 allowances were spent, not reusable.
+**Development only. Do not launch Lunar, model inference or a full inhabitant
+simulation.** S020a is complete: Habitat 1.1.0 has a digest-bound scientific
+image and python.packages. Read [S020a evidence](docs/habitat/demos/S020a.md),
+[Habitat v2](docs/habitat/HABITAT_V2.md), ADR-0027 and
+[S020b scope](docs/roadmap/ROADMAP.md#s020b--reference-library-and-procedural-audiovisual-work).
 
-## First development task
+## First task
 
-In Builder specify the additive digest-bound workshop-image contract; in the
-sibling Simulation implement its verified image selector/admission in container.py.
-Retain the existing pinned base image for old worlds. Refuse missing/mismatched
-images without pulling. Then pin/provision the scientific Python image, expose
-package inventory/docs and verify actual maths/data/plot programs through direct
-sandbox fixtures. This is S020a, not all three phases at once.
+In Builder, define a small versioned offline reference library with stable source
+ids, citations/licences and bounded library.search/read capabilities. Use actual
+licensed programming/maths/science material; preserve original provenance and
+attribution, no internet retrieval from the inhabitant. Reuse the read-only
+world release and existing discovery. Inspect the existing source/release copier
+before deciding where immutable library bytes belong. No vector database or
+embedding model is necessary. Coordinate Simulation only where runtime support
+is strictly needed; Window changes belong only to its read-only previews.
 
-Follow both AGENTS.md files; find sibling checkouts, inspect status/log/remote,
-uv sync, olb state and baseline checks. Preserve unrelated work. Builder owns
-contracts/manifests/releases, Simulation execution, Window observation. Do not
-import code between repositories or hand-edit generated world fixtures.
+Complete the remaining phase-1 slice: Pillow/NumPy/SciPy procedural sound/images,
+FFmpeg composition/editing/frame extraction, and basic safe WAV/WebM playback in
+Window. Inspect scope and split in the roadmap before implementation if one
+session cannot deliver it safely. Do not begin S021 or add image/audio models.
+Specific new system software/model/content acquisitions require the existing
+AGENTS.md approval rules. No such acquisitions are authorised by this handoff.
 
-Target packages: NumPy, SciPy, SymPy/mpmath, pandas, Matplotlib Agg and Pillow on
-Python 3.12. Resolve compatible pinned Linux wheels and notices, not host packages.
-Use workspace-only caches, bounded BLAS threads and explicit RAM/time policies.
-Before any new base image/system-software/model/content acquisition, obtain the
-specific approval required by AGENTS.md; this planning session authorised none.
-Preparing code/contracts with fakes does not require a model/download decision.
-If an essential provision is blocked, report it and retain incomplete status.
+## Reuse and verification
 
-## Exit and boundaries
+Find sibling checkouts and follow each changed repository's AGENTS. Start with
+status/log/fetch, sync, state and baseline checks. S020a built and tested the
+scientific image already; do not rebuild or replace it casually. Its ID and
+package lock/recipe/notices are described in Simulation workshop/README.md.
+Older worlds retain the S006c image. Build new immutable world versions and copy
+generated fixture bytes exactly; never normalise or hand-edit release fixtures.
 
-Direct offline container fixtures must execute a symbolic identity, numerical
-integration, CSV analysis and saved PNG; edit/re-run a project module, inspect
-result bytes and verify capture. Test digest refusal and unchanged legacy worlds,
-network/host isolation, timeout and quotas. No full scripted supervisor run:
-exercise service handlers and capture/checkpoint components directly as needed.
-Run relevant suites/lint in changed repositories and Builder olb check --tests;
-update roadmap/state/docs with actual results, then commit and push scoped work.
-If tests need a new contract version, update examples/changelog and rebuild fixtures.
+Use direct sandbox, tool-host, recorder/checkpoint components and fake-service
+integration, not a scripted inhabitant loop. Test source search/read/citation,
+media creation/editing/muxing, output preservation and malformed/path/size/time
+bounds. Retain Window GET/HEAD-only, no disk writes/conversion, no active HTML or
+calls into a run. Keep initial outputs below the existing 50 MiB capture cap.
+Explicit resource grants remain authoritative; do not alter old experiment pins,
+model settings or provider limits. All media AI remains local-only in later slices.
 
-No inference, experiments, hosted probes, profile/effort/limit changes, runtime
-pip, agent network or GPU devices. All future media AI is local-only, including
-understanding. Local functional admission checks follow approved provisioning during the
-relevant development slice; real Lunar runs need a separate explicit owner decision after v2 is useful.
+Run lint and relevant suites in changed repositories plus Builder
+olb check --tests. Record real outcomes/remaining limits in roadmap/state/docs,
+then commit and push scoped work. Existing whole-run tests are outside the v2
+verification programme; use their direct component alternatives.
 
 ## Following work
 
-S020b adds the offline library, FFmpeg/procedural media and basic read-only
-playback. S021 adds optional local delegation and image AI; S022 adds speech,
-audio analysis and audiovisual completion. Do not defer images for campaigns.
-Main obstacles: reproducible image binding, 4 GB VRAM/~6 GB available RAM,
-restricted local workers, bounded long jobs and media preservation/decoding.
-Neural video is outside the current hardware promise. The 6×6 field stays optional.
+S021 adds optional local text delegation and local visual creation/understanding;
+S022 adds speech, transcription and audiovisual completion. The 4 GB GPU and
+~6 GB available RAM remain binding constraints. No automatic return to S012:
+only a separate explicit owner decision can authorise a future Lunar experiment.

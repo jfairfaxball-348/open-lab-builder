@@ -1,0 +1,126 @@
+{
+  "schema": "open-lab/world-release",
+  "schema_version": "1.1.0",
+  "world_id": "minimal",
+  "version": "0.8.0",
+  "name": "Minimal world",
+  "description": "Eleven capabilities including bounded descriptive statistics, linear regression and local model consultation.",
+  "created_at": "2026-11-13T20:00:00Z",
+  "status": "draft",
+  "builder": {
+    "version": "0.1.0"
+  },
+  "contracts": {
+    "world-release": "1.0.0",
+    "capability": "1.0.1",
+    "model-provider": "1.0.0",
+    "experiment-config": "1.1.0",
+    "observation-event": "1.2.0",
+    "artifact-metadata": "1.0.0",
+    "checkpoint-metadata": "1.0.1",
+    "common": "1.0.0"
+  },
+  "capabilities": [
+    {
+      "id": "math.evaluate",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/math.evaluate/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000001"
+    },
+    {
+      "id": "memory.list",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/memory.list/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000002"
+    },
+    {
+      "id": "memory.search",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/memory.search/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000003"
+    },
+    {
+      "id": "memory.write",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/memory.write/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000004"
+    },
+    {
+      "id": "models.ask",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/models.ask/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000009"
+    },
+    {
+      "id": "stats.describe",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/stats.describe/capability.json",
+      "sha256": "000000000000000000000000000000000000000000000000000000000000000a"
+    },
+    {
+      "id": "stats.regress",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/stats.regress/capability.json",
+      "sha256": "000000000000000000000000000000000000000000000000000000000000000b"
+    },
+    {
+      "id": "text.stats",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/text.stats/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000005"
+    },
+    {
+      "id": "time.now",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/time.now/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000006"
+    },
+    {
+      "id": "workspace.list",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/workspace.list/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000007"
+    },
+    {
+      "id": "workspace.write",
+      "version": "0.1.0",
+      "manifest_path": "capabilities/workspace.write/capability.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000008"
+    }
+  ],
+  "model_manifests": [
+    {
+      "provider_id": "ollama-local",
+      "manifest_path": "models/ollama-local.json",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000003"
+    }
+  ],
+  "environment": {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "python": ">=3.12",
+    "isolation": {
+      "minimum_tier": "container"
+    },
+    "min_resources": {
+      "ram_mb": 8192,
+      "disk_mb": 10240
+    },
+    "container_image": "sha256:f1a63cbdd0c4afbe35c533efa8f3ca21ff4f46c80a36d4d9cbba5bca08826f6c"
+  },
+  "default_limits": {
+    "wall_clock_s": 3600,
+    "ram_mb": 4096,
+    "disk_mb": 2048,
+    "max_processes": 16
+  },
+  "default_permissions": {
+    "filesystem": "workspace_write",
+    "network": "loopback",
+    "subprocess": false,
+    "gpu": true
+  },
+  "notes": "S006a adds memory.write, memory.search and memory.list, and checkpoint-metadata 1.0.1 clarifies append-only rollback/replay on resume. Model choice is unchanged."
+}

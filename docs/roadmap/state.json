@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-16T15:59:11Z",
-  "last_session": "S020p",
+  "updated_at": "2026-11-16T16:23:04Z",
+  "last_session": "S020a",
   "completed_milestones": [
     {
       "id": "S001",
@@ -362,25 +362,33 @@
       "completed_at": "2026-11-16T15:56:59Z",
       "repository": "open-lab-builder",
       "summary": "Owner-authorised Habitat v2 strategic planning only: audited fetched clean main branches in all three repositories, current implementation, hardware and installed models; researched local software/model primary sources; adopted ADR-0027 and three delivery phases with S020a first. No implementation, downloads, model inference or inhabitant simulation. All previous S012 records retained; all further experiments suspended until separate explicit owner decision."
+    },
+    {
+      "id": "S020a",
+      "completed_at": "2026-11-16T16:23:04Z",
+      "repository": "open-lab-simulation",
+      "commits": [
+        "5121697"
+      ],
+      "summary": "Habitat 1.1.0 scientific workshop implemented: world-release 1.1.0 optionally pins a local OCI config ID; Simulation refuses missing/mismatched images without pulling and preserves legacy selection. Approved cached base plus 15 hash-locked binary-wheel distributions; NumPy/SciPy/SymPy/mpmath/pandas/Matplotlib/Pillow; exact licences/inventory in image, python.packages discovery, bounded headless plotting/cache/threads. Generated 74-file release fixture byte-identical to Builder build. Direct real sandbox/project repair/artifact revision/isolation/timeout/quota tests pass. No inference, full inhabitant simulation, host system install or provider/profile changes."
     }
   ],
   "next_milestone": {
-    "id": "S020a",
-    "repository": "open-lab-simulation",
-    "title": "Digest-bound scientific Python workshop"
+    "id": "S020b",
+    "repository": "open-lab-builder",
+    "title": "Reference library and procedural audiovisual work"
   },
   "blockers": [
     {
       "id": "B-PROVISION",
-      "summary": "S020a can begin contract/selector engineering; actual new image/system provisioning requires specific owner approval.",
+      "summary": "S020a scientific provisioning complete; later FFmpeg/system software, licensed reference content and model acquisitions retain scoped approval requirements.",
       "affects": [
-        "S020a",
         "S020b",
         "S021",
         "S022"
       ],
       "needs_human": true,
-      "detail": "No downloads/installations authorised by this planning session. Model weights, media runtime/system software and reference content need scoped acquisition decisions before provisioning. No blocker requires an inhabitant experiment. S020a is incomplete until actual sandbox scientific fixtures pass."
+      "detail": "Owner Run 20a authorised the named scientific workshop and its package provisioning inside a derived image, using the already approved cached base. No base pull, host software install or models needed. Future acquisition is not authorised by this handoff; do not work around a listed human dependency."
     }
   ],
   "known_issues": [
@@ -504,14 +512,14 @@
     },
     {
       "id": "KI-19",
-      "summary": "The container tier is Windows/WSL 2 only, has no network or GPU path, and its base image is a host constant.",
+      "summary": "Container tier remains Windows/WSL 2 only, with no network or GPU path; S020a adds digest-bound image selection.",
       "affects": [
         "S006f",
         "S008d",
         "S009",
         "S011a"
       ],
-      "detail": "Per-container memory/CPU/pids ceilings are separate from the runtime's Windows job. Container-made links are WSL reparse points; the disk quota and checkpoint snapshot refuse them, so code able to create links can end a quota-limited run (fail closed). Each call costs about 0.3-2 s of container start. A Windows update breaking WSL makes container worlds unlaunchable. See ADR-0015 and docs/experiments/2026-11-14-container-isolation.md."
+      "detail": "Legacy worlds retain the original pinned base image; world-release 1.1.0 can select an immutable local OCI configuration ID with current Simulation. Missing/mismatched images are refused without pulling. Linux-host execution remains unverified."
     },
     {
       "id": "KI-20",
@@ -600,13 +608,11 @@
     },
     {
       "id": "KI-32",
-      "summary": "Habitat python.run has the Python standard library only; no packages, and models.ask is absent from container worlds.",
+      "summary": "S020a scientific packages are installed in Habitat 1.1.0; models.ask remains absent from container worlds.",
       "affects": [
-        "S016",
-        "S017",
-        "S019"
+        "S021"
       ],
-      "detail": "The pinned python:3.12-slim image carries no third-party packages and the container tier has no loopback/GPU path. Both need S006f (deferred) or a later Habitat slice."
+      "detail": "Earlier Habitat releases retain the standard-library-only image. New scientific stack and python.packages are verified directly in the real image. Optional local delegation remains S021; no inference was made in S020a."
     },
     {
       "id": "KI-33",
@@ -639,14 +645,13 @@
     },
     {
       "id": "KI-36",
-      "summary": "Habitat v2 is planned only; scientific image, offline library and brokered media are not implemented.",
+      "summary": "Habitat v2 is partly implemented: S020a scientific image complete; offline references, FFmpeg/media and local model brokers remain planned.",
       "affects": [
-        "S020a",
         "S020b",
         "S021",
         "S022"
       ],
-      "detail": "Live audit: 15.7 GiB total RAM, 5.9 GiB available; 4 GiB RTX3050Ti; 659 GiB free disk; rootless Podman 5.7.0 cgroups v2 probe passes. No inference measured. Existing Python cap 60 s, artifacts default 50 MiB/file, workspace 256 MiB; explicit bounded policy work needed."
+      "detail": "Habitat 1.1.0 binds the tested local image, adds python.packages and headless numeric/plot defaults. python.run retains 60 s maximum, artifacts 50 MiB/file and workspace default 256 MiB; future media policies require explicit work. No full inhabitant simulation or inference."
     },
     {
       "id": "KI-37",
@@ -661,48 +666,47 @@
   "open_decisions": [
     {
       "id": "OD-V2-PROVISION",
-      "summary": "Select and specifically approve the pinned workshop image/software, licensed reference editions and later local model/voice acquisitions when implementation reaches them.",
+      "summary": "Specifically approve later licensed reference editions, FFmpeg/system provisioning and local model/voice acquisitions when reached.",
       "affects": [
-        "S020a",
         "S020b",
         "S021",
         "S022"
       ],
       "needs_human": true,
-      "detail": "Owner resolved OD-2 by choosing Habitat v2 development, not another run or model winner. Retain gpt-5.6-luna/low and existing ChatGPT-plan connection/limits as future option. S012-001/002 allowances spent; further experimental work suspended. Exact local candidates and restricted-worker requirements are in HABITAT_V2.md. No model is artificially preferred for optional delegation."
+      "detail": "S020a workshop provisioning resolved by owner Run 20a: derived local image with approved cached base and hash-locked packages, no host install or model download. Existing gpt-5.6-luna/low ChatGPT-plan connection and limits remain unchanged. No further inhabitant experiment is authorised; actual model/media peak memory and latency remain unmeasured."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-16T15:59:11Z",
+    "ran_at": "2026-11-16T16:23:04Z",
     "commands": [
       {
-        "command": "All three repositories: git status/log; git fetch origin; git branch -avv",
-        "result": "Clean main equals origin/main: Builder 8ae516f, Simulation 7fdc97c, Window 3a88970; no other branches advertised."
+        "command": "Builder git status/log/fetch; uv sync; uv run olb state; uv run olb check --tests (baseline)",
+        "result": "Clean main at 97b1155 equal origin/main; S020a next. Sync/health passed; 426 tests passed in 62.77 s."
       },
       {
-        "command": "Builder uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Sync succeeded; old S010c fallback observed; health passed, 426 tests passed in 62.79 s."
+        "command": "Simulation git status/log/fetch; uv sync; workshop uv pip compile (Python 3.12, manylinux target, binary-only, hashes); podman build --pull=never; pip check; Backend.probe for both images",
+        "result": "Clean baseline 7fdc97c equal origin/main. 15 distributions resolved and installed in derived image from existing cached approved base; no host software or base image pull. pip check passed; image ID f1a63cbd...26f6c, 595191083 bytes; both probes pass. Raw build log ignored under .local."
       },
       {
-        "command": "Builder uv run olb diagnose --json --save-raw; CIM; nvidia-smi; ollama list/ps; WSL/Podman inventory; Simulation Backend().probe()",
-        "result": "Hardware/model inventory recorded in HABITAT_V2; raw diagnostics ignored. Rootless Podman 5.7.0 cgroups v2 with pinned base image verified. Initial Podman Go-template field probe failed; corrected backend JSON probe passed. No model loaded/resident; no inference/container run. Media executable lookup absent on Windows/WSL PATH; Windows optional-command lookup returned exit 1 because candidates were absent."
+        "command": "Builder targeted contract/capability tests; uv run olb world build worlds/habitat --out .local/s020a-final; olb world verify --self-test; byte comparison against generated Simulation fixture",
+        "result": "Built Habitat 1.1.0 with 23 capabilities, self-tests/verification passed. Content digest 7ee9c976...75a19; all 74 fixture files byte-identical. Initial demo metadata and bare-hex Podman ID handling were corrected; line-ending copy error was repaired by recopying generated bytes, not by altering their digest."
       },
       {
-        "command": "Primary-source web research and cross-repository code/contract/report review",
-        "result": "Documented candidate licences, published resource evidence versus unmeasured local budgets; no model/software/content downloads or runtime changes."
+        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_workshop.py -o addopts= -q",
+        "result": "15 passed in 14.05 s: actual scientific imports/identities/numerics/CSV/PNG/docstrings, repair/reuse, artifact revisions and byte hashes, image admission/refusal, real isolation/cgroups, timeout and quota denial. No skip and no inhabitant loop."
       },
       {
-        "command": "Ollama /api/show for four installed profiles (metadata only)",
-        "result": "Llama Community Licence; Qwen/Granite Apache-2.0. qwen3.5:2b advertises vision; no image inference, load or functional vision claim. Advertised maximum contexts are not deployed-memory guarantees."
+        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_container.py -k \"not container_run_completes and not deadline_stops and not quota_stops\" -q",
+        "result": "20 direct legacy container checks passed; 3 whole-run tests excluded by ADR-0027. Full Simulation suite not run because it launches scripted inhabitant loops; relevant direct component regressions ran instead."
       },
       {
-        "command": "Builder uv run ruff check .; uv run olb check --tests (closeout)",
-        "result": "Lint passed; health passed; 426 tests passed in 62.06 s. No real models used."
+        "command": "Builder uv run pytest tests/test_workshop_packages.py -o addopts= -q; both repositories uv run ruff check .; Builder uv run olb check --tests (closeout)",
+        "result": "2 package/environment tests passed; both lints passed; Builder health and 437 tests passed in 64.28 s. Historical S012 records unchanged. No model invocation or hosted provider probe."
       },
       {
-        "command": "Local documentation link targets; historical record scope; git diff --check; sibling git status",
-        "result": "235 local file-link targets existed at check. All prior completed milestone records unchanged; no experimental reports/registrations, validation snapshots, schemas, worlds, implementation or tests changed; siblings remain clean. Diff whitespace check passed."
+        "command": "Simulation scoped staged-size/digest audit; commit and push 5121697; remote reconciliation",
+        "result": "83 files, 545409 bytes total, largest 79890 bytes; generated release load verifies. Commit 5121697 pushed; HEAD equals origin/main. No image layers, weights, archives or raw diagnostics committed."
       }
     ]
   }

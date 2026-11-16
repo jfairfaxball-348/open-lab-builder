@@ -57,6 +57,13 @@ def _environment():
     # Nothing from the capability's own environment reaches the program except
     # what an interpreter needs to start (Windows needs SYSTEMROOT).
     environment = {"PYTHONIOENCODING": "utf-8", "PYTHONDONTWRITEBYTECODE": "1"}
+    # Native libraries otherwise oversubscribe small CPU/pid budgets; plotting
+    # must work without a display or writes to a read-only home directory.
+    cache = workspace_root() / ".cache"
+    environment.update(OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1",
+                       MKL_NUM_THREADS="1", NUMEXPR_NUM_THREADS="1",
+                       MPLBACKEND="Agg", MPLCONFIGDIR=str(cache / "matplotlib"),
+                       XDG_CACHE_HOME=str(cache))
     for name in ("SYSTEMROOT", "PATH", "TMPDIR", "TEMP", "TMP"):
         if name in os.environ:
             environment[name] = os.environ[name]

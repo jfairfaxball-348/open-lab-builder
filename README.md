@@ -28,7 +28,7 @@ The three communicate only through the versioned contracts in
 
 ## Status
 
-**Habitat v2 is the active development plan; S020a is next.**
+**S020a is complete: Habitat 1.1.0 provides a scientific Python workshop. S020b is next.**
 The owner has suspended all further Lunar runs, behavioural experiments,
 comparisons and endurance work. S012-002 demonstrated sustained prompted
 project activity; its report and S012-001 remain intact. Build a scientific
@@ -36,8 +36,10 @@ workshop/offline library/procedural media, then optional local assistants and
 image creation, then speech/music/audiovisual completion. All media AI is local.
 See [Habitat v2 audit and plan](docs/habitat/HABITAT_V2.md),
 [ADR-0027](docs/decisions/ADR-0027-habitat-v2.md) and
-[next-session development handoff](NEXT_SESSION.md). No implementation,
-downloads, inference or inhabitant simulation occurred in this planning session.
+[next-session development handoff](NEXT_SESSION.md). S020a adds a digest-bound
+scientific image and python.packages; maths, CSV, plotting, project repair and
+artifact revisions pass direct sandbox checks ([evidence](docs/habitat/demos/S020a.md)).
+No model inference or inhabitant simulation was run.
 The next real Lunar experiment requires a separate explicit owner decision.
 Historical status below is retained for context.
 

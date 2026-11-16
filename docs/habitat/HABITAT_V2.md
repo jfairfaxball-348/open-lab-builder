@@ -1,7 +1,8 @@
 # Habitat v2 — a universe worth inhabiting
 
 Adopted for planning 2026-11-16 under [ADR-0027](../decisions/ADR-0027-habitat-v2.md).
-Implementation has not begun. Active phases and acceptance are in
+S020a is implemented in Habitat 1.1.0; [component evidence](demos/S020a.md).
+The remaining phases are planned. Active phases and acceptance are in
 [ROADMAP.md](../roadmap/ROADMAP.md); [next session](../../NEXT_SESSION.md).
 
 ## Ambition and evidence
@@ -36,18 +37,18 @@ ADR-0018/0022–0026, both S012 reports and the relevant runtime/Window code.
 
 | Requested freedom | Exists now | Composition or new work |
 | --- | --- | --- |
-| Mathematics/science | math.evaluate, stats.describe/regress; Python standard library | Fractions, decimal, statistics, algorithms and small simulations compose now. NumPy/SciPy/SymPy/pandas/Matplotlib must enter a pinned sandbox image; host packages are unavailable to Habitat |
-| Software creation | workspace write/list/read/edit; python.run; stdout, stderr, tracebacks, timeouts; projects can import their own modules | Already permits write/debug/reuse, JSON/CSV/SQLite and unittest. Add installed package documentation, reliable longer bounded compute and artifact inspection; no arbitrary host shell or runtime pip |
+| Mathematics/science | math.evaluate, stats.describe/regress; Python standard library | Fractions, decimal, statistics, algorithms and small simulations compose now. S020a installs NumPy/SciPy/SymPy/pandas/Matplotlib in a digest-bound sandbox image; host packages remain unavailable to Habitat |
+| Software creation | workspace write/list/read/edit; python.run; stdout, stderr, tracebacks, timeouts; projects can import their own modules | Already permits write/debug/reuse, JSON/CSV/SQLite and unittest. S020a adds installed-package discovery/docstrings, headless plotting and artifact revision checks; no arbitrary host shell or runtime pip |
 | Skills/tools/continuation | skills.save/list/get, tools.create, memory.*, checkpoints, operator data-only lineage | Reuse directly. Child runs inherit files/memory, not trusted registrations, authority or conversation; saved source must be revalidated to register a tool |
-| Images | Binary files can be written by Python; Window previews recognised raster formats | Procedural PPM is possible now; Pillow/Matplotlib unlock practical PNG/diagrams/editing. AI generation, editing and inhabitant visual understanding are absent. Window viewing does not give Lunar vision |
+| Images | Binary files can be written by Python; Window previews recognised raster formats | S020a delivers Pillow/Matplotlib PNG, diagrams and raster editing. AI generation, editing and inhabitant visual understanding are absent. Window viewing does not give Lunar vision |
 | Audio/music | Python wave/struct can write PCM; existing file capture | Procedural composition/DSP compose from Python; add scientific stack, soundfile, FFmpeg, local speech/transcription and optional music model. No playback or audio AI capability today |
 | Animation/video | Python can compute frames; Window recognises GIF | Add Pillow animation, FFmpeg assembly/editing/frame extraction, audio muxing and read-only playback. No video AI today |
 | Research/library | Workspace reading, SQLite and memory search; registry searches tools, not knowledge | Add licensed offline content and bounded source/page search/read. memory.search is personal notes, not a reference corpus |
 | Local delegation | S007e models.ask in minimal world; supervisor specialist.py and finite GPU lease | Single pinned llama3.2:3b only, external/scripted orchestrator, bounded 1–32 calls, ≤6000 input/output chars, ≤1024 output tokens, ≤120 s/call, ≤600 s lease. No models.list or model selection; absent from Habitat |
 | Observation | Versioned artifacts, protected archive and read-only text/raster Window | Reuse. Add WAV and one supported video format, basic native controls; no dashboard, execution, conversion or write path in Window |
 
-Specific implementation anchors: Simulation container.py has a fixed base
-image and no GPU/network path; python.run currently allows 1–60 s and defaults
+Specific implementation anchors: Simulation container.py now selects the verified world image or the original
+legacy base, and still has no GPU/network path; python.run currently allows 1–60 s and defaults
 to 10 s; artifact preservation defaults to 50 MiB/file. Habitat defaults are
 1 GiB per capability and 256 MiB workspace, unsuitable as implicit media limits.
 The image selector, timeout hierarchy, archive size and resource policy must be
