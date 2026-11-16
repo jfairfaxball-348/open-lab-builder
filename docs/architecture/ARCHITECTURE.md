@@ -44,6 +44,15 @@ Tool competence and uptime remain engineering outcomes, not evidence of autonomy
 
 ## 1. Three repositories, three roles
 
+S016a adds procedural skill storage in Habitat 0.2.1: `skills.save/list/get`
+are ordinary Builder capabilities, discovered by the existing meta-tools.
+They store bounded, structured JSON notes under the agent-owned workspace
+`.skills/` directory. Keyword listing and retrieval expose those notes without
+executing them. The existing workspace checkpoint includes them; no new
+runtime state or schema is needed. Agent provenance labels authored data,
+not validated behaviour. Executable tool registration remains S016b, and
+`agent_created_tools` is still refused. See [the demonstration](../habitat/demos/S016a.md).
+
 | | Builder | Simulation | Window |
 | --- | --- | --- | --- |
 | Verb | engineers | inhabits | observes |

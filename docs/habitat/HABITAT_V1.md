@@ -138,6 +138,12 @@ always requires explicit owner approval.
 
 ### S016 — Skills and self-made tools
 
+Split before implementation into S016a (saved procedures) and S016b (executable
+tools). S016a is implemented in Habitat 0.2.1; [demonstration](demos/S016a.md).
+S016b remains next: there is no executable tool registration yet, and
+`agent_created_tools` is still refused. The combined freedom below is not
+complete until S016b passes.
+
 - **New freedom:** turn something that worked into a named, documented,
   reusable skill or tool, and find and use it later through the same discovery
   interface.

@@ -568,6 +568,7 @@ chronology and scientific interpretation are never certified automatically.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-16 | (world capability content) | - | S016a Habitat 0.2.1 adds skills.save/list/get with bounded schemas, workspace JSON notes, agent provenance and existing checkpoint semantics; no shared schema or invocation change |
 | 2026-11-15 | study-annotations; study-analysis | 1.0.0 | S010b source-bound descriptive reports and typed citations; no runtime/world change |
 | 2026-11-15 | study-manifest; evidence-export | 1.0.0 | S010a additive offline research interfaces; portable stopped-archive export; no runtime or world schema change |
 | 2026-11-15 | (world capability content) | - | S008c minimal 0.8.0 adds bounded stats.describe and stats.regress using existing Python invocation and numeric JSON schemas; population variance, inclusive quartiles, OLS/correlation edge cases documented in manifests; no shared schema change |

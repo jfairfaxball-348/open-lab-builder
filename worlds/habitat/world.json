@@ -1,8 +1,8 @@
 {
   "world_id": "habitat",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "name": "Habitat",
-  "description": "First Habitat slice: the inhabitant can read, edit and write its own files, keep memories, and write and run its own Python programs in an isolated container. Ten network-free tools from the minimal world plus workspace.read, workspace.edit and python.run.",
+  "description": "Habitat with workspace code, memory and named reusable procedural skills (skills.save/list/get). Executable tool registration remains future S016b.",
   "environment": {
     "platforms": [
       "windows",
@@ -29,5 +29,5 @@
     "subprocess": true,
     "gpu": false
   },
-  "notes": "S015 (ADR-0022). Every capability call runs in a fresh rootless container (S006c): no network, read-only root and world, workspace the only writable mount. python.run executes agent code only there. models.ask is excluded because the container tier provides no loopback or GPU path (S006f, deferred). The container image has the Python standard library only."
+  "notes": "S015 and S016a (ADR-0022). Saved skills are agent-owned workspace data, not executable capability registrations. Every capability call runs in a fresh rootless container (S006c): no network, read-only root and world, workspace the only writable mount. python.run executes agent code only there. models.ask is excluded because the container tier provides no loopback or GPU path (S006f, deferred). The container image has the Python standard library only."
 }

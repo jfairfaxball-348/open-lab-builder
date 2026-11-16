@@ -16,7 +16,7 @@ heading must keep the form `### S000 — Title`; the health check reads it.
 
 ## Active programme: Habitat (since 2026-11-16)
 
-**Read this first.** **S015 is complete; next is S016.** The owner directed a strategic reset
+**Read this first.** **S015 and S016a are complete; next is S016b.** The owner directed a strategic reset
 ([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)). Active
 development now builds a world worth inhabiting:
 [Habitat v1](../habitat/HABITAT_V1.md), through vertical slices **S015 → S016 →
@@ -1642,7 +1642,9 @@ Hosted inference requires explicit owner approval.
 
 - **Repository / streams:** Builder (contracts, capabilities); Simulation
   (registry, sandboxed execution of agent tools).
-- **Status:** planned.
+- **Status:** split before implementation into S016a and S016b; parent incomplete
+  until both exit. Procedural storage and executable registration have distinct
+  validation and security boundaries; this session implements S016a only.
 - **New freedom:** name, document and reuse its own procedures and executable
   tools, through the same discovery interface as builder capabilities.
 - **Scope:**
@@ -1660,6 +1662,48 @@ Hosted inference requires explicit owner approval.
 - **Demonstration:** a scripted run that creates, validates, rediscovers and
   reuses a tool.
 - **Out of scope:** sharing tools across runs (S018), networked tools.
+
+### S016a — Saved procedural skills
+
+- **Repository:** Builder (capabilities and world); Simulation (acceptance).
+- **Status:** complete (2026-11-16); [evidence](../habitat/demos/S016a.md).
+- **Objective:** save a named procedure with steps and examples, find it later,
+  retrieve it and reuse it after a checkpoint resume.
+- **Prerequisites:** S015 and its working container backend.
+- **Scope / deliverables:** `skills.save/list/get` in Habitat 0.2.1; structured
+  workspace-owned JSON notes with explicit replacement, bounded keyword search,
+  pagination and agent provenance. Existing capability search/describe exposes
+  these interfaces; `skills.list/get` discovers the saved procedures.
+- **Exclusions:** executable tools, dynamic capability registration, cross-run
+  sharing and network access. `agent_created_tools` remains refused.
+- **Acceptance tests:** round-trip, update refusal/replacement, search/pagination,
+  malformed or oversized stored data, traversal/link refusal; real container
+  discovery/save/pause/resume/retrieval/reuse, with archive verification.
+- **Exit criteria:** Builder lint/health/tests and Simulation lint/tests pass;
+  required live container checks pass; one scripted supervisor demonstration
+  with pause/resume is preserved and verified; docs/state updated.
+- **Risks:** notes are agent-owned data, not trusted authority or executable
+  registrations. Direct workspace edits can invalidate them; fail visibly.
+- **Next recommendation:** S016b, retaining all executable-tool security gates.
+
+### S016b — Validated sandboxed self-made tools
+
+- **Repository:** Builder (manifests/world); Simulation (registry/execution).
+- **Objective / prerequisite:** after S016a, create and rediscover a reusable
+  executable tool without widening the S015 sandbox boundary.
+- **Scope / deliverables:** `tools.create`, bounded JSON schemas/examples,
+  sandbox example validation before registration; run-local discovery,
+  describe/invoke with agent provenance; checkpoint restoration; lift
+  `agent_created_tools` refusal only on the container tier.
+- **Exclusions:** cross-run sharing, network, new privileges.
+- **Acceptance tests / exit:** no builder-id shadowing, no permission beyond
+  `python.run`, no agent code in runtime/supervisor, schema/output/example
+  failure refusal, tamper handling and checkpoint resume; passing tests/lint
+  in both repositories, live container isolation checks, and one preserved,
+  verified scripted create/validate/rediscover/invoke/resume demonstration.
+- **Risks:** workspace manifests/code are mutable untrusted inputs; registration
+  must not turn an earlier validation into enduring authority over changed code.
+- **Next recommendation:** S017 after every S016 exit criterion passes.
 
 ### S017 — Habitat Slice 3: A World with Phenomena
 

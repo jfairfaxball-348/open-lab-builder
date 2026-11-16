@@ -269,7 +269,12 @@ S011p is complete: Luna passed a low-effort smoke and one registered unguided ho
 **Strategic reset (2026-11-16, [ADR-0022](docs/decisions/ADR-0022-strategic-reset-habitat.md)).** The campaign and
 endurance programme is closed. Development now builds [Habitat v1](docs/habitat/HABITAT_V1.md) in vertical slices.
 **S015 is done:** world `habitat` 0.1.0 lets the inhabitant read and edit its own files and write and run its own
-Python in the container sandbox ([demonstration](docs/habitat/demos/S015.md)). Next: S016, skills and self-made tools.
+Python in the container sandbox ([demonstration](docs/habitat/demos/S015.md)).
+**S016a is done:** Habitat 0.2.1 adds named procedural skills with steps,
+examples, keyword listing and retrieval. A scripted container demonstration
+saves a skill, pauses, resumes and reuses it
+([evidence and limits](docs/habitat/demos/S016a.md)). Next: **S016b**, validated
+sandboxed self-made tools. Parent S016 remains incomplete.
 
 ## Governing principle
 
