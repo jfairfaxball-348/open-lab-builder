@@ -84,6 +84,15 @@ existing parent logs/summary remain unchanged. Permissions, conversation, budget
 private fields, wake schedules and trusted tool registrations start fresh. See
 [ADR-0025](../decisions/ADR-0025-time-and-run-lineage.md).
 
+S019 assembles these capabilities in Habitat **1.0.0**, retaining the same
+22-capability interface and container boundary. The supervisor demonstration
+combines file repair/reuse, memory, skills, validated tools, phenomena, waking,
+checkpoint resume and data-only lineage in one release. The existing Window
+reads the resulting events and artifacts without a new interface. See
+[assembly evidence](../habitat/demos/S019.md). The
+[S012 premise](../habitat/S012_PREMISE_DRAFT.md) is a draft for owner review;
+engineering acceptance does not establish independent objective choice.
+
 | | Builder | Simulation | Window |
 | --- | --- | --- | --- |
 | Verb | engineers | inhabits | observes |

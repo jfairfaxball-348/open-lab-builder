@@ -1,7 +1,10 @@
 # Habitat v1 — target, reuse audit and implementation sequence
 
 Status: adopted 2026-11-16 ([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)).
-This document defines the destination for active development. Ideas for later
+S019 assembles Habitat 1.0.0; [integrated evidence](demos/S019.md) maps all twelve
+freedoms to preserved scripted supervisor records. The S012 premise is still a
+[draft for owner review](S012_PREMISE_DRAFT.md). Engineering acceptance does not
+establish independently chosen objectives. Ideas for later
 are in [IDEAS.md](IDEAS.md).
 
 ## The question this habitat must make answerable
@@ -104,8 +107,8 @@ are now delivered by S015-S017; item 5 is delivered by S018, items 6-8 remain fu
 - AGENTS.md still made every capability carry a research-gate obligation.
   Fixed with ADR-0022.
 - The roadmap pointed at endurance runs. Replaced.
-- The S012 premise text (the creator may terminate the simulation) is not
-  written yet. It belongs to S019.
+- The S012 premise text (the creator may terminate the simulation) is now
+  [drafted in S019](S012_PREMISE_DRAFT.md); exact owner approval remains for S012.
 
 ## Implementation sequence (vertical slices)
 
@@ -219,10 +222,16 @@ registration is inherited. [Evidence and limits](demos/S018.md), [ADR-0025](../d
 
 ### S019 — Habitat v1 assembly
 
+Assembled in Habitat **1.0.0**, retaining the existing 22 capabilities and
+container boundary. [Engineering evidence](demos/S019.md) includes a preserved
+parent/checkpoint-resume/child chain, the twelve-freedom map and unchanged Window
+HTTP/API reads. No real model was needed. The premise is drafted, not approved;
+S012 launch remains separately gated.
+
 - **New freedom:** all of the above together, in a released `habitat` 1.0.0.
-- **Code to write:**
+- **Deliverables:**
   - world assembly;
-  - the existential premise prompt for S012 (draft, owner-approved);
+  - the existential premise prompt for S012 (draft for owner approval);
   - small Window additions if needed;
   - one bounded real-model acceptance demonstration, if the owner approves.
 - **Exit:** freedoms 1–12 demonstrated and preserved. Then S012.

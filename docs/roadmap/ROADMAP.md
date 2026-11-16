@@ -16,7 +16,7 @@ heading must keep the form `### S000 — Title`; the health check reads it.
 
 ## Active programme: Habitat (since 2026-11-16)
 
-**Read this first.** **S015-S018 are complete; next is S019.** The owner directed a strategic reset
+**Read this first.** **S015-S019 are complete; next is S012.** The owner directed a strategic reset
 ([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)). Active
 development now builds a world worth inhabiting:
 [Habitat v1](../habitat/HABITAT_V1.md), through vertical slices **S015 → S016 →
@@ -1547,8 +1547,12 @@ behavioural success are always reported separately.
 - **Status:** planned; **re-gated on Habitat v1 (S019)** (ADR-0022 strategic reset, 2026-11-16), not on endurance or comparison campaigns. It remains the destination.
 - **Objective:** Investigate self-directed, goal-relevant/adaptive activity under a
   philosophical premise and contrast, without assuming consciousness.
-- **Prerequisites:** S010/S011c/S006c and current baseline evidence for the exact
-  chosen world/model/policies; repeat after meaningful changes.
+- **Prerequisites:** completed Habitat v1 assembly (S019), the working container
+  tier and auditable observation/provenance for the chosen configuration.
+  ADR-0022 retires the S011c endurance and repeated comparison prerequisites;
+  S010c remains deferred unless the registered question needs its view.
+  Owner approval of the exact premise and orchestrator selection (OD-2), plus
+  a specific hosted allowance if applicable, are still required before launch.
 - **Scope:** preregister creator-return premise, contrast without assigned objective/
   audience, replicates, fixed interventions/metrics and full provenance; separate
   claims, observed action and evidence-linked investigator assessment.
@@ -1556,9 +1560,12 @@ behavioural success are always reported separately.
   unseen evaluation or duration presented as success.
 - **Deliverables:** registered campaign, verified exports, read-only comparison and
   report with event references, denominators, limitations and negative findings.
-- **Acceptance tests:** all [validity gates](../experiments/README.md#validity-gates-for-s010s012)
-  pass before scored launch; analyses handle idle/invalid/censored traces; archives
-  are independently readable within recorded provider reproducibility limits.
+- **Acceptance tests:** map the applicable
+  [validity gates](../experiments/README.md#validity-gates-for-s010s012) to the
+  frozen Habitat question/configuration before scored launch, under ADR-0022;
+  analyses handle idle/invalid/censored traces; archives are independently
+  readable within recorded provider reproducibility limits. S019's scripted
+  acceptance is engineering evidence, never unseen behavioural evaluation.
 - **Exit criteria:** complete auditable campaign/report even if no agency appears.
   With a negative baseline, preregister that limitation and a bounded null question;
   do not advertise established autonomous capability. Invalid provenance/conditions
@@ -1748,11 +1755,32 @@ Hosted inference requires explicit owner approval.
 ### S019 — Habitat v1 Assembly
 
 - **Repository / streams:** all three.
-- **Status:** planned.
-- **Scope:**
+- **Status:** complete (2026-11-16); [integrated evidence](../habitat/demos/S019.md).
+- **Objective:** make all twelve Habitat freedoms available together in one
+  container-tier release and preserve integrated engineering evidence.
+- **Prerequisites:** completed S015–S018 and the working container backend.
+- **Scope / deliverables:**
   - release `habitat` 1.0.0, integrating S015–S018;
   - draft the existential premise for S012, for owner approval;
   - minimal Window additions if needed;
-  - one bounded real-model acceptance demonstration, if approved.
-- **Exit:** freedoms 1–12 of HABITAT_V1.md are demonstrated and preserved.
-  Next: S012.
+  - one preserved scripted parent/resume/child demonstration through the real
+    supervisor, with an explicit mapping to freedoms 1–12;
+  - one bounded real-model acceptance demonstration only if useful and approved.
+- **Exclusions:** S012 execution, hosted inference without a new allowance,
+  packages, networking, specialist access, cognitive-continuity or autonomy claims.
+- **Acceptance tests:** reproducible builds and all capability self-tests;
+  integration covering discovery, file inspection/repair/reuse, memory, skills,
+  validated tool registration/reuse across resume, lawful phenomena, sleep/wake,
+  and verified data-only child lineage; Window reads results/artifacts without
+  changing archive bytes. Existing isolation regressions remain passing.
+- **Exit criteria:** freedoms 1–12 of HABITAT_V1.md available together, exercised
+  where observable and preserved in verified archives; passing Builder
+  lint/health/tests, Simulation tests/lint and Window read-only checks; source
+  release/fixture consistency; premise draft and evidence/docs/state updated.
+  Freedom 3 means no assigned task or privilege in the prompt; scripted actions
+  cannot demonstrate independently chosen objectives.
+- **Risks:** composing capabilities can expose integration defects; engineering
+  evidence may be mistaken for behavioural evidence. Existing container,
+  scheduling and lineage limits remain explicit.
+- **Next recommendation:** S012 planning/registration, with owner-approved exact
+  premise, selected orchestrator and any required hosted allowance before launch.

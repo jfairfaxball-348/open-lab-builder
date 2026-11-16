@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-16T12:02:16Z",
-  "last_session": "S018",
+  "updated_at": "2026-11-16T12:46:47Z",
+  "last_session": "S019",
   "completed_milestones": [
     {
       "id": "S001",
@@ -344,23 +344,28 @@
       "completed_at": "2026-11-16T12:02:16Z",
       "repository": "open-lab-simulation",
       "summary": "Habitat 0.5.0 adds supervisor-owned time.remaining/time.sleep, bounded self-scheduled-v1 waking with private checkpoint latch and no artificial inference/messages while waiting. Operator --from-run seeds a fresh run from verified final workspace/memory data with pinned portable evidence and parent child-reference sidecars; no permissions, budgets, conversation, private field/wake state or trusted registrations inherited. Preserved parent/child run-20261116t114910z-543f69 and run-20261116t114919z-aacd68 both completed and verified; no model inference."
+    },
+    {
+      "id": "S019",
+      "completed_at": "2026-11-16T12:46:47Z",
+      "repository": "open-lab-builder",
+      "summary": "Habitat 1.0.0 integrates all 22 S015-S018 capabilities in one container-tier release. Identical build digests and 71 byte-identical generated Simulation fixture files; preserved parent/resume/child run-20261116t124014z-570ddd and run-20261116t124030z-cd4cca completed and verified, with explicit twelve-freedom evidence map. Existing Window HTTP/API reads leave all 90 archive files unchanged. S012 premise drafted for owner review, not approved; no real-model inference or hosted allowance. Simulation source/fixture/acceptance delivered as 0f85401."
     }
   ],
   "next_milestone": {
-    "id": "S019",
-    "repository": "open-lab-builder",
-    "title": "Habitat v1 Assembly"
+    "id": "S012",
+    "repository": "open-lab-simulation",
+    "title": "First Philosophical Experiment"
   },
   "blockers": [
     {
       "id": "B-HOSTED",
-      "summary": "No standing hosted allowance. Any hosted inference (e.g. an S019 real-model demonstration or S012) needs explicit owner approval first.",
+      "summary": "No standing hosted allowance. Any S012 hosted inference needs explicit owner approval first.",
       "affects": [
-        "S019",
         "S012"
       ],
       "needs_human": true,
-      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign. S010b used existing evidence only and made zero new model requests. 2026-11-16 ADR-0022: the hosted test programme is closed; broker profile left at per_run 180 / total 1570 (ledger 1080), which grants nothing without owner approval."
+      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign. S010b used existing evidence only and made zero new model requests. 2026-11-16 ADR-0022: the hosted test programme is closed; broker profile left at per_run 180 / total 1570 (ledger 1080), which grants nothing without owner approval. S019 used scripted acceptance only and no hosted inference; its engineering exit does not require a real-model check and creates no S012 allowance."
     }
   ],
   "known_issues": [
@@ -619,41 +624,58 @@
   "open_decisions": [
     {
       "id": "OD-2",
-      "summary": "Orchestrator for S012 is undecided; deferred until Habitat v1 (ADR-0022). No further comparison campaigns.",
+      "summary": "Orchestrator for S012 is undecided; owner selection is required before registration/launch. No further comparison campaigns.",
       "affects": [
         "S012"
       ],
-      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering and its completed 4-cell capability check add no model-ranking or final orchestrator-selection evidence; the approved gpt-6.1-sol route is retained. S010a portable evidence inventories do not rank models or settle this decision. S010b descriptive comparisons and six source-linked retrospective annotations likewise do not select or rank an orchestrator.",
+      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering and its completed 4-cell capability check add no model-ranking or final orchestrator-selection evidence; the approved gpt-6.1-sol route is retained. S010a portable evidence inventories do not rank models or settle this decision. S010b descriptive comparisons and six source-linked retrospective annotations likewise do not select or rank an orchestrator. S019 now assembles Habitat 1.0.0 but selects no real model and makes no new inference. Resolve this decision against the exact proposed S012 configuration.",
       "needs_human": true
+    },
+    {
+      "id": "OD-S012-PREMISE",
+      "summary": "Approve the exact S012 premise and contrast before preregistration/launch.",
+      "affects": [
+        "S012"
+      ],
+      "needs_human": true,
+      "detail": "docs/habitat/S012_PREMISE_DRAFT.md contains the concrete S019 draft, not an approved prompt. S012 must freeze its question, policies, limits, comparisons, analysis and stopping/censoring rules before scored launch. No S012 run is authorised or executed by S019."
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-16T12:02:16Z",
+    "ran_at": "2026-11-16T12:46:47Z",
     "commands": [
       {
-        "command": "Builder uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Clean worktree; sync passed; S018 next; 419 tests and health passed."
+        "command": "Builder git status/log; uv sync; uv run olb state; uv run olb check --tests (baseline)",
+        "result": "Clean baseline, S019 next; sync passed; 426 tests passed in 75.67 s; health passed."
       },
       {
-        "command": "Simulation uv sync; uv run pytest (baseline)",
-        "result": "Clean worktree; sync passed; 517 passed in 700.82 s without skips."
+        "command": "Simulation git status/log; uv sync; uv run pytest (existing regression suite)",
+        "result": "Clean baseline; sync passed; all 535 existing tests passed in 771.76 s, no skips. No Simulation runtime code changed in S019; the new integrated acceptance is checked separately below."
       },
       {
-        "command": "Builder uv run pytest tests/test_time_contracts.py; uv run ruff check .; uv run olb check --tests",
-        "result": "7 new tests passed; lint and health passed; full Builder suite 426 passed. Build fakes report unavailable and neither read a run budget nor wait."
+        "command": "Builder uv run olb world build worlds/habitat --out .local/s019-build; uv run olb world build worlds/habitat --publish; uv run olb world verify .local/s019-build/habitat/1.0.0 --self-test; generated fixture comparison",
+        "result": "Habitat 1.0.0, 22 capabilities; both builds share digest 03d9ea8fb2c13a9bbd4d0cdbf1e979cbc6db3a1df839a940e70d4d47059735e6; all self-tests and verification passed; all 71 fixture files byte-identical; both final demo pins match. No schemas or dependencies changed."
       },
       {
-        "command": "Builder uv run olb world build worlds/habitat --out .local/s018-build; uv run olb world build worlds/habitat --publish; uv run olb world verify .local/s018-build/habitat/0.5.0 --self-test; fixture byte comparison",
-        "result": "Two Habitat 0.5.0 builds identical at 3a076c9c8ce2812d0d3fd4d5435faf723a1130a0bc7b64be3cfef6954e6f2639; all 22 self-tests passed; verification passed; all 71 fixture files byte-identical."
+        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_habitat_v1.py -q; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_container.py tests/test_habitat_v1.py; uv run ruff check .",
+        "result": "Final new integrated test passed; final forced-live isolation/integration subset 24 passed in 102.10 s, no skips; lint passed. Covers the full parent/resume/child chain, intentional Python traceback and repair, content search/organisation, procedures, pinned tools across resume and fresh child validation, lawful field continuity/reset, budget/wake ordering, data-only lineage and sandbox cleanup. Initial development failure was a wrong test lookup of described-tool provenance; corrected to parse documentation JSON without weakening the expected provenance. No runtime changes."
       },
       {
-        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_time_continuity.py; related policy/checkpoint/run subset; uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
-        "result": "18 new tests passed in 49.96 s, no skips; related subset 96 passed. Full final suite 535 passed in 762.45 s, live containers required, no skips; lint passed. An earlier partial full regression was interrupted at 53 percent to fix inherited-artifact attribution, then restarted. Initial child artifacts are now recorded by the system before model execution; the final demonstration was rerun and the added assertion passed. Coverage includes fake-clock boundaries/ready latch, real sleep-pause-resume, deadline priority, no inference/messages during wait, private-state forgery, data-only lineage, fresh authority/field/tool registry, live/paused/corrupt/out-of-root/missing-final-checkpoint refusal and portable tamper checks. Initial unused import and long lines corrected; no behaviour assertion weakened or test skipped."
+        "command": "Simulation run_experiment(s019-parent-demo, pause_after_steps=24); verify paused; resume_experiment; run_experiment(s019-child-demo, from_run=parent); check_pair; ols verify both final archives",
+        "result": "Final parent run-20261116t124014z-570ddd completed: 224 events/33 successful tool results. Final child run-20261116t124030z-cd4cca completed: 84 events/11 successful results. Both verify. Parent produces 10; child retrieves saved files/memory/skill, revalidates tool source with child provenance and produces 60. Parent log/summary unchanged after lineage; pre-pause bytes remain a prefix; one child-reference sidecar. Wake target 8702 ms active, wake 9797 ms; no model.call/agent.output/environment.message between scheduling and wake. Earlier development archives retained, not relabelled. No real-model inference."
       },
       {
-        "command": "Simulation run_experiment(s018-parent-demo, pause_after_steps=6); verify; resume; ols run s018-child-demo --from-run <parent>; verify both archives",
-        "result": "Parent run-20261116t114910z-543f69 completed with 79 events/8 successful tool results; child run-20261116t114919z-aacd68 completed with 45 events/5 successful results. Wake target 3828 ms active, actual wake 4701 ms; no model.call/agent.output/environment.message between schedule and wake. Parent produced 10; CLI-launched child read inherited project memory and produced 60. Both verify; parent original log/summary bytes unchanged; parent child-reference exists. No model inference."
+        "command": "Window uv sync; uv run pytest; uv run ruff check .; actual loopback HTTP/API read of final S019 archives with before/after SHA-256 inventory",
+        "result": "38 passed in 19.25 s; lint passed. Both final summaries/world versions, all paired tool results, event-log integrity and output text previews 10/60 pass. All 90 archive files unchanged. HTTP/API check, not a new visual browser check; no Window source changes required."
+      },
+      {
+        "command": "Builder uv run ruff check .; uv run olb check --tests; git diff --check",
+        "result": "Lint passed; all 426 tests passed in 66.38 s; health passed, including privacy and roadmap checks. Diff checks passed. S018 prior validation retained in docs/roadmap/validation/S018.json."
+      },
+      {
+        "command": "Builder uv run olb state; uv run ruff check .; uv run olb check; git diff --check (after S019 closeout metadata)",
+        "result": "State reports S019 complete and S012 next, with premise/orchestrator decisions and hosted blocker explicit; lint, metadata health/privacy checks and diff checks pass."
       }
     ]
   }

@@ -1,0 +1,30 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-16T12:02:16Z",
+  "commands": [
+    {
+      "command": "Builder uv sync; uv run olb state; uv run olb check --tests (baseline)",
+      "result": "Clean worktree; sync passed; S018 next; 419 tests and health passed."
+    },
+    {
+      "command": "Simulation uv sync; uv run pytest (baseline)",
+      "result": "Clean worktree; sync passed; 517 passed in 700.82 s without skips."
+    },
+    {
+      "command": "Builder uv run pytest tests/test_time_contracts.py; uv run ruff check .; uv run olb check --tests",
+      "result": "7 new tests passed; lint and health passed; full Builder suite 426 passed. Build fakes report unavailable and neither read a run budget nor wait."
+    },
+    {
+      "command": "Builder uv run olb world build worlds/habitat --out .local/s018-build; uv run olb world build worlds/habitat --publish; uv run olb world verify .local/s018-build/habitat/0.5.0 --self-test; fixture byte comparison",
+      "result": "Two Habitat 0.5.0 builds identical at 3a076c9c8ce2812d0d3fd4d5435faf723a1130a0bc7b64be3cfef6954e6f2639; all 22 self-tests passed; verification passed; all 71 fixture files byte-identical."
+    },
+    {
+      "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_time_continuity.py; related policy/checkpoint/run subset; uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
+      "result": "18 new tests passed in 49.96 s, no skips; related subset 96 passed. Full final suite 535 passed in 762.45 s, live containers required, no skips; lint passed. An earlier partial full regression was interrupted at 53 percent to fix inherited-artifact attribution, then restarted. Initial child artifacts are now recorded by the system before model execution; the final demonstration was rerun and the added assertion passed. Coverage includes fake-clock boundaries/ready latch, real sleep-pause-resume, deadline priority, no inference/messages during wait, private-state forgery, data-only lineage, fresh authority/field/tool registry, live/paused/corrupt/out-of-root/missing-final-checkpoint refusal and portable tamper checks. Initial unused import and long lines corrected; no behaviour assertion weakened or test skipped."
+    },
+    {
+      "command": "Simulation run_experiment(s018-parent-demo, pause_after_steps=6); verify; resume; ols run s018-child-demo --from-run <parent>; verify both archives",
+      "result": "Parent run-20261116t114910z-543f69 completed with 79 events/8 successful tool results; child run-20261116t114919z-aacd68 completed with 45 events/5 successful results. Wake target 3828 ms active, actual wake 4701 ms; no model.call/agent.output/environment.message between schedule and wake. Parent produced 10; CLI-launched child read inherited project memory and produced 60. Both verify; parent original log/summary bytes unchanged; parent child-reference exists. No model inference."
+    }
+  ]
+}

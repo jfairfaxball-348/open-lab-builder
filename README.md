@@ -28,6 +28,10 @@ The three communicate only through the versioned contracts in
 
 ## Status
 
+**Habitat v1 is assembled (S019); next is S012 planning and registration.** The earlier campaign
+programme is retired under ADR-0022. The historical milestones below retain
+their original results; see the Habitat status near the end of this document.
+
 **S001 (foundation) and S002 (minimal world packaging) are complete.** What
 exists and works:
 
@@ -147,7 +151,7 @@ after a plan-quota stop (C1 no consultation, C2 censored, C3 unstarted).
 S008c's separate four-run capability check is now complete; its own allowance
 was used without reruns. S010 was split before coding. S010a adds study protocols
 and portable evidence export; S010b adds source-bound descriptive comparison and
-annotation checks; next: **S010c — Read-Only Window Comparison**.
+annotation checks; S010c (Read-Only Window Comparison) is deferred under ADR-0022.
 
 S008c's engineering is implemented: bounded population statistics/inclusive
 quartiles and ordinary least-squares regression with Pearson r, using only the
@@ -229,7 +233,7 @@ guided control or qualifying unguided run. S007h also returned NO_GO. Subsequent
 hosted work led to the owner-accepted post-hoc GO in ADR-0017 and per-capability
 checks; S007e is closed with the partial coverage stated above. S008c's approved
 statistics part is complete with its full four-run capability report. S010a/b are
-complete; next is S010c. Parent S010 remains incomplete until S010c passes.
+complete; S010c is deferred under ADR-0022. Parent S010 remains incomplete until S010c passes.
 A valid negative
 report remains a completed research result, not a capability claim. Hosted models
 are optional and separately authorised; real isolation remains mandatory for
@@ -287,7 +291,14 @@ self-scheduled sleep/wake. Operator `ols run --from-run` starts a fresh run from
 an earlier completed run's protected final files and memory, with linked archives
 ([evidence and limits](docs/habitat/demos/S018.md)). Permissions, conversation,
 budgets and trusted executable registrations are not inherited.
-Next: **S019 — Habitat v1 assembly**.
+**S019 is done:** Habitat 1.0.0 integrates all 22 capabilities. A preserved
+scripted supervisor/resume/child chain maps all twelve available freedoms, and
+the existing Window reads its records without changing archive bytes
+([assembly evidence](docs/habitat/demos/S019.md)). This establishes engineering
+capability, not independent objective choice.
+Next: **S012 — First Philosophical Experiment**, beginning with owner review of
+the [premise draft](docs/habitat/S012_PREMISE_DRAFT.md), orchestrator selection
+and a frozen protocol. No S012 launch or hosted allowance is authorised here.
 
 ## Governing principle
 

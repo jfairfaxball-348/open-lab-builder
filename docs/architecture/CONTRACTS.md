@@ -696,6 +696,7 @@ chronology and scientific interpretation are never certified automatically.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-16 | (world assembly) | - | S019 releases Habitat 1.0.0 with the existing 22 capabilities and unchanged shared schemas/protocols; integrated container supervisor/resume/lineage acceptance and existing read-only Window HTTP/API verified |
 | 2026-11-16 | (supervisor-time / runtime policy / lineage) | - | S018 Habitat 0.5.0 adds remaining budget, self-scheduled-v1 bounded waking and data-only operator lineage with pinned snapshots and two-way references; existing MCP, observation extensions and runtime checkpoint component; no shared schema change; ADR-0025 |
 | 2026-11-16 | (supervisor-world protocol / world capability content) | - | S017 Habitat 0.4.0 adds configured world.observe/act/advance services, versioned coupled-field journal/replay and supervisor-inserted private checkpoint state; existing MCP, observation extensions and runtime component, no shared schema change; ADR-0024 |
 | 2026-11-16 | (runtime tool protocol / world capability content) | - | S016b Habitat 0.3.0 adds opt-in tools.create, bounded sandbox validation, pinned agent manifests and protected runtime checkpoint registrations; existing MCP invocation, provenance and observation extensions; no shared schema change; ADR-0023 |
