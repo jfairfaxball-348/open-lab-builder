@@ -38,12 +38,17 @@ def module(capability_id):
     return loaded
 
 
-def test_world_is_container_tier_without_models_ask():
+def test_world_is_container_tier_with_broker_only_model_services():
     world = json.loads((HABITAT / "world.json").read_text(encoding="utf-8"))
     assert world["world_id"] == "habitat"
     assert world["environment"]["isolation"]["minimum_tier"] == "container"
     names = sorted(p.name for p in CAPABILITIES.iterdir() if p.is_dir())
-    assert "models.ask" not in names
+    assert {"models.ask", "models.list"} <= set(names)
+    for ident in ("models.ask", "models.list"):
+        manifest, _ = load(ident)
+        assert manifest["invocation"] == {
+            "interface": "mcp", "server": "supervisor-gateway", "tool": ident}
+        assert manifest["permissions"] == {"filesystem": "none", "network": "none", "gpu": False}
     assert {"workspace.read", "workspace.edit", "python.run"} <= set(names)
     for name in names:
         manifest, _ = load(name)
@@ -56,6 +61,30 @@ def test_world_is_container_tier_without_models_ask():
 def test_self_tests_pass(capability_id):
     manifest, directory = load(capability_id)
     assert run_self_test(manifest, directory) == []
+
+
+@pytest.mark.parametrize("ident", ["models.list", "models.ask"])
+def test_local_assistant_contract_self_tests_use_only_builder_fakes(ident, tmp_path):
+    manifest, directory = load(ident)
+    assert run_self_test(manifest, directory) == []
+    args = {} if ident == "models.list" else {"model_id": "granite-text", "prompt": "Task"}
+    assert not invoke(manifest, directory, args, workspace=tmp_path).ok
+    fake = ({"models": [], "context_tokens": 2048, "max_output_tokens": 512,
+             "max_prompt_utf8_bytes": 1280} if ident == "models.list" else
+            {"text": "Labelled fake reply", "truncated": False})
+    result = invoke(manifest, directory, args, workspace=tmp_path, service=lambda _: fake)
+    assert result.ok
+    if ident == "models.list":
+        assert result.output["models"] == []
+    else:
+        assert result.output["truncated"] is False
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_local_assistant_selector_contract_rejects_endpoint_arguments(tmp_path):
+    assert not call("models.ask", tmp_path, model_id="http://localhost", prompt="Task").ok
+    assert not call("models.ask", tmp_path, model_id="granite-text", prompt="Task",
+                    endpoint="http://localhost").ok
 
 
 # --- workspace.read -----------------------------------------------------------------

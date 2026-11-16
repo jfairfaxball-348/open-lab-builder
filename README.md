@@ -28,7 +28,7 @@ The three communicate only through the versioned contracts in
 
 ## Status
 
-**S020 is complete: Habitat 1.2.0 provides a scientific, reference and procedural media workshop. S021 is next.**
+**S021a is complete: Habitat 1.3.0 adds optional local text assistants. S021b visual creation/understanding is next; parent S021 remains incomplete.**
 The owner has suspended all further Lunar runs, behavioural experiments,
 comparisons and endurance work. S012-002 demonstrated sustained prompted
 project activity; its report and S012-001 remain intact. Build a scientific
@@ -36,7 +36,7 @@ workshop/offline library/procedural media, then optional local assistants and
 image creation, then speech/music/audiovisual completion. All media AI is local.
 See [Habitat v2 audit and plan](docs/habitat/HABITAT_V2.md),
 [ADR-0027](docs/decisions/ADR-0027-habitat-v2.md) and
-[next-session development handoff](NEXT_SESSION.md). S020a adds a digest-bound
+[next-session development handoff](NEXT_SESSION.md). [S021a evidence](docs/experiments/2026-11-16-local-assistant-components.md) covers neutral models.list, explicit model selection and bounded supervisor-only consultation; sandbox code gains no network/GPU access. S020a adds a digest-bound
 scientific image and python.packages; maths, CSV, plotting, project repair and
 artifact revisions pass direct sandbox checks ([evidence](docs/habitat/demos/S020a.md)).
 S020b adds cited offline programming/calculus/science references, Iris CSV data,

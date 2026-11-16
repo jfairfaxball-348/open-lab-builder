@@ -1,8 +1,8 @@
 {
   "world_id": "habitat",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "name": "Habitat",
-  "description": "Habitat workshop and offline library: scientific Python, licensed references and data, procedural images/audio/animation and sandboxed FFmpeg composition.",
+  "description": "Habitat workshop with optional supervisor-brokered local text assistants, scientific Python, offline references and procedural media.",
   "environment": {
     "platforms": [
       "windows",
@@ -30,5 +30,5 @@
     "subprocess": true,
     "gpu": false
   },
-  "notes": "S020b adds bounded library.search/read over immutable licensed text/CSV assets and a new operator-provisioned image containing FFmpeg/ffprobe. All 25 capabilities remain container-tier and network/GPU-free; older image/world versions are unchanged. Media is generated/edited by Python programs using installed FFmpeg, never by hosted or local AI in this slice. Existing explicit experiment grants and data-only lineage remain authoritative."
+  "notes": "S020b adds bounded library.search/read over immutable licensed text/CSV assets and a new operator-provisioned image containing FFmpeg/ffprobe. All 25 capabilities remain container-tier and network/GPU-free; older image/world versions are unchanged. Media is generated/edited by Python programs using installed FFmpeg, never by hosted or local AI in this slice. Existing explicit experiment grants and data-only lineage remain authoritative. S021a adds optional models.list/models.ask through the supervisor, without sandbox network or GPU devices. Requires local-models-v1 specialist configuration and explicit model permissions. No visual AI or autonomous specialist loops."
 }

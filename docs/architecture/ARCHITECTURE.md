@@ -4,7 +4,7 @@ Active direction: [Habitat v2](../habitat/HABITAT_V2.md),
 [ADR-0027](../decisions/ADR-0027-habitat-v2.md). S020a implements digest-bound scientific container images and package
 discovery in Habitat 1.1.0. S020b adds licensed offline references, procedural
 FFmpeg media and read-only WAV/WebM previews in Habitat 1.2.0. Optional local
-models and AI media remain planned. Three-repository ownership and existing isolation remain.
+text models are delivered in Habitat 1.3.0 (S021a); AI media remain planned. Three-repository ownership and existing isolation remain.
 All further inhabitant simulations/experiments are suspended; offline component
 verification replaces full-run demonstrations during development. S012-002
 demonstrated sustained prompted activity; its historical report is preserved.
@@ -33,6 +33,16 @@ Limits, reservations, recording, expiry and segment cleanup remain outside
 the agent. [ADR-0018](../decisions/ADR-0018-supervisor-specialist-consultation.md)
 and the specialist protocol in CONTRACTS.md specify this boundary. Archived
 0.6.0 remains runnable. Local orchestrator swapping is not implemented.
+
+S021a extends this service to Habitat 1.3.0 container worlds: neutral models.list
+and explicit models.ask selection from a frozen, permitted local catalog. The
+supervisor repeats permission/schema/correlation checks and reserves calls before
+HTTP. Single-owner residency, conservative context bounds, RAM/VRAM admission,
+reported allocation checks and cancellable HTTP remain outside sandbox code.
+The model server itself is outside container job ceilings; the lease is
+cooperative, not hard VRAM isolation. No model receives tools or a runtime loop.
+[ADR-0028](../decisions/ADR-0028-optional-local-assistants.md) defines this additive
+protocol; S021b still owes isolated local visual workers.
 
 S008c engineering adds `stats.describe` and `stats.regress` in minimal 0.8.0.
 They are ordinary standard-library Python capabilities on the process tier,

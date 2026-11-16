@@ -16,7 +16,7 @@ heading must keep the form `### S000 — Title`; the health check reads it.
 
 ## Active programme: Habitat v2 (2026-11-16)
 
-**S020 (S020a/S020b) is complete; S021 is next in Simulation.**
+**S020 and S021a are complete; S021b is next in Simulation. Parent S021 remains incomplete.**
 [Habitat v2](../habitat/HABITAT_V2.md) contains the verified reuse/hardware audit,
 local software/model choices and security dependencies.
 [ADR-0027](../decisions/ADR-0027-habitat-v2.md) governs this programme;
@@ -32,7 +32,7 @@ acceptance simulations), survival/endurance study, model comparison, behavioural
 benchmark and exploratory hosted inference. Offline engineering fixtures,
 fake-service integration, security tests and static analysis are permitted.
 After approved provisioning, direct local model admission is ordinary offline
-component verification; this planning session authorises no inference. No automatic return to S012: the next
+component verification; planning authorisation alone permits no inference. No automatic return to S012: the next
 real Lunar experiment requires a separate explicit owner decision after v2 is
 useful. Existing ChatGPT-plan profile, effort and limits stay unchanged.
 
@@ -135,7 +135,7 @@ browser playback pass; no model or inhabitant simulation was run.
 
 ### S021 — Optional local assistants and visual creation
 
-**Status: next. Phase 2.**
+**Status: active. Phase 2; split into S021a then S021b.**
 
 - **Objective:** choose bounded local assistance and create/edit/inspect original
   images, without prescribing projects or delegation.
@@ -163,6 +163,60 @@ browser playback pass; no model or inhabitant simulation was run.
   fallback or silently switched model. Required image scope needs owner revision
   if no candidate can be admitted, not a false completion.
 - **Next:** S022; local media model calls remain bounded optional tools.
+
+### S021a — Optional local text assistants
+
+**Status: complete (2026-11-16); Simulation `8c75e57`, Habitat 1.3.0.** S021 is split before code
+because catalogued text brokerage and isolated visual-model workers have
+separate security/provisioning work. S021b remains required for phase completion.
+
+- **Objective:** discover installed local assistants and optionally delegate a
+  bounded text subtask; no preference, obligation or secondary inhabitant.
+- **Prerequisites:** S007e service/lease, S020 container world and installed
+  approved Ollama profiles. No new model/runtime download needed.
+- **Scope/deliverables:** frozen digest-pinned model allowlist, models.list and
+  selectable models.ask through the existing supervisor IPC; bounded context,
+  calls/output/time, one-heavy-job lease, resource admission, switch/unload and
+  cancellation; neutral capability documentation and real installed-model check.
+- **Exclusions:** image payloads, visual workers/downloads, hosted inference,
+  orchestrator changes, full inhabitant runs and behavioural comparisons.
+- **Acceptance/exit:** direct fake-service tests verify discovery, each selection,
+  denial/forgery, reservations across resume accounting, timeouts/cancellation,
+  resource refusal and no network/GPU/host privileges for container Python.
+  At most one bounded direct text request per installed profile verifies actual
+  reachability, requested context and unload; record failures honestly without
+  ranking quality. Lint and relevant suites pass; generated release verifies.
+- **Risks:** cooperative GPU lock, model servers outside job ceilings, resource
+  estimates versus actual allocations, hidden reasoning using visible output
+  allowance. Refuse uncertain admission; never unload unrelated host work.
+- **Delivered:** neutral catalog and all four installed text profiles, bounded broker
+  routing/admission/cancellation, exact generated fixture and direct component
+  evidence. Four single local text checks returned and unloaded; no inhabitant or
+  hosted call. [Evidence](../experiments/2026-11-16-local-assistant-components.md).
+- **Next:** S021b; parent S021 remains incomplete.
+
+### S021b — Local image understanding and creation
+
+**Status: next; required S021 completion.**
+
+- **Objective:** generate/edit original images and inspect them locally.
+- **Prerequisites:** S021a bounded brokerage/lease, S020 artifact pipeline;
+  specifically approved exact image model/runtime artefacts and restricted
+  worker provisioning where needed.
+- **Scope/deliverables:** installed Qwen3.5 vision first (SmolVLM alternative),
+  local SD1.5 text-to-image/img2img and programmatic editing; staged validated
+  media inputs, bounded immutable worker/model identities, persistent PNGs and
+  local descriptions. Reuse S021a admission and do not upload media to hosted text.
+- **Exclusions:** hosted media, autonomous specialist loops, unrestricted host
+  GPU/code access, large diffusion/video stacks and campaigns.
+- **Acceptance/exit:** full visual requirements in parent S021, including fake
+  security/routing tests and actual authorised isolated PNG generation/editing/
+  description with measured peak resources/latency. Mock routing alone cannot
+  advertise a generator. Preserve exact artifacts, provenance and continuity.
+- **Risks:** 4 GB VRAM, limited free RAM, licence/backend compatibility and
+  restricted GPU worker isolation. Required scope needs owner revision if no
+  candidate is viable; never mark parent complete on text brokerage alone.
+- **Next:** S022 only after S021a/S021b meet their exits.
 
 ### S022 — Sound and audiovisual completion
 

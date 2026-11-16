@@ -502,6 +502,41 @@ cooperating supervisors under one data root; other resident models cause a
 refusal without unloading unrelated work. Native finite keep-alive bounds
 residency after abrupt supervisor loss, not an immediate unload guarantee.
 
+**S021a local catalog variant (ADR-0028).** Habitat 1.3.0 adds the reserved
+`supervisor-gateway / models.list` invocation and models.ask 0.2.0. The latter
+requires `{model_id,prompt}` and returns `{text,truncated}`; a length-stop marks
+truncated. The legacy minimal-world prompt-only protocol remains unchanged.
+Both services are hidden without an enabled specialist policy. No endpoint or
+model download is accepted; model selection grants no sandbox GPU/network access.
+
+The new closed `extensions.specialist` variant requires `version: local-models-v1`,
+1–8 unique `model_ids`, all six existing integer bounds above, and these integer
+fields: context_tokens 1024–4096, model_ram_mb 128–16384, model_vram_mb 0–16384,
+ram_reserve_mb 1024–16384, vram_reserve_mb 128–4096. All selected IDs require
+permissions.models and one pinned local text provider. Context must exceed the
+output token cap plus 256 framing tokens; prompt UTF-8 bytes plus those values
+must fit context. This is a conservative guard, not a tokenizer attestation.
+Zero model_vram_mb requests CPU-only loading; unavailable measurements refuse.
+
+models.list({}) returns sorted configured id/name/digest/family/quantization/
+license/status/tools metadata and context/output/prompt-byte limits. It makes no
+HTTP call, spends no reservation and does not assert live availability. models.ask
+consumes a durable reservation even on failed/uncertain execution; exact recorded
+call binding and replay denial apply to both. Models have no tools or recursive
+loop. Empty text or unexpected tool output is an explicit error.
+
+One cooperative OS lease serializes heavyweight work. Host available RAM/VRAM
+must cover budgets plus reserves before loading; actual server allocation and
+context plus remaining headroom are checked after loading. These observations use
+local_model_headroom and local_model_allocation stages; they are not process peak
+measurements or hard model-server memory ceilings. Switching unloads the owned
+model, then rechecks identity/residency. Foreign models are refused, never unloaded.
+Cancellable bounded HTTP polls during header/body reads, rejects redirects and
+limits wire data. Orderly close unloads only the owned digest; finite keep-alive
+remains the abrupt-loss backstop. No reasoning channel is returned or recorded.
+No shared schema shape changes: the versioned extension and capability manifests
+carry this additive protocol. Build self-tests are labelled fakes only.
+
 Holds everything needed to reproduce a launch: prompt, world and digest, model
 and sampling parameters, limits, permissions, checkpointing and termination.
 A premise in `initial_prompt` grants nothing; only `permissions` and `limits`
@@ -731,6 +766,7 @@ chronology and scientific interpretation are never certified automatically.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-16 | (local assistant service protocol) | - | S021a / ADR-0028 adds closed local-models-v1 specialist policy, models.list and explicit-id models.ask 0.2.0 with truncation, bounded resources and cancellable HTTP; Habitat 1.3.0; legacy preserved, no shared schema shape change |
 | 2026-11-16 | (world content / passive observation) | - | S020b Habitat 1.2.0 packages hash-bound licensed library text/CSV, adds library.search/read, sandbox FFmpeg/ffprobe in a new image, and bounded read-only PCM WAV/WebM preview/ranges in Window; no shared schema shape change |
 | 2026-11-16 | world-release | 1.1.0 | S020a adds optional container-only immutable local image configuration ID in environment.container_image; absent preserves legacy image; schema/examples/tests updated. Habitat 1.1.0 adds python.packages and pinned scientific Python, with unchanged sandbox/experiment authority |
 | 2026-11-16 | (planning only) | - | S020p / ADR-0027 plans digest-bound workshop images, local model/media services and offline library; no schema, protocol, capability or world release changed |

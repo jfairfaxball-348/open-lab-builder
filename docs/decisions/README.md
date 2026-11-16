@@ -35,5 +35,7 @@ by rewriting history.
 | [0026](ADR-0026-approved-survival-directive.md) | Owner-approved exact survival directive, prompted-objective interpretation and new-chat launch boundary | Accepted (owner, 2026-11-16); S012-001/002 reported, further launches suspended by ADR-0027 |
 | [0027](ADR-0027-habitat-v2.md) | Habitat v2: workshop, local assistants/media; suspend further inhabitant experiments | Accepted for planning (owner, 2026-11-16); no implementation/inference |
 
+| [0028](ADR-0028-optional-local-assistants.md) | Optional frozen local text assistant catalog, explicit selection and bounded broker admission | Accepted; S021a, refines ADR-0018 |
+
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).

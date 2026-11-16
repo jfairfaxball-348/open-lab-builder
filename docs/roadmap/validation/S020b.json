@@ -1,0 +1,38 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-16T16:56:32Z",
+  "commands": [
+    {
+      "command": "All repositories git status/log/fetch; uv sync; Builder olb state; Builder uv run olb check --tests baseline; Window uv run pytest baseline",
+      "result": "Clean matching main refs: Builder ba336be, Simulation 5121697, Window 3a88970. Sync passed; Builder 437 baseline tests/health passed; Window baseline passed. S020b was next."
+    },
+    {
+      "command": "Primary upstream source/licence retrieval; UCI Iris acquisition; Builder source validation and tests",
+      "result": "Pinned Python v3.12.10, SymPy sympy-1.14.0 and SciPy v1.18.1 source text/notices retained; Iris 150 rows with attributed CSV header adaptation. Library catalog sizes/paths/fields/hashes validated. Initial uppercase notice-name refusal corrected; no validation bypass."
+    },
+    {
+      "command": "Simulation podman build --pull=never from the existing scientific image; pin FFmpeg version; inspect inventory/buildconf and Backend probe",
+      "result": "Derived local image a0fb028f...41efb, 1495645879 disk bytes, FFmpeg 7:7.1.5-0+deb13u1; GPL enabled, nonfree disabled. Version/package/build/notice inventories retained in image. No host software/system changes, base pull or model download. Raw logs ignored."
+    },
+    {
+      "command": "Builder olb world build worlds/habitat --out .local/s020b-releases; cross-repository release byte/digest checks",
+      "result": "Habitat 1.2.0, 25 capabilities, self-tests passed. Digest 61d51369...a5dd31. All 89 generated fixture files byte-identical and Simulation load verifies. No shared schema shape/version change needed for optional library content."
+    },
+    {
+      "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 pytest tests/test_library_media.py tests/test_workshop.py -o addopts= -q; strengthened media-only repeat",
+      "result": "17 passed in 28.73 s; final media-only 2 passed in 11.24 s with all root scientific packages/plot in the new image. Real reference retrieval, synthesis, animation, edit/mux/extraction, numeric inspection, artifact preservation, checkpoint restore and lineage pin verification pass. Host/network/GPU absent; malformed media bounded. No skip/inference/inhabitant loop. Full Simulation suite intentionally not launched under ADR-0027."
+    },
+    {
+      "command": "Window uv run pytest -o addopts= -q; uv run ruff check .; node --check static app.js; installed headless Chromium UI check",
+      "result": "45 passed in 22.40 s, Ruff and JS syntax passed. Actual UI plays 128x96 WebM for 2.012 s and PCM WAV for 2 s, controls true/autoplay false, no page errors, all archive bytes unchanged. Initial browser harness eval was blocked by CSP; harness adjusted, CSP not weakened. Ignored screenshot/JSON preserved."
+    },
+    {
+      "command": "Builder uv run ruff check .; uv run olb check --tests closeout",
+      "result": "Ruff/health passed; 450 tests passed in 70.22 s, including 13 library checks. Historical experimental reports/registrations/validation and prior milestone records retained."
+    },
+    {
+      "command": "Window and Simulation staged-size/blob audits, commit/push 051b2d7 and 755194c",
+      "result": "Window 10 files/105107 bytes; Simulation 93 files/547424 bytes. Staged blobs equal source bytes and generated release digest verifies. Both pushed. diff --check reports two upstream trailing spaces in verbatim SciPy reference and SymPy licence text; intentionally preserved with their exact source/hash, not code whitespace errors. No container images/weights/raw diagnostics/experimental archives committed."
+    }
+  ]
+}

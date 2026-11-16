@@ -100,6 +100,7 @@ def invoke(
         return _error(INVALID_INPUT, problem)
     reserved = manifest["invocation"] in (
             {"interface": "mcp", "server": "supervisor-gateway", "tool": "models.ask"},
+            {"interface": "mcp", "server": "supervisor-gateway", "tool": "models.list"},
             {"interface": "mcp", "server": "runtime-tools", "tool": "tools.create"}
     ) or (manifest["id"] in ("world.observe", "world.act", "world.advance")
           and manifest["invocation"] == {"interface": "mcp", "server": "supervisor-world",
@@ -173,7 +174,12 @@ def run_self_test(manifest: dict[str, Any], capability_dir: Path) -> list[str]:
                                      {"available": False} if manifest["id"] in (
                                          "world.observe", "world.act", "world.advance",
                                          "time.remaining", "time.sleep") else
-                                     {"text": "Build-time fake specialist reply."}))
+                                     {"models": [], "context_tokens": 2048,
+                                      "max_output_tokens": 512, "max_prompt_utf8_bytes": 1280}
+                                     if manifest["id"] == "models.list" else
+                                     {"text": "Build-time fake specialist reply.",
+                                      **({"truncated": False} if "truncated" in manifest[
+                                          "output_schema"].get("properties", {}) else {})}))
         label = f"{manifest['id']} demonstration '{demo_id}'"
         if not result.ok:
             problems.append(f"{label}: {result.error_kind}: {result.message}")

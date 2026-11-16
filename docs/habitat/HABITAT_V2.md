@@ -3,7 +3,7 @@
 Adopted for planning 2026-11-16 under [ADR-0027](../decisions/ADR-0027-habitat-v2.md).
 S020a is implemented in Habitat 1.1.0; [component evidence](demos/S020a.md).
 S020b completes phase 1 in Habitat 1.2.0: [reference/media evidence](demos/S020b.md).
-Local-model and AI-media phases remain planned. Active phases and acceptance are in
+S021a adds optional local text assistants in Habitat 1.3.0; [component evidence](../experiments/2026-11-16-local-assistant-components.md). S021b visual AI and S022 remain required. Active phases and acceptance are in
 [ROADMAP.md](../roadmap/ROADMAP.md); [next session](../../NEXT_SESSION.md).
 
 ## Ambition and evidence
@@ -45,7 +45,7 @@ ADR-0018/0022–0026, both S012 reports and the relevant runtime/Window code.
 | Audio/music | Python wave/struct can write PCM; existing file capture | S020b delivers NumPy/SciPy/wave synthesis, FFmpeg editing/mixing and Window PCM WAV playback. Local speech/transcription and optional neural music remain S022; soundfile is optional, not installed in this image |
 | Animation/video | Python can compute frames; Window recognises GIF | S020b delivers Pillow animation, FFmpeg assembly/editing/frame extraction, audio muxing and basic read-only WAV/WebM playback. No video AI today |
 | Research/library | Workspace reading, SQLite and memory search; registry searches tools, not knowledge | S020b adds licensed Python/SymPy/SciPy manuals, Iris CSV and bounded cited search/read. memory.search is personal notes, not a reference corpus |
-| Local delegation | S007e models.ask in minimal world; supervisor specialist.py and finite GPU lease | Single pinned llama3.2:3b only, external/scripted orchestrator, bounded 1–32 calls, ≤6000 input/output chars, ≤1024 output tokens, ≤120 s/call, ≤600 s lease. No models.list or model selection; absent from Habitat |
+| Local delegation | S021a models.list/ask in Habitat 1.3.0 | Frozen permitted Granite/Llama/Qwen profiles, explicit selection, optional bounded text-only consultation. External/scripted primary, no specialist tools. Context, reservations, RAM/VRAM admission and finite cooperative lease; no image inputs yet |
 | Observation | Versioned artifacts, protected archive and read-only text/raster Window | Reuse. S020b adds PCM WAV and VP8/VP9 WebM with basic native controls; no dashboard, execution, conversion or write path in Window |
 
 Specific implementation anchors: Simulation container.py now selects the verified world image or the original
@@ -204,9 +204,11 @@ be Markdown with formula source, plots and citations; PDF typesetting is optiona
 3. **S022 Sound and audiovisual completion:** local transcription/speech,
    optional short neural music, video frame/audio analysis and finished media.
 
-S020a is a focused cross-repository engineering slice. S020's corpus/media
-completion takes additional sessions; S021's image pinning, brokers and restricted
-workers are the largest implementation work; S022 reuses those boundaries.
+S020a/S020b and S021a are complete. S021b image pinning and restricted visual
+workers are the next substantial implementation work; S022 reuses those boundaries.
+Installed text services passed four bounded component calls, without downloads,
+hosted inference or an inhabitant loop. Resource samples are admission evidence,
+not independently measured memory peaks or quality comparisons.
 No invented calendar estimates: package provisioning, licence checks and local
 admission measurements determine elapsed time.
 

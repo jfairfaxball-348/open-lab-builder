@@ -7,8 +7,12 @@ UTF-8 files, source-id selection and verified hashes. Window serves only bounded
 recognised PCM WAV/WebM in addition to raster/text: native browser decoding,
 GET/HEAD ranges, strict CSP and no conversion, writes, active documents or service
 connections. Header checks are not full bitstream validation.
-Local-only media workers and optional model delegation do not yet exist in
-Habitat. See [the security work](../habitat/HABITAT_V2.md#architecture-and-concrete-security-work)
+S021a adds optional text delegation via a frozen supervisor catalog in Habitat
+1.3.0, with explicit model permissions, durable reservations and bounded leases.
+RAM/VRAM admission and reported allocation checks fail closed; the Ollama service
+is outside runtime job limits and cannot provide hard memory isolation. Hidden
+reasoning and unexpected tool calls are never passed through. Local-only media
+workers remain required S021b work. See [the security work](../habitat/HABITAT_V2.md#architecture-and-concrete-security-work)
 for bounded service inputs, restricted workers, resource admission and output
 validation. Agent code receives no network/GPU device or model endpoint;
 hosted orchestration receives no image/audio/video payload for inspection.
