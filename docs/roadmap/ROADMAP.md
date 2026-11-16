@@ -14,37 +14,179 @@ update `state.json`. If a milestone turns out to be too large, split it here
 Milestone ids are `S` plus three digits and an optional letter. Each section
 heading must keep the form `### S000 — Title`; the health check reads it.
 
-## Active programme: Habitat (since 2026-11-16)
+## Active programme: Habitat v2 (2026-11-16)
 
-**Read this first.** **S015-S019 and S012 are complete** (S012-001
-[report](../experiments/2026-11-16-s012-001.md)). Nothing further is scoped:
-the next step needs an owner decision (OD-2). The owner directed a strategic reset
-([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)). Active
-development now builds a world worth inhabiting:
-[Habitat v1](../habitat/HABITAT_V1.md), through vertical slices **S015 → S016 →
-S017 → S018 → S019**, followed by the philosophical experiment **S012**.
+**S020a is next, in Simulation with Builder contract/release work.**
+[Habitat v2](../habitat/HABITAT_V2.md) contains the verified reuse/hardware audit,
+local software/model choices and security dependencies.
+[ADR-0027](../decisions/ADR-0027-habitat-v2.md) governs this programme;
+[NEXT_SESSION.md](../../NEXT_SESSION.md) is the development handoff.
 
-Each slice adds a real freedom for the inhabitant. A slice is proved by tests
-plus one preserved end-to-end demonstration, not by a statistical campaign. The
-demonstration uses a scripted model by default; real-model checks need owner
-approval.
+S015–S019, S012-001 and S012-002 are completed history. S012-002's sustained
+prompted work is a positive result and motivates richer opportunities. Preserve
+all reports, registrations, validation snapshots and archives; infer no independent
+goals, consciousness or cognitive continuity from it. The field remains optional.
 
-- **Retired:** endurance runs (S011b/S011c), comparison campaigns, repeated
-  capability benchmarks and new registration machinery.
-- **Deferred:** S010c, S006f, S007b, S008a/b.
+**Suspended:** every further Lunar/full inhabitant run (including scripted
+acceptance simulations), survival/endurance study, model comparison, behavioural
+benchmark and exploratory hosted inference. Offline engineering fixtures,
+fake-service integration, security tests and static analysis are permitted.
+After approved provisioning, direct local model admission is ordinary offline
+component verification; this planning session authorises no inference. No automatic return to S012: the next
+real Lunar experiment requires a separate explicit owner decision after v2 is
+useful. Existing ChatGPT-plan profile, effort and limits stay unchanged.
 
-Everything below this section is retained history and the old plan. Where it
-conflicts with this section, this section governs.
+Three phases deliver science/software/references/procedural media, then optional
+local delegation and visual AI, then speech/music/audiovisual completion. No
+hosted media generation or understanding, no unrestricted internet, hardware
+purchase or new hosted text service. Specific software/model/content acquisition
+approval remains necessary where required by AGENTS.md; planning is not approval.
+S010c stays parked; S006f/S007b/S008a/b are not separate prerequisites: reuse their
+useful designs inside these phases without reviving their campaigns.
 
-```mermaid
-flowchart LR
-    S011a["S011a (closed)"] --> S015["S015 Read, edit, run Python"]
-    S015 --> S016["S016 Skills and self-made tools"]
-    S016 --> S017["S017 World with phenomena"]
-    S017 --> S018["S018 Time and continuity"]
-    S018 --> S019["S019 Habitat v1 assembly"]
-    S019 --> S012["S012 First philosophical experiment"]
-```
+### S020p — Habitat v2 strategic plan
+
+**Status: complete as documentation only.** Owner-authorised audit of the three
+current remote branches, implementation, hardware, local inventory and primary
+software/model sources. Deliverables: Habitat v2 plan, ADR-0027, updated roadmap,
+state and development handoff. No capability changes, downloads, inference or
+inhabitant simulation. Completion does not complete any implementation phase.
+
+### S020 — Workshop, offline library and procedural media
+
+**Status: planned. Phase 1; split into S020a then S020b before implementation.**
+
+- **Objective:** investigate mathematics/data, create reusable software, consult
+  references, draw illustrations, compose sound and produce simple animation.
+- **Prerequisites:** existing container boundary, artifact/checkpoint/lineage;
+  S020a scientific image before S020b package/media completion.
+- **Scope/deliverables:** pinned Python 3.12 scientific image, discoverable package
+  inventory/docs; read-only licensed library with bounded search/read; Pillow
+  PNG/GIF, NumPy/SciPy/WAV synthesis, FFmpeg edit/mux/frame extraction. Basic
+  Window WAV/WebM playback, retain existing raster previews. Builder owns
+  contracts/manifests/releases; Simulation owns image/runtime and library
+  mediation; Window owns only previews. No shared code.
+- **Exclusions:** neural models, networked package installation in runs, Jupyter
+  server, active HTML/app execution in Window, field expansion, experiments.
+- **Acceptance/exit:** offline fixtures import every pinned package, check a
+  symbolic identity, solve a numerical problem, analyse a CSV, save/revise/read
+  a plot and software result; search/read/cite two genuine reference sources;
+  synthesize a WAV, render/edit a short animation and mux audio; verify captured
+  binary hashes and checkpoint/lineage restoration using component fixtures.
+  Window GET/HEAD previews preserve data-root digests; malformed input, traversal,
+  network/host access, quota and timeout tests pass. No full inhabitant loop.
+- **Risks:** image provenance across repos, read-only cache paths, native library
+  threads, dependency/licence compatibility, artifact size/decoder limits.
+- **Next:** S021. First S020a is narrower and does not wait for FFmpeg/models.
+
+### S020a — Digest-bound scientific Python workshop
+
+**Status: next; not implemented.** Lead: open-lab-simulation. Builder owns the
+additive contract, world metadata and generated release; find/read both AGENTS.
+
+- **Objective:** write, execute, inspect and improve actual scientific programs.
+- **Prerequisites:** approved existing rootless container backend; resolve a
+  compatible Python 3.12 wheel set. Obtain specific approval before acquiring
+  a new base image/system software; no runtime downloads. No model needed.
+- **First task:** specify an additive verified workshop-image binding in Builder
+  and implement its digest-only selector/admission in Simulation container.py,
+  preserving the current constant for legacy worlds. Pin image identity in world
+  or experiment contracts and archive, not an agent-controlled path/tag. Tests
+  must refuse missing/mismatched images without pulling them.
+- **Scope/deliverables:** pin NumPy, SciPy, SymPy/mpmath, pandas, Matplotlib Agg and
+  Pillow in the workshop image with hashes/notices; bounded writable caches and
+  BLAS threads, package inventory, appropriate explicit per-call RAM/time bounds,
+  updated python.run documentation and generated world fixture. Resolve schema
+  versions/examples/changelog before changing shared formats.
+- **Exclusions:** FFmpeg, library acquisition, brokers, models, apps, inference,
+  full scripted supervisor demonstrations and any Lunar run.
+- **Acceptance/exit:** direct sandbox fixtures run a symbolic identity, numerical
+  integration, CSV analysis and PNG plot; edit/re-run a project module and verify
+  output bytes plus artifact capture. Old world image selection still passes;
+  no network/host reads, image tampering, timeout and quota regressions. Lint and
+  relevant Builder/Simulation suites pass; do not claim image readiness on mocks.
+- **Risks:** software acquisition permission, native wheel compatibility, cache
+  writes, memory/thread oversubscription. If provisioning is blocked, record it;
+  do not pretend a selector-only change completes the scientific workshop.
+- **Next:** S020b, completing phase 1.
+
+### S020b — Reference library and procedural audiovisual work
+
+**Status: planned; phase 1 completion.**
+
+- **Objective:** learn from sources and create inspectable images, sound and video.
+- **Prerequisites:** S020a; approved licensed content and FFmpeg image provisioning.
+- **Scope/deliverables:** bounded library.search/read with stable citations;
+  versioned initial maths/science/programming references and small datasets;
+  Pillow/NumPy/SciPy synthesis plus FFmpeg/ffprobe in sandbox; Window WAV/WebM
+  preview with safe signature/size/range handling. Reuse artifact/version/lineage.
+- **Exclusions:** internet retrieval, neural generation, arbitrary host processes,
+  new dashboard, active agent HTML/JavaScript preview.
+- **Acceptance/exit:** all remaining S020 criteria above, with real offline
+  source and media bytes; Window never writes, converts or influences a run.
+- **Risks:** corpus/codec licences, malicious media, capture cap and bounded clips.
+- **Next:** S021. Do not expand the reference collection into a separate programme.
+
+### S021 — Optional local assistants and visual creation
+
+**Status: planned. Phase 2.**
+
+- **Objective:** choose bounded local assistance and create/edit/inspect original
+  images, without prescribing projects or delegation.
+- **Prerequisites:** S020a image identity and S007e specialist service; S020 output
+  inspection/preservation. Specific model/runtime approval before provisioning.
+- **Scope/deliverables:** models.list/ask for all approved compatible installed
+  profiles, no default preference; extend S007e service into container worlds.
+  Common single-heavy-job lease/admission/cancellation for local text and media.
+  Local image descriptions (installed Qwen3.5 vision first; SmolVLM smaller
+  alternative if needed), SD1.5 text-to-image/img2img and programmatic
+  editing, bounded file inputs/outputs, source hashes and provenance. Keep hosted
+  primary inhabitant configuration; no direct sandbox model/GPU/network access.
+- **Exclusions:** autonomous secondary inhabitants, recursive tool use, media
+  uploads to hosted inference, model leaderboard, large diffusion/video models.
+- **Acceptance/exit:** fake services prove list/select/ask and image operations
+  through supervisor handlers, bounds/reservations/cancellation/recovery and
+  no endpoint/path injection. After approved provisioning, isolated local functional
+  checks then verify installed model identity, generated PNG, edited PNG and
+  local description of saved output, recording actual peak RAM/VRAM and latency.
+  No capability is advertised available on fake evidence alone. Changed source
+  suites and legacy container/isolation tests pass; no inhabitant simulation.
+- **Risks:** only 4 GB VRAM and ~6 GB free RAM, cooperative GPU lock, WSL/host
+  worker restrictions, model licence terms, hidden reasoning budgets and weak
+  small-model vision. Failed admission returns explicit unavailable; no cloud
+  fallback or silently switched model. Required image scope needs owner revision
+  if no candidate can be admitted, not a false completion.
+- **Next:** S022; local media model calls remain bounded optional tools.
+
+### S022 — Sound and audiovisual completion
+
+**Status: planned. Phase 3.**
+
+- **Objective:** synthesize speech/music, understand recordings and finish media.
+- **Prerequisites:** S020 procedural media/Window; S021 local broker and scheduler;
+  approved Whisper/Piper runtime/weights and individually licensed voice.
+- **Scope/deliverables:** local CPU transcription, speech synthesis, audio metrics,
+  short optional MusicGen-small excerpts if admitted; video frame extraction,
+  sampled local vision descriptions and audio transcripts with timestamps;
+  compose images/motion/audio into preserved finished videos. Procedural music
+  and animation stay first-class. Summaries disclose sampled coverage.
+- **Exclusions:** commercial studio, full video-semantic coverage promises,
+  real-time neural media, default diffusion-video support, hosted media APIs.
+- **Acceptance/exit:** fixed offline clips prove edit/mix/mux and decoder bounds;
+  fake broker tests verify denial, timeout, partial output and cancellation.
+  Direct local functional fixtures after approved provisioning verify transcription, speech and
+  image/frame understanding with measured resource admission. Required outputs
+  survive revision/checkpoint/data-only lineage; previews keep Window read-only.
+  Complete the useful-state matrix in HABITAT_V2, using component fixtures, not
+  an inhabitant run. Keep neural music explicitly unavailable if it cannot fit;
+  procedural composition mandatory; neural video is the stated hardware exception.
+- **Risks:** CPU time, model footprints, noncommercial weights/voice conditions,
+  hallucinated transcript/captions, video sampling misses events, archive growth.
+- **Next:** report useful-state completion and exceptions to owner; wait for a
+  separate explicit decision about any real Lunar experiment. No launch queued.
+
+Everything below is retained history and the old plan. This active section
+supersedes conflicting future recommendations, dependency graphs and run commands.
 
 ## Purpose and development streams
 

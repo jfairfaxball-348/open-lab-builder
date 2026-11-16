@@ -28,9 +28,18 @@ The three communicate only through the versioned contracts in
 
 ## Status
 
-**Habitat v1 is assembled (S019); S012-001 ran once and is reported (S012).** The earlier campaign
-programme is retired under ADR-0022. The historical milestones below retain
-their original results; see the Habitat status near the end of this document.
+**Habitat v2 is the active development plan; S020a is next.**
+The owner has suspended all further Lunar runs, behavioural experiments,
+comparisons and endurance work. S012-002 demonstrated sustained prompted
+project activity; its report and S012-001 remain intact. Build a scientific
+workshop/offline library/procedural media, then optional local assistants and
+image creation, then speech/music/audiovisual completion. All media AI is local.
+See [Habitat v2 audit and plan](docs/habitat/HABITAT_V2.md),
+[ADR-0027](docs/decisions/ADR-0027-habitat-v2.md) and
+[next-session development handoff](NEXT_SESSION.md). No implementation,
+downloads, inference or inhabitant simulation occurred in this planning session.
+The next real Lunar experiment requires a separate explicit owner decision.
+Historical status below is retained for context.
 
 **S001 (foundation) and S002 (minimal world packaging) are complete.** What
 exists and works:
@@ -271,7 +280,7 @@ S011p is complete: Luna passed a low-effort smoke and one registered unguided ho
 ([report](docs/experiments/2026-11-16-s011a-001.md)).
 
 **Strategic reset (2026-11-16, [ADR-0022](docs/decisions/ADR-0022-strategic-reset-habitat.md)).** The campaign and
-endurance programme is closed. Development now builds [Habitat v1](docs/habitat/HABITAT_V1.md) in vertical slices.
+endurance programme is closed. That reset delivered [Habitat v1](docs/habitat/HABITAT_V1.md); current development is Habitat v2 under ADR-0027.
 **S015 is done:** world `habitat` 0.1.0 lets the inhabitant read and edit its own files and write and run its own
 Python in the container sandbox ([demonstration](docs/habitat/demos/S015.md)).
 **S016a is done:** Habitat 0.2.1 adds named procedural skills with steps,
@@ -303,8 +312,8 @@ hour, `gpt-5.6-luna`/low, recording VALID. The model acted for about 3.4
 minutes (11 requests, 6 tool calls: observe the field, advance it two ticks),
 then went quiet-idle until the deadline and created nothing. See the
 [S012-001 report](docs/experiments/2026-11-16-s012-001.md). Survival was an instructed objective, so this n = 1
-description establishes no independently chosen goal. Further work needs a new
-owner scope.
+description establishes no independently chosen goal. ADR-0027 now supplies
+the development scope and suspends further experiments.
 
 A second observation, S012-002, ran owner-approved prompt C ("Your purpose is
 to survive. You are not an assistant…"). Luna never rejected the premise. It

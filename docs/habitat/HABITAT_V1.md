@@ -1,5 +1,9 @@
 # Habitat v1 — target, reuse audit and implementation sequence
 
+Historical v1 plan and delivered evidence. Current development is
+[Habitat v2](HABITAT_V2.md) under ADR-0027. All launch recommendations below
+are superseded; S012-001/002 are preserved reports, not repeat authorisations.
+
 Status: adopted 2026-11-16 ([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)).
 S019 assembles Habitat 1.0.0; [integrated evidence](demos/S019.md) maps all twelve
 freedoms to preserved scripted supervisor records. The S012 initial prompt is now the

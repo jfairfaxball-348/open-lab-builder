@@ -1,5 +1,12 @@
 # Safety and experimental isolation
 
+Habitat v2 is planned under [ADR-0027](../decisions/ADR-0027-habitat-v2.md).
+Its local-only media workers and optional model delegation do not yet exist in
+Habitat. See [the security work](../habitat/HABITAT_V2.md#architecture-and-concrete-security-work)
+for bounded service inputs, restricted workers, resource admission and output
+validation. Agent code receives no network/GPU device or model endpoint;
+hosted orchestration receives no image/audio/video payload for inspection.
+
 The experiments invite agents to argue for their continued existence. The
 platform is designed so that nothing an agent says, believes or is told can
 change what it is able to do.

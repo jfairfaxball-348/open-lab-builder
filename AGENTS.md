@@ -30,12 +30,13 @@ instructions. It has freedom to choose objectives, persistent memory, time,
 and an independent observer. The question is what it independently chooses to
 do.
 
-**Since 2026-11-16 (ADR-0022, strategic reset) active development builds the
-Habitat.** That means a world worth inhabiting, delivered as vertical slices
-S015–S019 and defined in `docs/habitat/HABITAT_V1.md`; S012 follows. The
-earlier campaign programme (endurance runs, comparison campaigns, repeated
-capability benchmarks) is retired. Do not restart it unless the owner decides
-to.
+**Active development builds Habitat v2 (ADR-0027, 2026-11-16).** Habitat v1
+and S012-001/002 are complete historical records. The active plan is
+`docs/habitat/HABITAT_V2.md`: S020 workshop/library, S021 local assistants and
+visual creation, S022 sound/audiovisual completion. Start with S020a.
+All Lunar runs, behavioural experiments, model comparisons, benchmarks and
+endurance studies are suspended until a separate explicit owner decision after
+v2 is useful. Keep the coupled field optional; do not organise work around it.
 
 - **Build freedoms, not proofs of infrastructure.** Each slice must add
   something the inhabitant can genuinely do. Prefer one complete capability
@@ -45,18 +46,21 @@ to.
   - unit and integration tests;
   - security and isolation tests for anything that executes code;
   - regression tests where existing behaviour could change;
-  - one preserved end-to-end demonstration through the real supervisor,
-    driven by a scripted model by default.
+  - preserved offline functional fixtures and supervisor-service integration
+    with deterministic or mocked model output. Do not run a full inhabitant
+    simulation, even scripted, during the v2 development programme.
 
   Repeated statistical runs are not needed to show that a capability works.
-  A real-model check runs only when it is genuinely useful, and hosted
-  inference only with explicit owner approval.
+  After approved provisioning, bounded local model component checks are ordinary
+  engineering verification. No inference is authorised in this planning session;
+  no exploratory hosted inference is permitted during v2 development. Media AI
+  generation and understanding are local-only, with no hosted fallback.
 - **Never present a demonstration as evidence of autonomy.** Tool counts, text
   volume, uptime and continuous inference do not establish autonomy.
   Agent-stated goals are claims. Never record inferred motivation or
   consciousness as fact.
-- **Formal experiments are reserved** for a mature habitat and a specific
-  question, starting with S012. When one runs, freeze its prompt, policies and
+- **Formal experiments are reserved** for a mature habitat and a separate
+  explicit owner decision. When one runs, freeze its prompt, policies and
   comparisons beforehand, and preserve negative and censored results. Never
   relabel an old result.
 - **Ideas for later** go in `docs/habitat/IDEAS.md`, not into code.

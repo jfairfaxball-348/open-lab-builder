@@ -1,5 +1,13 @@
 # Local environment
 
+**Current refresh: 2026-11-16.** See the
+[Habitat v2 live audit](../habitat/HABITAT_V2.md#live-hardware-and-deployment-feasibility)
+for verified CPU/GPU/RAM, 659 GiB free disk, four installed Ollama profiles,
+working rootless WSL Podman and media tooling gaps. The snapshot below remains
+historical: its old resource strategy, installation status and experimental
+recommendations do not govern v2. Model footprints/performance remain unmeasured
+for proposed media workers. ADR-0027 suspends further inhabitant runs.
+
 Sanitised audit of the development machine, taken on 2026-11-13 during S001
 with read-only probes. It contains no user names, paths, host names or file
 inventories. Nothing was installed or downloaded apart from this project's own

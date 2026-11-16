@@ -1,5 +1,14 @@
 # Architecture
 
+Active direction: [Habitat v2](../habitat/HABITAT_V2.md),
+[ADR-0027](../decisions/ADR-0027-habitat-v2.md). This is a planned extension,
+not implemented functionality: digest-bound scientific container images,
+offline references, supervisor-brokered optional local models/media and small
+read-only previews. Three-repository ownership and existing isolation remain.
+All further inhabitant simulations/experiments are suspended; offline component
+verification replaces full-run demonstrations during development. S012-002
+demonstrated sustained prompted activity; its historical report is preserved.
+
 Status: established in S001. Implemented so far: the contracts, the builder
 tooling, the world release manager (S002), the generated registry, documentation
 and five simple capabilities (S005a), and in
