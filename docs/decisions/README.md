@@ -29,6 +29,7 @@ by rewriting history.
 | [0020](ADR-0020-source-bound-study-analysis.md) | Source-bound descriptive analysis and typed investigator annotations over verified exports | Accepted (S010b) |
 | [0021](ADR-0021-hosted-recovery-identity.md) | Opt-in hosted run recovery: frozen request identity plus provider-reported model_version pin; provider stops never trigger recovery | Accepted (owner); S011r, amends ADR-0016 |
 | [0022](ADR-0022-strategic-reset-habitat.md) | Strategic reset: build Habitat v1 in vertical slices; retire endurance/comparison campaigns; engineering demonstrations prove capabilities | Accepted (owner, 2026-11-16) |
+| [0023](ADR-0023-pinned-agent-tools.md) | Run-local tools pin sandbox-validated entry source in protected checkpoint state | Accepted; S016b, refines ADR-0003/0015 |
 
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).

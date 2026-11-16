@@ -16,7 +16,7 @@ heading must keep the form `### S000 — Title`; the health check reads it.
 
 ## Active programme: Habitat (since 2026-11-16)
 
-**Read this first.** **S015 and S016a are complete; next is S016b.** The owner directed a strategic reset
+**Read this first.** **S015 and S016 (a/b) are complete; next is S017.** The owner directed a strategic reset
 ([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)). Active
 development now builds a world worth inhabiting:
 [Habitat v1](../habitat/HABITAT_V1.md), through vertical slices **S015 → S016 →
@@ -1642,9 +1642,9 @@ Hosted inference requires explicit owner approval.
 
 - **Repository / streams:** Builder (contracts, capabilities); Simulation
   (registry, sandboxed execution of agent tools).
-- **Status:** split before implementation into S016a and S016b; parent incomplete
-  until both exit. Procedural storage and executable registration have distinct
-  validation and security boundaries; this session implements S016a only.
+- **Status:** complete (2026-11-16). Split before implementation into S016a
+  (procedural notes) and S016b (validated executable tools); both exit criteria
+  are met. Evidence is linked in the child milestones.
 - **New freedom:** name, document and reuse its own procedures and executable
   tools, through the same discovery interface as builder capabilities.
 - **Scope:**
@@ -1689,6 +1689,7 @@ Hosted inference requires explicit owner approval.
 ### S016b — Validated sandboxed self-made tools
 
 - **Repository:** Builder (manifests/world); Simulation (registry/execution).
+- **Status:** complete (2026-11-16); [evidence](../habitat/demos/S016b.md).
 - **Objective / prerequisite:** after S016a, create and rediscover a reusable
   executable tool without widening the S015 sandbox boundary.
 - **Scope / deliverables:** `tools.create`, bounded JSON schemas/examples,

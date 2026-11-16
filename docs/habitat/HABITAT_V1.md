@@ -54,7 +54,7 @@ simulation.
 | Checkpoints and recovery, including hosted (ADR-0021) | Working | Directly |
 | Resource limits (process tier) | Working | Directly |
 | **Container tier** (rootless Podman/WSL 2): no network, read-only root, workspace the only writable mount, cgroup limits, timeout removal, escape tests | Working, tested live 2026-11-16 | **Directly. This is the sandbox for agent code.** A capability may already declare `subprocess: true`, and launch is refused unless the experiment grants it on a container-tier world |
-| Capability schema `provenance.origin: "agent"` | Contract exists, unused | Basis for self-made tools (S016) |
+| Capability schema `provenance.origin: "agent"` | Used by S016b | Run-local pinned tool manifests in Habitat 0.3.0 |
 | Supervisor-mediated specialist (S007e) | Working | Pattern for supervisor-held world state (S017) |
 | Quiet/legacy runtime policies | Working | Quiet stays. Self-scheduled wake is new (S018) |
 | Read-only Window | Working | Shows tool results already; small additions only |
@@ -80,7 +80,8 @@ Nothing needs to be rebuilt.
 4. **Skills and self-made tools.** Saved procedures, plus agent-written
    executables with a validated interface. They run only through the sandbox
    and are discoverable alongside builder capabilities with `origin: agent`.
-   The supervisor currently refuses `agent_created_tools`.
+   S016b now implements this with explicit `agent_created_tools` opt-in and
+   pinned entry snapshots; procedural skills were delivered in S016a.
 5. **Time and continuity.**
    - `time.remaining` reports the remaining active budget.
    - A self-scheduled wake, which is a new runtime policy. Today a quiet idle
@@ -140,9 +141,11 @@ always requires explicit owner approval.
 
 Split before implementation into S016a (saved procedures) and S016b (executable
 tools). S016a is implemented in Habitat 0.2.1; [demonstration](demos/S016a.md).
-S016b remains next: there is no executable tool registration yet, and
-`agent_created_tools` is still refused. The combined freedom below is not
-complete until S016b passes.
+S016b implements opt-in sandbox-validated tools in Habitat 0.3.0. Their pinned
+entry snapshots survive checkpoints. Workspace file edits cannot replace
+registrations; workspace data/imports remain mutable. Cross-run sharing and
+networked tools remain out of scope. Engineering evidence is recorded in
+[S016b's demonstration](demos/S016b.md).
 
 - **New freedom:** turn something that worked into a named, documented,
   reusable skill or tool, and find and use it later through the same discovery

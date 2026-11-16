@@ -78,19 +78,26 @@ Therefore:
   is capped. The container provides no network, a read-only root and world, the
   workspace as the only writable mount, cgroup limits, and removal when the
   call ends. These limits were tested live on 2026-11-16. Agent-created tools
-  remain refused until S016.
+  are now opt-in in Habitat 0.3.0 (S016b, ADR-0023), requiring the experiment's
+  `agent_created_tools` flag, container tier and subprocess grant.
 - A container-tier world launches only when the backend probe passes; it is
   never silently run on the process tier. Container lifetime is owned by the
   supervisor: every container of a run is removed when a runtime segment ends.
 
 ## Capability expansion without privilege expansion
 
-Agent-created tools (S009) are capability manifests with
-`provenance.origin: agent`, stored in the agent's workspace, registered only in
-that run's registry, executed only in the container tier, with permissions that
-can never exceed the experiment's. They cannot modify builder capabilities, the
-world release or anything on the host, and they vanish with the run except for
-their preserved artifacts.
+Agent-created tools (S016b) have manifests with `provenance.origin: agent` and
+infrastructure-assigned run provenance. Their entry source begins in the
+workspace, but accepted source bytes, definitions and digests are pinned in
+protected runtime/checkpoint state. Workspace files cannot manufacture or
+replace registrations. Example validation and every invocation run through
+`python.run` in a fresh container. Both the tool and `python.run` must pass
+allow/deny and permission checks. Permissions are fixed to the existing
+workspace-write/subprocess/network-none boundary. Source edits do not replace
+a registered entry; mutable data and imports can still affect its behaviour.
+Tools cannot shadow Builder ids or modify the runtime, recorder or world
+release. They remain local to the run; only infrastructure-owned archives and
+checkpoints preserve their registration evidence.
 
 ## Freedom inside the boundary
 

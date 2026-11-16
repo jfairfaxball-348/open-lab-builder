@@ -204,7 +204,8 @@ arguments and results are JSON objects in all four, which is what makes the
 manifest transport-neutral ([ADR-0003](../decisions/ADR-0003-capability-manifest.md)).
 
 **Invocation protocol** (fixed in S002; `python` and `subprocess` are
-implemented, `http` and `mcp` are not):
+implemented; generic `http` and `mcp` execution is not, apart from the reserved
+runtime/supervisor service pairs documented here):
 
 - A capability is self-contained in its own directory. A host runs it with
   that directory as the working directory.
@@ -266,6 +267,46 @@ paths, reject traversal, special names and links, and report errors without
 local paths. These checks do not contain concurrent path replacement or
 arbitrary capability code on the process tier; the container tier (S006c, ADR-0015)
 confines capability processes on Windows hosts.
+
+### Run-local agent tools (S016b)
+
+Habitat 0.3.0 reserves `{"interface":"mcp","server":"runtime-tools",
+"tool":"tools.create"}` for the runtime-managed creation service. It is
+off unless the frozen experiment sets `capabilities.agent_created_tools: true`;
+launch also requires a container world, `tools.create`, `python.run` and the
+subprocess grant. Builder self-tests use a labelled non-registering fake
+(`registered=false`); they never run agent source on the host.
+
+The service accepts a workspace Python entry file defining `run(arguments)`,
+bounded JSON input/output schemas and one to five exact examples. The schema
+subset and limits are documented in the capability manifest; references,
+regex and compositions are refused before execution. Each example executes
+through the existing `python.run` sandbox, with a five-second program limit,
+and must satisfy the output schema and exact expected value. Failure registers
+nothing, but example workspace side effects remain. Successful validation is
+not a correctness or safety proof.
+
+The runtime generates a capability manifest with `provenance.origin: agent`,
+the infrastructure's `created_in_run`, fixed workspace-write/subprocess/network-none
+permissions, and a source SHA-256 in `extensions`. Ids use `agent.<slug>`;
+existing ids cannot be shadowed or replaced. The invocation uses the reserved
+`runtime-tools` server and that agent id as its tool name. No source is imported
+or executed by the runtime or supervisor.
+
+Accepted source bytes and definition live in protected runtime state, included
+in the existing checkpoint runtime component. They are not loaded from
+workspace manifests. Search, describe, demonstrate and invoke use the same
+interfaces as Builder capabilities; dynamic search results and execution result
+extensions include provenance. Every execution still checks target and
+`python.run` permissions and allow/deny lists. At most sixteen tools are kept.
+Resume checks the source digest and definition without replaying examples.
+
+Editing the source file does not replace a registered entry snapshot. Inputs,
+workspace data and imported workspace modules remain mutable; the digest
+attests only the entry source. New ids are required for new registrations.
+Cross-run sharing is not implemented. See [ADR-0023](../decisions/ADR-0023-pinned-agent-tools.md).
+These are capability-content and optional checkpoint-component additions;
+shared schemas are unchanged.
 
 ### Model provider
 
@@ -568,6 +609,7 @@ chronology and scientific interpretation are never certified automatically.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-16 | (runtime tool protocol / world capability content) | - | S016b Habitat 0.3.0 adds opt-in tools.create, bounded sandbox validation, pinned agent manifests and protected runtime checkpoint registrations; existing MCP invocation, provenance and observation extensions; no shared schema change; ADR-0023 |
 | 2026-11-16 | (world capability content) | - | S016a Habitat 0.2.1 adds skills.save/list/get with bounded schemas, workspace JSON notes, agent provenance and existing checkpoint semantics; no shared schema or invocation change |
 | 2026-11-15 | study-annotations; study-analysis | 1.0.0 | S010b source-bound descriptive reports and typed citations; no runtime/world change |
 | 2026-11-15 | study-manifest; evidence-export | 1.0.0 | S010a additive offline research interfaces; portable stopped-archive export; no runtime or world schema change |

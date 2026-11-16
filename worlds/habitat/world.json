@@ -1,8 +1,8 @@
 {
   "world_id": "habitat",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "name": "Habitat",
-  "description": "Habitat with workspace code, memory and named reusable procedural skills (skills.save/list/get). Executable tool registration remains future S016b.",
+  "description": "Habitat: workspace Python, saved procedural skills and validated run-local sandboxed self-made tools.",
   "environment": {
     "platforms": [
       "windows",
@@ -29,5 +29,5 @@
     "subprocess": true,
     "gpu": false
   },
-  "notes": "S015 and S016a (ADR-0022). Saved skills are agent-owned workspace data, not executable capability registrations. Every capability call runs in a fresh rootless container (S006c): no network, read-only root and world, workspace the only writable mount. python.run executes agent code only there. models.ask is excluded because the container tier provides no loopback or GPU path (S006f, deferred). The container image has the Python standard library only."
+  "notes": "S015, S016a and S016b (ADR-0022). Saved skills are agent-owned workspace data, not executable capability registrations. tools.create separately pins sandbox-validated executable registrations when enabled by the experiment. Every capability call runs in a fresh rootless container (S006c): no network, read-only root and world, workspace the only writable mount. python.run executes agent code only there. models.ask is excluded because the container tier provides no loopback or GPU path (S006f, deferred). The container image has the Python standard library only."
 }

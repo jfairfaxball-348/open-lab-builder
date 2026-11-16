@@ -50,8 +50,17 @@ They store bounded, structured JSON notes under the agent-owned workspace
 `.skills/` directory. Keyword listing and retrieval expose those notes without
 executing them. The existing workspace checkpoint includes them; no new
 runtime state or schema is needed. Agent provenance labels authored data,
-not validated behaviour. Executable tool registration remains S016b, and
-`agent_created_tools` is still refused. See [the demonstration](../habitat/demos/S016a.md).
+not validated behaviour. See [the demonstration](../habitat/demos/S016a.md).
+
+S016b adds opt-in `tools.create` in Habitat 0.3.0. The runtime validates bounded
+declarative definitions and runs every supplied example through the existing
+`python.run` container capability before registration. Generated agent manifests
+join the same discovery interface; their pinned entry bytes, definitions and
+digests survive the existing protected runtime checkpoint. Workspace source edits
+cannot replace registrations. The runtime and supervisor never execute agent
+source. Both target and Python runner retain normal permission and allow/deny
+checks. No new network, GPU or host privileges are available. See
+[ADR-0023](../decisions/ADR-0023-pinned-agent-tools.md) and the protocol in CONTRACTS.md.
 
 | | Builder | Simulation | Window |
 | --- | --- | --- | --- |

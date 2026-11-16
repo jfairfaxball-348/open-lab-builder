@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-16T09:39:54Z",
-  "last_session": "S016a",
+  "updated_at": "2026-11-16T10:35:12Z",
+  "last_session": "S016b",
   "completed_milestones": [
     {
       "id": "S001",
@@ -320,12 +320,24 @@
       "completed_at": "2026-11-16T09:39:54Z",
       "repository": "open-lab-builder",
       "summary": "Habitat 0.2.1 adds bounded skills.save/list/get procedural notes with steps, examples, explicit replacement, keyword pagination and agent provenance. Two live Simulation tests cover checkpoint restoration/reuse and link refusal. Scripted run-20261116t092747z-952d44 completed with 67 events and verified archive. S016 parent remains incomplete; executable tools are S016b."
+    },
+    {
+      "id": "S016b",
+      "completed_at": "2026-11-16T10:35:12Z",
+      "repository": "open-lab-builder",
+      "summary": "Habitat 0.3.0 adds opt-in tools.create and runtime-local agent discovery/invoke, sandbox example validation, pinned entry source and generated run provenance, protected checkpoint restoration, bounded schemas and no new execution privilege. 21 new Simulation tests and 2 Builder tests; preserved scripted run-20261116t102236z-38fb65 completed with 77 events and verified archive."
+    },
+    {
+      "id": "S016",
+      "completed_at": "2026-11-16T10:35:12Z",
+      "repository": "open-lab-builder",
+      "summary": "Both S016a saved procedures and S016b sandboxed self-made tools meet their exit criteria. No cross-run sharing or networked tools; validation is example-specific and pins only entry source."
     }
   ],
   "next_milestone": {
-    "id": "S016b",
+    "id": "S017",
     "repository": "open-lab-builder",
-    "title": "Habitat Slice 2b: Validated sandboxed self-made tools"
+    "title": "Habitat Slice 3: A World with Phenomena (design note first)"
   },
   "blockers": [
     {
@@ -561,6 +573,16 @@
         "S019"
       ],
       "detail": "The pinned python:3.12-slim image carries no third-party packages and the container tier has no loopback/GPU path. Both need S006f (deferred) or a later Habitat slice."
+    },
+    {
+      "id": "KI-33",
+      "summary": "Agent-tool validation covers supplied examples and pinned entry source only; workspace data and imported workspace modules remain mutable.",
+      "affects": [
+        "S016b",
+        "S018",
+        "S019"
+      ],
+      "detail": "Successful validation grants no new authority and is not general correctness. Each invocation remains sandboxed with fixed python.run permissions and runner/target allow-deny checks. New ids are needed to replace an entry snapshot. Cross-run tool sharing is not implemented. See ADR-0023 and docs/habitat/demos/S016b.md."
     }
   ],
   "open_decisions": [
@@ -576,31 +598,31 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-16T09:39:54Z",
+    "ran_at": "2026-11-16T10:35:12Z",
     "commands": [
       {
         "command": "Builder uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Dependency sync passed; S016 was next, clean worktree; 384 tests and all health checks passed. Split S016 into S016a/S016b before implementation."
+        "result": "Clean worktree; dependency sync passed; S016b next; 408 tests and all health checks passed."
       },
       {
         "command": "Simulation uv sync; uv run pytest (baseline)",
-        "result": "472 passed in 606.97 s, no skips. Clean worktree at session start."
+        "result": "Clean worktree; dependency sync passed; 474 passed in 621.12 s without skips."
       },
       {
-        "command": "Builder uv run pytest tests/test_skills.py; uv run ruff check .; uv run olb check --tests",
-        "result": "24 targeted tests passed without skips; final Builder lint and health passed, full suite 408 passed. Initial import-order and line-length lint issues fixed; host symlink-privilege skip replaced with a passing Windows junction test."
+        "command": "Builder uv run pytest tests/test_tools_create_contract.py; uv run ruff check .; uv run olb check --tests",
+        "result": "2 new interface/non-execution tests passed. Full Builder suite 410 passed; lint and health passed. No agent source executes in Builder self-tests; tools.create uses a labelled non-registering fake."
       },
       {
-        "command": "Builder uv run olb world build worlds/habitat --out .local/releases; uv run olb world build worlds/habitat --publish; uv run olb world verify .local/releases/habitat/0.2.1 --self-test; byte-compare generated Simulation fixture",
-        "result": "Two builds of Habitat 0.2.1 identical at ca2ce18d975dd7b60a84bd0fd8d44e652884556e5187e1d2595980aee2a15f17; 16 self-tests passed. Release verification passed; all 59 generated fixture files byte-identical. Earlier local 0.2.0 development build retained as unused immutable output."
+        "command": "Builder uv run olb world build worlds/habitat --out .local/s016b-build; uv run olb world build worlds/habitat --publish; uv run olb world verify .local/s016b-build/habitat/0.3.0 --self-test; generated-fixture byte comparison",
+        "result": "Habitat 0.3.0 built twice at identical dbab97a3cc5f7a35a1586b0e2bd8073f0d4213d928ffaf18ad0513d0b452231b; 17 self-tests passed; verification passed; all 61 generated Simulation fixture files byte-identical."
       },
       {
-        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_skills.py -q; uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
-        "result": "Two new live container tests passed. Final full suite 474 passed in 621.94 s without skips, with live container checks required; lint passed. Initial supervisor-level link probe terminated resource_limit:monitoring as existing quota enforcement refuses links; direct real-container ToolHost test verifies capability-level refusal without altering enforcement."
+        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_agent_tools.py; related discovery/checkpoint/run regression subset; uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
+        "result": "21 new tests passed in 50.56 s, no skips, real containers required. Related regression subset 92 passed. Full final suite 495 passed in 667.07 s, no skips, live containers required; lint passed. Initial lint found two long source lines and an unused test import, all corrected. No behaviour assertion weakened or test skipped."
       },
       {
-        "command": "Simulation run_experiment(experiments/habitat/s016a-demo.json, pause_after_steps=3); verify_archive; resume_experiment; verify_archive",
-        "result": "run-20261116t092747z-952d44 paused and verified, then completed; 67 events, seven successful tool results, original log prefix preserved, saved result 10; archive intact. No model inference. Demonstration API is equivalent to documented ols CLI commands."
+        "command": "Simulation run_experiment(experiments/habitat/s016b-demo.json, pause_after_steps=4); verify_archive; resume_experiment; verify_archive",
+        "result": "run-20261116t102236z-38fb65 paused/verified then completed: 77 events, nine successful tool results, pinned double(7)=14 after source replacement, example replay matched; pre-pause log prefix preserved; archive intact. No model inference. Source digest 88c1f71ab92757bc6b2adbc059c0f1fa0787f2967720652d9d1b4d3ae6d01b5b."
       }
     ]
   }

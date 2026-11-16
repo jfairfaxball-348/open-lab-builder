@@ -273,8 +273,12 @@ Python in the container sandbox ([demonstration](docs/habitat/demos/S015.md)).
 **S016a is done:** Habitat 0.2.1 adds named procedural skills with steps,
 examples, keyword listing and retrieval. A scripted container demonstration
 saves a skill, pauses, resumes and reuses it
-([evidence and limits](docs/habitat/demos/S016a.md)). Next: **S016b**, validated
-sandboxed self-made tools. Parent S016 remains incomplete.
+([evidence and limits](docs/habitat/demos/S016a.md)).
+**S016b is done:** Habitat 0.3.0 adds opt-in `tools.create`. Examples run in
+the container sandbox before registration; pinned entry snapshots survive
+checkpoint resume and use the existing discovery interface
+([evidence and limits](docs/habitat/demos/S016b.md)). Parent S016 is complete.
+Next: **S017 — a world with phenomena**, beginning with its short design note.
 
 ## Governing principle
 
