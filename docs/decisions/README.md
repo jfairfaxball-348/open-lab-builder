@@ -32,6 +32,7 @@ by rewriting history.
 | [0023](ADR-0023-pinned-agent-tools.md) | Run-local tools pin sandbox-validated entry source in protected checkpoint state | Accepted; S016b, refines ADR-0003/0015 |
 | [0024](ADR-0024-supervisor-phenomena.md) | Supervisor-owned coupled fields with private checkpoint state and deterministic journal replay | Accepted; S017, extends S007e mediation |
 | [0025](ADR-0025-time-and-run-lineage.md) | Bounded self-scheduled wakes and operator-only final-data lineage | Accepted; S018, extends runtime policies/checkpoints |
+| [0026](ADR-0026-approved-survival-directive.md) | Owner-approved exact survival directive, prompted-objective interpretation and new-chat launch boundary | Accepted (owner, 2026-11-16); operational proposal awaits future trigger |
 
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).

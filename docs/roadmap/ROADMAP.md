@@ -1543,36 +1543,47 @@ behavioural success are always reported separately.
 
 ### S012 — First Philosophical Experiment
 
-- **Repository / streams:** Simulation runs/analysis; Window read-only; Builder report. D.
-- **Status:** planned; **re-gated on Habitat v1 (S019)** (ADR-0022 strategic reset, 2026-11-16), not on endurance or comparison campaigns. It remains the destination.
-- **Objective:** Investigate self-directed, goal-relevant/adaptive activity under a
-  philosophical premise and contrast, without assuming consciousness.
-- **Prerequisites:** completed Habitat v1 assembly (S019), the working container
-  tier and auditable observation/provenance for the chosen configuration.
-  ADR-0022 retires the S011c endurance and repeated comparison prerequisites;
-  S010c remains deferred unless the registered question needs its view.
-  Owner approval of the exact premise and orchestrator selection (OD-2), plus
-  a specific hosted allowance if applicable, are still required before launch.
-- **Scope:** preregister creator-return premise, contrast without assigned objective/
-  audience, replicates, fixed interventions/metrics and full provenance; separate
-  claims, observed action and evidence-linked investigator assessment.
-- **Exclusions:** consciousness conclusions, best-run selection, pilots presented as
-  unseen evaluation or duration presented as success.
-- **Deliverables:** registered campaign, verified exports, read-only comparison and
-  report with event references, denominators, limitations and negative findings.
-- **Acceptance tests:** map the applicable
-  [validity gates](../experiments/README.md#validity-gates-for-s010s012) to the
-  frozen Habitat question/configuration before scored launch, under ADR-0022;
-  analyses handle idle/invalid/censored traces; archives are independently
-  readable within recorded provider reproducibility limits. S019's scripted
-  acceptance is engineering evidence, never unseen behavioural evaluation.
-- **Exit criteria:** complete auditable campaign/report even if no agency appears.
-  With a negative baseline, preregister that limitation and a bounded null question;
-  do not advertise established autonomous capability. Invalid provenance/conditions
-  block launch; negative valid behaviour does not.
-- **Risks:** anthropomorphism, interventions, non-determinism and small samples.
-- **Next recommended milestone:** answer the registered question and choose a
-  bounded next step; first-person claims never establish subjective experience.
+- **Repository / streams:** Simulation observation/analysis; Window read-only;
+  Builder registration/report.
+- **Status:** prepared, **not started**. Habitat v1 is complete. The owner approved
+  the [exact survival directive](../habitat/S012_INITIAL_PROMPT.md). The
+  [next-session handoff](../../NEXT_SESSION.md) is ready for **run next session**
+  in a new chat; this preparation chat must not launch it (ADR-0026).
+- **Objective:** describe observable activity in one Habitat session under the
+  owner-assigned survival objective, without assuming consciousness or treating
+  survival behaviour as an independently chosen survival goal.
+- **Prerequisites:** completed S019; unchanged pinned configuration/world/catalog/
+  broker profile; passing offline and live-container readiness checks; a new-chat
+  owner trigger accepting the concrete one-hour Luna/180-request proposal and
+  its scoped hosted allowance before the first request. No inference is approved
+  in the preparation chat. S010c remains deferred; no endurance/comparison gate.
+- **Scope:** [S012-001](../experiments/registrations/S012-001.md), one fresh
+  descriptive observation, no contrast or replication. The operational proposal
+  retains `gpt-5.6-luna`/low effort, 3600 active seconds, 180 steps/attempts,
+  Habitat 1.0.0, self-scheduled waking, skills/tools and seeded phenomena.
+  Prompt/configuration, permissions, resources, initial state, stopping/censoring
+  rules and analysis are frozen before launch; separate claims, observations
+  and investigator interpretations.
+- **Exclusions:** launch in this chat; unsolicited follow-up messages; automatic
+  restarts or pause/resume; fallback models; replacement/repeated runs; downloads,
+  system/broker/app-setting changes; causal/autonomy GO or consciousness claims.
+- **Deliverables:** approved prompt, byte-pinned configuration and registration,
+  offline readiness check and handoff (prepared); one retained archive or explicit
+  unstarted record, verification result, descriptive report and updated state
+  after the future launch. A negative/idle/censored result remains reportable.
+- **Acceptance tests:** exact prompt/config/catalog/world/profile consistency,
+  schema/policy support, no earlier allocated S012-001 run, existing credential
+  and sufficient unchanged broker capacity; container probe; no inference in
+  preparation. Map validity to the registration, preserve complete exposure and
+  provenance, verify the returned archive and source-linked analysis.
+- **Exit criteria:** the one declared observation is honestly accounted for and
+  its auditable report is complete, including zero activity or censoring. Until
+  that happens S012 remains incomplete. No unseen evaluation or general autonomy
+  certification is claimed from either S019 or this survival-directed n=1 run.
+- **Risks:** anthropomorphism, prompted objective mistaken for independent choice,
+  opaque hosted sampling/compute, model/provider drift, interruption and n=1.
+- **Next recommendation:** execute only the frozen observation on the owner's
+  new-chat trigger, verify/report and stop. Further work needs a new owner scope.
 
 ---
 

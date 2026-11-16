@@ -28,7 +28,7 @@ The three communicate only through the versioned contracts in
 
 ## Status
 
-**Habitat v1 is assembled (S019); next is S012 planning and registration.** The earlier campaign
+**Habitat v1 is assembled (S019); S012 is prepared and not started.** The earlier campaign
 programme is retired under ADR-0022. The historical milestones below retain
 their original results; see the Habitat status near the end of this document.
 
@@ -296,9 +296,12 @@ scripted supervisor/resume/child chain maps all twelve available freedoms, and
 the existing Window reads its records without changing archive bytes
 ([assembly evidence](docs/habitat/demos/S019.md)). This establishes engineering
 capability, not independent objective choice.
-Next: **S012 — First Philosophical Experiment**, beginning with owner review of
-the [premise draft](docs/habitat/S012_PREMISE_DRAFT.md), orchestrator selection
-and a frozen protocol. No S012 launch or hosted allowance is authorised here.
+Next: **S012 — First Philosophical Experiment**, using the
+[owner-approved survival prompt](docs/habitat/S012_INITIAL_PROMPT.md). The
+[next-session handoff](NEXT_SESSION.md) freezes a proposed one-hour Luna run
+with at most 180 provider attempts, accepted by **run next session** in a new
+chat. No run starts in this preparation chat. Survival is an instructed objective;
+this observation cannot establish an independently chosen survival goal.
 
 ## Governing principle
 

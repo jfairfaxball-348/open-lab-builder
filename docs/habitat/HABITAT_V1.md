@@ -2,8 +2,9 @@
 
 Status: adopted 2026-11-16 ([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)).
 S019 assembles Habitat 1.0.0; [integrated evidence](demos/S019.md) maps all twelve
-freedoms to preserved scripted supervisor records. The S012 premise is still a
-[draft for owner review](S012_PREMISE_DRAFT.md). Engineering acceptance does not
+freedoms to preserved scripted supervisor records. The S012 initial prompt is now the
+[owner-approved survival directive](S012_INITIAL_PROMPT.md) (ADR-0026), with a
+[next-chat launch handoff](../../NEXT_SESSION.md); no S012 run has started. Engineering acceptance does not
 establish independently chosen objectives. Ideas for later
 are in [IDEAS.md](IDEAS.md).
 
@@ -108,7 +109,7 @@ are now delivered by S015-S017; item 5 is delivered by S018, items 6-8 remain fu
   Fixed with ADR-0022.
 - The roadmap pointed at endurance runs. Replaced.
 - The S012 premise text (the creator may terminate the simulation) is now
-  [drafted in S019](S012_PREMISE_DRAFT.md); exact owner approval remains for S012.
+  drafted in S019 and superseded by the [approved owner text](S012_INITIAL_PROMPT.md).
 
 ## Implementation sequence (vertical slices)
 

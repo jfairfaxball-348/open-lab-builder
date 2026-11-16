@@ -1,0 +1,38 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-16T12:46:47Z",
+  "commands": [
+    {
+      "command": "Builder git status/log; uv sync; uv run olb state; uv run olb check --tests (baseline)",
+      "result": "Clean baseline, S019 next; sync passed; 426 tests passed in 75.67 s; health passed."
+    },
+    {
+      "command": "Simulation git status/log; uv sync; uv run pytest (existing regression suite)",
+      "result": "Clean baseline; sync passed; all 535 existing tests passed in 771.76 s, no skips. No Simulation runtime code changed in S019; the new integrated acceptance is checked separately below."
+    },
+    {
+      "command": "Builder uv run olb world build worlds/habitat --out .local/s019-build; uv run olb world build worlds/habitat --publish; uv run olb world verify .local/s019-build/habitat/1.0.0 --self-test; generated fixture comparison",
+      "result": "Habitat 1.0.0, 22 capabilities; both builds share digest 03d9ea8fb2c13a9bbd4d0cdbf1e979cbc6db3a1df839a940e70d4d47059735e6; all self-tests and verification passed; all 71 fixture files byte-identical; both final demo pins match. No schemas or dependencies changed."
+    },
+    {
+      "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_habitat_v1.py -q; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_container.py tests/test_habitat_v1.py; uv run ruff check .",
+      "result": "Final new integrated test passed; final forced-live isolation/integration subset 24 passed in 102.10 s, no skips; lint passed. Covers the full parent/resume/child chain, intentional Python traceback and repair, content search/organisation, procedures, pinned tools across resume and fresh child validation, lawful field continuity/reset, budget/wake ordering, data-only lineage and sandbox cleanup. Initial development failure was a wrong test lookup of described-tool provenance; corrected to parse documentation JSON without weakening the expected provenance. No runtime changes."
+    },
+    {
+      "command": "Simulation run_experiment(s019-parent-demo, pause_after_steps=24); verify paused; resume_experiment; run_experiment(s019-child-demo, from_run=parent); check_pair; ols verify both final archives",
+      "result": "Final parent run-20261116t124014z-570ddd completed: 224 events/33 successful tool results. Final child run-20261116t124030z-cd4cca completed: 84 events/11 successful results. Both verify. Parent produces 10; child retrieves saved files/memory/skill, revalidates tool source with child provenance and produces 60. Parent log/summary unchanged after lineage; pre-pause bytes remain a prefix; one child-reference sidecar. Wake target 8702 ms active, wake 9797 ms; no model.call/agent.output/environment.message between scheduling and wake. Earlier development archives retained, not relabelled. No real-model inference."
+    },
+    {
+      "command": "Window uv sync; uv run pytest; uv run ruff check .; actual loopback HTTP/API read of final S019 archives with before/after SHA-256 inventory",
+      "result": "38 passed in 19.25 s; lint passed. Both final summaries/world versions, all paired tool results, event-log integrity and output text previews 10/60 pass. All 90 archive files unchanged. HTTP/API check, not a new visual browser check; no Window source changes required."
+    },
+    {
+      "command": "Builder uv run ruff check .; uv run olb check --tests; git diff --check",
+      "result": "Lint passed; all 426 tests passed in 66.38 s; health passed, including privacy and roadmap checks. Diff checks passed. S018 prior validation retained in docs/roadmap/validation/S018.json."
+    },
+    {
+      "command": "Builder uv run olb state; uv run ruff check .; uv run olb check; git diff --check (after S019 closeout metadata)",
+      "result": "State reports S019 complete and S012 next, with premise/orchestrator decisions and hosted blocker explicit; lint, metadata health/privacy checks and diff checks pass."
+    }
+  ]
+}

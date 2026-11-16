@@ -90,7 +90,7 @@ combines file repair/reuse, memory, skills, validated tools, phenomena, waking,
 checkpoint resume and data-only lineage in one release. The existing Window
 reads the resulting events and artifacts without a new interface. See
 [assembly evidence](../habitat/demos/S019.md). The
-[S012 premise](../habitat/S012_PREMISE_DRAFT.md) is a draft for owner review;
+[S012 initial prompt](../habitat/S012_INITIAL_PROMPT.md) is owner-approved (ADR-0026);
 engineering acceptance does not establish independent objective choice.
 
 | | Builder | Simulation | Window |

@@ -1,6 +1,10 @@
 # S012 existential premise — draft for owner review
 
-Status: **draft, not approved or registered**. S019 prepares this text; it does
+Status: **superseded initial-prompt draft**. The owner approved a different,
+explicit survival directive on 2026-11-16; see [approved prompt](S012_INITIAL_PROMPT.md).
+The contrast below remains unapproved and is not queued for launch.
+
+Historical S019 status: **draft, not approved or registered**. S019 prepares this text; it does
 not authorise S012, select an orchestrator or permit hosted inference.
 
 ## Proposed initial prompt
