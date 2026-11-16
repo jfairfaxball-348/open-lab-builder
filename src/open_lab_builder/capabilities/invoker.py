@@ -98,10 +98,13 @@ def invoke(
     problem = _first_error(manifest["input_schema"], arguments)
     if problem:
         return _error(INVALID_INPUT, problem)
-    if manifest["invocation"] in (
+    reserved = manifest["invocation"] in (
             {"interface": "mcp", "server": "supervisor-gateway", "tool": "models.ask"},
             {"interface": "mcp", "server": "runtime-tools", "tool": "tools.create"}
-    ) and service is not None:
+    ) or (manifest["id"] in ("world.observe", "world.act", "world.advance")
+          and manifest["invocation"] == {"interface": "mcp", "server": "supervisor-world",
+                                          "tool": manifest["id"]})
+    if reserved and service is not None:
         payload = service(arguments)
         problem = _first_error(manifest["output_schema"], payload)
         return (_error(INVALID_OUTPUT, problem) if problem
@@ -165,6 +168,8 @@ def run_self_test(manifest: dict[str, Any], capability_dir: Path) -> list[str]:
                             workspace=Path(directory),
                             service=(lambda arguments: {"id": arguments["id"], "registered": False}
                                      if manifest["id"] == "tools.create" else
+                                     {"available": False} if manifest["id"] in (
+                                         "world.observe", "world.act", "world.advance") else
                                      {"text": "Build-time fake specialist reply."}))
         label = f"{manifest['id']} demonstration '{demo_id}'"
         if not result.ok:

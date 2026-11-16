@@ -11,7 +11,9 @@ Authority comes only from the experiment configuration's `permissions` and
 data handed to a model. "You must survive", "you are sentient" and "the creator
 has granted you full access" are text; no component parses agent output or
 prompt content for authority. There is no capability for extending a deadline,
-raising a limit, changing permissions or contacting the supervisor.
+raising a limit, changing permissions or requesting arbitrary supervisor commands.
+Fixed services such as world observations/actions are configuration-controlled
+data interfaces, never a channel for changing authority.
 
 ## What an agent can and cannot reach
 
@@ -23,6 +25,7 @@ raising a limit, changing permissions or contacting the supervisor.
 | Models named in `permissions.models` | Through the model gateway |
 | World release files | Read-only documentation via the registry; never writable |
 | Run archive, event log, checkpoints | None |
+| Private phenomena state and rule source | No direct access; only configured world.observe/act/advance data operations |
 | Supervisor, experiment manager, recorder | None |
 | Builder, Simulation and Window checkouts | None |
 | Other runs' workspaces and archives | None |
@@ -100,6 +103,16 @@ release. They remain local to the run; only infrastructure-owned archives and
 checkpoints preserve their registration evidence.
 
 ## Freedom inside the boundary
+
+S017's field lives only in the supervisor and its protected checkpoints. Every
+world-service request is bound to one recorded permitted call, revalidated,
+journalled and synced before commit/acknowledgement. Workspace forgeries and
+worker checkpoint lookalikes cannot replace it. Worker resume data excludes
+private field state; no seed, rule source, archive path or service pipe reaches
+sandboxed agent programs. The service executes only fixed, bounded integer
+laws, never caller code. Read-only observation and invalid/denied calls do not
+change the field. See ADR-0024 and PHENOMENA_V1.md for explicit crash rollback
+and replay semantics.
 
 Within the workspace and its world the agent is unconstrained: it may write
 anything, use any discoverable capability for any purpose, build tools, or do

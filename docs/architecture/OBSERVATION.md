@@ -43,6 +43,16 @@ periodic `resource.sample` and resource installation/enforcement/denial actions.
 
 ## What is recorded
 
+S017 adds supervisor-owned `phenomena_root` and `phenomena_call` stages under
+existing `supervisor.action` extensions. They record versioned roots, accepted
+data operations, public results and state hashes, synced before committing a
+candidate transition and acknowledging it. Ordinary tool.call/tool.result pairs
+remain the record of the runtime interface and delivery. Archive verification
+replays the laws and validates private checkpoint state, including explicit
+rollback to the recovery checkpoint. A recorded transition alone does not prove
+that a later model input contained the result. No interpretation of the model's
+interest, intention or experience is recorded.
+
 | Requirement | Event type and fields |
 | --- | --- |
 | Experiment and run identifiers | `experiment_id`, `run_id` on every event |

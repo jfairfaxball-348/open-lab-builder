@@ -62,6 +62,17 @@ source. Both target and Python runner retain normal permission and allow/deny
 checks. No new network, GPU or host privileges are available. See
 [ADR-0023](../decisions/ADR-0023-pinned-agent-tools.md) and the protocol in CONTRACTS.md.
 
+S017 adds `world.observe/act/advance` in Habitat 0.4.0. Fixed, deterministic
+coupled-field laws run only in the supervisor; the world release contains
+manifests, not those laws or private state. The service binds each pipe request
+to a permitted recorded call, journals/syncs a candidate transition, then commits
+and acknowledges it. The supervisor inserts private state into the protected
+runtime checkpoint component and strips it from worker resume data. Archive
+verification independently replays the journal and checks checkpoint state.
+Recovery can explicitly roll back post-checkpoint effects, retaining earlier
+observations. See [the design](../habitat/PHENOMENA_V1.md) and
+[ADR-0024](../decisions/ADR-0024-supervisor-phenomena.md).
+
 | | Builder | Simulation | Window |
 | --- | --- | --- | --- |
 | Verb | engineers | inhabits | observes |

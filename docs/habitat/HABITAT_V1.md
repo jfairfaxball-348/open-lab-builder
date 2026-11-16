@@ -63,7 +63,8 @@ Nothing needs to be rebuilt.
 
 ## Gap analysis
 
-**Genuine implementation gaps**, ranked by practical value for complexity:
+**Original gap audit**, ranked by practical value for complexity. Items 1-4
+are now delivered by S015-S017; items 5-8 remain future work:
 
 1. **Sandboxed program execution** (`python.run`). Without it nothing can be
    computed, tested or invented. The container tier exists; the capability does
@@ -77,6 +78,8 @@ Nothing needs to be rebuilt.
    workspace can be rewritten by that code. World state therefore has to live
    with the supervisor, using the S007e mediation pattern, and not in the
    workspace.
+   S017 implements this as the coupled field in Habitat 0.4.0, with private
+   checkpoint state and deterministic journal replay.
 4. **Skills and self-made tools.** Saved procedures, plus agent-written
    executables with a validated interface. They run only through the sandbox
    and are discoverable alongside builder capabilities with `origin: agent`.
@@ -170,6 +173,11 @@ networked tools remain out of scope. Engineering evidence is recorded in
   access.
 
 ### S017 — A world with phenomena
+
+Implemented in Habitat 0.4.0. The design was written before code in
+[PHENOMENA_V1.md](PHENOMENA_V1.md); [engineering evidence](demos/S017.md) records
+lawful persistence, pause/resume equivalence, explicit crash rollback, archive
+replay and state isolation. This is an abstract system with no reward or task.
 
 - **New freedom:** encounter, probe and change things that are not
   documented, and observe consequences that persist.

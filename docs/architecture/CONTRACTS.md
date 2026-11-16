@@ -308,6 +308,49 @@ Cross-run sharing is not implemented. See [ADR-0023](../decisions/ADR-0023-pinne
 These are capability-content and optional checkpoint-component additions;
 shared schemas are unchanged.
 
+### Supervisor-held phenomena (S017)
+
+Habitat 0.4.0 reserves `supervisor-world` MCP pairs for `world.observe`,
+`world.act` and `world.advance`. Frozen experiment extension
+`"phenomena": {"seed": N}` enables them, where N is an unsigned 32-bit integer.
+The world must be container-tier and contain all three reserved manifests.
+Missing configuration hides the services. Builder self-tests inject a labelled
+unavailable response (`available=false`), never an invented field observation.
+
+The service exposes a 6 by 6 field of bounded integer water/activity values and
+held local drive controls. Observe has no effects; act changes one control;
+advance evolves 1-100 simulation ticks, to a total bound of 1000000. Simulation
+time is independent of wall time. Input objects are closed and contain no code,
+paths, seed changes or configuration authority. Output `available=true` requires
+the complete grid, dimensions and tick. All manifests need filesystem/network
+`none`; execution capabilities retain their independent container requirements.
+
+The worker sends `{world: {id, arguments}}` over the existing private pipe.
+The supervisor requires exactly one outstanding matching invoke/demonstrate,
+denies stopped/denied/duplicate/mismatched requests and rechecks the original
+configuration, manifest and permissions. Only fixed supervisor source runs.
+The reply `world_result` contains a normal outcome, not private state or seed.
+
+Existing `supervisor.action` extensions record `phenomena_root` (version, seed,
+selected checkpoint and private state hash) and `phenomena_call` (correlation,
+operation, arguments, public result and before/after state hashes). Journal
+records are synced before candidate state commit and acknowledgement. A result
+record is distinct from evidence that the model later received it.
+
+The supervisor inserts `phenomena` into the existing protected checkpoint
+runtime component, overriding any worker-supplied lookalike. It is removed from
+worker resume specifications. Archive verification replays the versioned laws
+and checks public results, roots, operation binding and retained checkpoint
+private state. A recovery resets replay to its named prior checkpoint, so
+abandoned-segment effects are not applied twice. Observations are never erased.
+This preserves complete-step rollback semantics, not exactly-once crashes.
+
+Rule source and private data are outside workspace/container mounts. Neither
+is part of the released capability directories; interface docs do not disclose
+equations. The engineering specification is
+[PHENOMENA_V1.md](../habitat/PHENOMENA_V1.md). Existing schema extension points
+and checkpoint components suffice; no shared schema changes.
+
 ### Model provider
 
 Separates the gateway-facing model `id` from the provider's own name
@@ -609,6 +652,7 @@ chronology and scientific interpretation are never certified automatically.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-16 | (supervisor-world protocol / world capability content) | - | S017 Habitat 0.4.0 adds configured world.observe/act/advance services, versioned coupled-field journal/replay and supervisor-inserted private checkpoint state; existing MCP, observation extensions and runtime component, no shared schema change; ADR-0024 |
 | 2026-11-16 | (runtime tool protocol / world capability content) | - | S016b Habitat 0.3.0 adds opt-in tools.create, bounded sandbox validation, pinned agent manifests and protected runtime checkpoint registrations; existing MCP invocation, provenance and observation extensions; no shared schema change; ADR-0023 |
 | 2026-11-16 | (world capability content) | - | S016a Habitat 0.2.1 adds skills.save/list/get with bounded schemas, workspace JSON notes, agent provenance and existing checkpoint semantics; no shared schema or invocation change |
 | 2026-11-15 | study-annotations; study-analysis | 1.0.0 | S010b source-bound descriptive reports and typed citations; no runtime/world change |

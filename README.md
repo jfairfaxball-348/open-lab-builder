@@ -278,7 +278,11 @@ saves a skill, pauses, resumes and reuses it
 the container sandbox before registration; pinned entry snapshots survive
 checkpoint resume and use the existing discovery interface
 ([evidence and limits](docs/habitat/demos/S016b.md)). Parent S016 is complete.
-Next: **S017 — a world with phenomena**, beginning with its short design note.
+**S017 is done:** Habitat 0.4.0 adds a seeded field with observable, persistent
+consequences. `world.observe/act/advance` use supervisor-held state outside the
+sandbox; checkpoints and archive replay preserve an auditable history
+([design](docs/habitat/PHENOMENA_V1.md), [evidence](docs/habitat/demos/S017.md)).
+Next: **S018 — time and continuity**.
 
 ## Governing principle
 
