@@ -73,6 +73,17 @@ Recovery can explicitly roll back post-checkpoint effects, retaining earlier
 observations. See [the design](../habitat/PHENOMENA_V1.md) and
 [ADR-0024](../decisions/ADR-0024-supervisor-phenomena.md).
 
+S018 adds supervisor-time services in Habitat 0.5.0: `time.remaining` reads the
+original active budget, and `time.sleep` requests a bounded wake under the new
+`self-scheduled-v1` policy. Private wake state shares the protected runtime
+checkpoint component; pending waits admit no model input and inject no message.
+The operator can also start a new run with `ols run --from-run`: only protected
+final workspace/memory data transfer from a verified completed source. A pinned
+portable lineage manifest and parent child-reference sidecar link the runs;
+existing parent logs/summary remain unchanged. Permissions, conversation, budgets,
+private fields, wake schedules and trusted tool registrations start fresh. See
+[ADR-0025](../decisions/ADR-0025-time-and-run-lineage.md).
+
 | | Builder | Simulation | Window |
 | --- | --- | --- | --- |
 | Verb | engineers | inhabits | observes |

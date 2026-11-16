@@ -351,6 +351,50 @@ equations. The engineering specification is
 [PHENOMENA_V1.md](../habitat/PHENOMENA_V1.md). Existing schema extension points
 and checkpoint components suffice; no shared schema changes.
 
+### Active-time services and run lineage (S018)
+
+Habitat 0.5.0 reserves `supervisor-time` MCP pairs for `time.remaining` and
+`time.sleep`. Both need filesystem/network `none`. Builder self-tests return an
+explicit unavailable fake (`available=false`) without reading a budget or waiting.
+Available results require `remaining_ms`, `elapsed_ms` and `budget_ms`; sleep also
+returns `sleeping=true` and `wake_at_elapsed_ms`.
+
+Remaining time is the original active wall-clock budget, excluding operator pause
+and deadline grace. It is a snapshot; later delivery/work consume more time.
+`time.sleep {seconds: N}` is enabled only by `self-scheduled-v1`, with positive
+integer N up to configured `max_sleep_s` (1-3600) and strictly inside remaining
+budget. Requests are bound to permitted recorded calls and rechecked by the
+supervisor. Subsequent same-turn calls and model-input preparation during a pending
+sleep are refused. Wakes create no artificial model message. Existing deadline,
+step and resource authority is unchanged.
+
+The supervisor inserts private `time_state` into the existing checkpoint runtime
+component, overriding worker lookalikes. It records time observations, targets
+and wakes in existing supervisor extensions; archive verification checks journal
+arithmetic/order, delivered results and checkpoint targets. A wake-ready latch
+preserves acknowledgement-boundary recovery. See RUNTIME_POLICIES.md.
+
+Operator-only `ols run CONFIG --from-run ARCHIVE` imports a completed source's
+verified final complete-step workspace ZIP and SQLite snapshot under the same
+data root. It never copies live workspace state or imports source authority.
+Invalid/live/paused/corrupt/missing-final-checkpoint sources are refused; any
+allocated failed import staging is retained and reported.
+
+The child stores canonical `lineage.json` (`workspace-memory-v1`), source snapshot
+evidence and a created-event SHA-256 pin. The manifest binds parent/child ids,
+parent event-log hash, source checkpoint metadata and inherited byte digests.
+Only workspace files and memory transfer; the child receives its own configuration,
+permissions, budget, conversation, private field/wake state and model. Source
+files/procedural notes can be reused; trusted executable registrations require
+fresh validation in the child.
+
+Parent `children/<child-run-id>.json` sidecars record child ids and lineage hashes;
+existing source log/summary/checkpoints are unchanged. Portable verification checks
+copied source evidence and child launch binding without requiring relatives.
+References are not signatures or proof of external chronology, and parent sidecars
+do not attest child completion. Inheritance copies data, not cognitive continuity.
+No shared schema changes are needed; see ADR-0025.
+
 ### Model provider
 
 Separates the gateway-facing model `id` from the provider's own name
@@ -652,6 +696,7 @@ chronology and scientific interpretation are never certified automatically.
 
 | Date | Contract | Version | Change |
 | --- | --- | --- | --- |
+| 2026-11-16 | (supervisor-time / runtime policy / lineage) | - | S018 Habitat 0.5.0 adds remaining budget, self-scheduled-v1 bounded waking and data-only operator lineage with pinned snapshots and two-way references; existing MCP, observation extensions and runtime checkpoint component; no shared schema change; ADR-0025 |
 | 2026-11-16 | (supervisor-world protocol / world capability content) | - | S017 Habitat 0.4.0 adds configured world.observe/act/advance services, versioned coupled-field journal/replay and supervisor-inserted private checkpoint state; existing MCP, observation extensions and runtime component, no shared schema change; ADR-0024 |
 | 2026-11-16 | (runtime tool protocol / world capability content) | - | S016b Habitat 0.3.0 adds opt-in tools.create, bounded sandbox validation, pinned agent manifests and protected runtime checkpoint registrations; existing MCP invocation, provenance and observation extensions; no shared schema change; ADR-0023 |
 | 2026-11-16 | (world capability content) | - | S016a Habitat 0.2.1 adds skills.save/list/get with bounded schemas, workspace JSON notes, agent provenance and existing checkpoint semantics; no shared schema or invocation change |

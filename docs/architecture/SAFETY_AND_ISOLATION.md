@@ -104,6 +104,20 @@ checkpoints preserve their registration evidence.
 
 ## Freedom inside the boundary
 
+S018 time reads/sleeps never change authority. The supervisor computes remaining
+active time and admits wakes strictly inside the original budget. Pending sleeps
+block model input; original deadlines/step/resource caps still win. Private wake
+targets are checkpointed outside the workspace and cannot be forged by worker
+state. No OS scheduler, new network path or sandbox privilege is installed.
+
+Lineage is an operator CLI action, never a capability or prompt-derived right.
+Only a verified completed source's protected final files/memory are restored to
+a fresh workspace. Source conversations, runtime credentials, permissions, budgets,
+private fields, wake schedules and trusted tool registrations are not inherited.
+Copied source files are data until explicitly executed under the child's grants.
+Parent logs and summaries stay unchanged; child references are infrastructure
+metadata, not evidence of subjective or cognitive continuity. See ADR-0025.
+
 S017's field lives only in the supervisor and its protected checkpoints. Every
 world-service request is bound to one recorded permitted call, revalidated,
 journalled and synced before commit/acknowledgement. Workspace forgeries and

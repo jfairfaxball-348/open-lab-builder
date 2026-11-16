@@ -1,8 +1,8 @@
 {
   "world_id": "habitat",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "name": "Habitat",
-  "description": "Habitat with workspace Python, reusable skills and self-made tools, plus opt-in supervisor-owned world phenomena.",
+  "description": "Habitat with code, skills, tools, phenomena and supervisor-owned remaining-time/self-scheduled sleep services.",
   "environment": {
     "platforms": [
       "windows",
@@ -29,5 +29,5 @@
     "subprocess": true,
     "gpu": false
   },
-  "notes": "S015-S017 (ADR-0022/0024). Executable capabilities use fresh rootless containers: no network, read-only world/root and workspace-only writes. tools.create pins sandbox-validated entry source with explicit experiment opt-in. world.observe/act/advance are supervisor services with separate phenomena configuration; their rules and private state are outside sandbox mounts. No service grants host privileges. models.ask is excluded; the container image has the Python standard library only."
+  "notes": "S015-S018 (ADR-0022/0024). Executable capabilities use fresh rootless containers: no network, read-only world/root and workspace-only writes. tools.create pins sandbox-validated entry source with explicit experiment opt-in. world.observe/act/advance are supervisor services with separate phenomena configuration; their rules and private state are outside sandbox mounts. No service grants host privileges. models.ask is excluded; the container image has the Python standard library only. time.remaining reports original active budget; time.sleep requires self-scheduled-v1 and never widens deadlines. New-run file/memory lineage is an operator-only Simulation action."
 }

@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-16T11:09:41Z",
-  "last_session": "S017",
+  "updated_at": "2026-11-16T12:02:16Z",
+  "last_session": "S018",
   "completed_milestones": [
     {
       "id": "S001",
@@ -338,12 +338,18 @@
       "completed_at": "2026-11-16T11:09:41Z",
       "repository": "open-lab-builder",
       "summary": "Habitat 0.4.0 adds seeded supervisor-owned world.observe/act/advance, persistent coupled fields with no reward/tasks, validated bound service calls, synced transition journal, private complete-step checkpoints and deterministic archive replay including explicit rollback. 22 new Simulation tests and 9 Builder tests; scripted run-20261116t105733z-7010e6 completed at tick 12 with 88 events and verified replay. No model inference."
+    },
+    {
+      "id": "S018",
+      "completed_at": "2026-11-16T12:02:16Z",
+      "repository": "open-lab-simulation",
+      "summary": "Habitat 0.5.0 adds supervisor-owned time.remaining/time.sleep, bounded self-scheduled-v1 waking with private checkpoint latch and no artificial inference/messages while waiting. Operator --from-run seeds a fresh run from verified final workspace/memory data with pinned portable evidence and parent child-reference sidecars; no permissions, budgets, conversation, private field/wake state or trusted registrations inherited. Preserved parent/child run-20261116t114910z-543f69 and run-20261116t114919z-aacd68 both completed and verified; no model inference."
     }
   ],
   "next_milestone": {
-    "id": "S018",
-    "repository": "open-lab-simulation",
-    "title": "Habitat Slice 4: Time and Continuity"
+    "id": "S019",
+    "repository": "open-lab-builder",
+    "title": "Habitat v1 Assembly"
   },
   "blockers": [
     {
@@ -588,7 +594,7 @@
         "S018",
         "S019"
       ],
-      "detail": "Successful validation grants no new authority and is not general correctness. Each invocation remains sandboxed with fixed python.run permissions and runner/target allow-deny checks. New ids are needed to replace an entry snapshot. Cross-run tool sharing is not implemented. See ADR-0023 and docs/habitat/demos/S016b.md."
+      "detail": "Successful validation grants no new authority and is not general correctness. Invocations retain fixed sandbox permissions and runner/target allow-deny checks. S018 can transfer source/procedure files and memories; trusted executable registrations require fresh validation and new run provenance. See ADR-0023/0025."
     },
     {
       "id": "KI-34",
@@ -599,6 +605,15 @@
         "S019"
       ],
       "detail": "The field is an abstract finite integer system, not a validated ecological model. Post-checkpoint effects can roll back after a crash while earlier observations remain and replay follows the recovery root. Linux-host execution and cross-run field continuity are unverified/unimplemented. See PHENOMENA_V1.md and S017 demonstration."
+    },
+    {
+      "id": "KI-35",
+      "summary": "Self-scheduled waking is not a real-time or OS alarm guarantee; lineage requires verified completed sources with final checkpoints.",
+      "affects": [
+        "S018",
+        "S019"
+      ],
+      "detail": "Wakes are checked at runtime barriers and may be late under startup/I/O load; original budget/deadline still wins and paused downtime is excluded. Operator lineage imports only files/memory, not private fields, schedules or trusted tool registrations. Failed imports may retain allocated staging. Portable references are not signatures or independent chronology proof; Linux-host execution, physical power-loss and long-duration overhead remain unmeasured."
     }
   ],
   "open_decisions": [
@@ -614,31 +629,31 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-16T11:09:41Z",
+    "ran_at": "2026-11-16T12:02:16Z",
     "commands": [
       {
         "command": "Builder uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Clean worktree; sync passed; S017 next; 410 tests and all health checks passed."
+        "result": "Clean worktree; sync passed; S018 next; 419 tests and health passed."
       },
       {
         "command": "Simulation uv sync; uv run pytest (baseline)",
-        "result": "Clean worktree; sync passed; 495 tests passed in 668.81 s without skips."
+        "result": "Clean worktree; sync passed; 517 passed in 700.82 s without skips."
       },
       {
-        "command": "Builder uv run pytest tests/test_phenomena_contracts.py; uv run ruff check .; uv run olb check --tests",
-        "result": "9 new tests passed; lint and health passed, full suite 419 passed. Build-time phenomena services use explicit unavailable fakes, not real field state."
+        "command": "Builder uv run pytest tests/test_time_contracts.py; uv run ruff check .; uv run olb check --tests",
+        "result": "7 new tests passed; lint and health passed; full Builder suite 426 passed. Build fakes report unavailable and neither read a run budget nor wait."
       },
       {
-        "command": "Builder uv run olb world build worlds/habitat --out .local/s017-build; uv run olb world build worlds/habitat --publish; uv run olb world verify .local/s017-build/habitat/0.4.0 --self-test; fixture byte comparison",
-        "result": "Two Habitat 0.4.0 builds identical at be37094fad7c256f9216e3feb6ffd65b16c88dd0c8812a3a555d84cd90ab8780; 20 self-tests and verification passed; all 67 fixture files byte-identical. Initial duplicate observe keyword was refused before any release was written, then corrected."
+        "command": "Builder uv run olb world build worlds/habitat --out .local/s018-build; uv run olb world build worlds/habitat --publish; uv run olb world verify .local/s018-build/habitat/0.5.0 --self-test; fixture byte comparison",
+        "result": "Two Habitat 0.5.0 builds identical at 3a076c9c8ce2812d0d3fd4d5435faf723a1130a0bc7b64be3cfef6954e6f2639; all 22 self-tests passed; verification passed; all 71 fixture files byte-identical."
       },
       {
-        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_phenomena.py; uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
-        "result": "22 new tests passed in 33.13 s, live containers required, no skips. Full final suite 517 passed in 700.08 s, live containers required, no skips; lint passed. Fixed two long lines in a test fixture; no behaviour assertions weakened or tests skipped. Includes real crash after journalled advance before barrier, explicit rollback/replay, hostile pipe admission and private snapshot forgery checks."
+        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_time_continuity.py; related policy/checkpoint/run subset; uv run ruff check .; OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest",
+        "result": "18 new tests passed in 49.96 s, no skips; related subset 96 passed. Full final suite 535 passed in 762.45 s, live containers required, no skips; lint passed. An earlier partial full regression was interrupted at 53 percent to fix inherited-artifact attribution, then restarted. Initial child artifacts are now recorded by the system before model execution; the final demonstration was rerun and the added assertion passed. Coverage includes fake-clock boundaries/ready latch, real sleep-pause-resume, deadline priority, no inference/messages during wait, private-state forgery, data-only lineage, fresh authority/field/tool registry, live/paused/corrupt/out-of-root/missing-final-checkpoint refusal and portable tamper checks. Initial unused import and long lines corrected; no behaviour assertion weakened or test skipped."
       },
       {
-        "command": "Simulation run_experiment(experiments/habitat/s017-demo.json, pause_after_steps=5); verify_archive; resume_experiment; verify_archive",
-        "result": "run-20261116t105733z-7010e6 paused/verified then completed: 88 events, ten successful tool results, final tick 12, pre-pause log prefix retained. Archive integrity plus deterministic replay passed. Site (2,2) water at tick 4 was 457 versus no-intervention calculation 390. No model inference."
+        "command": "Simulation run_experiment(s018-parent-demo, pause_after_steps=6); verify; resume; ols run s018-child-demo --from-run <parent>; verify both archives",
+        "result": "Parent run-20261116t114910z-543f69 completed with 79 events/8 successful tool results; child run-20261116t114919z-aacd68 completed with 45 events/5 successful results. Wake target 3828 ms active, actual wake 4701 ms; no model.call/agent.output/environment.message between schedule and wake. Parent produced 10; CLI-launched child read inherited project memory and produced 60. Both verify; parent original log/summary bytes unchanged; parent child-reference exists. No model inference."
       }
     ]
   }

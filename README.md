@@ -282,7 +282,12 @@ checkpoint resume and use the existing discovery interface
 consequences. `world.observe/act/advance` use supervisor-held state outside the
 sandbox; checkpoints and archive replay preserve an auditable history
 ([design](docs/habitat/PHENOMENA_V1.md), [evidence](docs/habitat/demos/S017.md)).
-Next: **S018 — time and continuity**.
+**S018 is done:** Habitat 0.5.0 adds remaining-budget reads and recorded bounded
+self-scheduled sleep/wake. Operator `ols run --from-run` starts a fresh run from
+an earlier completed run's protected final files and memory, with linked archives
+([evidence and limits](docs/habitat/demos/S018.md)). Permissions, conversation,
+budgets and trusted executable registrations are not inherited.
+Next: **S019 — Habitat v1 assembly**.
 
 ## Governing principle
 

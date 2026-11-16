@@ -16,7 +16,7 @@ heading must keep the form `### S000 — Title`; the health check reads it.
 
 ## Active programme: Habitat (since 2026-11-16)
 
-**Read this first.** **S015-S017 are complete; next is S018.** The owner directed a strategic reset
+**Read this first.** **S015-S018 are complete; next is S019.** The owner directed a strategic reset
 ([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)). Active
 development now builds a world worth inhabiting:
 [Habitat v1](../habitat/HABITAT_V1.md), through vertical slices **S015 → S016 →
@@ -1732,7 +1732,8 @@ Hosted inference requires explicit owner approval.
 
 - **Repository / streams:** Simulation (runtime policy, lineage); Builder
   (capabilities, contracts).
-- **Status:** planned.
+- **Status:** complete (2026-11-16); [evidence](../habitat/demos/S018.md),
+  [ADR-0025](../decisions/ADR-0025-time-and-run-lineage.md).
 - **New freedom:** know how much time remains, choose to sleep until a chosen
   moment, and resume an earlier run's project in a new run.
 - **Scope:**

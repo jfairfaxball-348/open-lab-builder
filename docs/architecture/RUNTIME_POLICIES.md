@@ -1,8 +1,9 @@
-# Runtime policies (S007c)
+# Runtime policies (S007c, S018)
 
 The scientific purpose is to control infrastructure interventions while permitting
-observable inactivity. Both policies are experimental treatments. Neither is
-asserted neutral, and a tool-free reply is not evidence of intent or failure.
+observable inactivity. The original legacy/quiet policies and S018's explicit
+self-scheduling policy are infrastructure treatments. None is asserted neutral,
+and a tool-free reply is not evidence of intent or failure.
 No S007d benchmark is authorised or executed by this implementation milestone.
 
 ## Configuration and frozen identity
@@ -11,16 +12,18 @@ No S007d benchmark is authorised or executed by this implementation milestone.
 
 | Field | Values / default |
 | --- | --- |
-| `id` | `legacy-immediate-v1` (default), `quiet-until-deadline-v1` |
-| `max_tool_free_replies` | Quiet only: integer 1 through 16, default 1 |
+| `id` | `legacy-immediate-v1` (default), `quiet-until-deadline-v1`, `self-scheduled-v1` |
+| `max_tool_free_replies` | Quiet/self-scheduled: integer 1 through 16, default 1 |
+| `max_sleep_s` | Self-scheduled only: integer 1 through 3600, default 3600 |
 | `context_guard_tokens` | Positive integer; default selected model manifest or 4096 |
 | `context_policy` | `oldest-tools-turns-v1` only |
 | `memory_policy` | `explicit-tools-v1` only |
 | `turn_semantics` | `user-continuation-v1` only |
 
 Unknown fields, versions and turn semantics are refused at launch. Summarisation,
-implicit retrieval, model-requested sleep and mid-run human instructions are not
-supported. No prose is parsed for scheduling authority. The experiment retains
+implicit retrieval and mid-run human instructions are not supported. Sleep needs
+the fixed capability and configured policy; no prose is parsed for scheduling
+authority. The experiment retains
 its existing `continuation.message` field and bundled-schema default.
 
 The supervisor resolves defaults and freezes `policy.json`, including the exact
@@ -58,6 +61,35 @@ Each segment records scheduling identity. A quiet idle entry is a supervisor
 labelled as restored. Complete-step checkpoints preserve the tool-free counter,
 idle latch and policy digest. A crash can replay from an earlier checkpoint;
 existing recovery events retain that rollback and original budgets.
+
+## Self-scheduled waiting (S018)
+
+`self-scheduled-v1` retains quiet idling and adds the explicitly requested
+`time.sleep` wake. The configured `max_sleep_s` is an integer from 1 to 3600
+(default 3600); it is refused on legacy/quiet policies. A request must fit
+strictly inside the original remaining active wall-clock budget. `time.remaining`
+reports a millisecond snapshot, not a deadline extension or execution guarantee.
+
+The supervisor binds each request to a recorded permitted call, records the
+active-time wake target and acknowledges it. The current turn completes; any
+further calls in that turn are refused. No model input preparation is admitted
+while the target is pending. The existing state-barrier cadence checks for wakes
+without inference, tool execution or injected messages. Resource, health,
+deadline and operator-pause enforcement continue. Simulation fields do not
+advance automatically. Sleeping consumes active time; operator-paused downtime
+does not. The exhausted step budget and original deadline always take priority.
+
+Private `time_state` is inserted into checkpoints by the supervisor and omitted
+from worker resume specifications. Its wake-ready latch survives a checkpoint
+between recording a wake and the worker consuming the acknowledgement. Resume
+preserves the active-time target; no external scheduler or wall-clock alarm is
+installed. A quiet idle without a pending requested wake remains quiet.
+
+`time_sleep_scheduled`, `time_wake` and `time_remaining` observations use existing
+supervisor extensions. Archive verification checks budget arithmetic, call
+binding, wake ordering, delivered results and retained checkpoint targets. Wake
+latency depends on barrier and I/O scheduling; this is not a real-time guarantee.
+Old policy identities/behaviour remain unchanged. See ADR-0025.
 
 ## Context and exact inputs
 

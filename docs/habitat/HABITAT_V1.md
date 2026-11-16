@@ -64,7 +64,7 @@ Nothing needs to be rebuilt.
 ## Gap analysis
 
 **Original gap audit**, ranked by practical value for complexity. Items 1-4
-are now delivered by S015-S017; items 5-8 remain future work:
+are now delivered by S015-S017; item 5 is delivered by S018, items 6-8 remain future work:
 
 1. **Sandboxed program execution** (`python.run`). Without it nothing can be
    computed, tested or invented. The container tier exists; the capability does
@@ -196,6 +196,12 @@ replay and state isolation. This is an abstract system with no reward or task.
 - **Out of scope:** graphics, other agents.
 
 ### S018 — Time and continuity
+
+Implemented in Habitat 0.5.0 and Simulation. `time.remaining` reads active budget,
+`time.sleep` uses the recorded `self-scheduled-v1` policy, and operator
+`ols run --from-run` imports only final files/memory from a verified completed
+source. No conversation, permissions, private field/wake state or trusted tool
+registration is inherited. [Evidence and limits](demos/S018.md), [ADR-0025](../decisions/ADR-0025-time-and-run-lineage.md).
 
 - **New freedom:** know how long remains, choose to sleep until a chosen
   moment, and resume an earlier investigation in a later run.

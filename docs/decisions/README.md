@@ -31,6 +31,7 @@ by rewriting history.
 | [0022](ADR-0022-strategic-reset-habitat.md) | Strategic reset: build Habitat v1 in vertical slices; retire endurance/comparison campaigns; engineering demonstrations prove capabilities | Accepted (owner, 2026-11-16) |
 | [0023](ADR-0023-pinned-agent-tools.md) | Run-local tools pin sandbox-validated entry source in protected checkpoint state | Accepted; S016b, refines ADR-0003/0015 |
 | [0024](ADR-0024-supervisor-phenomena.md) | Supervisor-owned coupled fields with private checkpoint state and deterministic journal replay | Accepted; S017, extends S007e mediation |
+| [0025](ADR-0025-time-and-run-lineage.md) | Bounded self-scheduled wakes and operator-only final-data lineage | Accepted; S018, extends runtime policies/checkpoints |
 
 Unresolved choices are tracked as `open_decisions` in
 [`docs/roadmap/state.json`](../roadmap/state.json).

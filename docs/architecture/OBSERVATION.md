@@ -43,6 +43,15 @@ periodic `resource.sample` and resource installation/enforcement/denial actions.
 
 ## What is recorded
 
+S018 records remaining-budget snapshots, scheduled active-time targets and wakes
+as supervisor observations. No wake text is injected into the conversation.
+Archive checks validate budget arithmetic, service/result binding and absence
+of model-input preparation while a sleep is pending. The created-state event
+also pins any `lineage.json`: the child's source-data evidence and parent ids.
+Parent child-reference sidecars link the records without changing historical
+logs or summaries. These links attest recorded file/memory inheritance, not
+mental continuity, independent goals or external chronology.
+
 S017 adds supervisor-owned `phenomena_root` and `phenomena_call` stages under
 existing `supervisor.action` extensions. They record versioned roots, accepted
 data operations, public results and state hashes, synced before committing a
