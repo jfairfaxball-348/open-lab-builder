@@ -28,7 +28,7 @@ The three communicate only through the versioned contracts in
 
 ## Status
 
-**Habitat v1 is assembled (S019); S012 is prepared and not started.** The earlier campaign
+**Habitat v1 is assembled (S019); S012-001 ran once and is reported (S012).** The earlier campaign
 programme is retired under ADR-0022. The historical milestones below retain
 their original results; see the Habitat status near the end of this document.
 
@@ -296,12 +296,15 @@ scripted supervisor/resume/child chain maps all twelve available freedoms, and
 the existing Window reads its records without changing archive bytes
 ([assembly evidence](docs/habitat/demos/S019.md)). This establishes engineering
 capability, not independent objective choice.
-Next: **S012 — First Philosophical Experiment**, using the
-[owner-approved survival prompt](docs/habitat/S012_INITIAL_PROMPT.md). The
-[next-session handoff](NEXT_SESSION.md) freezes a proposed one-hour Luna run
-with at most 180 provider attempts, accepted by **run next session** in a new
-chat. No run starts in this preparation chat. Survival is an instructed objective;
-this observation cannot establish an independently chosen survival goal.
+**S012 — First Philosophical Experiment** ran its single registered
+observation on 2026-11-16 under the
+[owner-approved survival prompt](docs/habitat/S012_INITIAL_PROMPT.md): one
+hour, `gpt-5.6-luna`/low, recording VALID. The model acted for about 3.4
+minutes (11 requests, 6 tool calls: observe the field, advance it two ticks),
+then went quiet-idle until the deadline and created nothing. See the
+[S012-001 report](docs/experiments/2026-11-16-s012-001.md). Survival was an instructed objective, so this n = 1
+description establishes no independently chosen goal. Further work needs a new
+owner scope.
 
 ## Governing principle
 

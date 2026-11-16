@@ -3,7 +3,8 @@
 **Programme closed for active development (2026-11-16, [ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)).**
 The campaign and endurance programme below is history. New work builds the
 [Habitat](../habitat/HABITAT_V1.md); capabilities are shown by engineering
-demonstrations, not campaigns. The next formal experiment is S012, after Habitat v1.
+demonstrations, not campaigns. The first formal Habitat experiment, S012-001, ran once on
+2026-11-16 (VALID; 202.9 s active, then quiet idle). See its [report](2026-11-16-s012-001.md).
 The S011a close-out is in its [report](2026-11-16-s011a-001.md#close-out-2026-11-16-strategic-reset).
 
 **S011a complete:** three hosted Luna one-hour runs each recovered from a registered runtime kill (300/900/1800 s) and

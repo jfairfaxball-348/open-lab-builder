@@ -1,6 +1,12 @@
 # Next session: S012-001, first Habitat observation
 
-Preparation status: **READY FOR OWNER LAUNCH TRIGGER; NOT STARTED**.
+> **Executed 2026-11-16.** The owner's new-chat **run next session** accepted
+> this proposal; S012-001 ran once (`run-20261116t131531z-c12d57`, VALID,
+> deadline). See the [report](docs/experiments/2026-11-16-s012-001.md). This
+> handoff is spent: do not launch it again. Any further run needs a new owner
+> scope and registration.
+
+Preparation status (historical): **READY FOR OWNER LAUNCH TRIGGER; NOT STARTED**.
 The owner approved the [exact initial prompt](docs/habitat/S012_INITIAL_PROMPT.md)
 and requested that the experiment be prepared now and commence only after
 **run next session** in a **new chat**. Do not open that chat, schedule a launch,

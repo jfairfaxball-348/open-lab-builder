@@ -1,0 +1,26 @@
+{
+  "status": "passing",
+  "ran_at": "2026-11-16T14:30:00Z",
+  "commands": [
+    {
+      "command": "Builder git status/log; uv sync; uv run olb state; uv run olb check --tests (baseline)",
+      "result": "Clean at 1ccda75; S012 next; health and test suite passed."
+    },
+    {
+      "command": "Simulation git fetch; rev-parse HEAD origin/main; uv sync; uv run pytest tests/test_s012_preparation.py; uv run python experiments/s012/check_ready.py; container Backend().probe(); sha256 of config and prompt",
+      "result": "Clean at 4337a07a, equal to origin/main. 7 passed; offline readiness passed; container probe passed; config 58a96b3c... and prompt 8ceedc56... equal to the frozen pins."
+    },
+    {
+      "command": "Simulation uv run ols run experiments/s012/first-observation.json (once)",
+      "result": "run-20261116t131531z-c12d57 terminated (deadline) after 3600.0 s; 3706 events; exit 0. Archived experiment.json and model-catalog.json hashes equal to the frozen pins."
+    },
+    {
+      "command": "Simulation uv run ols verify <archive>; uv run ols provider status openai-chatgpt; archive/ledger analysis",
+      "result": "Run archive is intact. 11 attempts, all attempt 1 and ok (6 tool_calls, 5 stop), all gpt-5.6-luna, effort low; tokens 47134/661/294 reasoning; reservations 1080 -> 1091. Quiet idle at event 267 (202.9 s), wake none; zero artifacts/memory/skills/tools/programs."
+    },
+    {
+      "command": "Builder uv run ruff check .; uv run olb check --tests",
+      "result": "Lint passed; health check passed; 426 tests passed in 65.84 s."
+    }
+  ]
+}

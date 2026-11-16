@@ -16,7 +16,9 @@ heading must keep the form `### S000 — Title`; the health check reads it.
 
 ## Active programme: Habitat (since 2026-11-16)
 
-**Read this first.** **S015-S019 are complete; next is S012.** The owner directed a strategic reset
+**Read this first.** **S015-S019 and S012 are complete** (S012-001
+[report](../experiments/2026-11-16-s012-001.md)). Nothing further is scoped:
+the next step needs an owner decision (OD-2). The owner directed a strategic reset
 ([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)). Active
 development now builds a world worth inhabiting:
 [Habitat v1](../habitat/HABITAT_V1.md), through vertical slices **S015 → S016 →
@@ -1545,10 +1547,12 @@ behavioural success are always reported separately.
 
 - **Repository / streams:** Simulation observation/analysis; Window read-only;
   Builder registration/report.
-- **Status:** prepared, **not started**. Habitat v1 is complete. The owner approved
-  the [exact survival directive](../habitat/S012_INITIAL_PROMPT.md). The
-  [next-session handoff](../../NEXT_SESSION.md) is ready for **run next session**
-  in a new chat; this preparation chat must not launch it (ADR-0026).
+- **Status:** **complete (2026-11-16).** The owner's new-chat **run next
+  session** accepted the frozen proposal. S012-001 ran once
+  (`run-20261116t131531z-c12d57`) and ended at the deadline: archive intact,
+  recording VALID, 11 provider attempts with no retry. The model was active for
+  202.9 s, then quiet-idle for 3396.8 s with no artifacts.
+  [Report](../experiments/2026-11-16-s012-001.md). The handoff is spent.
 - **Objective:** describe observable activity in one Habitat session under the
   owner-assigned survival objective, without assuming consciousness or treating
   survival behaviour as an independently chosen survival goal.

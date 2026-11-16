@@ -90,7 +90,8 @@ combines file repair/reuse, memory, skills, validated tools, phenomena, waking,
 checkpoint resume and data-only lineage in one release. The existing Window
 reads the resulting events and artifacts without a new interface. See
 [assembly evidence](../habitat/demos/S019.md). The
-[S012 initial prompt](../habitat/S012_INITIAL_PROMPT.md) is owner-approved (ADR-0026);
+[S012 initial prompt](../habitat/S012_INITIAL_PROMPT.md) is owner-approved (ADR-0026); its single observation is
+reported in [S012-001](../experiments/2026-11-16-s012-001.md);
 engineering acceptance does not establish independent objective choice.
 
 | | Builder | Simulation | Window |

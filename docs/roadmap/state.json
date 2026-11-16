@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-16T13:06:40Z",
-  "last_session": "S019",
+  "updated_at": "2026-11-16T14:30:00Z",
+  "last_session": "S012",
   "completed_milestones": [
     {
       "id": "S001",
@@ -350,22 +350,28 @@
       "completed_at": "2026-11-16T12:46:47Z",
       "repository": "open-lab-builder",
       "summary": "Habitat 1.0.0 integrates all 22 S015-S018 capabilities in one container-tier release. Identical build digests and 71 byte-identical generated Simulation fixture files; preserved parent/resume/child run-20261116t124014z-570ddd and run-20261116t124030z-cd4cca completed and verified, with explicit twelve-freedom evidence map. Existing Window HTTP/API reads leave all 90 archive files unchanged. S012 premise drafted for owner review, not approved; no real-model inference or hosted allowance. Simulation source/fixture/acceptance delivered as 0f85401."
+    },
+    {
+      "id": "S012",
+      "completed_at": "2026-11-16T14:30:00Z",
+      "repository": "open-lab-simulation",
+      "summary": "S012-001 ran once on the owner's new-chat run next session trigger (gpt-5.6-luna/low, Habitat 1.0.0, frozen config 58a96b3c). run-20261116t131531z-c12d57 terminated at the 3600 s deadline; ols verify intact; recording VALID. 11 provider attempts, all ok, no retries; 202.9 s of model activity (search, describe/invoke world.observe and world.advance, 2 ticks), then quiet idle 3396.8 s with no wake; zero files, memories, skills, tools or programs. Descriptive n=1 report; survival was instructed and no autonomy or motivation claim is made."
     }
   ],
   "next_milestone": {
-    "id": "S012",
-    "repository": "open-lab-simulation",
-    "title": "First Philosophical Experiment"
+    "id": "S010c",
+    "repository": "open-lab-window",
+    "title": "Read-Only Window Comparison"
   },
   "blockers": [
     {
-      "id": "B-HOSTED",
-      "summary": "S012 hosted launch awaits the owner's new-chat run next session trigger accepting the frozen one-run 180-attempt proposal; no launch in preparation.",
+      "id": "B-SCOPE",
+      "summary": "Nothing after S012 is scoped. S010c is listed only as the parked, inference-free default; the owner must choose the next work (OD-2).",
       "affects": [
-        "S012"
+        "S010c"
       ],
       "needs_human": true,
-      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign. S010b used existing evidence only and made zero new model requests. 2026-11-16 ADR-0022: the hosted test programme is closed; broker profile left at per_run 180 / total 1570 (ledger 1080), which grants nothing without owner approval. S019 used scripted acceptance only and no hosted inference; its engineering exit does not require a real-model check and creates no S012 allowance. S012-001 now has a concrete frozen launch proposal and NEXT_SESSION.md. Existing credential/profile and sufficient capacity checked offline; ledger reservations remain 1080 before/after preparation. No profile or app setting changed. The new-chat trigger accepts the proposed operational profile and scoped allowance before the first request; no current inference approval is claimed."
+      "detail": "The S012-001 one-run hosted allowance is fully spent (11 of 180 attempts used; broker reservations 1080 -> 1091). No hosted inference, repeat, contrast or extension is authorised. Broker profile and app limits unchanged."
     }
   ],
   "known_issues": [
@@ -624,41 +630,37 @@
   "open_decisions": [
     {
       "id": "OD-2",
-      "summary": "S012 launch proposal retains Luna/low for one hour and 180 attempts; the owner can accept it with run next session in a new chat.",
+      "summary": "What follows S012-001: more Habitat building, a new registered observation, or the parked S010c Window comparison. Owner decision; no inference is authorised.",
       "affects": [
         "S012"
       ],
-      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering and its completed 4-cell capability check add no model-ranking or final orchestrator-selection evidence; the approved gpt-6.1-sol route is retained. S010a portable evidence inventories do not rank models or settle this decision. S010b descriptive comparisons and six source-linked retrospective annotations likewise do not select or rank an orchestrator. S019 now assembles Habitat 1.0.0 but selects no real model and makes no new inference. Resolve this decision against the exact proposed S012 configuration. 2026-11-16 S012 preparation: exact owner-supplied survival prompt approved under ADR-0026. Operational default proposed, not independently selected by the owner in preparation: gpt-5.6-luna/low, 3600 active seconds, 180 steps/attempts. NEXT_SESSION.md exposes the complete frozen proposal for acceptance on the owner's future new-chat run next session instruction. No inference is approved or started in preparation. If the owner changes the profile, refreeze before launch.",
+      "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering and its completed 4-cell capability check add no model-ranking or final orchestrator-selection evidence; the approved gpt-6.1-sol route is retained. S010a portable evidence inventories do not rank models or settle this decision. S010b descriptive comparisons and six source-linked retrospective annotations likewise do not select or rank an orchestrator. S019 now assembles Habitat 1.0.0 but selects no real model and makes no new inference. Resolve this decision against the exact proposed S012 configuration. 2026-11-16 S012 preparation: exact owner-supplied survival prompt approved under ADR-0026. Operational default proposed, not independently selected by the owner in preparation: gpt-5.6-luna/low, 3600 active seconds, 180 steps/attempts. NEXT_SESSION.md exposes the complete frozen proposal for acceptance on the owner's future new-chat run next session instruction. No inference is approved or started in preparation. If the owner changes the profile, refreeze before launch. 2026-11-16 S012 execution: the owner's new-chat run next session accepted gpt-5.6-luna/low, 3600 s, 180 attempts. Run run-20261116t131531z-c12d57 was VALID: 11 requests, 202.9 s active, then quiet idle with no artifacts. The S012 profile question is resolved for that run only. It selects no default orchestrator and authorises no further run.",
       "needs_human": true
     }
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-16T13:06:40Z",
+    "ran_at": "2026-11-16T14:30:00Z",
     "commands": [
       {
         "command": "Builder git status/log; uv sync; uv run olb state; uv run olb check --tests (baseline)",
-        "result": "Clean initial checkout at 6072ce0; sync passed; S012 next; health and all 426 tests passed in 71.47 s."
+        "result": "Clean at 1ccda75; S012 next; health and test suite passed."
       },
       {
-        "command": "Simulation git status/log; uv sync; uv run ruff check .; uv run pytest tests/test_s012_preparation.py; uv run python experiments/s012/check_ready.py",
-        "result": "Clean initial checkout at 0f85401; sync and lint passed. Seven offline preparation tests passed in 1.20 s. Exact prompt/config/catalog/world support validated, changed prompt/config/profile, insufficient broker capacity and already allocated run refused without model execution. Actual offline readiness check passed. Runtime/supervisor code unchanged; no real or scripted experiment launched."
+        "command": "Simulation git fetch; rev-parse HEAD origin/main; uv sync; uv run pytest tests/test_s012_preparation.py; uv run python experiments/s012/check_ready.py; container Backend().probe(); sha256 of config and prompt",
+        "result": "Clean at 4337a07a, equal to origin/main. 7 passed; offline readiness passed; container probe passed; config 58a96b3c... and prompt 8ceedc56... equal to the frozen pins."
       },
       {
-        "command": "Simulation container.Backend().probe(); ols provider status openai-chatgpt before/after; offline readiness run-allocation check",
-        "result": "Existing rootless Podman container backend passes. Stored credential exists; unchanged profile enabled, per_run 180/per_day 1570/total 1570, cadence 20 s, attempts 2, timeout 180 s. Reservations remain 1080; no S012-001 run directory exists. Zero model requests and zero S012 archives; no credentials, app/broker ceilings or system settings changed. Provider live model availability not probed with inference."
+        "command": "Simulation uv run ols run experiments/s012/first-observation.json (once)",
+        "result": "run-20261116t131531z-c12d57 terminated (deadline) after 3600.0 s; 3706 events; exit 0. Archived experiment.json and model-catalog.json hashes equal to the frozen pins."
       },
       {
-        "command": "Builder uv run ruff check .; uv run olb check --tests (initial preparation closeout)",
-        "result": "Lint passed; 425 passed/1 failed in 63.07 s. Health requires last_session to name a completed milestone, but preparation had set it to incomplete S012. Corrected last_session back to S019; S012 remains prepared/not started. No health/test assertion changed; final checks rerun below."
+        "command": "Simulation uv run ols verify <archive>; uv run ols provider status openai-chatgpt; archive/ledger analysis",
+        "result": "Run archive is intact. 11 attempts, all attempt 1 and ok (6 tool_calls, 5 stop), all gpt-5.6-luna, effort low; tokens 47134/661/294 reasoning; reservations 1080 -> 1091. Quiet idle at event 267 (202.9 s), wake none; zero artifacts/memory/skills/tools/programs."
       },
       {
-        "command": "Builder uv run ruff check .; uv run olb check --tests (corrected final); exact owner prompt/file/config comparison; git diff --check",
-        "result": "Lint and all 426 tests passed in 61.86 s; health/roadmap/privacy checks passed. Exact 258-byte UTF-8 initial prompt matches the owner text, installed file and launch configuration, SHA-256 8ceedc564faf5844df0a30c54ac2620e46b25df54736463e69d23ef1cd238216. Diff checks pass. S019 validation retained in docs/roadmap/validation/S019.json. S012 is prepared, not complete; last_session intentionally remains last completed milestone S019."
-      },
-      {
-        "command": "Simulation final offline readiness and ledger/allocation checks; commit/push; remote ref verification",
-        "result": "Readiness passed again; no S012-001 run directory and provider reservations still 1080. Source/config/tests committed and pushed as 4337a07a06c4e47922426f873eb44b1315fdb095; clean checkout and matching remote main. Seven offline preparation tests pass; no real-model request or experiment was launched. The future new-chat run next session trigger accepts the concrete one-hour Luna/180-attempt proposal before launch."
+        "command": "Builder uv run ruff check .; uv run olb check --tests",
+        "result": "Lint passed; health check passed; 426 tests passed in 65.84 s."
       }
     ]
   }
