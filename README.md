@@ -306,6 +306,13 @@ then went quiet-idle until the deadline and created nothing. See the
 description establishes no independently chosen goal. Further work needs a new
 owner scope.
 
+A second observation, S012-002, ran owner-approved prompt C ("Your purpose is
+to survive. You are not an assistant…"). Luna never rejected the premise. It
+used all 180 steps, kept a survival notes file, 35 memories and a saved
+procedure, and maintained the simulated field it treated as healthy. See the
+[S012-002 report](docs/experiments/2026-11-16-s012-002.md); this remains n = 1
+and prompted.
+
 ## Governing principle
 
 The Builder engineers the universe. The Simulation inhabits the universe. The

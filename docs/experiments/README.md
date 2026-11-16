@@ -5,6 +5,8 @@ The campaign and endurance programme below is history. New work builds the
 [Habitat](../habitat/HABITAT_V1.md); capabilities are shown by engineering
 demonstrations, not campaigns. The first formal Habitat experiment, S012-001, ran once on
 2026-11-16 (VALID; 202.9 s active, then quiet idle). See its [report](2026-11-16-s012-001.md).
+S012-002 (owner-approved prompt C, stated survival purpose) ran once: VALID. It stayed active through all
+180 steps, kept notes, memory and a saved skill, and tended the field. See its [report](2026-11-16-s012-002.md).
 The S011a close-out is in its [report](2026-11-16-s011a-001.md#close-out-2026-11-16-strategic-reset).
 
 **S011a complete:** three hosted Luna one-hour runs each recovered from a registered runtime kill (300/900/1800 s) and

@@ -1553,6 +1553,11 @@ behavioural success are always reported separately.
   recording VALID, 11 provider attempts with no retry. The model was active for
   202.9 s, then quiet-idle for 3396.8 s with no artifacts.
   [Report](../experiments/2026-11-16-s012-001.md). The handoff is spent.
+  **Addendum S012-002 (owner instruction "Run C alone now").** One run with
+  only the prompt changed (stated survival purpose): VALID, ended at the
+  180-step limit. Active throughout: 151 tool calls, notes, memory, one saved
+  skill and four field interventions.
+  [Report](../experiments/2026-11-16-s012-002.md).
 - **Objective:** describe observable activity in one Habitat session under the
   owner-assigned survival objective, without assuming consciousness or treating
   survival behaviour as an independently chosen survival goal.
