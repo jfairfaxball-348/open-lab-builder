@@ -263,8 +263,13 @@ annotations ([protocol](docs/experiments/STUDY_ANALYSIS.md),
 unchanged. Export integrity establishes no new autonomy GO or causal comparison.
 S011p is complete: Luna passed a low-effort smoke and one registered unguided hour ended completed-idle after 423.5 s of activity
 ([report](docs/experiments/2026-11-15-s011p-hour-001.md)). S011r then added opt-in hosted fault recovery under a provider-reported model-version pin
-([ADR-0021](docs/decisions/ADR-0021-hosted-recovery-identity.md)). S011a then ran three hosted one-hour runs, each
-recovering from a registered runtime kill: 3/3 clean ([report](docs/experiments/2026-11-16-s011a-001.md)). S011b is next.
+([ADR-0021](docs/decisions/ADR-0021-hosted-recovery-identity.md)). S011a then ran three hosted one-hour runs, each recovering from a registered runtime kill: 3/3 clean
+([report](docs/experiments/2026-11-16-s011a-001.md)).
+
+**Strategic reset (2026-11-16, [ADR-0022](docs/decisions/ADR-0022-strategic-reset-habitat.md)).** The campaign and
+endurance programme is closed. Development now builds [Habitat v1](docs/habitat/HABITAT_V1.md) in vertical slices.
+**S015 is done:** world `habitat` 0.1.0 lets the inhabitant read and edit its own files and write and run its own
+Python in the container sandbox ([demonstration](docs/habitat/demos/S015.md)). Next: S016, skills and self-made tools.
 
 ## Governing principle
 

@@ -16,7 +16,7 @@ heading must keep the form `### S000 — Title`; the health check reads it.
 
 ## Active programme: Habitat (since 2026-11-16)
 
-**Read this first.** The owner directed a strategic reset
+**Read this first.** **S015 is complete; next is S016.** The owner directed a strategic reset
 ([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)). Active
 development now builds a world worth inhabiting:
 [Habitat v1](../habitat/HABITAT_V1.md), through vertical slices **S015 → S016 →
@@ -1608,7 +1608,7 @@ Hosted inference requires explicit owner approval.
 
 - **Repository / streams:** Builder (capabilities, world `habitat` 0.1.0);
   Simulation (fixture world, tests, demonstration).
-- **Status:** planned; first Habitat milestone.
+- **Status:** **complete (2026-11-16).** World `habitat` 0.1.0 (digest `de087f5a…`) with `workspace.read`, `workspace.edit` and `python.run`; live container tests pass; demonstration `run-20261116t073714z-f6497a` preserved ([record](../habitat/demos/S015.md)). Builder 26ae0d7+, Simulation ea8e778.
 - **New freedom:** write a program and run it in the container sandbox; read
   stdout, stderr and exit status; fix it and run it again; keep it and import it
   from a later program. Read back and edit any of its own files.

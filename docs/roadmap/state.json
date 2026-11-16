@@ -1,8 +1,8 @@
 {
   "schema": "open-lab/development-state",
   "schema_version": "1.0.0",
-  "updated_at": "2026-11-16T02:40:00Z",
-  "last_session": "S011a",
+  "updated_at": "2026-11-16T08:30:00Z",
+  "last_session": "S015",
   "completed_milestones": [
     {
       "id": "S001",
@@ -304,12 +304,22 @@
         "1bc219a"
       ],
       "summary": "Registered runtime-kill reliability fault (runtime-kill-at-active-second-v1). S011a-001: three hosted gpt-5.6-luna one-hour runs, kills at 300/900/1800 s, each auto-recovered under the ADR-0021 pin, deadline reached, archives intact: 3/3 clean. 50 requests, all ok, low effort. All kills landed in quiet idle; active-phase live recovery not exercised. Behaviour: orientation then idle at 263-344 s, no memory writes."
+    },
+    {
+      "id": "S015",
+      "completed_at": "2026-11-16T08:30:00Z",
+      "repository": "open-lab-builder",
+      "commits": [
+        "26ae0d7",
+        "ea8e778"
+      ],
+      "summary": "Strategic reset (ADR-0022): campaign/endurance programme retired, Habitat roadmap S015-S019 installed, S011a closed out. World habitat 0.1.0 (container tier, digest de087f5a) adds workspace.read, workspace.edit and sandboxed python.run to ten network-free minimal capabilities. Live container tests and a preserved scripted demonstration (write, run, traceback, read, edit, run, import, reuse) pass."
     }
   ],
   "next_milestone": {
-    "id": "S015",
+    "id": "S016",
     "repository": "open-lab-builder",
-    "title": "Habitat Slice 1: Read, Edit and Run Python"
+    "title": "Habitat Slice 2: Skills and Self-Made Tools"
   },
   "blockers": [
     {
@@ -535,6 +545,16 @@
         "S012"
       ],
       "detail": "Luna idled at 263-344 s in every S011a run, before every registered kill (300/900/1800 s). A crash error event records recoverable:false for the failed segment even when the run is then recovered (existing wording). A future registration should place a kill inside the active window."
+    },
+    {
+      "id": "KI-32",
+      "summary": "Habitat python.run has the Python standard library only; no packages, and models.ask is absent from container worlds.",
+      "affects": [
+        "S016",
+        "S017",
+        "S019"
+      ],
+      "detail": "The pinned python:3.12-slim image carries no third-party packages and the container tier has no loopback/GPU path. Both need S006f (deferred) or a later Habitat slice."
     }
   ],
   "open_decisions": [
@@ -550,19 +570,27 @@
   ],
   "validation": {
     "status": "passing",
-    "ran_at": "2026-11-16T02:40:00Z",
+    "ran_at": "2026-11-16T08:30:00Z",
     "commands": [
       {
-        "command": "Simulation uv run pytest tests/test_reliability_fault.py; uv run ruff check .; uv run pytest (full)",
-        "result": "Reliability fault tests passed (scripted recovery, hosted kill during idle stays idle with no new request, invalid configs refused, S011a configs differ only where registered) after one max_steps headroom fix in the new test; full suite passed. Fake providers only."
+        "command": "Builder uv run olb world build worlds/habitat --publish; uv run olb world verify <release> --self-test",
+        "result": "habitat 0.1.0 built twice with identical digest de087f5a9caa364b599fea72ab46e55fd8cca2e938c575f93548a15706c9470e; 13 self-tests passed; release intact."
       },
       {
-        "command": "Owner-approved ols provider configure (per_run 180, per_day/total 1570, 20 s, 2 attempts); ols run experiments/s011a/hour-{1,2,3}.json sequentially; ols verify after each",
-        "result": "Three runs terminated at the 3600 s deadline; each one reliability_fault, one recovery_restart, hosted_identity_pin gpt-5.6-luna; 14/18/18 requests all ok with reasoning.effort=low; archives intact; 3/3 clean."
+        "command": "Builder uv run pytest tests/test_habitat_capabilities.py",
+        "result": "23 passed on the Windows host after fixing test fixtures that wrote CRLF and two lint issues; covers read paging/refusals, edit replace/append/ambiguity, run args/stdin/traceback/fix/imports/timeout killing descendants/output caps/environment."
+      },
+      {
+        "command": "Simulation OPEN_LAB_REQUIRE_CONTAINER=1 uv run pytest tests/test_habitat.py; then full suite with the same variable; uv run ruff check .",
+        "result": "4 live container tests passed first time; full Simulation suite passed (container tests required, none skipped); ruff passed."
+      },
+      {
+        "command": "Simulation uv run ols run experiments/habitat/s015-demo.json; uv run ols verify <archive>",
+        "result": "run-20261116t073714z-f6497a completed, 93 events, archive intact; traceback then fix then reuse observed as scripted. No model inference."
       },
       {
         "command": "Builder uv run ruff check .; uv run olb check --tests",
-        "result": "Ruff passed; health check passed (documents, state, privacy, test suite)."
+        "result": "Ruff passed; health check passed (documents, state, privacy, test suite including the habitat capability tests)."
       }
     ]
   }

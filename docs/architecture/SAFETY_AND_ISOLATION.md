@@ -69,9 +69,16 @@ Therefore:
 - A world declares its `environment.isolation.minimum_tier`. The Simulation
   must refuse to launch a world on a weaker tier.
 - Capabilities with `permissions.subprocess: true`, anything that evaluates
-  agent-supplied code, and agent-created tools (S009) require `container`.
-- The container tier exists for Windows hosts (S006c). Agent-created tools
-  remain refused until S009, and execution capabilities until S008d.
+  agent-supplied code, and agent-created tools (S016) require `container`.
+- The container tier exists for Windows hosts (S006c). The first execution
+  capability is `python.run` in world `habitat` 0.1.0 (S015). That world is
+  container-tier, and the experiment must grant `subprocess`. The program runs
+  with `-E -s` and a scrubbed environment, with the workspace as its working
+  directory. A wall-clock timeout kills its whole process group, and its output
+  is capped. The container provides no network, a read-only root and world, the
+  workspace as the only writable mount, cgroup limits, and removal when the
+  call ends. These limits were tested live on 2026-11-16. Agent-created tools
+  remain refused until S016.
 - A container-tier world launches only when the backend probe passes; it is
   never silently run on the process tier. Container lifetime is owned by the
   supervisor: every container of a run is removed when a runtime segment ends.

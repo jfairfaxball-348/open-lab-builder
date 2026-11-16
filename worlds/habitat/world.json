@@ -1,0 +1,33 @@
+{
+  "world_id": "habitat",
+  "version": "0.1.0",
+  "name": "Habitat",
+  "description": "First Habitat slice: the inhabitant can read, edit and write its own files, keep memories, and write and run its own Python programs in an isolated container. Ten network-free tools from the minimal world plus workspace.read, workspace.edit and python.run.",
+  "environment": {
+    "platforms": [
+      "windows",
+      "linux"
+    ],
+    "python": ">=3.12",
+    "isolation": {
+      "minimum_tier": "container"
+    },
+    "min_resources": {
+      "ram_mb": 8192,
+      "disk_mb": 10240
+    }
+  },
+  "default_limits": {
+    "wall_clock_s": 3600,
+    "ram_mb": 1024,
+    "disk_mb": 256,
+    "max_processes": 64
+  },
+  "default_permissions": {
+    "filesystem": "workspace_write",
+    "network": "none",
+    "subprocess": true,
+    "gpu": false
+  },
+  "notes": "S015 (ADR-0022). Every capability call runs in a fresh rootless container (S006c): no network, read-only root and world, workspace the only writable mount. python.run executes agent code only there. models.ask is excluded because the container tier provides no loopback or GPU path (S006f, deferred). The container image has the Python standard library only."
+}
