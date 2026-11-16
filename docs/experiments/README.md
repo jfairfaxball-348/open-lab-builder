@@ -1,5 +1,11 @@
 # Experiments and experimental validity
 
+**Programme closed for active development (2026-11-16, [ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)).**
+The campaign and endurance programme below is history. New work builds the
+[Habitat](../habitat/HABITAT_V1.md); capabilities are shown by engineering
+demonstrations, not campaigns. The next formal experiment is S012, after Habitat v1.
+The S011a close-out is in its [report](2026-11-16-s011a-001.md#close-out-2026-11-16-strategic-reset).
+
 **S011a complete:** three hosted Luna one-hour runs each recovered from a registered runtime kill (300/900/1800 s) and
 reached the deadline with intact archives: 3/3 clean, 50 requests. Every kill hit quiet idle, so live recovery during active
 work is untested. Behaviour repeated S011p's orientation-then-idle pattern. See the [report](2026-11-16-s011a-001.md).

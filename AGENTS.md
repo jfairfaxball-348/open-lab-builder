@@ -22,30 +22,46 @@ path. Read [README.md](README.md) and
 [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) before
 changing anything structural.
 
-## Experimental purpose
+## Purpose and current strategy
 
-The world is an instrument for studying what an inhabitant independently does,
-not just a collection of working tools. Keep engineering correctness separate
-from evidence of exploration, agent-stated objectives and adaptive action.
-Read the current research gates in `docs/experiments/README.md` when a milestone
-changes the orchestrator, environment or experimental conditions.
+The destination is the original philosophical experiment. An AI is placed in a
+rich computational universe with an existential premise and no further
+instructions. It has freedom to choose objectives, persistent memory, time,
+and an independent observer. The question is what it independently chooses to
+do.
 
-- A short milestone plan states its engineering outcome, scientific purpose and
-  what the evidence will not establish; routine fixes need only a sentence.
-- Tool counts, text volume and uptime do not establish autonomy. Agent-stated
-  goals are claims; goal-directed behaviour is an evidence-linked assessment,
-  never a fact about internal motivation or subjective consciousness.
-- Freeze prompts, continuation/context/repair policies and comparisons before
-  scored runs. Keep pilots separate; preserve negative and censored results.
-  A valid negative benchmark can complete its report without opening expansion.
-- Respect the roadmap's behavioural and isolation gates. Add new capabilities
-  one at a time and test each one (acceptance tests plus a bounded real-model
-  check of discovery and use); a full baseline repeat is not required after a
-  capability addition (owner decision, ADR-0017). Orchestrator, context/policy
-  or repair changes still need a new campaign. Never relabel an old result as a
-  success; the one owner-accepted post-hoc GO (S014i-001) is recorded as such.
-- An explicitly authorised strategic session may revise future planning; it does
-  not authorise implementing those future milestones, downloads or API spending.
+**Since 2026-11-16 (ADR-0022, strategic reset) active development builds the
+Habitat.** That means a world worth inhabiting, delivered as vertical slices
+S015–S019 and defined in `docs/habitat/HABITAT_V1.md`; S012 follows. The
+earlier campaign programme (endurance runs, comparison campaigns, repeated
+capability benchmarks) is retired. Do not restart it unless the owner decides
+to.
+
+- **Build freedoms, not proofs of infrastructure.** Each slice must add
+  something the inhabitant can genuinely do. Prefer one complete capability
+  chain over several partial frameworks. Do not add abstraction layers or
+  registration machinery unless they solve a concrete problem.
+- **Evidence for a capability is engineering evidence:**
+  - unit and integration tests;
+  - security and isolation tests for anything that executes code;
+  - regression tests where existing behaviour could change;
+  - one preserved end-to-end demonstration through the real supervisor,
+    driven by a scripted model by default.
+
+  Repeated statistical runs are not needed to show that a capability works.
+  A real-model check runs only when it is genuinely useful, and hosted
+  inference only with explicit owner approval.
+- **Never present a demonstration as evidence of autonomy.** Tool counts, text
+  volume, uptime and continuous inference do not establish autonomy.
+  Agent-stated goals are claims. Never record inferred motivation or
+  consciousness as fact.
+- **Formal experiments are reserved** for a mature habitat and a specific
+  question, starting with S012. When one runs, freeze its prompt, policies and
+  comparisons beforehand, and preserve negative and censored results. Never
+  relabel an old result.
+- **Ideas for later** go in `docs/habitat/IDEAS.md`, not into code.
+- An explicitly authorised strategic session may revise future planning. That
+  does not authorise downloads or API spending.
 
 ## Start of every session
 

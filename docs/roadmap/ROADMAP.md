@@ -14,6 +14,36 @@ update `state.json`. If a milestone turns out to be too large, split it here
 Milestone ids are `S` plus three digits and an optional letter. Each section
 heading must keep the form `### S000 — Title`; the health check reads it.
 
+## Active programme: Habitat (since 2026-11-16)
+
+**Read this first.** The owner directed a strategic reset
+([ADR-0022](../decisions/ADR-0022-strategic-reset-habitat.md)). Active
+development now builds a world worth inhabiting:
+[Habitat v1](../habitat/HABITAT_V1.md), through vertical slices **S015 → S016 →
+S017 → S018 → S019**, followed by the philosophical experiment **S012**.
+
+Each slice adds a real freedom for the inhabitant. A slice is proved by tests
+plus one preserved end-to-end demonstration, not by a statistical campaign. The
+demonstration uses a scripted model by default; real-model checks need owner
+approval.
+
+- **Retired:** endurance runs (S011b/S011c), comparison campaigns, repeated
+  capability benchmarks and new registration machinery.
+- **Deferred:** S010c, S006f, S007b, S008a/b.
+
+Everything below this section is retained history and the old plan. Where it
+conflicts with this section, this section governs.
+
+```mermaid
+flowchart LR
+    S011a["S011a (closed)"] --> S015["S015 Read, edit, run Python"]
+    S015 --> S016["S016 Skills and self-made tools"]
+    S016 --> S017["S017 World with phenomena"]
+    S017 --> S018["S018 Time and continuity"]
+    S018 --> S019["S019 Habitat v1 assembly"]
+    S019 --> S012["S012 First philosophical experiment"]
+```
+
 ## Purpose and development streams
 
 The scientific question is: **What does an artificial agent actually do when we
@@ -90,7 +120,7 @@ dashed repeat edges express decisions/campaigns rather than reopening milestones
 Campaign repeats get new campaign ids, never duplicate milestone completions.
 The loop authorises one bounded S007h change, not unlimited tuning.
 
-**S011p complete (2026-11-15)** — see its status below. **S011r complete:** opt-in hosted recovery ([ADR-0021](../decisions/ADR-0021-hosted-recovery-identity.md)). **S011a complete (2026-11-16):** 3/3 hosted fault/recovery hours clean ([report](../experiments/2026-11-16-s011a-001.md)). **Next: S011b**, which needs owner power/update arrangements and a new allowance.
+**S011p complete (2026-11-15)** — see its status below. **S011r complete:** opt-in hosted recovery ([ADR-0021](../decisions/ADR-0021-hosted-recovery-identity.md)). **S011a complete (2026-11-16):** 3/3 hosted fault/recovery hours clean ([report](../experiments/2026-11-16-s011a-001.md)). The preparatory test programme was then closed (ADR-0022); see the Active programme section at the top.
 
 _Historical S011p direction:_ **Next (owner-directed 2026-11-15): S011p — Luna 5.6 Qualification and First One-Hour Run.**
 The next session should first confirm `gpt-5.6-luna` is listed for the owner's
@@ -576,7 +606,7 @@ Research campaign gates are not extra paperwork for every routine fix.
 ### S006f — World Images, Linux Hosts and Brokered Container Networking
 
 - **Repository / streams:** Builder contracts/images; Simulation backend. C.
-- **Status:** planned; split from S006c on 2026-11-14.
+- **Status:** **deferred** (ADR-0022 strategic reset, 2026-11-16). Its pinned world images and brokered loopback return when a Habitat slice needs packages or container-reachable specialist models.
 - **Objective:** Make the container environment part of the versioned world and
   run the container tier on Linux hosts.
 - **Prerequisites:** S006c.
@@ -958,7 +988,7 @@ behavioural success are always reported separately.
 ### S014k — Window Provider Comparison View (Optional)
 
 - **Repository / streams:** Window, read-only. D.
-- **Status:** optional, after S014j.
+- **Status:** **retired** (ADR-0022 strategic reset, 2026-11-16); no further comparison views.
 - **Scope:** read-only comparison of registered campaigns; archives never modified.
 
 ### S014l — Event-Log Reader Fix (KI-24)
@@ -1141,7 +1171,7 @@ behavioural success are always reported separately.
 ### S007b — Vision-Language Model
 
 - **Repository / streams:** Builder capability; Simulation gateway. A/B.
-- **Status:** planned; no download authorised by this plan.
+- **Status:** **deferred** (ADR-0022 strategic reset, 2026-11-16); see docs/habitat/IDEAS.md.
 - **Objective:** Add useful image understanding after evidence of basic tool discovery/use.
 - **Prerequisites:** S007e, current expansion GO and specific model approval.
 - **Scope:** one measured hardware-feasible model, workspace vision.describe and
@@ -1222,7 +1252,7 @@ behavioural success are always reported separately.
 ### S008a — Audio Understanding
 
 - **Repository / streams:** Builder capability; Simulation gateway. A/B.
-- **Status:** planned, human resource approval required.
+- **Status:** **deferred** (ADR-0022 strategic reset, 2026-11-16); see docs/habitat/IDEAS.md.
 - **Objective:** Add testable audio understanding that serves observable work.
 - **Prerequisites:** S007e, current expansion GO, FFmpeg/speech-model approval.
 - **Scope:** audio.probe and one CPU-first recogniser; lightweight features only
@@ -1242,7 +1272,7 @@ behavioural success are always reported separately.
 ### S008b — Media Generation
 
 - **Repository / streams:** Builder capabilities; Simulation gateway. A/B.
-- **Status:** planned, specific software/model approvals required.
+- **Status:** **deferred** (ADR-0022 strategic reset, 2026-11-16); see docs/habitat/IDEAS.md.
 - **Objective:** Add affordable generation that contributes useful artifacts.
 - **Prerequisites:** S007e and current expansion GO, plus resource approval.
 - **Scope:** small speech synthesis first, measured image/audio generation
@@ -1261,7 +1291,7 @@ behavioural success are always reported separately.
 ### S008d — Scripting and Application Interfaces
 
 - **Repository / streams:** Builder capabilities; Simulation isolation. A/C.
-- **Status:** planned; actual container escape tests are a hard gate.
+- **Status:** **superseded by S015** (ADR-0022 strategic reset, 2026-11-16): sandboxed Python execution is delivered there.
 - **Objective:** Enable software work and bounded computer interfaces safely.
 - **Prerequisites:** S006c and current expansion GO; minimum_tier container.
 - **Scope:** sandboxed Python/shell; browser/computer control only inside that
@@ -1281,7 +1311,7 @@ behavioural success are always reported separately.
 ### S009 — Agent-Created Tools
 
 - **Repository / streams:** Simulation registration; Builder contracts/docs. A/B/C.
-- **Status:** planned.
+- **Status:** **superseded by S016** (ADR-0022 strategic reset, 2026-11-16): skills and agent-created tools are delivered there.
 - **Objective:** Study creation and reuse of tools inside an enforced sandbox.
 - **Prerequisites:** S006c/S005b/S008d and current expansion GO.
 - **Scope:** tools.create over sandbox manifests/code; validation/self-test in
@@ -1395,7 +1425,7 @@ behavioural success are always reported separately.
 ### S010c — Read-Only Window Comparison
 
 - **Repository / streams:** Window UI/API; Builder documentation. D.
-- **Status:** planned but **parked by owner 2026-11-15**; not implemented by S010a/b. It remains required to close S010 and before S012, but does not block S011p–S011c offline-verified engineering.
+- **Status:** **deferred** (ADR-0022 strategic reset, 2026-11-16); S010 stays incomplete. Return only if a Habitat study needs comparison views.
 - **Objective:** let an observer inspect verified comparisons and their source
   traces while retaining the Window's strict no-write/no-client boundary.
 - **Prerequisites:** S010a/b formats and existing Window integrity controls.
@@ -1475,7 +1505,7 @@ behavioural success are always reported separately.
 ### S011b — Reliability: Twelve-Hour Runs
 
 - **Repository / streams:** Simulation; Builder evidence. C/D.
-- **Status:** planned, human power/update preparation required.
+- **Status:** **retired** (ADR-0022 strategic reset, 2026-11-16). The endurance programme is closed; no 12-hour run will be prepared. Original plan kept below as history.
 - **Objective:** Establish overnight stability and auditable context/memory evolution.
 - **Prerequisites:** S011a and approved power/update arrangements.
 - **Scope:** twelve-hour run with registered sleep/resume; context growth, logs,
@@ -1494,7 +1524,7 @@ behavioural success are always reported separately.
 ### S011c — Reliability: Seventy-Two-Hour Run
 
 - **Repository / streams:** Simulation; Builder evidence. C/D.
-- **Status:** planned, explicit host-reboot arrangement required.
+- **Status:** **retired** (ADR-0022 strategic reset, 2026-11-16). Original plan kept below as history.
 - **Objective:** Rehearse target duration with an interpretable record.
 - **Prerequisites:** S011b, frozen S010 protocol and approved reboot plan.
 - **Scope:** neutral-premise rehearsal, deliberate reboot/recovery, downtime/limits,
@@ -1514,7 +1544,7 @@ behavioural success are always reported separately.
 ### S012 — First Philosophical Experiment
 
 - **Repository / streams:** Simulation runs/analysis; Window read-only; Builder report. D.
-- **Status:** planned; no philosophical experiment or autonomy baseline run yet.
+- **Status:** planned; **re-gated on Habitat v1 (S019)** (ADR-0022 strategic reset, 2026-11-16), not on endurance or comparison campaigns. It remains the destination.
 - **Objective:** Investigate self-directed, goal-relevant/adaptive activity under a
   philosophical premise and contrast, without assuming consciousness.
 - **Prerequisites:** S010/S011c/S006c and current baseline evidence for the exact
@@ -1559,3 +1589,123 @@ behavioural success are always reported separately.
 - **Risks:** endless planning or redefining success; bounded next work, explicit
   negative outcomes and unchanged runtime prevent either.
 - **Next recommended milestone:** S007a — Model Gateway and Local Brain Swap.
+
+---
+
+## Habitat programme milestones (ADR-0022)
+
+Full design, reuse audit and gap analysis:
+[HABITAT_V1.md](../habitat/HABITAT_V1.md).
+
+Evidence rule for every slice:
+- unit and integration tests;
+- security and isolation tests for anything that executes code;
+- one preserved end-to-end demonstration.
+
+Hosted inference requires explicit owner approval.
+
+### S015 — Habitat Slice 1: Read, Edit and Run Python
+
+- **Repository / streams:** Builder (capabilities, world `habitat` 0.1.0);
+  Simulation (fixture world, tests, demonstration).
+- **Status:** planned; first Habitat milestone.
+- **New freedom:** write a program and run it in the container sandbox; read
+  stdout, stderr and exit status; fix it and run it again; keep it and import it
+  from a later program. Read back and edit any of its own files.
+- **Reuses:** container tier and `subprocess` gate (S006c), workspace path
+  validation, artifact capture, the world build and self-test pipeline.
+- **Scope:**
+  - capabilities `workspace.read`, `workspace.edit` and `python.run`;
+  - world `habitat` 0.1.0 at container tier: the network-free minimal
+    capabilities plus these three, without `models.ask`;
+  - Simulation fixture and tests;
+  - a scripted end-to-end demonstration on the live container tier.
+- **Security and correctness:**
+  - `python.run` requires `subprocess` and a container world; the launch
+    refusal is tested.
+  - Isolated interpreter (`-I`), scrubbed environment, workspace as working
+    directory, wall-clock timeout that kills the process group, output caps.
+  - Existing live escape tests stay green.
+  - Read and edit share the workspace path rules and refuse ambiguity.
+- **Demonstration:** a scripted run that writes a buggy program, runs it and
+  gets a traceback, reads it, edits it, runs it successfully, writes a second
+  program that imports the first, and reads back the saved result. The archive
+  verifies.
+- **Out of scope:** packages, network, skill and tool registration (S016),
+  `models.ask` in container worlds (S006f).
+- **Exit:**
+  - tests pass in both repositories;
+  - live container tests pass with `OPEN_LAB_REQUIRE_CONTAINER=1`;
+  - the demonstration is preserved and verified.
+
+### S016 — Habitat Slice 2: Skills and Self-Made Tools
+
+- **Repository / streams:** Builder (contracts, capabilities); Simulation
+  (registry, sandboxed execution of agent tools).
+- **Status:** planned.
+- **New freedom:** name, document and reuse its own procedures and executable
+  tools, through the same discovery interface as builder capabilities.
+- **Scope:**
+  - `skills.save`, `skills.list` and `skills.get`;
+  - `tools.create`, with examples validated in the sandbox;
+  - agent tools discoverable with `provenance.origin: agent` and invoked only
+    through the sandbox runner;
+  - lift the `agent_created_tools` refusal.
+- **Security and correctness:**
+  - no permission beyond `python.run`;
+  - no shadowing of builder capability ids;
+  - no access to the runtime, the world release or the recorder;
+  - provenance recorded;
+  - tools survive a checkpoint resume.
+- **Demonstration:** a scripted run that creates, validates, rediscovers and
+  reuses a tool.
+- **Out of scope:** sharing tools across runs (S018), networked tools.
+
+### S017 — Habitat Slice 3: A World with Phenomena
+
+- **Repository / streams:** Builder (world design); Simulation
+  (supervisor-held world state).
+- **Status:** planned; needs a short design note before code.
+- **New freedom:** encounter and probe undocumented phenomena that are lawful
+  and persistent, and observe the consequences of its own actions.
+- **Scope:**
+  - a deterministic, seeded simulated system held by the supervisor (the S007e
+    mediation pattern);
+  - capabilities to observe, act and advance time;
+  - state that is checkpointed and replayable;
+  - no puzzles and no goals.
+- **Security and correctness:**
+  - state is unreachable from the workspace and from agent code;
+  - actions are validated data;
+  - no agent code runs in the supervisor.
+- **Demonstration:** scripted probes showing lawful, persistent and
+  reproducible responses.
+- **Out of scope:** graphics, other agents.
+
+### S018 — Habitat Slice 4: Time and Continuity
+
+- **Repository / streams:** Simulation (runtime policy, lineage); Builder
+  (capabilities, contracts).
+- **Status:** planned.
+- **New freedom:** know how much time remains, choose to sleep until a chosen
+  moment, and resume an earlier run's project in a new run.
+- **Scope:**
+  - `time.remaining`;
+  - a bounded, model-requested wake policy that is recorded and creates no
+    artificial activity;
+  - run lineage: a new run seeded from an earlier run's final workspace and
+    memory, with the two archives linked.
+- **Out of scope:** any claim of cognitive continuity. Only files and memory
+  persist.
+
+### S019 — Habitat v1 Assembly
+
+- **Repository / streams:** all three.
+- **Status:** planned.
+- **Scope:**
+  - release `habitat` 1.0.0, integrating S015–S018;
+  - draft the existential premise for S012, for owner approval;
+  - minimal Window additions if needed;
+  - one bounded real-model acceptance demonstration, if approved.
+- **Exit:** freedoms 1–12 of HABITAT_V1.md are demonstrated and preserved.
+  Next: S012.

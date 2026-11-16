@@ -307,29 +307,20 @@
     }
   ],
   "next_milestone": {
-    "id": "S011b",
-    "repository": "open-lab-simulation",
-    "title": "Reliability: Twelve-Hour Runs"
+    "id": "S015",
+    "repository": "open-lab-builder",
+    "title": "Habitat Slice 1: Read, Edit and Run Python"
   },
   "blockers": [
     {
       "id": "B-HOSTED",
-      "summary": "No allowance remains for additional hosted runs; offline S010c can use existing exports/reports without new spend.",
+      "summary": "No standing hosted allowance. Any hosted inference (e.g. an S019 real-model demonstration or S012) needs explicit owner approval first.",
       "affects": [
-        "S010"
+        "S019",
+        "S012"
       ],
       "needs_human": true,
-      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign. S010b used existing evidence only and made zero new model requests."
-    },
-    {
-      "id": "B-S011B-PREP",
-      "summary": "S011b needs owner power/update arrangements for a 12-hour run with registered sleep/resume, a new allowance, and a decision on hosted usage windows (a 12-hour hosted run can hit 5-hour/weekly limits, which end the run by design).",
-      "affects": [
-        "S011b",
-        "S011c"
-      ],
-      "needs_human": true,
-      "detail": "S011a complete 2026-11-16 (docs/experiments/2026-11-16-s011a-001.md). Broker profile still per_run 180 / total 1570 (ledger 1080); it grants nothing further without owner approval."
+      "detail": "ADR-0016 broker (S014b) and ChatGPT plan usage (S014d). On 2026-11-15 the owner left The Open Laboratory's ChatGPT app limit at 100% (OD-14, partial); the 5-hour plan window is shared with the owner's own use. Ledger ceilings are nominal; every attempt is reserved and recorded; subscription_sharing_usage_limit_exceeded ends the run with no retry or fallback, and campaign v1.1 stops after any terminal provider outcome until an operator clearance is recorded. No API key, credits, settings change or other tier is authorised. S007e-001 stopped on its third started cell; the fourth was never launched. The owner-directed partial closeout does not grant a quota bypass, transfer the unstarted cell to another milestone or change the per-app limit. S008c retains its separate approved ceiling of at most 4 runs x 32 steps after plan availability is confirmed. S008c engineering is ready in world 0.8.0; S008c-001 has zero started cells. Confirmation of plan availability was requested this session and remains pending. The new runner requires a durable quota-clearance record and refuses to use a clearance to override a provider stop. Owner follow-up on 2026-11-15: Yes run it, in response to the quota-confirmation handoff. Recorded as clearance for the frozen S008c-001 launch, not as a provider guarantee. A new provider refusal still stops the check. S008c-001 then completed guided/C1/C2/C3 at 32 steps each, 128 requests with no terminal provider outcome or retry. Its allowance is fully used. The per-app limit was not changed. No new hosted budget is granted for S010; its core work is not blocked when using existing archives only. S010a made zero new requests. Its verified exports do not authorize another campaign. S010b used existing evidence only and made zero new model requests. 2026-11-16 ADR-0022: the hosted test programme is closed; broker profile left at per_run 180 / total 1570 (ledger 1080), which grants nothing without owner approval."
     }
   ],
   "known_issues": [
@@ -525,8 +516,7 @@
       "summary": "S010a/b provide export integrity and source-bound descriptive analysis; Window comparison remains S010c and parent S010 is incomplete.",
       "affects": [
         "S010",
-        "S010c",
-        "S012"
+        "S010c"
       ],
       "detail": "All seven gates now expose mechanical checks or explicit human/unverified requirements; no automatic GO, effective-compute equivalence, chronology proof or interpretation adjudication. Report recomputation needs its associated export and matching aggregate source checkout. Stopped cooperative sources only; failed staging retained. Single unmasked retrospective annotations and unknown hosted identity remain limits. Linux execution and Window report reading are unverified here."
     },
@@ -534,9 +524,6 @@
       "id": "KI-30",
       "summary": "S011p Luna hour run went quiet-idle at 423.5 s of 3600 after six continuations; single run, prompt C, low effort, 20 s cadence.",
       "affects": [
-        "S011a",
-        "S011b",
-        "S011c",
         "S012"
       ],
       "detail": "Activity was orientation (workspace.list, memory.list, time.now) and two status memory writes; no use of math/stats/text/workspace.write, no memory retrieval. Most post-first-minute activity followed recorded continuations. n=1; no effort/policy/prompt comparison. Plan usage % not measured. Report docs/experiments/2026-11-15-s011p-hour-001.md."
@@ -545,8 +532,7 @@
       "id": "KI-31",
       "summary": "S011a live faults all hit quiet idle; recovery during active model work and live request replay are tested only with fake providers.",
       "affects": [
-        "S011b",
-        "S011c"
+        "S012"
       ],
       "detail": "Luna idled at 263-344 s in every S011a run, before every registered kill (300/900/1800 s). A crash error event records recoverable:false for the failed segment even when the run is then recovered (existing wording). A future registration should place a kill inside the active window."
     }
@@ -554,12 +540,8 @@
   "open_decisions": [
     {
       "id": "OD-2",
-      "summary": "Select an orchestrator through registered comparisons; earlier local pilots did not establish reliable unguided autonomy.",
+      "summary": "Orchestrator for S012 is undecided; deferred until Habitat v1 (ADR-0022). No further comparison campaigns.",
       "affects": [
-        "S007a",
-        "S007d",
-        "S007h",
-        "S010",
         "S012"
       ],
       "detail": "Evidence in docs/experiments/2026-11-14-orchestrator-candidates.md. llama3.2:3b uses tools most but invents surroundings; qwen3:4b is grounded but needs about 2048 output tokens per reply (hidden reasoning, about 30 s per step); qwen3.5:2b and granite4.1:3b act as assistants waiting for a user. Options: keep llama3.2:3b, adopt qwen3:4b with a larger output limit, authorise a larger partially offloaded model (e.g. qwen3.5:4b or qwen3.5:9b), or enable an external provider (ADR-0005). Worth repeating after S005b, when the world has more tools. Deferred by the human on 2026-11-14: llama3.2:3b stays the default for now. Planned later: try a larger model, and a 'brain swap' mode that can use an external provider with the human's own API key (a frontier model, or a hosted Gemma model) - see the note under S007a in ROADMAP.md. S013 leaves the current default unchanged. Existing approved installed candidates can prove S007a interchangeability without selecting a final research winner. Use registered S007d evidence for the comparison; stronger/offloaded local models require specific download approval. Hosted comparison is optional S007f/S007g with separate credentials, egress and spending gates. S007d-001 tested only the retained Llama default and yielded NO_GO. It does not rank alternatives or change the default. S007h must register one bounded comparison/change with development exposure disclosed. S007h-001 swapped in installed qwen3:4b with all else frozen and also yielded NO_GO (fewer invocations, zero repairs, deadline-bound by hidden reasoning). Neither registered profile is selected as a winner. On 2026-11-15 the owner started the S014 hosted comparison (ADR-0016); hosted arms are compared descriptively, not to pick a default by leaderboard. S007e retained the approved hosted route and installed specialist only; its guided success and partial provider-stopped capability check do not settle orchestrator selection or establish unguided specialist use. S008c statistics engineering and its completed 4-cell capability check add no model-ranking or final orchestrator-selection evidence; the approved gpt-6.1-sol route is retained. S010a portable evidence inventories do not rank models or settle this decision. S010b descriptive comparisons and six source-linked retrospective annotations likewise do not select or rank an orchestrator.",
